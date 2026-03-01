@@ -1,26 +1,116 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 37.5 44% 96%;
+    --foreground: 220 26% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 26% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 26% 14%;
+
+    --primary: 150 48% 35%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 180.8 47% 33%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 36 25% 88%;
+    --muted-foreground: 218 17% 35%;
+
+    --accent: 27.2 84% 57%;
+    --accent-foreground: 220 26% 14%;
+
+    --destructive: 0 61% 48%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 37.5 17% 81%;
+    --input: 37.5 17% 81%;
+    --ring: 150 48% 35%;
+
+    --success: 141.2 50.4% 42%;
+    --info: 213.1 61.3% 49.6%;
+    --warning: 23.7 71% 49.8%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 162.9 24% 6%;
+    --foreground: 204 45% 98%;
+
+    --card: 158.2 27% 8%;
+    --card-foreground: 204 45% 98%;
+
+    --popover: 158.2 27% 8%;
+    --popover-foreground: 204 45% 98%;
+
+    --primary: 148 48% 43%;
+    --primary-foreground: 162.9 24% 6%;
+
+    --secondary: 178.8 51% 39%;
+    --secondary-foreground: 162.9 24% 6%;
+
+    --muted: 154.3 18% 15%;
+    --muted-foreground: 213.8 20% 69%;
+
+    --accent: 32.8 90% 65%;
+    --accent-foreground: 162.9 24% 6%;
+
+    --destructive: 0 95% 75%;
+    --destructive-foreground: 162.9 24% 6%;
+
+    --border: 154.3 22% 19%;
+    --input: 154.3 22% 19%;
+    --ring: 143 55% 62%;
+
+    --success: 141.8 69.2% 58%;
+    --info: 213.8 93.9% 67.8%;
+    --warning: 32.1 94.6% 63.7%;
   }
 }
 
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-success: hsl(var(--success));
+  --color-info: hsl(var(--info));
+  --color-warning: hsl(var(--warning));
+  --radius-lg: var(--radius);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-inter);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family:
+    var(--font-inter),
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
 }
