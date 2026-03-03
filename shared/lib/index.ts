@@ -1,2 +1,2 @@
 // Exports utilitarios compartilhados.
-export {};
+export { cn } from "./utils";

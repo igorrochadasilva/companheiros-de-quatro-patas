@@ -3,6 +3,8 @@ import "@/app/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
+import { TooltipProvider } from "@/shared/ui/tooltip";
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -30,7 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased`}>{children}</body>
+      <body className={`${inter.variable} antialiased`}>
+        <TooltipProvider>{children}</TooltipProvider>
+      </body>
     </html>
   );
 }
