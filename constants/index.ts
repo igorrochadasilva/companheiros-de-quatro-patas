@@ -1,2 +1,2 @@
 // Exports centralizados de constantes globais.
-export {};
+export * from "./url";

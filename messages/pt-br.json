@@ -1,0 +1,15 @@
+{
+  "app": {
+    "name": "Companheiros de Quatro Patas",
+    "tagline": "Adoção, doações e cuidado responsável"
+  },
+  "nav": {
+    "adoption": "Adoção",
+    "donate": "Doar",
+    "bazaar": "Bazar",
+    "about": "Sobre",
+    "contact": "Contato",
+    "transparency": "Transparência",
+    "supportCta": "Quero apoiar"
+  }
+}
