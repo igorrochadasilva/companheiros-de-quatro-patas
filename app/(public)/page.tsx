@@ -1,27 +1,22 @@
 import Link from "next/link";
 
+import { Button } from "@/shared/ui/button";
+import { H1, Lead } from "@/shared/ui/typography";
+
 export default function HomePage() {
   return (
     <section className="space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight">
-        Encontre um novo companheiro
-      </h1>
-      <p className="text-muted-foreground">
+      <H1>Encontre um novo companheiro</H1>
+      <Lead>
         Home inicial com destaque para adoção, doações e apoio ao bazar da ONG.
-      </p>
+      </Lead>
       <div className="flex flex-wrap gap-3">
-        <Link
-          href="/adocao"
-          className="rounded-lg bg-primary px-4 py-2 font-semibold text-primary-foreground"
-        >
-          Ver animais
-        </Link>
-        <Link
-          href="/doar"
-          className="rounded-lg bg-secondary px-4 py-2 font-semibold text-secondary-foreground"
-        >
-          Fazer doação
-        </Link>
+        <Button asChild variant="primary" size="lg">
+          <Link href="/adocao">Ver animais</Link>
+        </Button>
+        <Button asChild variant="secondary" size="lg">
+          <Link href="/doar">Fazer doação</Link>
+        </Button>
       </div>
     </section>
   );
