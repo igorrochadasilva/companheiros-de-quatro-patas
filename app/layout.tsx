@@ -1,25 +1,26 @@
 import "@/app/globals.css";
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Abril_Fatface, Alata } from "next/font/google";
 
 import { AppQueryClientProvider } from "@/shared/providers/query-client-provider";
 import { Toaster } from "@/shared/ui/sonner";
 import { TooltipProvider } from "@/shared/ui/tooltip";
 
-const inter = Inter({
-  variable: "--font-inter",
+const alata = Alata({
+  variable: "--font-alata",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400"],
   display: "swap",
-  fallback: [
-    "system-ui",
-    "-apple-system",
-    "Segoe UI",
-    "Roboto",
-    "Arial",
-    "sans-serif",
-  ],
+  fallback: ["system-ui", "sans-serif"],
+});
+
+const abrilFatface = Abril_Fatface({
+  variable: "--font-abril",
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
+  fallback: ["system-ui", "sans-serif"],
 });
 
 export const metadata: Metadata = {
@@ -35,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} antialiased`}
+        className={`${alata.variable} ${abrilFatface.variable} antialiased`}
         suppressHydrationWarning
       >
         <AppQueryClientProvider>
