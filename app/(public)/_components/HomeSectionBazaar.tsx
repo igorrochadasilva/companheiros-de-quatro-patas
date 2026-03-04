@@ -6,6 +6,7 @@ import Link from "next/link";
 import { PUBLIC_ROUTES } from "@/constants";
 import messages from "@/messages/pt-br.json";
 import { useBazaarFeatured } from "@/shared/hooks/useBazaarFeatured";
+import { useWhenVisible } from "@/shared/hooks/useWhenVisible";
 import { Button } from "@/shared/ui/button";
 import {
   Card,
@@ -27,11 +28,14 @@ function formatCurrency(value: number) {
 }
 
 export function HomeSectionBazaar() {
-  const { data, isLoading, isError } = useBazaarFeatured();
+  const [sectionRef, isVisible] = useWhenVisible({ rootMargin: "150px" });
+  const { data, isLoading, isError } = useBazaarFeatured({
+    enabled: isVisible,
+  });
   const items = data?.items ?? [];
 
   return (
-    <section className="space-y-6">
+    <section ref={sectionRef} className="space-y-6">
       <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div className="space-y-2">
           <H2>{bazaarMessages.title}</H2>

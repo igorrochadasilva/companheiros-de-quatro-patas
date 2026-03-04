@@ -5,6 +5,7 @@ import Link from "next/link";
 import { PUBLIC_ROUTES } from "@/constants";
 import messages from "@/messages/pt-br.json";
 import { useTransparencySummary } from "@/shared/hooks/useTransparencySummary";
+import { useWhenVisible } from "@/shared/hooks/useWhenVisible";
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { Skeleton } from "@/shared/ui/skeleton";
@@ -21,10 +22,13 @@ function formatCurrency(value: number) {
 }
 
 export function HomeSectionTransparency() {
-  const { data, isLoading, isError } = useTransparencySummary();
+  const [sectionRef, isVisible] = useWhenVisible({ rootMargin: "150px" });
+  const { data, isLoading, isError } = useTransparencySummary({
+    enabled: isVisible,
+  });
 
   return (
-    <section className="space-y-6">
+    <section ref={sectionRef} className="space-y-6">
       <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div className="space-y-2">
           <H2>{transparencyMessages.title}</H2>

@@ -35,6 +35,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* LCP: preconnect to image origin so the hero image starts loading earlier */}
+        <link
+          rel="preconnect"
+          href="https://placehold.co"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body
         className={`${alata.variable} ${abrilFatface.variable} antialiased`}
         suppressHydrationWarning

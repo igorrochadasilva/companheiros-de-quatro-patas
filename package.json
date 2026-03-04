@@ -2,6 +2,10 @@
   "name": "companheiros-de-quatro-patas",
   "version": "0.1.0",
   "private": true,
+  "browserslist": [
+    "defaults",
+    "not IE 11"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "node -e \"require('fs').rmSync('.next', { recursive: true, force: true })\" && next build",
