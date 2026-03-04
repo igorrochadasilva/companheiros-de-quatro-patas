@@ -72,7 +72,16 @@
     "transparency": {
       "title": "Transparência",
       "subtitle": "Acompanhamos de perto cada real que entra e sai do abrigo.",
-      "cta": "Ver relatório completo"
+      "cta": "Ver relatório completo",
+      "empty": "Em breve você poderá acompanhar aqui o detalhamento das entradas e saídas.",
+      "cards": {
+        "raisedTitlePrefix": "Arrecadado em",
+        "raisedDescription": "Total de doações recebidas no período.",
+        "spentTitle": "Investido nos animais",
+        "spentDescription": "Gastos com alimentação, cuidados veterinários e manutenção.",
+        "balanceTitle": "Saldo do mês",
+        "updatedAtPrefix": "Atualizado em"
+      }
     },
     "bazaar": {
       "title": "Bazar solidário",
