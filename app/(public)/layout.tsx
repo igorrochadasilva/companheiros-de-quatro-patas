@@ -1,3 +1,4 @@
+import { PublicFooter } from "@/shared/ui/public-footer";
 import { PublicHeader } from "@/shared/ui/public-header";
 
 export default function PublicLayout({
@@ -11,11 +12,7 @@ export default function PublicLayout({
 
       <main className="mx-auto w-full max-w-6xl px-4 py-10">{children}</main>
 
-      <footer className="border-t border-border bg-card">
-        <div className="mx-auto w-full max-w-6xl px-4 py-6 text-sm text-muted-foreground">
-          © {new Date().getFullYear()} Companheiros de Quatro Patas
-        </div>
-      </footer>
+      <PublicFooter />
     </div>
   );
 }

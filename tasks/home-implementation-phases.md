@@ -19,14 +19,14 @@ Plano de execução da [home-implementation.md](./home-implementation.md), em or
 | Histórias                                                                      | 8     | ✅ Concluído | `HomeSectionStories`, useStories                           |
 | Voluntariado / Lar temporário                                                  | 9     | ⏸️ Stand by  | Mensagens em `home.volunteer`; componente não implementado |
 | FAQ / Dúvidas frequentes                                                       | 10    | ✅ Concluído | `HomeSectionFaq`, accordion + link "Fale com a gente"      |
-| Footer                                                                         | 11    | ⏳ Pendente  | `PublicFooter` no layout público                           |
+| Footer                                                                         | 11    | ✅ Concluído | `PublicFooter` no layout público; links, contato, © ano    |
 
 ---
 
 ## Estado atual (resumo)
 
 - **Header:** Concluído (menu mobile com Sheet, sticky, acessibilidade).
-- **Home:** Seções 2–10 implementadas (Hero até FAQ); Voluntariado em stand by; Footer pendente.
+- **Home:** Seções 2–11 implementadas (Hero até FAQ + Footer); Voluntariado em stand by.
 - **APIs mock:** stats, pets, donations/config, transparency/summary, bazaar/featured, stories.
 - **React Query:** Provider + hooks por seção.
 - **Mensagens:** `messages/pt-br.json` com `home.*` para todas as seções.

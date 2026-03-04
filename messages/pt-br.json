@@ -3,6 +3,14 @@
     "name": "Companheiros de Quatro Patas",
     "tagline": "Adoção, doações e cuidado responsável"
   },
+  "footer": {
+    "linksTitle": "Links rápidos",
+    "contactTitle": "Contato",
+    "whatsappLabel": "WhatsApp",
+    "emailLabel": "E-mail",
+    "cityLabel": "Cidade",
+    "copyright": "Todos os direitos reservados."
+  },
   "nav": {
     "adoption": "Adoção",
     "donate": "Doar",
