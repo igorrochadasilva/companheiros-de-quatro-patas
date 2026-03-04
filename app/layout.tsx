@@ -3,6 +3,7 @@ import "@/app/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
+import { AppQueryClientProvider } from "@/shared/providers/query-client-provider";
 import { TooltipProvider } from "@/shared/ui/tooltip";
 
 const inter = Inter({
@@ -33,7 +34,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} antialiased`}>
-        <TooltipProvider>{children}</TooltipProvider>
+        <AppQueryClientProvider>
+          <TooltipProvider>{children}</TooltipProvider>
+        </AppQueryClientProvider>
       </body>
     </html>
   );

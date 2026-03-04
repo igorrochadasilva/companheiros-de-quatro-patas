@@ -1,2 +1,2 @@
 // Exports de tipos globais.
-export {};
+export * from "./home";

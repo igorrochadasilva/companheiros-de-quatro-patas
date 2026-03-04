@@ -165,7 +165,7 @@ Componentes de uso imediato no site público e no admin:
    `npx shadcn@latest add card`  
    …
 
-3. **Estrutura do projeto:** Utilitários e componentes shadcn ficam em **`shared/`**: `shared/lib/utils.ts` (função `cn`), `shared/ui/*` (componentes), `shared/hooks/*` (ex.: `use-mobile`). O `components.json` está configurado com aliases `utils: "@/shared/lib/utils"`, `ui: "@/shared/ui"`, `lib: "@/shared/lib"`, `hooks: "@/shared/hooks"`. Ao adicionar novos componentes com `npx shadcn@latest add <nome>`, o CLI grava em `shared/ui/` se os aliases forem mantidos.
+3. **Estrutura do projeto:** Utilitários e componentes shadcn ficam em **`shared/`**: `shared/lib/utils.ts` (função `cn`), `shared/ui/*` (componentes), `shared/hooks/*` (ex.: `useIsMobile.ts`, `useStats.ts`). O `components.json` está configurado com aliases `utils: "@/shared/lib/utils"`, `ui: "@/shared/ui"`, `lib: "@/shared/lib"`, `hooks: "@/shared/hooks"`. Ao adicionar novos componentes com `npx shadcn@latest add <nome>`, o CLI grava em `shared/ui/` se os aliases forem mantidos.
 
 4. Opcional: configurar **React Hook Form** + **Zod** e usar os componentes de formulário (Input, Select, Checkbox, Field) conforme a doc de Forms do shadcn.
 

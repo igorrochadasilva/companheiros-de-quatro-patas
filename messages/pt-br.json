@@ -11,5 +11,51 @@
     "contact": "Contato",
     "transparency": "Transparência",
     "supportCta": "Quero apoiar"
+  },
+  "home": {
+    "hero": {
+      "title": "Encontre um novo companheiro",
+      "subtitle": "Home inicial com destaque para adoção, doações e apoio ao bazar da ONG.",
+      "ctaSeeAnimals": "Ver animais",
+      "ctaDonate": "Fazer doação"
+    },
+    "pets": {
+      "title": "Animais para adoção",
+      "seeAll": "Ver todos",
+      "emptyTitle": "Não encontramos animais com esses filtros",
+      "emptyDescription": "Tente alterar os filtros ou limpar tudo para ver mais opções.",
+      "clearFilters": "Limpar filtros"
+    },
+    "donation": {
+      "title": "Doação rápida via PIX",
+      "pixLabel": "Chave PIX",
+      "pixCopy": "Copiar chave",
+      "pixCopied": "Chave PIX copiada!",
+      "seeMoreWays": "Ver outras formas de doar",
+      "impactTitle": "Seu apoio faz a diferença"
+    },
+    "transparency": {
+      "title": "Transparência",
+      "subtitle": "Acompanhamos de perto cada real que entra e sai do abrigo.",
+      "cta": "Ver relatório completo"
+    },
+    "bazaar": {
+      "title": "Bazar solidário",
+      "subtitle": "Compre produtos e ajude a manter o abrigo.",
+      "cta": "Acessar bazar"
+    },
+    "stories": {
+      "title": "Histórias que aquecem o coração",
+      "cta": "Ver mais histórias"
+    },
+    "volunteer": {
+      "title": "Voluntariado e lar temporário",
+      "volunteerTitle": "Seja voluntário",
+      "fosterTitle": "Ofereça lar temporário"
+    },
+    "faq": {
+      "title": "Perguntas frequentes",
+      "contactLink": "Fale com a gente"
+    }
   }
 }
