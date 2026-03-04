@@ -31,7 +31,35 @@
       "seeAll": "Ver todos",
       "emptyTitle": "Não encontramos animais com esses filtros",
       "emptyDescription": "Tente alterar os filtros ou limpar tudo para ver mais opções.",
-      "clearFilters": "Limpar filtros"
+      "clearFilters": "Limpar filtros",
+      "filters": {
+        "species": "Espécie",
+        "all": "Todos",
+        "dog": "Cachorros",
+        "cat": "Gatos",
+        "size": "Porte",
+        "age": "Idade",
+        "city": "Cidade",
+        "cityPlaceholder": "Ex.: São Paulo",
+        "urgent": "Urgentes",
+        "sizeSmall": "Pequeno",
+        "sizeMedium": "Médio",
+        "sizeLarge": "Grande",
+        "agePuppy": "Filhote",
+        "ageAdult": "Adulto",
+        "ageSenior": "Idoso"
+      },
+      "card": {
+        "seeDetails": "Ver detalhes",
+        "wantToAdopt": "Quero adotar",
+        "dialogDescription": "Em breve você poderá enviar sua candidatura por aqui. Por enquanto, acesse a ficha do animal e entre em contato pela página de adoção.",
+        "seeFullProfile": "Ver ficha completa"
+      },
+      "badges": {
+        "vaccinated": "Vacinado",
+        "neutered": "Castrado",
+        "urgent": "Urgente"
+      }
     },
     "donation": {
       "title": "Doação rápida via PIX",

@@ -82,7 +82,7 @@ export function HomeHero() {
       </div>
       <div className="relative aspect-4/3 overflow-hidden rounded-xl border border-border bg-muted/30 md:aspect-square">
         <Image
-          src="https://placehold.co/600x500?text=Companheiros"
+          src="https://placehold.co/600x500.png?text=Companheiros"
           alt=""
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
