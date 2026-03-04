@@ -19,7 +19,12 @@
       "title": "Encontre um novo companheiro",
       "subtitle": "Home inicial com destaque para adoção, doações e apoio ao bazar da ONG.",
       "ctaSeeAnimals": "Ver animais",
-      "ctaDonate": "Fazer doação"
+      "ctaDonate": "Fazer doação",
+      "stats": {
+        "adopted": "Adotados",
+        "inTreatment": "Em tratamento",
+        "rescued": "Resgatados"
+      }
     },
     "pets": {
       "title": "Animais para adoção",
