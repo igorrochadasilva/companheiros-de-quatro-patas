@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 
 import { HomeHero } from "./_components/HomeHero";
+import { HomeSectionBazaar } from "./_components/HomeSectionBazaar";
 import { HomeSectionDonationPix } from "./_components/HomeSectionDonationPix";
 import { HomeSectionHowAdoptionWorks } from "./_components/HomeSectionHowAdoptionWorks";
 import { HomeSectionPets } from "./_components/HomeSectionPets";
@@ -22,6 +23,9 @@ export default function HomePage() {
       </div>
       <div className="mt-16">
         <HomeSectionTransparency />
+      </div>
+      <div className="mt-16">
+        <HomeSectionBazaar />
       </div>
     </>
   );

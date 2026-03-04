@@ -86,7 +86,8 @@
     "bazaar": {
       "title": "Bazar solidário",
       "subtitle": "Compre produtos e ajude a manter o abrigo.",
-      "cta": "Acessar bazar"
+      "cta": "Acessar bazar",
+      "empty": "Em breve você poderá ver aqui os produtos em destaque do bazar."
     },
     "adoptionHow": {
       "title": "Como funciona a adoção",
