@@ -79,6 +79,29 @@
       "subtitle": "Compre produtos e ajude a manter o abrigo.",
       "cta": "Acessar bazar"
     },
+    "adoptionHow": {
+      "title": "Como funciona a adoção",
+      "subtitle": "Um passo a passo simples e transparente para encontrar o novo companheiro da sua família.",
+      "steps": [
+        {
+          "title": "1. Escolha um amigo",
+          "description": "Veja os animais disponíveis, leia a ficha com histórico, necessidades especiais e perfil ideal de família."
+        },
+        {
+          "title": "2. Preencha o formulário",
+          "description": "Conte um pouco sobre você, sua casa e rotina. Assim conseguimos fazer um pareamento responsável."
+        },
+        {
+          "title": "3. Conversa e visita",
+          "description": "Nossa equipe entra em contato para tirar dúvidas e, quando necessário, agenda uma visita."
+        },
+        {
+          "title": "4. Adoção responsável",
+          "description": "Com tudo certo, você assina o termo de adoção responsável e leva seu novo companheiro para casa."
+        }
+      ],
+      "cta": "Ver detalhes sobre o processo de adoção"
+    },
     "stories": {
       "title": "Histórias que aquecem o coração",
       "cta": "Ver mais histórias"
