@@ -10,7 +10,9 @@
     "about": "Sobre",
     "contact": "Contato",
     "transparency": "Transparência",
-    "supportCta": "Quero apoiar"
+    "supportCta": "Quero apoiar",
+    "ariaLabel": "Navegação principal",
+    "openMenuLabel": "Abrir menu de navegação"
   },
   "home": {
     "hero": {
