@@ -125,7 +125,29 @@
     },
     "faq": {
       "title": "Perguntas frequentes",
-      "contactLink": "Fale com a gente"
+      "contactLink": "Fale com a gente",
+      "items": [
+        {
+          "question": "Como faço para adotar um animal?",
+          "answer": "Escolha um animal na seção de adoção, leia a ficha completa e preencha o formulário de candidatura. Nossa equipe entra em contato para uma conversa e, quando for o caso, agenda uma visita. Com tudo certo, você assina o termo de adoção responsável."
+        },
+        {
+          "question": "Posso doar por PIX?",
+          "answer": "Sim. Na home você encontra nossa chave PIX para doação rápida. Qualquer valor ajuda a manter ração, medicamentos e cuidados veterinários dos animais."
+        },
+        {
+          "question": "Onde posso ver como o dinheiro é usado?",
+          "answer": "Na página de Transparência publicamos resumos mensais com o que foi arrecadado, o que foi investido nos animais e as principais despesas. O link \"Ver relatório completo\" leva ao detalhamento."
+        },
+        {
+          "question": "O bazar é da ONG?",
+          "answer": "Sim. O bazar solidário vende produtos (camisetas, canecas, acessórios) e a renda é revertida para o abrigo. Comprando você apoia os animais e leva um produto com a cara da causa."
+        },
+        {
+          "question": "Não posso adotar. Como mais posso ajudar?",
+          "answer": "Você pode doar via PIX, comprar no bazar, divulgar nossos animais nas redes ou, no futuro, se candidatar como voluntário ou lar temporário. Entre em contato para saber as opções atuais."
+        }
+      ]
     }
   }
 }

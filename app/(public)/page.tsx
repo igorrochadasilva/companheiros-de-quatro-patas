@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { HomeHero } from "./_components/HomeHero";
 import { HomeSectionBazaar } from "./_components/HomeSectionBazaar";
 import { HomeSectionDonationPix } from "./_components/HomeSectionDonationPix";
+import { HomeSectionFaq } from "./_components/HomeSectionFaq";
 import { HomeSectionHowAdoptionWorks } from "./_components/HomeSectionHowAdoptionWorks";
 import { HomeSectionPets } from "./_components/HomeSectionPets";
 import { HomeSectionPetsSkeleton } from "./_components/HomeSectionPetsSkeleton";
@@ -30,6 +31,9 @@ export default function HomePage() {
       </div>
       <div className="mt-16">
         <HomeSectionStories />
+      </div>
+      <div className="mt-16">
+        <HomeSectionFaq />
       </div>
     </>
   );

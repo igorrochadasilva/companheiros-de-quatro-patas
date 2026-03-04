@@ -4,13 +4,32 @@ Plano de execução da [home-implementation.md](./home-implementation.md), em or
 
 ---
 
-## Estado atual
+## Status por feature (Home)
 
-- **Header:** `PublicHeader` existe com logo, menu desktop, CTAs. Falta: menu mobile (Sheet), sticky opcional, aria-labels.
-- **Home:** Uma seção simples com H1, Lead e 2 botões (sem âncoras).
-- **API:** Apenas `auth` e `webhooks`; sem `/api/stats`, `/api/pets`, etc.
-- **React Query:** Não instalado.
-- **Mensagens:** `messages/pt-br.json` com `app` e `nav`; será expandido por seção.
+| Feature                                                                        | Etapa | Status       | Observação                                                 |
+| ------------------------------------------------------------------------------ | ----- | ------------ | ---------------------------------------------------------- |
+| Infraestrutura (tipos, React Query, APIs mock, hooks, searchParams, analytics) | 0     | ✅ Concluído | `types/home.ts`, providers, services, hooks                |
+| Header (menu mobile, sticky, a11y)                                             | 1     | ✅ Concluído | `PublicHeader` com Sheet, sticky, aria-labels              |
+| Hero (H1, CTAs, métricas, imagem)                                              | 2     | ✅ Concluído | `HomeHero`, useStats, âncoras #animais / #doar             |
+| Animais para adoção (filtros URL, grid, dialog)                                | 3     | ✅ Concluído | `HomeSectionPets`, usePetFilters, useFeaturedPets          |
+| Como funciona a adoção                                                         | 4     | ✅ Concluído | `HomeSectionHowAdoptionWorks`                              |
+| Doação PIX (chave, copiar, toast)                                              | 5     | ✅ Concluído | `HomeSectionDonationPix`, Toaster                          |
+| Transparência (resumo do mês)                                                  | 6     | ✅ Concluído | `HomeSectionTransparency`, useTransparencySummary          |
+| Bazar (destaques)                                                              | 7     | ✅ Concluído | `HomeSectionBazaar`, useBazaarFeatured                     |
+| Histórias                                                                      | 8     | ✅ Concluído | `HomeSectionStories`, useStories                           |
+| Voluntariado / Lar temporário                                                  | 9     | ⏸️ Stand by  | Mensagens em `home.volunteer`; componente não implementado |
+| FAQ / Dúvidas frequentes                                                       | 10    | ✅ Concluído | `HomeSectionFaq`, accordion + link "Fale com a gente"      |
+| Footer                                                                         | 11    | ⏳ Pendente  | `PublicFooter` no layout público                           |
+
+---
+
+## Estado atual (resumo)
+
+- **Header:** Concluído (menu mobile com Sheet, sticky, acessibilidade).
+- **Home:** Seções 2–10 implementadas (Hero até FAQ); Voluntariado em stand by; Footer pendente.
+- **APIs mock:** stats, pets, donations/config, transparency/summary, bazaar/featured, stories.
+- **React Query:** Provider + hooks por seção.
+- **Mensagens:** `messages/pt-br.json` com `home.*` para todas as seções.
 
 ---
 
