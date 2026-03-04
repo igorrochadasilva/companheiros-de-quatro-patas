@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 
 import { HomeHero } from "./_components/HomeHero";
+import { HomeSectionDonationPix } from "./_components/HomeSectionDonationPix";
 import { HomeSectionHowAdoptionWorks } from "./_components/HomeSectionHowAdoptionWorks";
 import { HomeSectionPets } from "./_components/HomeSectionPets";
 import { HomeSectionPetsSkeleton } from "./_components/HomeSectionPetsSkeleton";
@@ -15,7 +16,9 @@ export default function HomePage() {
       <div className="mt-16">
         <HomeSectionHowAdoptionWorks />
       </div>
-      <div id="doar" className="scroll-mt-24" aria-hidden />
+      <div className="mt-16">
+        <HomeSectionDonationPix />
+      </div>
     </>
   );
 }

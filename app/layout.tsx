@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import { AppQueryClientProvider } from "@/shared/providers/query-client-provider";
+import { Toaster } from "@/shared/ui/sonner";
 import { TooltipProvider } from "@/shared/ui/tooltip";
 
 const inter = Inter({
@@ -38,7 +39,10 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <AppQueryClientProvider>
-          <TooltipProvider>{children}</TooltipProvider>
+          <TooltipProvider>
+            {children}
+            <Toaster />
+          </TooltipProvider>
         </AppQueryClientProvider>
       </body>
     </html>
