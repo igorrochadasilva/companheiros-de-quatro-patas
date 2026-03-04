@@ -6,6 +6,7 @@ import { HomeSectionDonationPix } from "./_components/HomeSectionDonationPix";
 import { HomeSectionHowAdoptionWorks } from "./_components/HomeSectionHowAdoptionWorks";
 import { HomeSectionPets } from "./_components/HomeSectionPets";
 import { HomeSectionPetsSkeleton } from "./_components/HomeSectionPetsSkeleton";
+import { HomeSectionStories } from "./_components/HomeSectionStories";
 import { HomeSectionTransparency } from "./_components/HomeSectionTransparency";
 
 export default function HomePage() {
@@ -26,6 +27,9 @@ export default function HomePage() {
       </div>
       <div className="mt-16">
         <HomeSectionBazaar />
+      </div>
+      <div className="mt-16">
+        <HomeSectionStories />
       </div>
     </>
   );

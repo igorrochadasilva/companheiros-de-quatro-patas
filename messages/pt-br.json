@@ -114,7 +114,9 @@
     },
     "stories": {
       "title": "Histórias que aquecem o coração",
-      "cta": "Ver mais histórias"
+      "subtitle": "Conheça alguns dos finais felizes que só foram possíveis graças às adoções e doações.",
+      "cta": "Ver mais histórias",
+      "empty": "Em breve vamos compartilhar aqui histórias de adoção que aquecem o coração."
     },
     "volunteer": {
       "title": "Voluntariado e lar temporário",
