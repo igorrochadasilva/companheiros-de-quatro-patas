@@ -34,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         {/* LCP: preconnect to image origin so the hero image starts loading earlier */}
         <link
