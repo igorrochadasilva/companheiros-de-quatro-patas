@@ -6,11 +6,21 @@ import { useCallback, useMemo } from "react";
 
 import { usePets } from "@/features/adoption/hooks/usePets";
 import messages from "@/messages/pt-br.json";
+import { track } from "@/shared/lib/analytics";
 import {
   parseAdoptionSearchParams,
   toAdoptionSearchParams,
 } from "@/shared/lib/search-params";
 import { Button } from "@/shared/ui/button";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/shared/ui/pagination";
 import {
   Sheet,
   SheetContent,
@@ -38,6 +48,7 @@ export function AdocaoContent() {
   const { data, isLoading, isError, refetch } = usePets(filters, page, sort);
   const items = data?.items ?? [];
   const total = data?.total ?? 0;
+  const totalPages = data?.totalPages ?? 1;
 
   const hasActiveFilters =
     !!filters.species ||
@@ -89,9 +100,42 @@ export function AdocaoContent() {
     [filters, setState],
   );
 
+  const handlePageChange = useCallback(
+    (nextPage: number) => {
+      if (nextPage === page || nextPage < 1 || nextPage > totalPages) return;
+      setState({ filters, page: nextPage, sort });
+      track("paginate", { page: nextPage });
+    },
+    [filters, page, sort, totalPages, setState],
+  );
+
   const cityInput = filters.city ?? "";
 
   const toolbarMessages = messages.adoption.toolbar;
+
+  // Páginas vizinhas (max 5) com reticências
+  const pages = useMemo(() => {
+    const maxPagesToShow = 5;
+    if (totalPages <= maxPagesToShow) {
+      return Array.from({ length: totalPages }, (_, index) => index + 1);
+    }
+
+    const pagesAround = 1;
+    const start = Math.max(2, page - pagesAround);
+    const end = Math.min(totalPages - 1, page + pagesAround);
+
+    const result: number[] = [1];
+    for (let p = start; p <= end; p += 1) {
+      if (!result.includes(p)) result.push(p);
+    }
+    if (!result.includes(totalPages)) result.push(totalPages);
+
+    return result.sort((a, b) => a - b);
+  }, [page, totalPages]);
+
+  const showLeftEllipsis = pages.length > 0 && pages[0] > 2;
+  const showRightEllipsis =
+    pages.length > 0 && pages[pages.length - 1] < totalPages - 1;
 
   return (
     <div className="space-y-8">
@@ -116,6 +160,7 @@ export function AdocaoContent() {
 
         {/* Área de resultados: toolbar + grid */}
         <div className="min-w-0 space-y-4">
+          <h2 className="sr-only">{messages.adoption.resultsHeading}</h2>
           {/* Mobile: botão Filtrar + Sheet */}
           <div className="flex items-center gap-2 lg:hidden">
             <Sheet>
@@ -167,6 +212,59 @@ export function AdocaoContent() {
             onClearFilters={clearFilters}
             onRetry={() => refetch()}
           />
+
+          {totalPages > 1 && (
+            <Pagination className="pt-4">
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
+                    href="#"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      handlePageChange(page - 1);
+                    }}
+                  />
+                </PaginationItem>
+
+                {showLeftEllipsis && (
+                  <PaginationItem>
+                    <PaginationEllipsis />
+                  </PaginationItem>
+                )}
+
+                {pages.map((pageNumber) => (
+                  <PaginationItem key={pageNumber}>
+                    <PaginationLink
+                      href="#"
+                      isActive={pageNumber === page}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        handlePageChange(pageNumber);
+                      }}
+                    >
+                      {pageNumber}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+
+                {showRightEllipsis && (
+                  <PaginationItem>
+                    <PaginationEllipsis />
+                  </PaginationItem>
+                )}
+
+                <PaginationItem>
+                  <PaginationNext
+                    href="#"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      handlePageChange(page + 1);
+                    }}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          )}
         </div>
       </div>
     </div>

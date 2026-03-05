@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { PUBLIC_ROUTES } from "@/constants";
+import { WHATSAPP_URL } from "@/constants/contact";
 import messages from "@/messages/pt-br.json";
 import { track } from "@/shared/lib/analytics";
 import { Badge } from "@/shared/ui/badge";
@@ -36,6 +37,12 @@ const BADGE_LABELS: Record<string, string> = {
 };
 
 export function HomeSectionPetsCard({ pet }: { pet: Pet }) {
+  const whatsappMessage = encodeURIComponent(
+    petsMessages.card.contactWhatsappMessage
+      .replace("{name}", pet.name)
+      .replace("{id}", pet.id),
+  );
+
   return (
     <Card className="overflow-hidden">
       <div className="relative aspect-square w-full bg-muted">
@@ -88,8 +95,35 @@ export function HomeSectionPetsCard({ pet }: { pet: Pet }) {
                 {petsMessages.card.dialogDescription}
               </DialogDescription>
             </DialogHeader>
-            <DialogFooter showCloseButton>
-              <Button asChild size="sm">
+            <DialogFooter className="flex flex-col gap-2 sm:flex-row sm:justify-end">
+              <Button
+                asChild
+                size="sm"
+                variant="outline"
+                onClick={() =>
+                  track("adoption_contact_whatsapp", { petId: pet.id })
+                }
+              >
+                <Link
+                  href={`${WHATSAPP_URL}?text=${whatsappMessage}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {petsMessages.card.contactWhatsapp}
+                </Link>
+              </Button>
+              <Button
+                asChild
+                size="sm"
+                onClick={() =>
+                  track("adoption_contact_form", { petId: pet.id })
+                }
+              >
+                <Link href={`${PUBLIC_ROUTES.adoption}/${pet.id}/candidatar`}>
+                  {petsMessages.card.contactForm}
+                </Link>
+              </Button>
+              <Button asChild size="sm" variant="ghost">
                 <Link href={`${PUBLIC_ROUTES.adoption}/${pet.id}`}>
                   {petsMessages.card.seeFullProfile}
                 </Link>

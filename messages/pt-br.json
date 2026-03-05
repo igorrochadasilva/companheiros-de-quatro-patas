@@ -29,6 +29,7 @@
       "breadcrumbHome": "Home",
       "breadcrumbCurrent": "Adoção"
     },
+    "resultsHeading": "Resultados da lista de animais disponíveis para adoção",
     "toolbar": {
       "clearFilters": "Limpar filtros",
       "resultsCount": "{count} pets encontrados",
@@ -90,8 +91,11 @@
       "card": {
         "seeDetails": "Ver detalhes",
         "wantToAdopt": "Quero adotar",
-        "dialogDescription": "Em breve você poderá enviar sua candidatura por aqui. Por enquanto, acesse a ficha do animal e entre em contato pela página de adoção.",
-        "seeFullProfile": "Ver ficha completa"
+        "dialogDescription": "Como prefere falar com a gente sobre a adoção deste pet?",
+        "seeFullProfile": "Ver ficha completa",
+        "contactWhatsapp": "Falar pelo WhatsApp",
+        "contactForm": "Preencher formulário de adoção",
+        "contactWhatsappMessage": "Olá! Tenho interesse em adotar o pet {name} (ID: {id})."
       },
       "badges": {
         "vaccinated": "Vacinado",
