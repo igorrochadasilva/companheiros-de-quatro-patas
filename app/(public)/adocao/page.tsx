@@ -1,10 +1,11 @@
-import { H1, Muted } from "@/shared/ui/typography";
+import { Suspense } from "react";
+
+import { AdocaoContent } from "@/features/adoption/components/AdocaoContent";
 
 export default function AdocaoPage() {
   return (
-    <section className="space-y-3">
-      <H1>Adoção</H1>
-      <Muted>Lista completa de animais disponíveis para adoção.</Muted>
-    </section>
+    <Suspense fallback={<div className="animate-pulse space-y-4 p-4" />}>
+      <AdocaoContent />
+    </Suspense>
   );
 }

@@ -28,6 +28,15 @@ export type PetFilters = {
   urgentOnly?: boolean;
 };
 
+export const PET_SORT_VALUES = [
+  "recent",
+  "urgent",
+  "age_asc",
+  "age_desc",
+  "name_asc",
+] as const;
+export type PetSort = (typeof PET_SORT_VALUES)[number];
+
 export type Stats = {
   adoptedCount: number;
   inTreatmentCount: number;

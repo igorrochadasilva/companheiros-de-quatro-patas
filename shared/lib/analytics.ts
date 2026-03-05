@@ -1,6 +1,8 @@
 type AnalyticsEventName =
   | "view_pet_list"
   | "filter_pets"
+  | "sort_pets"
+  | "clear_filters"
   | "select_pet"
   | "start_adoption"
   | "donate_click"

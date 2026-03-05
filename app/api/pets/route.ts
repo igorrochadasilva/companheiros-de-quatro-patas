@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import type { Pet, PetAgeGroup, PetSize, PetSpecies } from "@/types";
+import type { Pet, PetAgeGroup, PetSize, PetSort, PetSpecies } from "@/types";
 
 const mockPets: Pet[] = [
   {
@@ -83,6 +83,14 @@ const mockPets: Pet[] = [
   },
 ];
 
+const SORT_VALUES: PetSort[] = [
+  "recent",
+  "urgent",
+  "age_asc",
+  "age_desc",
+  "name_asc",
+];
+
 function filterPets(
   pets: Pet[],
   filters: {
@@ -107,6 +115,26 @@ function filterPets(
   });
 }
 
+function sortPets(pets: Pet[], sort: PetSort): Pet[] {
+  const list = [...pets];
+  switch (sort) {
+    case "urgent":
+      return list.sort((a, b) => {
+        const aUrgent = a.tags.includes("urgent") ? 1 : 0;
+        const bUrgent = b.tags.includes("urgent") ? 1 : 0;
+        return bUrgent - aUrgent;
+      });
+    case "age_asc":
+      return list.sort((a, b) => a.ageYears - b.ageYears);
+    case "age_desc":
+      return list.sort((a, b) => b.ageYears - a.ageYears);
+    case "name_asc":
+      return list.sort((a, b) => a.name.localeCompare(b.name));
+    default:
+      return list; // recent: keep original order
+  }
+}
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const species = searchParams.get("species") as PetSpecies | null;
@@ -115,6 +143,12 @@ export async function GET(request: NextRequest) {
   const city = searchParams.get("city") ?? null;
   const urgentOnly = searchParams.get("urgentOnly") === "1";
   const limit = Math.min(Number(searchParams.get("limit")) || 12, 24);
+  const page = Math.max(1, Number(searchParams.get("page")) || 1);
+  const sortParam = searchParams.get("sort");
+  const sort: PetSort =
+    sortParam && SORT_VALUES.includes(sortParam as PetSort)
+      ? (sortParam as PetSort)
+      : "recent";
 
   const filters = {
     species: species ?? undefined,
@@ -125,7 +159,17 @@ export async function GET(request: NextRequest) {
   };
 
   const filtered = filterPets(mockPets, filters);
-  const items = filtered.slice(0, limit);
+  const sorted = sortPets(filtered, sort);
+  const total = sorted.length;
+  const totalPages = Math.max(1, Math.ceil(total / limit));
+  const pageSafe = Math.min(page, totalPages);
+  const start = (pageSafe - 1) * limit;
+  const items = sorted.slice(start, start + limit);
 
-  return NextResponse.json({ items });
+  return NextResponse.json({
+    items,
+    total,
+    page: pageSafe,
+    totalPages,
+  });
 }

@@ -4,11 +4,11 @@ Listagem de pets para adoção em `/adocao`: filtros, ordenação, paginação, 
 
 ## Conteúdo
 
-| Pasta           | Responsabilidade                                                                                                |
-| --------------- | --------------------------------------------------------------------------------------------------------------- |
-| **hooks/**      | usePets (listagem paginada), usePetFilters (URL ↔ estado) — quando migrados                                     |
-| **services/**   | fetchPets (listagem com page, limit, sort) — quando migrado                                                     |
-| **components/** | Opcional: AdocaoFilters, AdocaoGrid, AdoptionContactDialog se forem reutilizados fora de `app/(public)/adocao/` |
+| Pasta           | Responsabilidade                                                            |
+| --------------- | --------------------------------------------------------------------------- |
+| **hooks/**      | usePets (listagem paginada), usePetFilters (URL ↔ estado) — quando migrados |
+| **services/**   | fetchPets (listagem com page, limit, sort) — quando migrado                 |
+| **components/** | AdocaoContent, AdocaoFilters, AdocaoGrid, AdocaoHero, AdocaoToolbar         |
 
 ## Dependências
 
@@ -19,9 +19,10 @@ Listagem de pets para adoção em `/adocao`: filtros, ordenação, paginação, 
 
 ## Uso
 
-A página `app/(public)/adocao/page.tsx` e seus \_components importam daqui, por exemplo:
+A página `app/(public)/adocao/page.tsx` importa o conteúdo da adoção daqui:
 
 ```ts
+import { AdocaoContent } from "@/features/adoption/components/AdocaoContent";
 import { usePets } from "@/features/adoption/hooks/usePets";
 import { fetchPets } from "@/features/adoption/services/pets";
 ```

@@ -32,7 +32,8 @@
     --destructive-foreground: 0 0% 100%;
 
     --border: 30 25% 88%;
-    --input: 30 25% 88%;
+    /* Input/campos: superfície clara para contraste com o fundo da página (--background) */
+    --input: 0 0% 98%;
     --ring: 187 61% 55%;
 
     --success: 141.2 50.4% 42%;

@@ -6,15 +6,15 @@ Plano de execução baseado no [adocao-implementation.md](./adocao-implementatio
 
 ## Status por feature (Adoção)
 
-| Feature                                                | Etapa | Status      | Observação                                                     |
-| ------------------------------------------------------ | ----- | ----------- | -------------------------------------------------------------- |
-| Infra (API paginada, sort, usePets, searchParams)      | 0     | 🔲 Pendente | API `page/limit/totalPages`, hook usePets, sort na URL         |
-| Layout base (PageShell, hero, 2 colunas, Sheet mobile) | 1     | 🔲 Pendente | Hero + sidebar filtros + área resultados                       |
-| Toolbar (contador, ordenação, limpar filtros)          | 2     | 🔲 Pendente | Reusa AdocaoFilters; toolbar acima do grid                     |
-| Filtros URL-driven (sidebar + Drawer mobile)           | 3     | 🟡 Parcial  | `AdocaoFilters` existe; integrar URL + debounce cidade + Sheet |
-| Grid + estados + paginação                             | 4     | 🟡 Parcial  | `AdocaoGrid` existe; falta paginação e link “Ver detalhes”     |
-| Dialog “Quero adotar” (WhatsApp + formulário)          | 5     | 🔲 Pendente | Reusar lógica do card da Home ou componente dedicado           |
-| SEO + a11y + performance                               | 6     | 🔲 Pendente | Metadata, H1/H2, alt, lazy, layout estável                     |
+| Feature                                                | Etapa | Status       | Observação                                                      |
+| ------------------------------------------------------ | ----- | ------------ | --------------------------------------------------------------- |
+| Infra (API paginada, sort, usePets, searchParams)      | 0     | ✅ Concluído | API `page/limit/totalPages`, usePets, parseAdoptionSearchParams |
+| Layout base (PageShell, hero, 2 colunas, Sheet mobile) | 1     | ✅ Concluído | AdocaoHero, 2 colunas, Sheet mobile com badge                   |
+| Toolbar (contador, ordenação, limpar filtros)          | 2     | ✅ Concluído | AdocaoToolbar com sort e clear_filters                          |
+| Filtros URL-driven (sidebar + Drawer mobile)           | 3     | ✅ Concluído | Filtros sincronizados com URL; Sheet no mobile                  |
+| Grid + estados + paginação                             | 4     | 🟡 Parcial   | Grid ok; falta paginação (page na URL já existe)                |
+| Dialog “Quero adotar” (WhatsApp + formulário)          | 5     | 🔲 Pendente  | Reusar lógica do card da Home ou componente dedicado            |
+| SEO + a11y + performance                               | 6     | 🔲 Pendente  | Metadata, H1/H2, alt, lazy, layout estável                      |
 
 ---
 
