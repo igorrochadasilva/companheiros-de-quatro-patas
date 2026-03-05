@@ -1,4 +1,4 @@
-﻿# Arquitetura
+# Arquitetura
 
 ## Objetivo
 
@@ -11,12 +11,12 @@ Descrever a arquitetura atual e alvo do projeto.
 - Persistencia: a confirmar.
 - Integracoes externas: a confirmar.
 
-## Organizacao de camadas (proposta)
+## Organizacao de camadas
 
-- `app/`: rotas e composicao de paginas (App Router).
-- `components/`: componentes de interface reutilizaveis. (a confirmar)
-- `lib/`: funcoes utilitarias e servicos de dominio. (a confirmar)
-- `services/`: adaptadores de APIs externas. (a confirmar)
+- **app/** — Rotas e composição de páginas (App Router). Componentes específicos de uma rota em `_components/`.
+- **features/** — Estrutura **feature-based**: cada feature tem `hooks/`, `services/`, `components/` (opcional). Agrupa lógica e dados por domínio (home, adoption). Ver [features/README.md](../../features/README.md).
+- **shared/** — Transversal: `ui/` (Design System), `lib/` (utils, API client, analytics), `providers/`, hooks genéricos (ex.: useWhenVisible, useIsMobile).
+- **types/** — Tipos compartilhados entre features e app.
 
 ## Padrões arquiteturais
 

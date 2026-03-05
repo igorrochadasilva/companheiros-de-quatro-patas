@@ -1,14 +1,14 @@
 import { Suspense } from "react";
 
-import { HomeHero } from "./_components/HomeHero";
-import { HomeSectionBazaar } from "./_components/HomeSectionBazaar";
-import { HomeSectionDonationPix } from "./_components/HomeSectionDonationPix";
-import { HomeSectionFaq } from "./_components/HomeSectionFaq";
-import { HomeSectionHowAdoptionWorks } from "./_components/HomeSectionHowAdoptionWorks";
-import { HomeSectionPets } from "./_components/HomeSectionPets";
-import { HomeSectionPetsSkeleton } from "./_components/HomeSectionPetsSkeleton";
-import { HomeSectionStories } from "./_components/HomeSectionStories";
-import { HomeSectionTransparency } from "./_components/HomeSectionTransparency";
+import { HomeHero } from "@/features/home/components/HomeHero";
+import { HomeSectionBazaar } from "@/features/home/components/HomeSectionBazaar";
+import { HomeSectionDonationPix } from "@/features/home/components/HomeSectionDonationPix";
+import { HomeSectionFaq } from "@/features/home/components/HomeSectionFaq";
+import { HomeSectionHowAdoptionWorks } from "@/features/home/components/HomeSectionHowAdoptionWorks";
+import { HomeSectionPets } from "@/features/home/components/HomeSectionPets";
+import { HomeSectionPetsSkeleton } from "@/features/home/components/HomeSectionPetsSkeleton";
+import { HomeSectionStories } from "@/features/home/components/HomeSectionStories";
+import { HomeSectionTransparency } from "@/features/home/components/HomeSectionTransparency";
 
 export function Home() {
   return (

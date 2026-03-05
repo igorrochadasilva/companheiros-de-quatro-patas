@@ -2,18 +2,18 @@
 
 import { useQuery } from "@tanstack/react-query";
 
-import { fetchBazaarFeatured } from "@/shared/services/bazaar";
+import { fetchStories } from "@/features/home/services/stories";
 
-export interface UseBazaarFeaturedOptions {
+export interface UseStoriesOptions {
   /** Só dispara o fetch quando true (ex.: quando a seção está visível). Default true. */
   enabled?: boolean;
 }
 
-export function useBazaarFeatured(options: UseBazaarFeaturedOptions = {}) {
+export function useStories(options: UseStoriesOptions = {}) {
   const { enabled = true } = options;
   return useQuery({
-    queryKey: ["bazaar-featured"],
-    queryFn: fetchBazaarFeatured,
+    queryKey: ["stories"],
+    queryFn: fetchStories,
     staleTime: 1000 * 60, // 1 min
     enabled,
   });

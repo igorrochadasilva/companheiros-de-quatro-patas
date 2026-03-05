@@ -3,8 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { useStats } from "@/features/home/hooks/useStats";
 import messages from "@/messages/pt-br.json";
-import { useStats } from "@/shared/hooks/useStats";
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent } from "@/shared/ui/card";
 import { Skeleton } from "@/shared/ui/skeleton";

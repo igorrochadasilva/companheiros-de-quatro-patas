@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useEffect } from "react";
 
 import { PUBLIC_ROUTES } from "@/constants";
+import { useFeaturedPets } from "@/features/home/hooks/useFeaturedPets";
 import messages from "@/messages/pt-br.json";
-import { useFeaturedPets } from "@/shared/hooks/useFeaturedPets";
 import { usePetFilters } from "@/shared/hooks/usePetFilters";
 import { track } from "@/shared/lib/analytics";
 import { Button } from "@/shared/ui/button";

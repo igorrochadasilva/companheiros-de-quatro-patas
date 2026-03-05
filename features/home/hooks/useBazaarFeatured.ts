@@ -2,20 +2,18 @@
 
 import { useQuery } from "@tanstack/react-query";
 
-import { fetchTransparencySummary } from "@/shared/services/transparency";
+import { fetchBazaarFeatured } from "@/features/home/services/bazaar";
 
-export interface UseTransparencySummaryOptions {
+export interface UseBazaarFeaturedOptions {
   /** Só dispara o fetch quando true (ex.: quando a seção está visível). Default true. */
   enabled?: boolean;
 }
 
-export function useTransparencySummary(
-  options: UseTransparencySummaryOptions = {},
-) {
+export function useBazaarFeatured(options: UseBazaarFeaturedOptions = {}) {
   const { enabled = true } = options;
   return useQuery({
-    queryKey: ["transparency-summary"],
-    queryFn: fetchTransparencySummary,
+    queryKey: ["bazaar-featured"],
+    queryFn: fetchBazaarFeatured,
     staleTime: 1000 * 60, // 1 min
     enabled,
   });

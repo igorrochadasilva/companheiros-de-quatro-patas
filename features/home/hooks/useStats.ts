@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 
-import { fetchStats } from "@/shared/services/stats";
+import { fetchStats } from "@/features/home/services/stats";
 
 export function useStats() {
   return useQuery({

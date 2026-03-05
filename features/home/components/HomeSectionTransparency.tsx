@@ -3,8 +3,8 @@
 import Link from "next/link";
 
 import { PUBLIC_ROUTES } from "@/constants";
+import { useTransparencySummary } from "@/features/home/hooks/useTransparencySummary";
 import messages from "@/messages/pt-br.json";
-import { useTransparencySummary } from "@/shared/hooks/useTransparencySummary";
 import { useWhenVisible } from "@/shared/hooks/useWhenVisible";
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";

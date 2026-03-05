@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { PUBLIC_ROUTES } from "@/constants";
+import { useStories } from "@/features/home/hooks/useStories";
 import messages from "@/messages/pt-br.json";
-import { useStories } from "@/shared/hooks/useStories";
 import { useWhenVisible } from "@/shared/hooks/useWhenVisible";
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";

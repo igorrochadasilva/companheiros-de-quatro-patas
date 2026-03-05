@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { PUBLIC_ROUTES } from "@/constants";
+import { useBazaarFeatured } from "@/features/home/hooks/useBazaarFeatured";
 import messages from "@/messages/pt-br.json";
-import { useBazaarFeatured } from "@/shared/hooks/useBazaarFeatured";
 import { useWhenVisible } from "@/shared/hooks/useWhenVisible";
 import { Button } from "@/shared/ui/button";
 import {

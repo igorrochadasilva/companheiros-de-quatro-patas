@@ -22,6 +22,22 @@
     "ariaLabel": "Navegação principal",
     "openMenuLabel": "Abrir menu de navegação"
   },
+  "adoption": {
+    "toolbar": {
+      "clearFilters": "Limpar filtros",
+      "resultsCount": "{count} pets encontrados",
+      "sortLabel": "Ordenar por"
+    },
+    "empty": {
+      "title": "Nenhum pet encontrado",
+      "description": "Tente remover filtros como cidade ou porte para ver mais opções.",
+      "clearFilters": "Limpar filtros"
+    },
+    "error": {
+      "title": "Não foi possível carregar os animais",
+      "retry": "Tentar novamente"
+    }
+  },
   "home": {
     "hero": {
       "title": "Encontre um novo companheiro",

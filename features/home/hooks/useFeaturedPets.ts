@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 
-import { fetchFeaturedPets } from "@/shared/services/pets";
+import { fetchFeaturedPets } from "@/features/home/services/pets";
 import type { PetFilters } from "@/types";
 
 export function useFeaturedPets(filters: PetFilters) {
