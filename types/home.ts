@@ -53,8 +53,11 @@ export type DonationTier = {
 
 export type DonationConfig = {
   pixKey: string;
-  pixQrCodeUrl?: string;
+  pixQrUrl?: string;
   tiers: DonationTier[];
+  whatsapp?: string;
+  recurringUrl?: string;
+  bankAccount?: string;
 };
 
 export type TransparencyExpense = {

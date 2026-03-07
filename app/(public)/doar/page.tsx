@@ -1,10 +1,13 @@
+import type { Metadata } from "next";
+
+import { DoarContent } from "./DoarContent";
+
+export const metadata: Metadata = {
+  title: "Doe e ajude a manter o abrigo | Companheiros de Quatro Patas",
+  description:
+    "Doe via PIX, conheça opções de apoio mensal, doação de itens e acompanhe nossa transparência para ajudar os animais resgatados.",
+};
+
 export default function DoarPage() {
-  return (
-    <section className="space-y-3">
-      <h1 className="text-2xl font-bold">Doar</h1>
-      <p className="text-muted-foreground">
-        Página de doações financeiras e de itens.
-      </p>
-    </section>
-  );
+  return <DoarContent />;
 }
