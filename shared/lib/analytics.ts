@@ -9,7 +9,10 @@ type AnalyticsEventName =
   | "select_pet"
   | "start_adoption"
   | "donate_click"
-  | "pix_copy";
+  | "pix_copy"
+  | "donate_tier_click"
+  | "open_whatsapp"
+  | "view_transparency";
 
 type AnalyticsPayload = Record<string, unknown>;
 

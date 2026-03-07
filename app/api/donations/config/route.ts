@@ -5,7 +5,10 @@ import type { DonationConfig } from "@/types";
 export async function GET() {
   const data: DonationConfig = {
     pixKey: "pix@companheiros4patas.org",
-    pixQrCodeUrl: "https://placehold.co/200x200?text=PIX+QR",
+    pixQrUrl: "https://placehold.co/320x320?text=PIX+QR",
+    whatsapp: "5511999999999",
+    recurringUrl: "https://apoia.se/companheiros4patas",
+    bankAccount: "Banco Exemplo - Ag 0001 - Cc 12345-6",
     tiers: [
       {
         id: "tier-25",
