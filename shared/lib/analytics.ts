@@ -12,6 +12,11 @@ type AnalyticsEventName =
   | "pix_copy"
   | "donate_tier_click"
   | "open_whatsapp"
+  | "open_email"
+  | "submit_contact"
+  | "contact_success"
+  | "contact_error"
+  | "prefill_contact"
   | "view_transparency";
 
 type AnalyticsPayload = Record<string, unknown>;

@@ -1,10 +1,15 @@
+import type { Metadata } from "next";
+
+import { ContactContent } from "@/features/contact/components/ContactContent";
+import messages from "@/messages/pt-br.json";
+
+const contactMessages = messages.contact;
+
+export const metadata: Metadata = {
+  title: contactMessages.metadata.title,
+  description: contactMessages.metadata.description,
+};
+
 export default function ContatoPage() {
-  return (
-    <section className="space-y-3">
-      <h1 className="text-2xl font-bold">Contato</h1>
-      <p className="text-muted-foreground">
-        Canais de atendimento e redes sociais da ONG.
-      </p>
-    </section>
-  );
+  return <ContactContent />;
 }

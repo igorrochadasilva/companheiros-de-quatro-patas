@@ -1,11 +1,13 @@
 /**
- * Dados de contato da ONG (footer, páginas públicas).
- * Em produção, podem vir de variáveis de ambiente.
+ * Dados de contato da ONG (footer, paginas publicas).
+ * Em producao, podem vir de variaveis de ambiente.
  */
 export const CONTACT = {
   email: "contato@companheiros.org.br",
   whatsAppNumber: "5511999999999",
-  city: "São Paulo",
+  instagramUrl: "https://instagram.com/companheiros4patas",
+  city: "Sao Paulo",
 };
 
 export const WHATSAPP_URL = `https://wa.me/${CONTACT.whatsAppNumber}`;
+export const EMAIL_URL = `mailto:${CONTACT.email}`;

@@ -18,9 +18,12 @@ export const PUBLIC_ANCHOR_ROUTES = {
 };
 
 export const CONTACT_SUBJECT_ROUTES = {
+  adoption: "/contato?assunto=adocao",
+  donation: "/contato?assunto=doacao",
   volunteer: "/contato?assunto=voluntariado",
   foster: "/contato?assunto=lar-temporario",
   partnership: "/contato?assunto=parceria",
+  others: "/contato?assunto=outros",
 };
 
 export type PublicRouteKey = keyof typeof PUBLIC_ROUTES;

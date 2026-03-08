@@ -10,6 +10,7 @@ export const API_ROUTES = {
   bazaarFeatured: "/api/bazaar/featured",
   bazaarItems: "/api/bazaar/items",
   stories: "/api/stories",
+  contact: "/api/contact",
 };
 
 export type ApiRouteKey = keyof typeof API_ROUTES;
