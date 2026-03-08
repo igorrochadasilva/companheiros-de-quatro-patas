@@ -1,10 +1,15 @@
+import type { Metadata } from "next";
+
+import { AboutContent } from "@/features/about/components/AboutContent";
+import messages from "@/messages/pt-br.json";
+
+const aboutMessages = messages.about;
+
+export const metadata: Metadata = {
+  title: aboutMessages.metadata.title,
+  description: aboutMessages.metadata.description,
+};
+
 export default function SobrePage() {
-  return (
-    <section className="space-y-3">
-      <h1 className="text-2xl font-bold">Sobre a ONG</h1>
-      <p className="text-muted-foreground">
-        Missão, valores e história da organização.
-      </p>
-    </section>
-  );
+  return <AboutContent />;
 }
