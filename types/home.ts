@@ -76,12 +76,24 @@ export type TransparencySummary = {
   lastExpenses: TransparencyExpense[];
 };
 
+export enum BazaarItemStatusEnum {
+  AVAILABLE = "available",
+  RESERVED = "reserved",
+  SOLD = "sold",
+}
+
+export type BazaarItemStatus = `${BazaarItemStatusEnum}`;
+
 export type BazaarItem = {
   id: string;
   name: string;
+  description: string;
   price: number;
-  imageUrl: string;
-  category: string;
+  imageUrl: string | null;
+  status: BazaarItemStatus;
+  category?: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type Story = {

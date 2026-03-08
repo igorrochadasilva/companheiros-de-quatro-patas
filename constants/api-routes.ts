@@ -1,6 +1,6 @@
 /**
  * Rotas da API usadas nos services (fetch).
- * Base para chamadas client-side; query params são montados em cada service.
+ * Base para chamadas client-side; query params sao montados em cada service.
  */
 export const API_ROUTES = {
   stats: "/api/stats",
@@ -8,6 +8,7 @@ export const API_ROUTES = {
   donationsConfig: "/api/donations/config",
   transparencySummary: "/api/transparency/summary",
   bazaarFeatured: "/api/bazaar/featured",
+  bazaarItems: "/api/bazaar/items",
   stories: "/api/stories",
 };
 

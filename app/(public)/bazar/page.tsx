@@ -1,10 +1,15 @@
+import type { Metadata } from "next";
+
+import { BazaarContent } from "@/features/bazaar/components/BazaarContent";
+import messages from "@/messages/pt-br.json";
+
+const bazaarMessages = messages.bazaar;
+
+export const metadata: Metadata = {
+  title: bazaarMessages.metadata.title,
+  description: bazaarMessages.metadata.description,
+};
+
 export default function BazarPage() {
-  return (
-    <section className="space-y-3">
-      <h1 className="text-2xl font-bold">Bazar</h1>
-      <p className="text-muted-foreground">
-        Catálogo de itens do bazar para arrecadação.
-      </p>
-    </section>
-  );
+  return <BazaarContent />;
 }

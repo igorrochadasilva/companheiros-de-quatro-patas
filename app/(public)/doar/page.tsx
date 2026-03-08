@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { DoarContent } from "./DoarContent";
+import { DonatationContent } from "@/features/donatation/components/DonatationContent";
 
 export const metadata: Metadata = {
   title: "Doe e ajude a manter o abrigo | Companheiros de Quatro Patas",
@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function DoarPage() {
-  return <DoarContent />;
+  return <DonatationContent />;
 }

@@ -69,7 +69,7 @@ export function HomeSectionBazaar() {
             >
               <div className="relative aspect-square w-full bg-muted">
                 <Image
-                  src={item.imageUrl}
+                  src={item.imageUrl ?? "/icon.webp"}
                   alt={item.name}
                   fill
                   sizes="(max-width: 768px) 50vw, 25vw"
@@ -80,7 +80,7 @@ export function HomeSectionBazaar() {
                 <CardTitle className="text-sm font-medium">
                   {item.name}
                 </CardTitle>
-                <Muted className="text-xs">{item.category}</Muted>
+                <Muted className="text-xs">{item.category ?? "Bazar"}</Muted>
               </CardHeader>
               <CardContent className="pb-2">
                 <p className="text-sm font-semibold text-primary">
