@@ -7,7 +7,7 @@ export enum ContactSubjectEnum {
   OTHERS = "outros",
 }
 
-export type ContactSubject = `${ContactSubjectEnum}`;
+export type ContactSubject = ContactSubjectEnum;
 
 export interface ContactPrefill {
   subject: ContactSubject;
@@ -22,7 +22,7 @@ const CONTACT_SUBJECT_VALUES = new Set<string>(
   Object.values(ContactSubjectEnum),
 );
 
-function isContactSubject(value: string): value is ContactSubject {
+function isContactSubject(value: string): value is ContactSubjectEnum {
   return CONTACT_SUBJECT_VALUES.has(value);
 }
 
@@ -32,7 +32,7 @@ export function parseContactPrefill(source: SearchParamsLike): ContactPrefill {
 
   return {
     subject: isContactSubject(subjectRaw)
-      ? subjectRaw
+      ? (subjectRaw as ContactSubjectEnum)
       : ContactSubjectEnum.OTHERS,
     pet: petRaw,
   };
