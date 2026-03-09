@@ -12,6 +12,8 @@ type AnalyticsEventName =
   | "pix_copy"
   | "donate_tier_click"
   | "open_whatsapp"
+  | "view_abrigo"
+  | "expand_milestone"
   | "open_email"
   | "submit_contact"
   | "contact_success"

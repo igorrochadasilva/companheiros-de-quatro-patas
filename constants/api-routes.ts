@@ -11,6 +11,7 @@ export const API_ROUTES = {
   bazaarItems: "/api/bazaar/items",
   stories: "/api/stories",
   contact: "/api/contact",
+  shelterProgress: "/api/shelter/progress",
 };
 
 export type ApiRouteKey = keyof typeof API_ROUTES;

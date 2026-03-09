@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Building2Icon,
   GiftIcon,
   InfoIcon,
   MailIcon,
@@ -29,6 +30,11 @@ const navItems = [
     href: PUBLIC_ROUTES.adoption,
     label: messages.nav.adoption,
     icon: PawPrintIcon,
+  },
+  {
+    href: PUBLIC_ROUTES.shelter,
+    label: messages.nav.shelter,
+    icon: Building2Icon,
   },
   { href: PUBLIC_ROUTES.donate, label: messages.nav.donate, icon: GiftIcon },
   {

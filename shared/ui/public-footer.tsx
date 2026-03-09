@@ -1,5 +1,6 @@
 import {
   BarChart3Icon,
+  Building2Icon,
   GiftIcon,
   InfoIcon,
   MailIcon,
@@ -17,6 +18,7 @@ const { app, footer, nav } = messages;
 
 const quickLinks = [
   { href: PUBLIC_ROUTES.adoption, label: nav.adoption, icon: PawPrintIcon },
+  { href: PUBLIC_ROUTES.shelter, label: nav.shelter, icon: Building2Icon },
   { href: PUBLIC_ROUTES.donate, label: nav.donate, icon: GiftIcon },
   { href: PUBLIC_ROUTES.bazaar, label: nav.bazaar, icon: ShoppingBagIcon },
   {
