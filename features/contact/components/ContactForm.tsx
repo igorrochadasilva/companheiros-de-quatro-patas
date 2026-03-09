@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useMemo } from "react";
-import { Controller, useForm, useWatch } from "react-hook-form";
+import { Controller, type Resolver, useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
 
 import {
@@ -31,6 +31,9 @@ import { Textarea } from "@/shared/ui/textarea";
 import { H2, Muted } from "@/shared/ui/typography";
 
 const contactMessages = messages.contact;
+const contactFormResolver = zodResolver(
+  contactFormSchema as never,
+) as Resolver<ContactFormData>;
 
 interface ContactFormProps {
   prefillSubject: ContactSubject;
@@ -61,7 +64,7 @@ export function ContactForm({ prefillSubject, prefillPet }: ContactFormProps) {
     setValue,
     formState: { errors },
   } = useForm<ContactFormData>({
-    resolver: zodResolver(contactFormSchema),
+    resolver: contactFormResolver,
     defaultValues,
   });
 
