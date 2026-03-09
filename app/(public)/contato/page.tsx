@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import { ContactContent } from "@/features/contact/components/ContactContent";
 import messages from "@/messages/pt-br.json";
@@ -11,5 +12,9 @@ export const metadata: Metadata = {
 };
 
 export default function ContatoPage() {
-  return <ContactContent />;
+  return (
+    <Suspense fallback={null}>
+      <ContactContent />
+    </Suspense>
+  );
 }
