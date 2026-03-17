@@ -1,2 +1,2 @@
 // Exports de configuracoes compartilhadas.
-export {};
+export * from "./contentful";

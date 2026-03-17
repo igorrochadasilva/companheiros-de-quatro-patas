@@ -9,6 +9,16 @@ const nextConfig: NextConfig = {
         hostname: "placehold.co",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "images.ctfassets.net",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.eu.ctfassets.net",
+        pathname: "/**",
+      },
     ],
   },
 };

@@ -102,3 +102,13 @@ export type Story = {
   summary: string;
   imageUrl: string;
 };
+
+export type HomeCmsContent = {
+  title: string | null;
+  subtitle: string | null;
+  primaryCtaLabel: string | null;
+  secondaryCtaLabel: string | null;
+  heroImageUrl: string | null;
+  heroImageAlt: string | null;
+  entryId: string | null;
+};

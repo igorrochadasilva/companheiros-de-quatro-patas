@@ -77,26 +77,24 @@ Estrutura atual (resumo):
 
 ## Configuração de ambiente
 
-Crie um arquivo `.env.local` com base em um `.env.example` na raiz do projeto.
+Crie um arquivo `.env.local` com base no arquivo `.env.example` na raiz do projeto.
 
-### Exemplo de `.env.example`
+### Contentful CMS (configuração inicial)
+
+Preencha as variáveis:
 
 ```env
-# Aplicação
-NEXT_PUBLIC_APP_NAME=companheiros-de-quatro-patas
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-
-# Contato institucional
-ONG_PUBLIC_EMAIL=contato@exemplo.org
-ONG_PUBLIC_PHONE=+55XXXXXXXXXXX
-
-# Redes sociais (opcional)
-NEXT_PUBLIC_INSTAGRAM_URL=https://instagram.com/SEU_PERFIL
-NEXT_PUBLIC_FACEBOOK_URL=https://facebook.com/SUA_PAGINA
-
-# Doações / apoio (opcional)
-NEXT_PUBLIC_DONATION_PAGE_URL=https://exemplo.org/doar
+CONTENTFUL_SPACE_ID=seu_space_id
+CONTENTFUL_ENVIRONMENT=master
+CONTENTFUL_DELIVERY_ACCESS_TOKEN=seu_delivery_access_token
+CONTENTFUL_PREVIEW_ACCESS_TOKEN=seu_preview_access_token
 ```
+
+Para validar conexão local, use:
+
+- `GET /api/cms/contentful/health`
+
+Se estiver tudo certo, a API retorna `ok: true`.
 
 > Use apenas placeholders e nunca versione segredos reais.
 

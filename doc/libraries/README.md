@@ -23,6 +23,7 @@ Listar bibliotecas aprovadas, em avaliacao e descartadas.
 - Formularios: `react-hook-form`
 - Validacao: `zod`
 - Git hooks e qualidade pre-commit: `husky`, `lint-staged`
+- CMS headless: `contentful`
 
 ## Observacoes de nomenclatura
 
@@ -47,6 +48,7 @@ Listar bibliotecas aprovadas, em avaliacao e descartadas.
 - `@tanstack/react-query`: https://tanstack.com/query/latest/docs/framework/react/overview
 - `react-hook-form`: https://react-hook-form.com/docs
 - `zod`: https://zod.dev/
+- `contentful` (SDK): https://www.contentful.com/developers/docs/javascript/tutorials/using-js-cda-sdk/
 
 ## Diretriz de implementacao
 

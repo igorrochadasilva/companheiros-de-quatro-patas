@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { useHomeCmsContent } from "@/features/home/hooks/useHomeCmsContent";
 import { useStats } from "@/features/home/hooks/useStats";
 import messages from "@/messages/pt-br.json";
 import { Button } from "@/shared/ui/button";
@@ -14,18 +15,30 @@ const heroMessages = messages.home.hero;
 
 export function HomeHero() {
   const { data: stats, isLoading, isError } = useStats();
+  const { data: homeCmsContent } = useHomeCmsContent();
+
+  const heroTitle = homeCmsContent?.title || heroMessages.title;
+  const heroSubtitle = homeCmsContent?.subtitle || heroMessages.subtitle;
+  const primaryCtaLabel =
+    homeCmsContent?.primaryCtaLabel || heroMessages.ctaSeeAnimals;
+  const secondaryCtaLabel =
+    homeCmsContent?.secondaryCtaLabel || heroMessages.ctaDonate;
+  const heroImageUrl =
+    homeCmsContent?.heroImageUrl ||
+    "https://placehold.co/600x500.png?text=Companheiros";
+  const heroImageAlt = homeCmsContent?.heroImageAlt || heroTitle;
 
   return (
     <section className="grid gap-8 md:grid-cols-2 md:gap-12 md:items-center">
       <div className="space-y-6">
-        <H1>{heroMessages.title}</H1>
-        <Lead>{heroMessages.subtitle}</Lead>
+        <H1>{heroTitle}</H1>
+        <Lead>{heroSubtitle}</Lead>
         <div className="flex flex-wrap gap-3">
           <Button asChild variant="primary" size="lg">
-            <Link href="/#animais">{heroMessages.ctaSeeAnimals}</Link>
+            <Link href="/#animais">{primaryCtaLabel}</Link>
           </Button>
           <Button asChild variant="secondary" size="lg">
-            <Link href="/#doar">{heroMessages.ctaDonate}</Link>
+            <Link href="/#doar">{secondaryCtaLabel}</Link>
           </Button>
         </div>
         <div className="grid grid-cols-3 gap-3">
@@ -82,8 +95,8 @@ export function HomeHero() {
       </div>
       <div className="relative aspect-4/3 overflow-hidden rounded-xl border border-border bg-muted/30 md:aspect-square">
         <Image
-          src="https://placehold.co/600x500.png?text=Companheiros"
-          alt=""
+          src={heroImageUrl}
+          alt={heroImageAlt}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
           className="object-cover"
