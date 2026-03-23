@@ -103,6 +103,16 @@ export type Story = {
   imageUrl: string;
 };
 
+export type HomeCmsAdoptionStep = {
+  title: string;
+  description: string;
+};
+
+export type HomeCmsFaqItem = {
+  question: string;
+  answer: string;
+};
+
 export type HomeCmsContent = {
   title: string | null;
   subtitle: string | null;
@@ -111,4 +121,76 @@ export type HomeCmsContent = {
   heroImageUrl: string | null;
   heroImageAlt: string | null;
   entryId: string | null;
+  petsTitle: string | null;
+  petsSeeAll: string | null;
+  petsSeeAllHref: string | null;
+  adoptionHowTitle: string | null;
+  adoptionHowSubtitle: string | null;
+  adoptionHowCta: string | null;
+  adoptionHowCtaHref: string | null;
+  adoptionHowSteps: HomeCmsAdoptionStep[] | null;
+  donationTitle: string | null;
+  donationImpactTitle: string | null;
+  donationPixLabel: string | null;
+  donationPixCopy: string | null;
+  donationSeeMoreWays: string | null;
+  donationSeeMoreWaysHref: string | null;
+  transparencyTitle: string | null;
+  transparencySubtitle: string | null;
+  transparencyCta: string | null;
+  transparencyCtaHref: string | null;
+  bazaarTitle: string | null;
+  bazaarSubtitle: string | null;
+  bazaarCta: string | null;
+  bazaarCtaHref: string | null;
+  storiesTitle: string | null;
+  storiesSubtitle: string | null;
+  storiesCta: string | null;
+  storiesCtaHref: string | null;
+  faqTitle: string | null;
+  faqContactLink: string | null;
+  faqContactHref: string | null;
+  faqItems: HomeCmsFaqItem[] | null;
 };
+
+export function emptyHomeCmsContent(): HomeCmsContent {
+  return {
+    title: null,
+    subtitle: null,
+    primaryCtaLabel: null,
+    secondaryCtaLabel: null,
+    heroImageUrl: null,
+    heroImageAlt: null,
+    entryId: null,
+    petsTitle: null,
+    petsSeeAll: null,
+    petsSeeAllHref: null,
+    adoptionHowTitle: null,
+    adoptionHowSubtitle: null,
+    adoptionHowCta: null,
+    adoptionHowCtaHref: null,
+    adoptionHowSteps: null,
+    donationTitle: null,
+    donationImpactTitle: null,
+    donationPixLabel: null,
+    donationPixCopy: null,
+    donationSeeMoreWays: null,
+    donationSeeMoreWaysHref: null,
+    transparencyTitle: null,
+    transparencySubtitle: null,
+    transparencyCta: null,
+    transparencyCtaHref: null,
+    bazaarTitle: null,
+    bazaarSubtitle: null,
+    bazaarCta: null,
+    bazaarCtaHref: null,
+    storiesTitle: null,
+    storiesSubtitle: null,
+    storiesCta: null,
+    storiesCtaHref: null,
+    faqTitle: null,
+    faqContactLink: null,
+    faqContactHref: null,
+    faqItems: null,
+  };
+}

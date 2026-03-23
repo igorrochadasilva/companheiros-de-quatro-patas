@@ -3,6 +3,7 @@
 import Link from "next/link";
 
 import { PUBLIC_ROUTES } from "@/constants";
+import { useHomeCmsContent } from "@/features/home/hooks/useHomeCmsContent";
 import { useTransparencySummary } from "@/features/home/hooks/useTransparencySummary";
 import messages from "@/messages/pt-br.json";
 import { useWhenVisible } from "@/shared/hooks/useWhenVisible";
@@ -11,7 +12,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { Skeleton } from "@/shared/ui/skeleton";
 import { H2, Muted } from "@/shared/ui/typography";
 
-const transparencyMessages = messages.home.transparency;
+const transparencyCardMessages = messages.home.transparency.cards;
+
+const TRANSPARENCY_LOAD_ERROR =
+  "Não foi possível carregar os dados de transparência no momento.";
 
 function formatCurrency(value: number) {
   return value.toLocaleString("pt-BR", {
@@ -23,22 +27,55 @@ function formatCurrency(value: number) {
 
 export function HomeSectionTransparency() {
   const [sectionRef, isVisible] = useWhenVisible({ rootMargin: "150px" });
+  const { data: cms, isPending: isCmsPending } = useHomeCmsContent();
   const { data, isLoading, isError } = useTransparencySummary({
     enabled: isVisible,
   });
+
+  const title = cms?.transparencyTitle?.trim() ?? "";
+  const subtitle = cms?.transparencySubtitle?.trim() ?? "";
+  const cta = cms?.transparencyCta?.trim() ?? "";
+  const ctaHref = cms?.transparencyCtaHref || PUBLIC_ROUTES.transparency;
+
+  if (isCmsPending) {
+    return (
+      <section ref={sectionRef} className="space-y-6">
+        <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div className="space-y-2">
+            <Skeleton className="h-9 w-48 rounded" />
+            <Skeleton className="h-5 w-full max-w-md rounded" />
+          </div>
+          <Skeleton className="h-9 w-40 rounded-md" />
+        </div>
+        <div className="grid gap-4 md:grid-cols-3">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <Card key={index}>
+              <CardHeader>
+                <Skeleton className="h-4 w-24" />
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <Skeleton className="h-7 w-24" />
+                <Skeleton className="h-3 w-32" />
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section ref={sectionRef} className="space-y-6">
       <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div className="space-y-2">
-          <H2>{transparencyMessages.title}</H2>
-          <Muted className="text-base">{transparencyMessages.subtitle}</Muted>
+          {title ? <H2>{title}</H2> : null}
+          {subtitle ? <Muted className="text-base">{subtitle}</Muted> : null}
         </div>
-        <Button asChild variant="outline" size="sm">
-          <Link href={PUBLIC_ROUTES.transparency}>
-            {transparencyMessages.cta}
-          </Link>
-        </Button>
+        {cta ? (
+          <Button asChild variant="outline" size="sm">
+            <Link href={ctaHref}>{cta}</Link>
+          </Button>
+        ) : null}
       </div>
 
       {isLoading ? (
@@ -56,13 +93,13 @@ export function HomeSectionTransparency() {
           ))}
         </div>
       ) : isError || !data ? (
-        <Muted className="text-sm">{transparencyMessages.empty}</Muted>
+        <Muted className="text-sm">{TRANSPARENCY_LOAD_ERROR}</Muted>
       ) : (
         <div className="grid gap-4 md:grid-cols-3">
           <Card>
             <CardHeader>
               <CardTitle className="text-sm font-medium text-muted-foreground">
-                {transparencyMessages.cards.raisedTitlePrefix} {data.monthLabel}
+                {transparencyCardMessages.raisedTitlePrefix} {data.monthLabel}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -70,7 +107,7 @@ export function HomeSectionTransparency() {
                 {formatCurrency(data.totalRaised)}
               </p>
               <Muted className="text-xs">
-                {transparencyMessages.cards.raisedDescription}
+                {transparencyCardMessages.raisedDescription}
               </Muted>
             </CardContent>
           </Card>
@@ -78,7 +115,7 @@ export function HomeSectionTransparency() {
           <Card>
             <CardHeader>
               <CardTitle className="text-sm font-medium text-muted-foreground">
-                {transparencyMessages.cards.spentTitle}
+                {transparencyCardMessages.spentTitle}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -86,7 +123,7 @@ export function HomeSectionTransparency() {
                 {formatCurrency(data.totalSpent)}
               </p>
               <Muted className="text-xs">
-                {transparencyMessages.cards.spentDescription}
+                {transparencyCardMessages.spentDescription}
               </Muted>
             </CardContent>
           </Card>
@@ -94,7 +131,7 @@ export function HomeSectionTransparency() {
           <Card>
             <CardHeader>
               <CardTitle className="text-sm font-medium text-muted-foreground">
-                {transparencyMessages.cards.balanceTitle}
+                {transparencyCardMessages.balanceTitle}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -102,7 +139,7 @@ export function HomeSectionTransparency() {
                 {formatCurrency(data.balance)}
               </p>
               <Muted className="text-xs">
-                {transparencyMessages.cards.updatedAtPrefix}{" "}
+                {transparencyCardMessages.updatedAtPrefix}{" "}
                 {new Date(data.lastUpdatedAt).toLocaleDateString("pt-BR")}.
               </Muted>
             </CardContent>

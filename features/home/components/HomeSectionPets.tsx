@@ -5,6 +5,7 @@ import { useEffect } from "react";
 
 import { PUBLIC_ROUTES } from "@/constants";
 import { useFeaturedPets } from "@/features/home/hooks/useFeaturedPets";
+import { useHomeCmsContent } from "@/features/home/hooks/useHomeCmsContent";
 import messages from "@/messages/pt-br.json";
 import { usePetFilters } from "@/shared/hooks/usePetFilters";
 import { track } from "@/shared/lib/analytics";
@@ -23,12 +24,24 @@ import { HomeSectionPetsSkeleton } from "./HomeSectionPetsSkeleton";
 
 const petsMessages = messages.home.pets;
 
+/** Cópia local: lista vazia por filtros não está no Contentful. */
+const PETS_EMPTY_LIST = {
+  title: "Nenhum resultado com esses filtros",
+  description:
+    "Altere os filtros ou limpe tudo para ver mais opções de animais.",
+} as const;
+
 export function HomeSectionPets() {
   const { filters, cityInput, setCityInput, updateFilters, clearFilters } =
     usePetFilters();
 
+  const { data: cms, isPending: isCmsPending } = useHomeCmsContent();
   const { data, isLoading, isSuccess } = useFeaturedPets(filters);
   const items = data?.items ?? [];
+
+  const sectionTitle = cms?.petsTitle?.trim() ?? "";
+  const seeAllLabel = cms?.petsSeeAll?.trim() ?? "";
+  const seeAllHref = cms?.petsSeeAllHref || PUBLIC_ROUTES.adoption;
 
   useEffect(() => {
     if (isSuccess && items.length > 0) {
@@ -39,10 +52,20 @@ export function HomeSectionPets() {
   return (
     <section id="animais" className="scroll-mt-24 space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <H2>{petsMessages.title}</H2>
-        <Button asChild variant="outline" size="sm">
-          <Link href={PUBLIC_ROUTES.adoption}>{petsMessages.seeAll}</Link>
-        </Button>
+        {isCmsPending ? (
+          <div className="h-9 w-48 animate-pulse rounded-md bg-muted" />
+        ) : (
+          sectionTitle && <H2>{sectionTitle}</H2>
+        )}
+        {isCmsPending ? (
+          <div className="h-9 w-24 animate-pulse rounded-md bg-muted" />
+        ) : (
+          seeAllLabel && (
+            <Button asChild variant="outline" size="sm">
+              <Link href={seeAllHref}>{seeAllLabel}</Link>
+            </Button>
+          )
+        )}
       </div>
 
       <HomeSectionPetsFilters
@@ -58,8 +81,8 @@ export function HomeSectionPets() {
       ) : items.length === 0 ? (
         <Empty>
           <EmptyHeader>
-            <EmptyTitle>{petsMessages.emptyTitle}</EmptyTitle>
-            <EmptyDescription>{petsMessages.emptyDescription}</EmptyDescription>
+            <EmptyTitle>{PETS_EMPTY_LIST.title}</EmptyTitle>
+            <EmptyDescription>{PETS_EMPTY_LIST.description}</EmptyDescription>
           </EmptyHeader>
           <Button onClick={clearFilters}>{petsMessages.clearFilters}</Button>
         </Empty>

@@ -14,6 +14,8 @@
 - Healthcheck em `GET /api/cms/contentful/health`
 - Endpoint de conteudo Home em `GET /api/cms/contentful/home`
   - Campos mapeados: `title`, `subtitle`, `primaryCtaLabel`, `secondaryCtaLabel`, `heroImage`
+- Endpoint de conteudo Adocao em `GET /api/cms/contentful/adoption`
+  - Content type `adoptPage`: `adoptionTitle`, `adoptionSubtitle`
 - Dominios de imagem do Contentful em `next.config.ts`
 
 ## Variaveis necessarias

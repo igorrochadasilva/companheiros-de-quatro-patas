@@ -11,36 +11,47 @@ import { Card, CardContent } from "@/shared/ui/card";
 import { Skeleton } from "@/shared/ui/skeleton";
 import { H1, Lead } from "@/shared/ui/typography";
 
-const heroMessages = messages.home.hero;
+const heroStatsLabels = messages.home.hero.stats;
 
 export function HomeHero() {
   const { data: stats, isLoading, isError } = useStats();
-  const { data: homeCmsContent } = useHomeCmsContent();
+  const { data: homeCmsContent, isPending: isCmsPending } = useHomeCmsContent();
 
-  const heroTitle = homeCmsContent?.title || heroMessages.title;
-  const heroSubtitle = homeCmsContent?.subtitle || heroMessages.subtitle;
-  const primaryCtaLabel =
-    homeCmsContent?.primaryCtaLabel || heroMessages.ctaSeeAnimals;
-  const secondaryCtaLabel =
-    homeCmsContent?.secondaryCtaLabel || heroMessages.ctaDonate;
+  const heroTitle = homeCmsContent?.title ?? "";
+  const heroSubtitle = homeCmsContent?.subtitle ?? "";
+  const primaryCtaLabel = homeCmsContent?.primaryCtaLabel ?? "";
+  const secondaryCtaLabel = homeCmsContent?.secondaryCtaLabel ?? "";
   const heroImageUrl =
     homeCmsContent?.heroImageUrl ||
     "https://placehold.co/600x500.png?text=Companheiros";
-  const heroImageAlt = homeCmsContent?.heroImageAlt || heroTitle;
+  const heroImageAlt = homeCmsContent?.heroImageAlt || heroTitle || "Hero";
 
   return (
     <section className="grid gap-8 md:grid-cols-2 md:gap-12 md:items-center">
       <div className="space-y-6">
-        <H1>{heroTitle}</H1>
-        <Lead>{heroSubtitle}</Lead>
-        <div className="flex flex-wrap gap-3">
-          <Button asChild variant="primary" size="lg">
-            <Link href="/#animais">{primaryCtaLabel}</Link>
-          </Button>
-          <Button asChild variant="secondary" size="lg">
-            <Link href="/#doar">{secondaryCtaLabel}</Link>
-          </Button>
-        </div>
+        {isCmsPending ? (
+          <>
+            <Skeleton className="h-10 w-full max-w-md rounded" />
+            <Skeleton className="h-20 w-full max-w-lg rounded" />
+            <div className="flex flex-wrap gap-3">
+              <Skeleton className="h-11 w-36 rounded-md" />
+              <Skeleton className="h-11 w-40 rounded-md" />
+            </div>
+          </>
+        ) : (
+          <>
+            <H1>{heroTitle}</H1>
+            <Lead>{heroSubtitle}</Lead>
+            <div className="flex flex-wrap gap-3">
+              <Button asChild variant="primary" size="lg">
+                <Link href="/#animais">{primaryCtaLabel}</Link>
+              </Button>
+              <Button asChild variant="secondary" size="lg">
+                <Link href="/#doar">{secondaryCtaLabel}</Link>
+              </Button>
+            </div>
+          </>
+        )}
         <div className="grid grid-cols-3 gap-3">
           {isLoading ? (
             <>
@@ -65,7 +76,7 @@ export function HomeHero() {
                     {stats.adoptedCount.toLocaleString("pt-BR")}
                   </span>
                   <span className="text-xs font-medium text-muted-foreground">
-                    {heroMessages.stats.adopted}
+                    {heroStatsLabels.adopted}
                   </span>
                 </CardContent>
               </Card>
@@ -75,7 +86,7 @@ export function HomeHero() {
                     {stats.inTreatmentCount.toLocaleString("pt-BR")}
                   </span>
                   <span className="text-xs font-medium text-muted-foreground">
-                    {heroMessages.stats.inTreatment}
+                    {heroStatsLabels.inTreatment}
                   </span>
                 </CardContent>
               </Card>
@@ -85,7 +96,7 @@ export function HomeHero() {
                     {stats.rescuedCount.toLocaleString("pt-BR")}
                   </span>
                   <span className="text-xs font-medium text-muted-foreground">
-                    {heroMessages.stats.rescued}
+                    {heroStatsLabels.rescued}
                   </span>
                 </CardContent>
               </Card>

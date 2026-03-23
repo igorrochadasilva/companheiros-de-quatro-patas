@@ -56,10 +56,6 @@
   },
   "home": {
     "hero": {
-      "title": "Encontre um novo companheiro",
-      "subtitle": "Home inicial com destaque para adoção, doações e apoio ao bazar da ONG.",
-      "ctaSeeAnimals": "Ver animais",
-      "ctaDonate": "Fazer doação",
       "stats": {
         "adopted": "Adotados",
         "inTreatment": "Em tratamento",
@@ -67,10 +63,6 @@
       }
     },
     "pets": {
-      "title": "Animais para adoção",
-      "seeAll": "Ver todos",
-      "emptyTitle": "Não encontramos animais com esses filtros",
-      "emptyDescription": "Tente alterar os filtros ou limpar tudo para ver mais opções.",
       "clearFilters": "Limpar filtros",
       "filters": {
         "species": "Espécie",
@@ -105,18 +97,9 @@
       }
     },
     "donation": {
-      "title": "Doação rápida via PIX",
-      "pixLabel": "Chave PIX",
-      "pixCopy": "Copiar chave",
-      "pixCopied": "Chave PIX copiada!",
-      "seeMoreWays": "Ver outras formas de doar",
-      "impactTitle": "Seu apoio faz a diferença"
+      "pixCopied": "Chave PIX copiada!"
     },
     "transparency": {
-      "title": "Transparência",
-      "subtitle": "Acompanhamos de perto cada real que entra e sai do abrigo.",
-      "cta": "Ver relatório completo",
-      "empty": "Em breve você poderá acompanhar aqui o detalhamento das entradas e saídas.",
       "cards": {
         "raisedTitlePrefix": "Arrecadado em",
         "raisedDescription": "Total de doações recebidas no período.",
@@ -125,72 +108,6 @@
         "balanceTitle": "Saldo do mês",
         "updatedAtPrefix": "Atualizado em"
       }
-    },
-    "bazaar": {
-      "title": "Bazar solidário",
-      "subtitle": "Compre produtos e ajude a manter o abrigo.",
-      "cta": "Acessar bazar",
-      "empty": "Em breve você poderá ver aqui os produtos em destaque do bazar."
-    },
-    "adoptionHow": {
-      "title": "Como funciona a adoção",
-      "subtitle": "Um passo a passo simples e transparente para encontrar o novo companheiro da sua família.",
-      "steps": [
-        {
-          "title": "1. Escolha um amigo",
-          "description": "Veja os animais disponíveis, leia a ficha com histórico, necessidades especiais e perfil ideal de família."
-        },
-        {
-          "title": "2. Preencha o formulário",
-          "description": "Conte um pouco sobre você, sua casa e rotina. Assim conseguimos fazer um pareamento responsável."
-        },
-        {
-          "title": "3. Conversa e visita",
-          "description": "Nossa equipe entra em contato para tirar dúvidas e, quando necessário, agenda uma visita."
-        },
-        {
-          "title": "4. Adoção responsável",
-          "description": "Com tudo certo, você assina o termo de adoção responsável e leva seu novo companheiro para casa."
-        }
-      ],
-      "cta": "Ver detalhes sobre o processo de adoção"
-    },
-    "stories": {
-      "title": "Histórias que aquecem o coração",
-      "subtitle": "Conheça alguns dos finais felizes que só foram possíveis graças às adoções e doações.",
-      "cta": "Ver mais histórias",
-      "empty": "Em breve vamos compartilhar aqui histórias de adoção que aquecem o coração."
-    },
-    "volunteer": {
-      "title": "Voluntariado e lar temporário",
-      "volunteerTitle": "Seja voluntário",
-      "fosterTitle": "Ofereça lar temporário"
-    },
-    "faq": {
-      "title": "Perguntas frequentes",
-      "contactLink": "Fale com a gente",
-      "items": [
-        {
-          "question": "Como faço para adotar um animal?",
-          "answer": "Escolha um animal na seção de adoção, leia a ficha completa e preencha o formulário de candidatura. Nossa equipe entra em contato para uma conversa e, quando for o caso, agenda uma visita. Com tudo certo, você assina o termo de adoção responsável."
-        },
-        {
-          "question": "Posso doar por PIX?",
-          "answer": "Sim. Na home você encontra nossa chave PIX para doação rápida. Qualquer valor ajuda a manter ração, medicamentos e cuidados veterinários dos animais."
-        },
-        {
-          "question": "Onde posso ver como o dinheiro é usado?",
-          "answer": "Na página de Transparência publicamos resumos mensais com o que foi arrecadado, o que foi investido nos animais e as principais despesas. O link \"Ver relatório completo\" leva ao detalhamento."
-        },
-        {
-          "question": "O bazar é da ONG?",
-          "answer": "Sim. O bazar solidário vende produtos (camisetas, canecas, acessórios) e a renda é revertida para o abrigo. Comprando você apoia os animais e leva um produto com a cara da causa."
-        },
-        {
-          "question": "Não posso adotar. Como mais posso ajudar?",
-          "answer": "Você pode doar via PIX, comprar no bazar, divulgar nossos animais nas redes ou, no futuro, se candidatar como voluntário ou lar temporário. Entre em contato para saber as opções atuais."
-        }
-      ]
     }
   },
   "bazaar": {

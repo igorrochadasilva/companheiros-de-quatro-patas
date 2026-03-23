@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 
 import { PUBLIC_ROUTES } from "@/constants";
+import { useAdoptionCmsContent } from "@/features/adoption/hooks/useAdoptionCmsContent";
 import messages from "@/messages/pt-br.json";
 import {
   Breadcrumb,
@@ -10,11 +13,17 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/shared/ui/breadcrumb";
+import { Skeleton } from "@/shared/ui/skeleton";
 import { H1, Muted } from "@/shared/ui/typography";
 
 const heroMessages = messages.adoption.hero;
 
 export function AdocaoHero() {
+  const { data: cms, isPending: isCmsPending } = useAdoptionCmsContent();
+
+  const title = cms?.adoptionTitle?.trim() ?? "";
+  const subtitle = cms?.adoptionSubtitle?.trim() ?? "";
+
   return (
     <section className="space-y-2">
       <Breadcrumb>
@@ -32,8 +41,19 @@ export function AdocaoHero() {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <H1>{heroMessages.title}</H1>
-      <Muted className="text-base">{heroMessages.subtitle}</Muted>
+      {isCmsPending ? (
+        <>
+          <Skeleton className="h-9 w-48 max-w-md rounded" />
+          <Skeleton className="h-6 w-full max-w-lg rounded" />
+        </>
+      ) : (
+        <>
+          <H1>{title || heroMessages.title}</H1>
+          <Muted className="text-base">
+            {subtitle || heroMessages.subtitle}
+          </Muted>
+        </>
+      )}
     </section>
   );
 }

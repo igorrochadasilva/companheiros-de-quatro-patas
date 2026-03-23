@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 import { PUBLIC_ROUTES } from "@/constants";
-import messages from "@/messages/pt-br.json";
+import { useHomeCmsContent } from "@/features/home/hooks/useHomeCmsContent";
 import {
   Accordion,
   AccordionContent,
@@ -11,16 +11,33 @@ import {
   AccordionTrigger,
 } from "@/shared/ui/accordion";
 import { Button } from "@/shared/ui/button";
+import { Skeleton } from "@/shared/ui/skeleton";
 import { H2 } from "@/shared/ui/typography";
 
-const faqMessages = messages.home.faq;
-
 export function HomeSectionFaq() {
-  const items = faqMessages.items ?? [];
+  const { data: cms, isPending: isCmsPending } = useHomeCmsContent();
+  const title = cms?.faqTitle?.trim() ?? "";
+  const contactLink = cms?.faqContactLink?.trim() ?? "";
+  const contactHref = cms?.faqContactHref || PUBLIC_ROUTES.contact;
+  const items = cms?.faqItems ?? [];
+
+  if (isCmsPending) {
+    return (
+      <section className="space-y-6">
+        <Skeleton className="h-9 w-56 rounded" />
+        <div className="space-y-2">
+          {[1, 2, 3].map((i) => (
+            <Skeleton key={i} className="h-12 w-full rounded-md" />
+          ))}
+        </div>
+        <Skeleton className="h-9 w-40 rounded-md" />
+      </section>
+    );
+  }
 
   return (
     <section className="space-y-6">
-      <H2>{faqMessages.title}</H2>
+      {title ? <H2>{title}</H2> : null}
 
       {items.length > 0 ? (
         <>
@@ -32,14 +49,18 @@ export function HomeSectionFaq() {
               </AccordionItem>
             ))}
           </Accordion>
-          <Button asChild variant="outline" size="sm">
-            <Link href={PUBLIC_ROUTES.contact}>{faqMessages.contactLink}</Link>
-          </Button>
+          {contactLink ? (
+            <Button asChild variant="outline" size="sm">
+              <Link href={contactHref}>{contactLink}</Link>
+            </Button>
+          ) : null}
         </>
       ) : (
-        <Button asChild variant="outline" size="sm">
-          <Link href={PUBLIC_ROUTES.contact}>{faqMessages.contactLink}</Link>
-        </Button>
+        contactLink && (
+          <Button asChild variant="outline" size="sm">
+            <Link href={contactHref}>{contactLink}</Link>
+          </Button>
+        )
       )}
     </section>
   );
