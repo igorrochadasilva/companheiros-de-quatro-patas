@@ -1,0 +1,21 @@
+# Workflow Standard
+
+- Load repository context before editing.
+- Read the relevant files in `rules/`, `doc/`, and `codex/standards/`.
+- Choose the smallest skill that fits the request.
+- Build a short plan before substantial changes.
+- A good implementation plan should include:
+  - a short summary
+  - key assumptions when information is incomplete
+  - main risks when the change can affect behavior or structure
+  - ordered implementation steps
+  - planned validation
+- Ask before acting when the request is ambiguous and affects architecture, contracts, or destructive operations.
+- Validate every non-trivial change with the cheapest reliable feedback first.
+- Prefer unit or integration validation when available, and report gaps when automation does not exist.
+- A good validation summary should include:
+  - final status
+  - checks that were run
+  - concrete findings when they exist
+  - residual risks or gaps
+- Summarize technical decisions in terms of correctness, maintainability, and scope control.

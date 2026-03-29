@@ -1,0 +1,4 @@
+version: 1
+display_name: Code Review
+short_description: Review code changes with focus on bugs, regressions, and missing validation.
+default_prompt: Review the relevant changes with a risk-first mindset, report concrete findings first, and call out residual risk or testing gaps.

@@ -1,0 +1,4 @@
+version: 1
+display_name: Bugfix Investigation
+short_description: Diagnose the root cause of a bug and apply the smallest reliable fix.
+default_prompt: Investigate the reported behavior, identify the root cause through the current code paths, and implement a targeted fix with explicit validation.

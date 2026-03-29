@@ -1,0 +1,4 @@
+version: 1
+display_name: Feature Implementation
+short_description: Implement scoped features after loading repository context and standards.
+default_prompt: Use the repository context and implement the requested feature with clear boundaries, minimal coupling, and explicit validation.

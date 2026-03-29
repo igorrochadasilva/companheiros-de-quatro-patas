@@ -1,0 +1,4 @@
+version: 1
+display_name: Repo Bootstrap
+short_description: Load repository context and choose the right Codex execution path before editing.
+default_prompt: Load the project context, identify the correct module boundaries, and recommend the next skill before any code changes.
