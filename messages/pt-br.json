@@ -23,6 +23,49 @@
     "ariaLabel": "Navegação principal",
     "openMenuLabel": "Abrir menu de navegação"
   },
+  "dashboard": {
+    "sidebar": {
+      "title": "Painel ONG",
+      "groupLabel": "Navegacao",
+      "overview": "Visao geral",
+      "pets": "Pets",
+      "importPets": "Importar planilha"
+    },
+    "header": {
+      "subtitle": "Painel administrativo de conteudo e operacao"
+    },
+    "home": {
+      "title": "Dashboard",
+      "subtitle": "Base administrativa preparada para o fluxo de pets.",
+      "quickActions": {
+        "managePets": {
+          "title": "Gerenciar pets",
+          "description": "Acesse listagem, filtros e acoes de edicao.",
+          "cta": "Abrir pets"
+        },
+        "importPets": {
+          "title": "Importar planilha",
+          "description": "Envie CSV ou XLSX para cadastro em lote.",
+          "cta": "Iniciar importacao"
+        }
+      }
+    },
+    "pets": {
+      "title": "Pets",
+      "subtitle": "Esta tela sera a listagem administrativa com filtros e acoes rapidas.",
+      "importCta": "Importar planilha"
+    },
+    "import": {
+      "title": "Importacao de pets",
+      "subtitle": "Proxima etapa: upload de arquivo, validacao e preview antes da gravacao.",
+      "backToPets": "Voltar para pets"
+    },
+    "petEdit": {
+      "title": "Edicao de pet",
+      "subtitle": "Registro em preparacao para o pet",
+      "backToPets": "Voltar para pets"
+    }
+  },
   "adoption": {
     "hero": {
       "title": "Adoção",
