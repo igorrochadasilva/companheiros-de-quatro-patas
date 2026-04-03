@@ -1,120 +1,127 @@
-﻿# Implementação técnica por etapas — Dashboard de pets (adaptado ao projeto atual)
+# Implementacao tecnica por etapas - Dashboard de pets (estrategia Prisma para MVP)
 
-## Contexto real do repositório (30/03/2026)
-
-Antes de implementar, estes pontos já existem hoje e impactam o plano:
+## Contexto real do repositório (03/04/2026)
 
 - Estrutura sem `src/`: usamos `app/`, `features/`, `shared/`, `types/`, `constants/`.
-- Dashboard inicial já existe em `app/(admin)/dashboard`, mas ainda é placeholder.
-- Não há autenticação administrativa ativa (sem `middleware.ts`, sem guard de rota).
-- `app/api/pets/route.ts` usa dados mock e já abastece o site público de adoção.
-- Supabase e Cloudinary ainda não estão integrados no projeto.
-- Variáveis atuais em `.env.example` cobrem apenas Contentful.
+- Dashboard base em `/dashboard` já existe e segue padrão de feature.
+- Supabase Auth + middleware SSR já está configurado.
+- Cloudinary server-side já está preparado.
+- `app/api/pets/route.ts` ainda usa mock e precisa migrar para banco real.
+- Decisao atual: usar Prisma para modelagem e `db push` no MVP (sem migrations por enquanto).
 
-## Objetivo do MVP (revisado)
+## Objetivo do MVP
 
-Entregar um dashboard funcional para gestão de pets sem quebrar o fluxo público atual, com:
+Entregar um dashboard de pets funcional, com:
 
-- listagem administrativa de pets
-- importação em lote por planilha (CSV/XLSX)
-- edição manual de pet
-- upload de mídia via Cloudinary
-- persistência no Supabase
-- proteção de rotas administrativas
+- listagem administrativa
+- edição manual
+- importação por planilha (CSV/XLSX)
+- upload de mídia no Cloudinary
+- persistência em Postgres via Prisma
+- manutenção do contrato da API pública de pets
 
-## Escopo do MVP
+## Estratégia arquitetural (híbrida)
+
+### Decisao 1 - ORM e schema sync no MVP
+
+Usar Prisma para schema e acesso ao banco, com `prisma db push` para sincronizar tabelas no ambiente de MVP.
+
+Observacao:
+
+- migrations entram na fase de producao, quando o modelo estiver mais estavel.
+
+### Decisão 2 — Auth e sessão
+
+Manter Supabase Auth (`@supabase/ssr`) para autenticação administrativa e sessão.
+
+### Decisão 3 — Camada de acesso a dados
+
+Centralizar queries em serviços de backend (`features/pets/services` + `shared/lib/prisma`), evitando SQL espalhado.
+
+### Decisão 4 — Contrato público estável
+
+`GET /api/pets` continua com o mesmo payload:
+
+```json
+{
+  "items": [],
+  "total": 0,
+  "page": 1,
+  "totalPages": 1
+}
+```
+
+## Escopo MVP
 
 ### Incluído
 
-- autenticação administrativa simples (Supabase Auth)
-- tabela `pets` no Supabase (com índices e constraints essenciais)
-- endpoint de importação em lote (`POST /api/pets/import`)
-- tela de importação com preview e erros por linha
-- listagem `/dashboard/pets` com filtros básicos
-- edição `/dashboard/pets/[id]`
-- upload de imagem principal e galeria (Cloudinary)
-- adaptação da API pública de pets para usar Supabase (sem mudar contrato)
+- tabela `pets` criada via Prisma `db push`
+- `GET /api/pets` usando Prisma (sem quebrar front público)
+- `POST /api/pets/import` com validação dupla e relatório
+- `/dashboard/pets` e `/dashboard/pets/[id]`
+- `/dashboard/pets/import` com preview e confirmação
+- upload assinado para Cloudinary
 
-### Fora do MVP inicial
+### Fora do MVP
 
-- workflow de aprovação
+- múltiplos perfis de permissão
 - histórico/auditoria completa
-- múltiplos níveis de permissão
 - merge avançado na importação
-- editor avançado de imagem
+- workflow de aprovação
 
-## Decisões arquiteturais (adaptadas)
-
-### Decisão 1 — Rota administrativa
-
-Manter prefixo atual `/dashboard` (coerente com `app/(admin)/dashboard`) e não migrar para `/admin` neste MVP.
-
-Motivo:
-
-- reduz refactor de rota e risco de quebrar links
-- acelera entrega inicial
-
-Observação:
-
-- o menu atual usa links `/admin/...`; isso precisa ser corrigido no primeiro PR.
-
-### Decisão 2 — Fonte de verdade dos pets
-
-Supabase passa a ser a fonte oficial de pets.
-
-Motivo:
-
-- hoje `/api/pets` usa mock; manter mock paralelamente cria divergência
-- o site público deve continuar consumindo `/api/pets`, mas com backend real
-
-### Decisão 3 — Importação
-
-Importação sempre passa por Route Handler (nunca cliente → banco direto).
-
-Motivo:
-
-- validação dupla (cliente + servidor)
-- regra de duplicidade centralizada
-- trilha mínima de logs
-
-### Decisão 4 — Upload de mídia
-
-Upload assinado no backend para Cloudinary público com transformações automáticas.
-
-Motivo:
-
-- equilíbrio entre simplicidade e segurança no MVP
-
-## Stack (estado alvo do MVP)
+## Stack alvo
 
 ### Frontend
 
-- Next.js 16 (App Router)
+- Next.js 16 + App Router
 - TypeScript
-- Tailwind CSS + shared UI existente
+- Tailwind + shadcn
 - React Hook Form + Zod
 - TanStack Query
 
 ### Backend / Infra
 
-- Supabase (Database + Auth)
+- Supabase Auth (SSR)
+- Postgres (Supabase) + Prisma ORM
 - Cloudinary
-- Route Handlers do Next.js
+- Route Handlers
 
-### Dependências a adicionar
+### Dependências principais
 
+- `@prisma/client`
+- `prisma`
+- `@supabase/ssr`
 - `@supabase/supabase-js`
 - `xlsx`
 - `cloudinary`
-- opcional: `slugify`
 
-## Estrutura de pastas proposta (sem `src/`)
+## Variáveis de ambiente (alvo)
+
+```env
+# Supabase Auth
+NEXT_PUBLIC_SUPABASE_URL=sua_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sua_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=sua_supabase_service_role_key
+
+# Prisma / Postgres
+DATABASE_URL=sua_connection_string_pooling_ou_direta
+DIRECT_URL=sua_connection_string_direta
+
+# Cloudinary
+CLOUDINARY_CLOUD_NAME=seu_cloud_name
+CLOUDINARY_API_KEY=sua_cloudinary_api_key
+CLOUDINARY_API_SECRET=seu_cloudinary_api_secret
+```
+
+## Estrutura de pastas proposta
 
 ```txt
+prisma/
+  schema.prisma
+
 app/
   (admin)/
     dashboard/
-      page.tsx
       pets/
         page.tsx
         import/
@@ -123,11 +130,11 @@ app/
           page.tsx
   api/
     pets/
-      route.ts                # GET público (mantém contrato atual)
+      route.ts
       import/
-        route.ts              # POST importação em lote
+        route.ts
       [id]/
-        route.ts              # PATCH edição
+        route.ts
     media/
       cloudinary-sign/
         route.ts
@@ -142,156 +149,153 @@ features/
 
 shared/
   lib/
+    prisma/
+      client.ts
     supabase/
       client.ts
       server.ts
+      middleware.ts
     cloudinary/
       server.ts
-
-types/
-  pets-admin.ts               # tipos de administração/importação
 ```
 
-## Modelo de dados `pets` (MVP)
+## Modelo de dados `Pet` (Prisma)
 
-```sql
-create table public.pets (
-  id uuid primary key default gen_random_uuid(),
-  external_id text,
-  name text not null,
-  species text not null,
-  breed text,
-  age text,
-  size text,
-  gender text,
-  color text,
-  castrated boolean not null default false,
-  vaccinated boolean not null default false,
-  description text,
-  status text not null default 'available',
-  city text,
-  state text,
-  featured boolean not null default false,
-  published boolean not null default true,
-  main_image_url text,
-  gallery_urls text[] not null default '{}',
-  created_at timestamptz not null default now(),
-  updated_at timestamptz not null default now()
-);
+```prisma
+model Pet {
+  id           String   @id @default(uuid()) @db.Uuid
+  externalId   String?  @map("external_id")
+  name         String
+  species      String
+  breed        String?
+  age          String?
+  size         String?
+  gender       String?
+  color        String?
+  castrated    Boolean  @default(false)
+  vaccinated   Boolean  @default(false)
+  description  String?
+  status       String   @default("available")
+  city         String?
+  state        String?
+  featured     Boolean  @default(false)
+  published    Boolean  @default(true)
+  mainImageUrl String?  @map("main_image_url")
+  galleryUrls  String[] @default([]) @map("gallery_urls")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
 
-create unique index if not exists uq_pets_external_id
-  on public.pets (external_id)
-  where external_id is not null;
-
-create index if not exists idx_pets_status on public.pets(status);
-create index if not exists idx_pets_published on public.pets(published);
-create index if not exists idx_pets_featured on public.pets(featured);
-create index if not exists idx_pets_species on public.pets(species);
-```
-
-Nota:
-
-- `status`, `species`, `size`, `gender` devem ter lista fechada no app (e opcionalmente `check constraint`).
-
-## Etapas de implementação (ordem recomendada)
-
-### Fase 0 — Fundacional (bloqueadores)
-
-1. Corrigir navegação do dashboard para `/dashboard/...`.
-2. Adicionar variáveis em `.env.example` para Supabase e Cloudinary.
-3. Instalar dependências ausentes.
-4. Criar cliente Supabase (server/client).
-5. Implementar proteção mínima de rota para `(admin)`.
-
-### Fase 1 — Dados reais de pets
-
-6. Criar migration da tabela `pets` + índices.
-7. Trocar `app/api/pets/route.ts` de mock para Supabase mantendo o contrato atual (`items`, `total`, `page`, `totalPages`).
-8. Validar filtros e ordenação atuais (`species`, `size`, `ageGroup`, `city`, `urgentOnly`, `sort`).
-
-### Fase 2 — Dashboard operacional
-
-9. Implementar `/dashboard/pets` com tabela, busca e filtros.
-10. Implementar `/dashboard/pets/[id]` com formulário RHF + Zod.
-11. Implementar upload de mídia para Cloudinary e persistência de URLs.
-
-### Fase 3 — Importação por planilha
-
-12. Definir template oficial (`external_id`, campos obrigatórios, booleanos).
-13. Criar schema Zod de linha + normalização (cliente e servidor).
-14. Implementar `/dashboard/pets/import` com preview e erros por linha.
-15. Implementar `POST /api/pets/import` com validação dupla e relatório final.
-
-### Fase 4 — Hardening
-
-16. Revisar RLS/policies para leitura pública e escrita admin.
-17. Padronizar logs de erro e observabilidade básica.
-18. Refinar UX com estados de loading/erro/sucesso.
-
-## Contratos importantes (para evitar regressão)
-
-### API pública atual de pets
-
-Enquanto migramos para Supabase, manter resposta:
-
-```json
-{
-  "items": [],
-  "total": 0,
-  "page": 1,
-  "totalPages": 1
+  @@index([status], map: "idx_pets_status")
+  @@index([published], map: "idx_pets_published")
+  @@index([featured], map: "idx_pets_featured")
+  @@index([species], map: "idx_pets_species")
+  @@unique([externalId], map: "uq_pets_external_id")
+  @@map("pets")
 }
 ```
 
-### API de importação (`POST /api/pets/import`)
+## Etapas de implementacao (reorganizadas)
 
-Resposta recomendada:
+### Fase 0 — Base técnica (status: em andamento)
 
-```json
-{
-  "inserted": 0,
-  "ignored": 0,
-  "duplicates": [],
-  "errors": []
-}
-```
+1. Dashboard base e rotas `/dashboard` prontas.
+2. Supabase SSR e Cloudinary server-side prontos.
+3. Definir estratégia Prisma como padrão de banco.
 
-## Riscos e mitigação (críticos)
+### Fase 1 - Prisma foundation
 
-### Risco 1 — Quebra do site público na migração do mock
+4. Instalar `prisma` e `@prisma/client`.
+5. Criar `prisma/schema.prisma` com datasource PostgreSQL.
+6. Criar `shared/lib/prisma/client.ts` (singleton).
+7. Atualizar `.env.example` com `DATABASE_URL` e `DIRECT_URL`.
+
+### Fase 2 - Schema e sync inicial
+
+8. Modelar `Pet` no Prisma.
+9. Rodar `prisma db push` para criar/atualizar tabelas no Supabase.
+10. Rodar `prisma generate` e validar queries no app.
+
+### Fase 3 - APIs com dados reais
+
+11. Trocar `GET /api/pets` de mock para Prisma mantendo contrato.
+12. Implementar `PATCH /api/pets/[id]`.
+13. Implementar `POST /api/pets/import` com dedupe e relatório.
+
+### Fase 4 - Dashboard operacional
+
+14. Listagem admin `/dashboard/pets` com busca/filtros.
+15. Edição `/dashboard/pets/[id]` com RHF + Zod.
+16. Upload Cloudinary integrado ao fluxo de edição.
+
+### Fase 5 - Importacao por planilha
+
+17. Template oficial de planilha.
+18. Schema Zod para linha, normalização e parsing.
+19. Preview com erros por linha e resumo final.
+
+### Fase 6 - Hardening
+
+20. Guard de rotas admin com sessão real.
+21. Logs padronizados e tratamento de erro consistente.
+22. Cobertura mínima de testes de parser/importação.
+
+## Riscos e mitigação
+
+### Risco 1 — Duas fontes de verdade (Prisma vs Supabase client)
+
+Mitigação:
+
+- definir Prisma como fonte de escrita/leitura das APIs de pets
+- usar Supabase client apenas para Auth/sessão
+
+### Risco 2 — Regressão no front público
 
 Mitigação:
 
 - preservar contrato de `GET /api/pets`
-- adicionar fallback controlado (erro explícito) se Supabase indisponível
+- validar paginação/filtros antigos durante migração
 
-### Risco 2 — Duplicidade na importação
-
-Mitigação:
-
-- `external_id` único quando informado
-- regra de dedupe secundária (`name + species + city` normalizados)
-
-### Risco 3 — Upload inseguro
+### Risco 3 — Duplicidade de importação
 
 Mitigação:
 
-- assinatura no backend
-- limite de MIME e tamanho
-- pasta/prefixo por pet no Cloudinary
+- `externalId` único
+- dedupe secundário (`name + species + city` normalizados)
 
-### Risco 4 — Admin sem proteção real
+### Risco 4 — Exposição de segredos
 
 Mitigação:
 
-- guard de rota antes de liberar operações de escrita
-- uso exclusivo de segredo no servidor
+- Prisma apenas server-side
+- `SERVICE_ROLE` e segredos Cloudinary nunca no cliente
+
+## Comandos Prisma para MVP
+
+Sugestao de scripts no `package.json`:
+
+- `prisma:generate`: `prisma generate`
+- `prisma:push`: `prisma db push`
+- `prisma:studio`: `prisma studio`
+- `prisma:reset`: `prisma db push --force-reset` (usar so em ambiente de dev)
+
+Fluxo operacional recomendado no MVP:
+
+1. editar `prisma/schema.prisma`
+2. rodar `pnpm prisma:generate`
+3. rodar `pnpm prisma:push`
+4. validar no Supabase e no app
+
+Transicao para producao:
+
+- congelar schema
+- introduzir migrations com `prisma migrate`
+- passar a versionar alteracoes de banco no repositorio
 
 ## Checklist de pronto (MVP)
 
-- dashboard acessível apenas por admin
-- `/dashboard/pets` listando dados reais
-- edição manual funcionando
-- importação com preview + relatório
-- upload de mídia funcional
-- `/api/pets` público lendo Supabase sem regressão no front de adoção
+- Prisma configurado e schema sincronizado com `db push`
+- `GET /api/pets` usando Prisma sem regressão
+- dashboard de pets funcional
+- importação em lote com preview e relatório
+- upload de mídia integrado
+- auth admin ativa nas rotas sensíveis

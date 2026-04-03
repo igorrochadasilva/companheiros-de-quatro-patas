@@ -12,6 +12,11 @@
     "build": "node -e \"require('fs').rmSync('.next', { recursive: true, force: true })\" && next build",
     "start": "next start",
     "lint": "eslint",
+    "prisma:generate": "prisma generate --config prisma.config.ts",
+    "prisma:push": "prisma db push --config prisma.config.ts",
+    "prisma:push:debug": "node scripts/prisma-push-debug.mjs",
+    "prisma:studio": "prisma studio --config prisma.config.ts",
+    "prisma:reset": "prisma db push --force-reset --config prisma.config.ts",
     "format": "prettier --write .",
     "prepare": "husky"
   },
@@ -24,21 +29,36 @@
       "prettier --write"
     ]
   },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@prisma/client",
+      "@prisma/engines",
+      "prisma"
+    ]
+  },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@prisma/adapter-pg": "^7.6.0",
+    "@prisma/client": "^7.6.0",
+    "@supabase/ssr": "^0.10.0",
+    "@supabase/supabase-js": "^2.101.0",
     "@tanstack/react-query": "^5.90.21",
     "class-variance-authority": "^0.7.1",
+    "cloudinary": "^2.9.0",
     "clsx": "^2.1.1",
     "contentful": "^11.10.5",
     "lucide-react": "^0.576.0",
     "next": "16.1.6",
     "next-themes": "^0.4.6",
+    "pg": "^8.20.0",
+    "prisma": "^7.6.0",
     "radix-ui": "^1.4.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-hook-form": "^7.71.2",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.5.0",
+    "xlsx": "^0.18.5",
     "zod": "^4.3.6"
   },
   "devDependencies": {

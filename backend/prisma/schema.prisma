@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Pet {
+  id           String   @id @default(uuid()) @db.Uuid
+  externalId   String?  @map("external_id")
+  name         String
+  species      String
+  breed        String?
+  age          String?
+  size         String?
+  gender       String?
+  color        String?
+  castrated    Boolean  @default(false)
+  vaccinated   Boolean  @default(false)
+  description  String?
+  status       String   @default("available")
+  city         String?
+  state        String?
+  featured     Boolean  @default(false)
+  published    Boolean  @default(true)
+  mainImageUrl String?  @map("main_image_url")
+  galleryUrls  String[] @default([]) @map("gallery_urls")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@index([status], map: "idx_pets_status")
+  @@index([published], map: "idx_pets_published")
+  @@index([featured], map: "idx_pets_featured")
+  @@index([species], map: "idx_pets_species")
+  @@unique([externalId], map: "uq_pets_external_id")
+  @@map("pets")
+}
