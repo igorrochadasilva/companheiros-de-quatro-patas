@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 
 import { isAdminUser } from "@/backend/modules/auth/application/is-admin-user";
+import { PUBLIC_ROUTES } from "@/constants";
 import { DashboardShell } from "@/features/dashboard/components/DashboardShell";
 import { getSupabaseServerClient } from "@/shared/lib/supabase/server";
 
@@ -15,7 +16,7 @@ export default async function AdminLayout({
   } = await supabase.auth.getUser();
 
   if (!isAdminUser(user)) {
-    redirect("/");
+    redirect(`${PUBLIC_ROUTES.login}?next=%2Fdashboard`);
   }
 
   return <DashboardShell>{children}</DashboardShell>;

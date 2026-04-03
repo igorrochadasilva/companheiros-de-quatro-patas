@@ -2,19 +2,31 @@
 
 import { createBrowserClient } from "@supabase/ssr";
 
-import { getSupabasePublicKey, requireEnv } from "@/backend/shared/env";
-
 let browserClient: ReturnType<typeof createBrowserClient> | null = null;
+
+function readBrowserSupabaseEnv() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key =
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY;
+
+  if (!url || !key) {
+    throw new Error(
+      "[env] Missing public Supabase envs in browser runtime. Check NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY (or NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY).",
+    );
+  }
+
+  return { url, key };
+}
 
 export function getSupabaseBrowserClient() {
   if (browserClient) {
     return browserClient;
   }
 
-  browserClient = createBrowserClient(
-    requireEnv("NEXT_PUBLIC_SUPABASE_URL"),
-    getSupabasePublicKey(),
-  );
+  const { url, key } = readBrowserSupabaseEnv();
+
+  browserClient = createBrowserClient(url, key);
 
   return browserClient;
 }

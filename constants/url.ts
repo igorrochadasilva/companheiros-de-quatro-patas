@@ -1,5 +1,6 @@
 export const PUBLIC_ROUTES = {
   home: "/",
+  login: "/login",
   adoption: "/adocao",
   shelter: "/abrigo",
   donate: "/doar",

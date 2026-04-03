@@ -18,6 +18,8 @@ import {
 } from "@/shared/ui/sidebar";
 import { Muted, Small, Typography } from "@/shared/ui/typography";
 
+import { DashboardLogoutButton } from "./DashboardLogoutButton";
+
 const dashboardMessages = messages.dashboard;
 
 type DashboardShellProps = Readonly<{
@@ -61,9 +63,12 @@ export function DashboardShell({ children }: DashboardShellProps) {
       </Sidebar>
 
       <SidebarInset className="min-h-screen bg-muted/30 text-foreground">
-        <header className="flex items-center gap-2 border-b border-border bg-card px-4 py-3 md:px-6">
-          <SidebarTrigger />
-          <Muted>{dashboardMessages.header.subtitle}</Muted>
+        <header className="flex items-center justify-between gap-2 border-b border-border bg-card px-4 py-3 md:px-6">
+          <div className="flex items-center gap-2">
+            <SidebarTrigger />
+            <Muted>{dashboardMessages.header.subtitle}</Muted>
+          </div>
+          <DashboardLogoutButton />
         </header>
         <main className="flex-1 px-4 py-6 md:px-6 md:py-8">{children}</main>
       </SidebarInset>
