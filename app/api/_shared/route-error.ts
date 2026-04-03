@@ -1,6 +1,21 @@
-import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
+
+type PrismaLikeKnownError = Error & {
+  code?: string;
+  clientVersion?: string;
+};
+
+function isPrismaKnownError(error: unknown): error is PrismaLikeKnownError {
+  if (!error || typeof error !== "object") return false;
+
+  const maybeError = error as PrismaLikeKnownError;
+  return (
+    typeof maybeError.code === "string" &&
+    maybeError.code.startsWith("P") &&
+    typeof maybeError.clientVersion === "string"
+  );
+}
 
 export function buildErrorResponse(error: unknown) {
   if (error instanceof ZodError) {
@@ -16,7 +31,7 @@ export function buildErrorResponse(error: unknown) {
     );
   }
 
-  if (error instanceof Prisma.PrismaClientKnownRequestError) {
+  if (isPrismaKnownError(error)) {
     if (error.code === "P2025") {
       return NextResponse.json(
         { error: "Resource not found" },
