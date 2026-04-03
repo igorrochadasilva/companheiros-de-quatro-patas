@@ -1,11 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { requireAdminApi } from "@/app/api/_shared/require-admin";
 import { buildErrorResponse } from "@/app/api/_shared/route-error";
 import { createAdoptionRequest } from "@/backend/modules/adoption-requests/application/create-adoption-request";
 import { listAdoptionRequests } from "@/backend/modules/adoption-requests/application/list-adoption-requests";
 
 export async function GET(request: NextRequest) {
   try {
+    const authError = await requireAdminApi();
+    if (authError) return authError;
+
     const { searchParams } = new URL(request.url);
     const page = Number(searchParams.get("page") ?? "1");
     const pageSize = Number(searchParams.get("pageSize") ?? "20");

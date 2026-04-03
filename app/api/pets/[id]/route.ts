@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { requireAdminApi } from "@/app/api/_shared/require-admin";
 import { buildErrorResponse } from "@/app/api/_shared/route-error";
 import { deletePet } from "@/backend/modules/pets/application/delete-pet";
 import { getPetById } from "@/backend/modules/pets/application/get-pet-by-id";
@@ -11,6 +12,9 @@ type RouteParams = {
 
 export async function GET(_request: NextRequest, { params }: RouteParams) {
   try {
+    const authError = await requireAdminApi();
+    if (authError) return authError;
+
     const { id } = await params;
     const pet = await getPetById(id);
 
@@ -29,6 +33,9 @@ export async function GET(_request: NextRequest, { params }: RouteParams) {
 
 export async function PATCH(request: NextRequest, { params }: RouteParams) {
   try {
+    const authError = await requireAdminApi();
+    if (authError) return authError;
+
     const { id } = await params;
     const body = await request.json();
     const pet = await updatePet(id, body);
@@ -40,6 +47,9 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
 
 export async function DELETE(_request: NextRequest, { params }: RouteParams) {
   try {
+    const authError = await requireAdminApi();
+    if (authError) return authError;
+
     const { id } = await params;
     await deletePet(id);
     return NextResponse.json({ ok: true });

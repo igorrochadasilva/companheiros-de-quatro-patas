@@ -52,8 +52,48 @@
     },
     "pets": {
       "title": "Pets",
-      "subtitle": "Esta tela sera a listagem administrativa com filtros e acoes rapidas.",
-      "importCta": "Importar planilha"
+      "subtitle": "Listagem administrativa com filtros, paginação e acesso rapido a edicao.",
+      "importCta": "Importar planilha",
+      "filters": {
+        "queryLabel": "Busca",
+        "queryPlaceholder": "Buscar por nome",
+        "speciesLabel": "Especie",
+        "statusLabel": "Status",
+        "publishedLabel": "Publicacao",
+        "all": "Todos",
+        "published": "Publicado",
+        "unpublished": "Despublicado",
+        "submit": "Filtrar"
+      },
+      "table": {
+        "name": "Nome",
+        "species": "Especie",
+        "status": "Status",
+        "city": "Cidade",
+        "published": "Publicado",
+        "featured": "Destaque",
+        "actions": "Acoes",
+        "edit": "Editar",
+        "yes": "Sim",
+        "no": "Nao",
+        "empty": "Nenhum pet encontrado para os filtros aplicados."
+      },
+      "pagination": {
+        "page": "Pagina {page} de {totalPages}",
+        "previous": "Anterior",
+        "next": "Proxima"
+      },
+      "speciesValues": {
+        "DOG": "Cachorro",
+        "CAT": "Gato",
+        "OTHER": "Outro"
+      },
+      "statusValues": {
+        "AVAILABLE": "Disponivel",
+        "RESERVED": "Reservado",
+        "ADOPTED": "Adotado",
+        "TREATMENT": "Em tratamento"
+      }
     },
     "import": {
       "title": "Importacao de pets",
@@ -62,8 +102,26 @@
     },
     "petEdit": {
       "title": "Edicao de pet",
-      "subtitle": "Registro em preparacao para o pet",
-      "backToPets": "Voltar para pets"
+      "subtitle": "Atualize os dados do pet e salve no banco.",
+      "backToPets": "Voltar para pets",
+      "notFound": "Pet nao encontrado.",
+      "form": {
+        "name": "Nome",
+        "status": "Status",
+        "description": "Descricao",
+        "published": "Publicado",
+        "featured": "Destaque",
+        "save": "Salvar alteracoes",
+        "saving": "Salvando...",
+        "success": "Dados salvos com sucesso.",
+        "error": "Nao foi possivel salvar. Tente novamente."
+      },
+      "statusValues": {
+        "AVAILABLE": "Disponivel",
+        "RESERVED": "Reservado",
+        "ADOPTED": "Adotado",
+        "TREATMENT": "Em tratamento"
+      }
     }
   },
   "adoption": {

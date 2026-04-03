@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { requireAdminApi } from "@/app/api/_shared/require-admin";
 import { buildErrorResponse } from "@/app/api/_shared/route-error";
 import { deletePetMedia } from "@/backend/modules/pets/application/delete-pet-media";
 import { updatePetMedia } from "@/backend/modules/pets/application/update-pet-media";
@@ -10,6 +11,9 @@ type RouteParams = {
 
 export async function PATCH(request: NextRequest, { params }: RouteParams) {
   try {
+    const authError = await requireAdminApi();
+    if (authError) return authError;
+
     const { id } = await params;
     const body = await request.json();
     const media = await updatePetMedia(id, body);
@@ -21,6 +25,9 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
 
 export async function DELETE(_request: NextRequest, { params }: RouteParams) {
   try {
+    const authError = await requireAdminApi();
+    if (authError) return authError;
+
     const { id } = await params;
     await deletePetMedia(id);
     return NextResponse.json({ ok: true });

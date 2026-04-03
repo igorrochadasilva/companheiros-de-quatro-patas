@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { requireAdminApi } from "@/app/api/_shared/require-admin";
 import { buildErrorResponse } from "@/app/api/_shared/route-error";
 import { deleteAdoptionRequest } from "@/backend/modules/adoption-requests/application/delete-adoption-request";
 import { getAdoptionRequestById } from "@/backend/modules/adoption-requests/application/get-adoption-request-by-id";
@@ -11,6 +12,9 @@ type RouteParams = {
 
 export async function GET(_request: NextRequest, { params }: RouteParams) {
   try {
+    const authError = await requireAdminApi();
+    if (authError) return authError;
+
     const { id } = await params;
     const adoptionRequest = await getAdoptionRequestById(id);
 
@@ -29,6 +33,9 @@ export async function GET(_request: NextRequest, { params }: RouteParams) {
 
 export async function PATCH(request: NextRequest, { params }: RouteParams) {
   try {
+    const authError = await requireAdminApi();
+    if (authError) return authError;
+
     const { id } = await params;
     const body = await request.json();
     const adoptionRequest = await updateAdoptionRequestStatus(id, body);
@@ -40,6 +47,9 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
 
 export async function DELETE(_request: NextRequest, { params }: RouteParams) {
   try {
+    const authError = await requireAdminApi();
+    if (authError) return authError;
+
     const { id } = await params;
     await deleteAdoptionRequest(id);
     return NextResponse.json({ ok: true });

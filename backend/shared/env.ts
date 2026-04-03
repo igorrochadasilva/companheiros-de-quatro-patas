@@ -2,6 +2,10 @@ function readEnv(name: string) {
   return process.env[name]?.trim() ?? "";
 }
 
+export function getOptionalEnv(name: string) {
+  return readEnv(name) || undefined;
+}
+
 export function requireEnv(name: string) {
   const value = readEnv(name);
   if (!value) {
@@ -19,6 +23,16 @@ export function requireAnyEnv(...names: string[]) {
   throw new Error(
     `[env] Missing required env var. Provide one of: ${names.join(", ")}`,
   );
+}
+
+export function getAdminEmailsFromEnv() {
+  const raw = getOptionalEnv("ADMIN_EMAILS");
+  if (!raw) return [];
+
+  return raw
+    .split(",")
+    .map((value) => value.trim().toLowerCase())
+    .filter(Boolean);
 }
 
 export function getSupabasePublicKey() {

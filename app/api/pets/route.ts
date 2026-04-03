@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { requireAdminApi } from "@/app/api/_shared/require-admin";
 import { buildErrorResponse } from "@/app/api/_shared/route-error";
 import { createPet } from "@/backend/modules/pets/application/create-pet";
 import { listPets } from "@/backend/modules/pets/application/list-pets";
@@ -11,7 +12,10 @@ export async function GET(request: NextRequest) {
   const size = searchParams.get("size") as PetSize | null;
   const ageGroup = searchParams.get("ageGroup") as PetAgeGroup | null;
   const city = searchParams.get("city") ?? null;
-  const urgentOnly = searchParams.get("urgentOnly") === "1";
+  const urgentOnlyRaw = searchParams.get("urgentOnly");
+  const featuredRaw = searchParams.get("featured");
+  const urgentOnly = urgentOnlyRaw === "1" || urgentOnlyRaw === "true";
+  const featured = featuredRaw === "1" || featuredRaw === "true";
   const limit = Math.min(Number(searchParams.get("limit")) || 12, 24);
   const page = Math.max(1, Number(searchParams.get("page")) || 1);
 
@@ -21,6 +25,7 @@ export async function GET(request: NextRequest) {
     ageGroup: ageGroup ?? undefined,
     city: city ?? undefined,
     urgentOnly,
+    featured,
     limit,
     page,
     sort: searchParams.get("sort"),
@@ -31,6 +36,9 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const authError = await requireAdminApi();
+    if (authError) return authError;
+
     const body = await request.json();
     const pet = await createPet(body);
     return NextResponse.json(pet, { status: 201 });
