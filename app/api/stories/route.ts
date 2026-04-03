@@ -1,31 +1,8 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 
-import type { Story } from "@/types";
-
-const stories: Story[] = [
-  {
-    id: "story-1",
-    title: "Da rua para o sofá: a história da Mel",
-    summary:
-      "Resgatada desnutrida, hoje a Mel vive cercada de carinho em seu novo lar.",
-    imageUrl: "https://placehold.co/600x400.png?text=Mel",
-  },
-  {
-    id: "story-2",
-    title: "Um novo começo para o Thor",
-    summary:
-      "Após meses em tratamento, o Thor encontrou uma família ativa como ele.",
-    imageUrl: "https://placehold.co/600x400.png?text=Thor",
-  },
-  {
-    id: "story-3",
-    title: "Quando dois gatinhos escolhem a mesma família",
-    summary:
-      "Nina e Chico chegaram tímidos, mas nunca mais se separaram — nem dos tutores.",
-    imageUrl: "https://placehold.co/600x400.png?text=Nina+%26+Chico",
-  },
-];
+import { listStories } from "@/backend/modules/stories/application/list-stories";
 
 export async function GET() {
-  return NextResponse.json({ items: stories });
+  const items = await listStories();
+  return NextResponse.json({ items });
 }

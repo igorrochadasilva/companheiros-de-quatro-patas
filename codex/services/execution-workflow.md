@@ -3,7 +3,7 @@
 Use this workflow before editing code.
 
 1. Read `README.md` for repository and product context.
-2. Read the relevant files in `rules/` and `codex/standards/`.
+2. Read the relevant files in `codex/standards/`.
 3. Read `doc/arquitetura/README.md` when the task affects structure, flow, or module boundaries.
 4. Inspect the target feature, route, or shared module.
 5. Choose the correct skill:

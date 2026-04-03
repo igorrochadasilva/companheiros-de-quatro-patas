@@ -1,14 +1,8 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 
-import type { Stats } from "@/types";
+import { getStats } from "@/backend/modules/stats/application/get-stats";
 
 export async function GET() {
-  const data: Stats = {
-    adoptedCount: 128,
-    inTreatmentCount: 23,
-    rescuedCount: 312,
-    lastUpdatedAt: new Date().toISOString(),
-  };
-
+  const data = await getStats();
   return NextResponse.json(data);
 }

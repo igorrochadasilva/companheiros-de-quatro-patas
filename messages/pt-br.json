@@ -23,6 +23,108 @@
     "ariaLabel": "Navegação principal",
     "openMenuLabel": "Abrir menu de navegação"
   },
+  "dashboard": {
+    "sidebar": {
+      "title": "Painel ONG",
+      "groupLabel": "Navegacao",
+      "overview": "Visao geral",
+      "pets": "Pets",
+      "importPets": "Importar planilha"
+    },
+    "header": {
+      "subtitle": "Painel administrativo de conteudo e operacao",
+      "logout": "Sair"
+    },
+    "home": {
+      "title": "Dashboard",
+      "subtitle": "Base administrativa preparada para o fluxo de pets.",
+      "quickActions": {
+        "managePets": {
+          "title": "Gerenciar pets",
+          "description": "Acesse listagem, filtros e acoes de edicao.",
+          "cta": "Abrir pets"
+        },
+        "importPets": {
+          "title": "Importar planilha",
+          "description": "Envie CSV ou XLSX para cadastro em lote.",
+          "cta": "Iniciar importacao"
+        }
+      }
+    },
+    "pets": {
+      "title": "Pets",
+      "subtitle": "Listagem administrativa com filtros, paginação e acesso rapido a edicao.",
+      "importCta": "Importar planilha",
+      "filters": {
+        "queryLabel": "Busca",
+        "queryPlaceholder": "Buscar por nome",
+        "speciesLabel": "Especie",
+        "statusLabel": "Status",
+        "publishedLabel": "Publicacao",
+        "all": "Todos",
+        "published": "Publicado",
+        "unpublished": "Despublicado",
+        "submit": "Filtrar"
+      },
+      "table": {
+        "name": "Nome",
+        "species": "Especie",
+        "status": "Status",
+        "city": "Cidade",
+        "published": "Publicado",
+        "featured": "Destaque",
+        "actions": "Acoes",
+        "edit": "Editar",
+        "yes": "Sim",
+        "no": "Nao",
+        "empty": "Nenhum pet encontrado para os filtros aplicados."
+      },
+      "pagination": {
+        "page": "Pagina {page} de {totalPages}",
+        "previous": "Anterior",
+        "next": "Proxima"
+      },
+      "speciesValues": {
+        "DOG": "Cachorro",
+        "CAT": "Gato",
+        "OTHER": "Outro"
+      },
+      "statusValues": {
+        "AVAILABLE": "Disponivel",
+        "RESERVED": "Reservado",
+        "ADOPTED": "Adotado",
+        "TREATMENT": "Em tratamento"
+      }
+    },
+    "import": {
+      "title": "Importacao de pets",
+      "subtitle": "Proxima etapa: upload de arquivo, validacao e preview antes da gravacao.",
+      "backToPets": "Voltar para pets"
+    },
+    "petEdit": {
+      "title": "Edicao de pet",
+      "subtitle": "Atualize os dados do pet e salve no banco.",
+      "backToPets": "Voltar para pets",
+      "notFound": "Pet nao encontrado.",
+      "form": {
+        "name": "Nome",
+        "status": "Status",
+        "description": "Descricao",
+        "published": "Publicado",
+        "featured": "Destaque",
+        "save": "Salvar alteracoes",
+        "saving": "Salvando...",
+        "success": "Dados salvos com sucesso.",
+        "error": "Nao foi possivel salvar. Tente novamente."
+      },
+      "statusValues": {
+        "AVAILABLE": "Disponivel",
+        "RESERVED": "Reservado",
+        "ADOPTED": "Adotado",
+        "TREATMENT": "Em tratamento"
+      }
+    }
+  },
   "adoption": {
     "hero": {
       "title": "Adoção",
@@ -600,6 +702,18 @@
           "answer": "Publicamos resumos de arrecadação, despesas e saldo para que você acompanhe a aplicação dos recursos."
         }
       ]
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Acesso administrativo",
+      "subtitle": "Entre com o email autorizado para acessar o dashboard.",
+      "emailLabel": "E-mail",
+      "passwordLabel": "Senha",
+      "submit": "Entrar",
+      "submitting": "Entrando...",
+      "invalidCredentials": "Credenciais invalidas.",
+      "forbidden": "Seu usuario nao possui permissao de administrador."
     }
   }
 }

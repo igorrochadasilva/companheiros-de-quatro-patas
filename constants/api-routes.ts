@@ -12,6 +12,7 @@ export const API_ROUTES = {
   stories: "/api/stories",
   contact: "/api/contact",
   shelterProgress: "/api/shelter/progress",
+  auth: "/api/auth",
   homeCms: "/api/cms/contentful/home",
   adoptionCms: "/api/cms/contentful/adoption",
 };

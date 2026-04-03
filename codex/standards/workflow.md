@@ -1,7 +1,7 @@
 # Workflow Standard
 
 - Load repository context before editing.
-- Read the relevant files in `rules/`, `doc/`, and `codex/standards/`.
+- Read the relevant files in `doc/` and `codex/standards/`.
 - Choose the smallest skill that fits the request.
 - Build a short plan before substantial changes.
 - A good implementation plan should include:
