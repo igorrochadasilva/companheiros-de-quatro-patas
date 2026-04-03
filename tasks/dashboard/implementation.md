@@ -1,301 +1,166 @@
-# Implementacao tecnica por etapas - Dashboard de pets (estrategia Prisma para MVP)
+﻿# Implementacao tecnica por etapas - Dashboard de pets (status atual)
 
-## Contexto real do repositório (03/04/2026)
+## Data de referencia
 
-- Estrutura sem `src/`: usamos `app/`, `features/`, `shared/`, `types/`, `constants/`.
-- Dashboard base em `/dashboard` já existe e segue padrão de feature.
-- Supabase Auth + middleware SSR já está configurado.
-- Cloudinary server-side já está preparado.
-- `app/api/pets/route.ts` ainda usa mock e precisa migrar para banco real.
-- Decisao atual: usar Prisma para modelagem e `db push` no MVP (sem migrations por enquanto).
+03/04/2026
 
-## Objetivo do MVP
+## Estado atual do projeto
 
-Entregar um dashboard de pets funcional, com:
+### Concluido
 
-- listagem administrativa
-- edição manual
-- importação por planilha (CSV/XLSX)
-- upload de mídia no Cloudinary
-- persistência em Postgres via Prisma
-- manutenção do contrato da API pública de pets
+- Dashboard base em `/dashboard` ja estruturado por feature.
+- Setup Supabase SSR e Cloudinary no backend concluido.
+- Prisma atualizado para versao atual (v7) e funcionando com `prisma.config.ts`.
+- `prisma generate` e `prisma db push` funcionando.
+- Camada `backend/` criada com organizacao clean architecture leve.
+- Integracao Contentful movida para backend:
+  - `backend/infrastructure/contentful/*`
+  - `backend/modules/cms/application/*`
+- Endpoints mockados migrados para backend:
+  - mocks em `backend/mock/*`
+  - regras em `backend/modules/*/application/*`
+  - `app/api/*` agora como adaptadores HTTP finos.
 
-## Estratégia arquitetural (híbrida)
+### Em andamento
 
-### Decisao 1 - ORM e schema sync no MVP
+- Migracao de `pets` para dados reais com Prisma (ainda usando mock no modulo de pets).
+- Implementacao de endpoints de escrita (`PATCH /api/pets/[id]`, `POST /api/pets/import`).
 
-Usar Prisma para schema e acesso ao banco, com `prisma db push` para sincronizar tabelas no ambiente de MVP.
+## Decisoes arquiteturais
 
-Observacao:
+### Decisao 1 - Backend orientado a camadas
 
-- migrations entram na fase de producao, quando o modelo estiver mais estavel.
+- `app/api/*` = transporte HTTP (parse/response).
+- `backend/modules/*/application/*` = casos de uso.
+- `backend/infrastructure/*` = integracoes externas (Prisma, Supabase, Cloudinary, Contentful).
+- `backend/mock/*` = dados fake centralizados por dominio.
 
-### Decisão 2 — Auth e sessão
+### Decisao 2 - Prisma no MVP sem migrations
 
-Manter Supabase Auth (`@supabase/ssr`) para autenticação administrativa e sessão.
+- Usar `db push` para evolucao rapida no MVP.
+- Migrations entram na fase de producao/estabilizacao.
 
-### Decisão 3 — Camada de acesso a dados
+### Decisao 3 - Contrato publico preservado
 
-Centralizar queries em serviços de backend (`features/pets/services` + `shared/lib/prisma`), evitando SQL espalhado.
+- APIs publicas mantem payload atual para nao quebrar frontend.
 
-### Decisão 4 — Contrato público estável
-
-`GET /api/pets` continua com o mesmo payload:
-
-```json
-{
-  "items": [],
-  "total": 0,
-  "page": 1,
-  "totalPages": 1
-}
-```
-
-## Escopo MVP
-
-### Incluído
-
-- tabela `pets` criada via Prisma `db push`
-- `GET /api/pets` usando Prisma (sem quebrar front público)
-- `POST /api/pets/import` com validação dupla e relatório
-- `/dashboard/pets` e `/dashboard/pets/[id]`
-- `/dashboard/pets/import` com preview e confirmação
-- upload assinado para Cloudinary
-
-### Fora do MVP
-
-- múltiplos perfis de permissão
-- histórico/auditoria completa
-- merge avançado na importação
-- workflow de aprovação
-
-## Stack alvo
-
-### Frontend
-
-- Next.js 16 + App Router
-- TypeScript
-- Tailwind + shadcn
-- React Hook Form + Zod
-- TanStack Query
-
-### Backend / Infra
-
-- Supabase Auth (SSR)
-- Postgres (Supabase) + Prisma ORM
-- Cloudinary
-- Route Handlers
-
-### Dependências principais
-
-- `@prisma/client`
-- `prisma`
-- `@supabase/ssr`
-- `@supabase/supabase-js`
-- `xlsx`
-- `cloudinary`
-
-## Variáveis de ambiente (alvo)
-
-```env
-# Supabase Auth
-NEXT_PUBLIC_SUPABASE_URL=sua_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=sua_supabase_anon_key
-SUPABASE_SERVICE_ROLE_KEY=sua_supabase_service_role_key
-
-# Prisma / Postgres
-DATABASE_URL=sua_connection_string_pooling_ou_direta
-DIRECT_URL=sua_connection_string_direta
-
-# Cloudinary
-CLOUDINARY_CLOUD_NAME=seu_cloud_name
-CLOUDINARY_API_KEY=sua_cloudinary_api_key
-CLOUDINARY_API_SECRET=seu_cloudinary_api_secret
-```
-
-## Estrutura de pastas proposta
+## Estrutura de pastas (alvo atual)
 
 ```txt
-prisma/
-  schema.prisma
+backend/
+  infrastructure/
+    cloudinary/
+    contentful/
+    prisma/
+    supabase/
+  mock/
+    bazaar.ts
+    donations.ts
+    pets.ts
+    shelter.ts
+    stats.ts
+    stories.ts
+    transparency.ts
+  modules/
+    bazaar/application/
+    cms/application/
+    donations/application/
+    pets/application/
+    shelter/application/
+    stats/application/
+    stories/application/
+    transparency/application/
+  prisma/
+    schema.prisma
+  shared/
+    env.ts
 
 app/
-  (admin)/
-    dashboard/
-      pets/
-        page.tsx
-        import/
-          page.tsx
-        [id]/
-          page.tsx
   api/
+    * (adaptadores HTTP)
+  (admin)/dashboard/
     pets/
-      route.ts
-      import/
-        route.ts
-      [id]/
-        route.ts
-    media/
-      cloudinary-sign/
-        route.ts
+      page.tsx
+      import/page.tsx
+      [id]/page.tsx
 
-features/
-  pets/
-    components/
-    hooks/
-    schemas/
-    services/
-    utils/
-
-shared/
-  lib/
-    prisma/
-      client.ts
-    supabase/
-      client.ts
-      server.ts
-      middleware.ts
-    cloudinary/
-      server.ts
+prisma.config.ts
 ```
 
-## Modelo de dados `Pet` (Prisma)
+## Prisma (estado atual)
 
-```prisma
-model Pet {
-  id           String   @id @default(uuid()) @db.Uuid
-  externalId   String?  @map("external_id")
-  name         String
-  species      String
-  breed        String?
-  age          String?
-  size         String?
-  gender       String?
-  color        String?
-  castrated    Boolean  @default(false)
-  vaccinated   Boolean  @default(false)
-  description  String?
-  status       String   @default("available")
-  city         String?
-  state        String?
-  featured     Boolean  @default(false)
-  published    Boolean  @default(true)
-  mainImageUrl String?  @map("main_image_url")
-  galleryUrls  String[] @default([]) @map("gallery_urls")
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
+### Dependencias
 
-  @@index([status], map: "idx_pets_status")
-  @@index([published], map: "idx_pets_published")
-  @@index([featured], map: "idx_pets_featured")
-  @@index([species], map: "idx_pets_species")
-  @@unique([externalId], map: "uq_pets_external_id")
-  @@map("pets")
-}
+- `prisma@7.x`
+- `@prisma/client@7.x`
+- `@prisma/adapter-pg`
+- `pg`
+
+### Configuracao
+
+- `prisma.config.ts` aponta para `backend/prisma/schema.prisma`.
+- CLI Prisma usa `DIRECT_URL` (config), client runtime usa `DATABASE_URL` (adapter).
+
+### Scripts
+
+- `pnpm prisma:generate`
+- `pnpm prisma:push`
+- `pnpm prisma:studio`
+- `pnpm prisma:reset`
+
+## Variaveis de ambiente (necessarias)
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+# opcional de compatibilidade:
+# NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+
+DATABASE_URL=
+DIRECT_URL=
+
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+
+CONTENTFUL_SPACE_ID=
+CONTENTFUL_ENVIRONMENT=master
+CONTENTFUL_DELIVERY_ACCESS_TOKEN=
+CONTENTFUL_PREVIEW_ACCESS_TOKEN=
 ```
 
-## Etapas de implementacao (reorganizadas)
+## Etapas restantes (ordem recomendada)
 
-### Fase 0 — Base técnica (status: em andamento)
+### Fase 1 - Pets reais no banco
 
-1. Dashboard base e rotas `/dashboard` prontas.
-2. Supabase SSR e Cloudinary server-side prontos.
-3. Definir estratégia Prisma como padrão de banco.
+1. Substituir `backend/modules/pets/application/list-pets.ts` (mock) por leitura via Prisma.
+2. Manter exatamente o contrato de resposta atual de `GET /api/pets`.
+3. Validar filtros e ordenacao existentes (`species`, `size`, `ageGroup`, `city`, `urgentOnly`, `sort`).
 
-### Fase 1 - Prisma foundation
+### Fase 2 - Escrita de pets
 
-4. Instalar `prisma` e `@prisma/client`.
-5. Criar `prisma/schema.prisma` com datasource PostgreSQL.
-6. Criar `shared/lib/prisma/client.ts` (singleton).
-7. Atualizar `.env.example` com `DATABASE_URL` e `DIRECT_URL`.
+4. Criar `PATCH /api/pets/[id]` com validacao.
+5. Criar `POST /api/pets/import` com validacao dupla (frontend/backend), dedupe e relatorio.
 
-### Fase 2 - Schema e sync inicial
+### Fase 3 - Dashboard operacional
 
-8. Modelar `Pet` no Prisma.
-9. Rodar `prisma db push` para criar/atualizar tabelas no Supabase.
-10. Rodar `prisma generate` e validar queries no app.
+6. Implementar listagem administrativa real em `/dashboard/pets`.
+7. Implementar edicao real em `/dashboard/pets/[id]`.
+8. Integrar upload Cloudinary no fluxo de edicao/importacao.
 
-### Fase 3 - APIs com dados reais
+### Fase 4 - Hardening
 
-11. Trocar `GET /api/pets` de mock para Prisma mantendo contrato.
-12. Implementar `PATCH /api/pets/[id]`.
-13. Implementar `POST /api/pets/import` com dedupe e relatório.
+9. Proteger rotas admin com sessao real.
+10. Padronizar erros/logs por modulo.
+11. Adicionar testes para parser/importacao.
 
-### Fase 4 - Dashboard operacional
+## Proxima etapa imediata
 
-14. Listagem admin `/dashboard/pets` com busca/filtros.
-15. Edição `/dashboard/pets/[id]` com RHF + Zod.
-16. Upload Cloudinary integrado ao fluxo de edição.
+Migrar `pets` de mock para Prisma no caso de uso `list-pets`.
 
-### Fase 5 - Importacao por planilha
+Esse passo destrava:
 
-17. Template oficial de planilha.
-18. Schema Zod para linha, normalização e parsing.
-19. Preview com erros por linha e resumo final.
-
-### Fase 6 - Hardening
-
-20. Guard de rotas admin com sessão real.
-21. Logs padronizados e tratamento de erro consistente.
-22. Cobertura mínima de testes de parser/importação.
-
-## Riscos e mitigação
-
-### Risco 1 — Duas fontes de verdade (Prisma vs Supabase client)
-
-Mitigação:
-
-- definir Prisma como fonte de escrita/leitura das APIs de pets
-- usar Supabase client apenas para Auth/sessão
-
-### Risco 2 — Regressão no front público
-
-Mitigação:
-
-- preservar contrato de `GET /api/pets`
-- validar paginação/filtros antigos durante migração
-
-### Risco 3 — Duplicidade de importação
-
-Mitigação:
-
-- `externalId` único
-- dedupe secundário (`name + species + city` normalizados)
-
-### Risco 4 — Exposição de segredos
-
-Mitigação:
-
-- Prisma apenas server-side
-- `SERVICE_ROLE` e segredos Cloudinary nunca no cliente
-
-## Comandos Prisma para MVP
-
-Sugestao de scripts no `package.json`:
-
-- `prisma:generate`: `prisma generate`
-- `prisma:push`: `prisma db push`
-- `prisma:studio`: `prisma studio`
-- `prisma:reset`: `prisma db push --force-reset` (usar so em ambiente de dev)
-
-Fluxo operacional recomendado no MVP:
-
-1. editar `prisma/schema.prisma`
-2. rodar `pnpm prisma:generate`
-3. rodar `pnpm prisma:push`
-4. validar no Supabase e no app
-
-Transicao para producao:
-
-- congelar schema
-- introduzir migrations com `prisma migrate`
-- passar a versionar alteracoes de banco no repositorio
-
-## Checklist de pronto (MVP)
-
-- Prisma configurado e schema sincronizado com `db push`
-- `GET /api/pets` usando Prisma sem regressão
-- dashboard de pets funcional
-- importação em lote com preview e relatório
-- upload de mídia integrado
-- auth admin ativa nas rotas sensíveis
+- dados reais no site publico
+- base para dashboard administrativo real
+- continuidade da importacao em lote com persistencia real

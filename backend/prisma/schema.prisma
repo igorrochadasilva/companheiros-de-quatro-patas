@@ -6,28 +6,66 @@ datasource db {
   provider = "postgresql"
 }
 
+enum PetSpecies {
+  DOG
+  CAT
+  OTHER
+}
+
+enum PetSize {
+  SMALL
+  MEDIUM
+  LARGE
+}
+
+enum PetGender {
+  MALE
+  FEMALE
+  UNKNOWN
+}
+
+enum PetStatus {
+  AVAILABLE
+  RESERVED
+  ADOPTED
+  TREATMENT
+}
+
+enum PetMediaType {
+  IMAGE
+  VIDEO
+}
+
+enum AdoptionRequestStatus {
+  PENDING
+  IN_REVIEW
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
 model Pet {
-  id           String   @id @default(uuid()) @db.Uuid
-  externalId   String?  @map("external_id")
-  name         String
-  species      String
-  breed        String?
-  age          String?
-  size         String?
-  gender       String?
-  color        String?
-  castrated    Boolean  @default(false)
-  vaccinated   Boolean  @default(false)
-  description  String?
-  status       String   @default("available")
-  city         String?
-  state        String?
-  featured     Boolean  @default(false)
-  published    Boolean  @default(true)
-  mainImageUrl String?  @map("main_image_url")
-  galleryUrls  String[] @default([]) @map("gallery_urls")
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
+  id               String            @id @default(uuid()) @db.Uuid
+  externalId       String?           @map("external_id")
+  name             String
+  species          PetSpecies
+  breed            String?
+  age              String?
+  size             PetSize?
+  gender           PetGender?        @default(UNKNOWN)
+  color            String?
+  castrated        Boolean           @default(false)
+  vaccinated       Boolean           @default(false)
+  description      String?
+  status           PetStatus         @default(AVAILABLE)
+  city             String?
+  state            String?
+  featured         Boolean           @default(false)
+  published        Boolean           @default(true)
+  media            PetMedia[]
+  adoptionRequests AdoptionRequest[]
+  createdAt        DateTime          @default(now()) @map("created_at")
+  updatedAt        DateTime          @updatedAt @map("updated_at")
 
   @@index([status], map: "idx_pets_status")
   @@index([published], map: "idx_pets_published")
@@ -35,4 +73,42 @@ model Pet {
   @@index([species], map: "idx_pets_species")
   @@unique([externalId], map: "uq_pets_external_id")
   @@map("pets")
+}
+
+model PetMedia {
+  id        String       @id @default(uuid()) @db.Uuid
+  petId     String       @map("pet_id") @db.Uuid
+  pet       Pet          @relation(fields: [petId], references: [id], onDelete: Cascade)
+  type      PetMediaType
+  url       String
+  publicId  String?      @map("public_id")
+  isMain    Boolean      @default(false) @map("is_main")
+  sortOrder Int          @default(0) @map("sort_order")
+  createdAt DateTime     @default(now()) @map("created_at")
+  updatedAt DateTime     @updatedAt @map("updated_at")
+
+  @@index([petId], map: "idx_pet_media_pet_id")
+  @@index([petId, sortOrder], map: "idx_pet_media_pet_sort")
+  @@index([petId, isMain], map: "idx_pet_media_pet_main")
+  @@map("pet_media")
+}
+
+model AdoptionRequest {
+  id        String                @id @default(uuid()) @db.Uuid
+  petId     String                @map("pet_id") @db.Uuid
+  pet       Pet                   @relation(fields: [petId], references: [id])
+  fullName  String                @map("full_name")
+  email     String?
+  phone     String
+  city      String?
+  state     String?
+  message   String?
+  status    AdoptionRequestStatus @default(PENDING)
+  createdAt DateTime              @default(now()) @map("created_at")
+  updatedAt DateTime              @updatedAt @map("updated_at")
+
+  @@index([petId], map: "idx_adoption_requests_pet_id")
+  @@index([status], map: "idx_adoption_requests_status")
+  @@index([createdAt], map: "idx_adoption_requests_created_at")
+  @@map("adoption_requests")
 }

@@ -1,5 +1,7 @@
-﻿import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
+import { buildErrorResponse } from "@/app/api/_shared/route-error";
+import { createPet } from "@/backend/modules/pets/application/create-pet";
 import { listPets } from "@/backend/modules/pets/application/list-pets";
 import type { PetAgeGroup, PetSize, PetSpecies } from "@/types";
 
@@ -25,4 +27,14 @@ export async function GET(request: NextRequest) {
   });
 
   return NextResponse.json(response);
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const pet = await createPet(body);
+    return NextResponse.json(pet, { status: 201 });
+  } catch (error) {
+    return buildErrorResponse(error);
+  }
 }
