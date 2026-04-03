@@ -29,4 +29,4 @@ CONTENTFUL_PREVIEW_ACCESS_TOKEN=
 
 ## Proximo passo recomendado
 
-Definir os content types no Contentful para as telas de `tasks/screens/` e criar os services por feature (ex.: `features/home/services/contentful-home.ts`) para substituir gradualmente os mocks.
+Definir os content types no Contentful para as telas de `doc/tasks/screens/` e criar os services por feature (ex.: `features/home/services/contentful-home.ts`) para substituir gradualmente os mocks.

@@ -14,7 +14,6 @@
     "lint": "eslint",
     "prisma:generate": "prisma generate --config prisma.config.ts",
     "prisma:push": "prisma db push --config prisma.config.ts",
-    "prisma:push:debug": "node scripts/prisma-push-debug.mjs",
     "prisma:studio": "prisma studio --config prisma.config.ts",
     "prisma:reset": "prisma db push --force-reset --config prisma.config.ts",
     "prisma:seed:pets": "node --env-file=.env backend/prisma/seeds/pets.mjs",

@@ -6,7 +6,6 @@
 - `types/`: global shared types when multiple features depend on them.
 - `constants/`: shared constants and route fragments.
 - `messages/`: interface text and localization content.
-- `rules/`: existing repository rules for AI agents.
 - `doc/`: architecture, stack, decisions, and feature documentation.
 - `codex/standards/`: repository-wide engineering standards for Codex execution.
 - `codex/agents/`: role definitions for repository automation.

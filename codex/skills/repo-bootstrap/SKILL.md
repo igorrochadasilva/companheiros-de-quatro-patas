@@ -10,7 +10,7 @@ Load repository context before choosing an implementation path.
 ## Execute
 
 1. Read `README.md`.
-2. Read the relevant files in `rules/` and `codex/standards/`.
+2. Read the relevant files in `codex/standards/`.
 3. Read `doc/arquitetura/README.md` for architectural placement and boundaries.
 4. Read `references/project-map.md`.
 5. Read `references/architecture-rules.md` and `references/coding-rules.md`.
