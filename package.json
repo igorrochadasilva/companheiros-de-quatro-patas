@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "next dev --webpack",
     "dev:turbo": "next dev",
-    "build": "node -e \"require('fs').rmSync('.next', { recursive: true, force: true })\" && next build",
+    "build": "pnpm prisma:generate && node -e \"require('fs').rmSync('.next', { recursive: true, force: true })\" && next build",
     "start": "next start",
     "lint": "eslint",
     "prisma:generate": "prisma generate --config prisma.config.ts",
