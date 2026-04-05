@@ -99,8 +99,32 @@
     },
     "import": {
       "title": "Importacao de pets",
-      "subtitle": "Proxima etapa: upload de arquivo, validacao e preview antes da gravacao.",
-      "backToPets": "Voltar para pets"
+      "subtitle": "Envie um arquivo CSV/XLSX, valide os dados e confirme a importacao.",
+      "backToPets": "Voltar para pets",
+      "downloadTemplate": "Baixar template",
+      "uploadLabel": "Arquivo da planilha",
+      "fileLoaded": "Arquivo carregado para preview.",
+      "fileError": "Nao foi possivel ler o arquivo.",
+      "fileName": "Arquivo selecionado: {file}",
+      "noValidRows": "Nao ha linhas validas para importar.",
+      "importButton": "Confirmar importacao",
+      "importing": "Importando...",
+      "importSuccess": "Importacao concluida. Inseridos: {inserted}. Ignorados: {ignored}.",
+      "importError": "Nao foi possivel concluir a importacao.",
+      "summary": {
+        "total": "Total de linhas",
+        "valid": "Linhas validas",
+        "invalid": "Linhas invalidas"
+      },
+      "preview": {
+        "row": "Linha",
+        "name": "Nome",
+        "species": "Especie",
+        "status": "Valida?",
+        "errors": "Erros",
+        "valid": "Sim",
+        "invalid": "Nao"
+      }
     },
     "petEdit": {
       "title": "Edicao de pet",
