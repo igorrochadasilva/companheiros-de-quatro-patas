@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useMemo } from "react";
 
 import { usePets } from "@/features/adoption/hooks/usePets";
-
 import { adoptionMessages } from "@/messages";
 import { track } from "@/shared/lib/analytics";
 import {

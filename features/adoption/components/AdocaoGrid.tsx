@@ -4,7 +4,6 @@ import { useEffect } from "react";
 
 import { HomeSectionPetsCard } from "@/features/home/components/HomeSectionPetsCard";
 import { HomeSectionPetsSkeleton } from "@/features/home/components/HomeSectionPetsSkeleton";
-
 import { adoptionMessages } from "@/messages";
 import { track } from "@/shared/lib/analytics";
 import { Button } from "@/shared/ui/button";

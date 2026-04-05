@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 
 import { useShelterProgress } from "@/features/shelter/hooks/useShelterProgress";
-
 import { shelterMessages } from "@/messages";
 import { track } from "@/shared/lib/analytics";
 import { Alert, AlertDescription, AlertTitle } from "@/shared/ui/alert";

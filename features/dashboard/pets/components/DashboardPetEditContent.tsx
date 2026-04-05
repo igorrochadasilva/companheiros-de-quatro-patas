@@ -60,6 +60,17 @@ export async function DashboardPetEditContent({
           state: pet.state,
           published: pet.published,
           featured: pet.featured,
+          media: pet.media.map((item) => ({
+            id: item.id,
+            petId: item.petId,
+            type: item.type,
+            url: item.url,
+            publicId: item.publicId,
+            isMain: item.isMain,
+            sortOrder: item.sortOrder,
+            createdAt: item.createdAt.toISOString(),
+            updatedAt: item.updatedAt.toISOString(),
+          })),
         }}
       />
 

@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { type FormEvent, useState } from "react";
 
 import { ADMIN_ROUTES, API_ROUTES, PUBLIC_ROUTES } from "@/constants";
-
 import { authMessages } from "@/messages";
 import { getSupabaseBrowserClient } from "@/shared/lib/supabase/client";
 import { Button } from "@/shared/ui/button";

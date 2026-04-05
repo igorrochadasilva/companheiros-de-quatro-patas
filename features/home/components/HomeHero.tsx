@@ -5,7 +5,6 @@ import Link from "next/link";
 
 import { useHomeCmsContent } from "@/features/home/hooks/useHomeCmsContent";
 import { useStats } from "@/features/home/hooks/useStats";
-
 import { homeMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent } from "@/shared/ui/card";

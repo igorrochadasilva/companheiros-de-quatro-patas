@@ -12,7 +12,6 @@ import {
 import { useSubmitContact } from "@/features/contact/hooks/useSubmitContact";
 import { contactFormSchema } from "@/features/contact/schema/contact-form.schema";
 import { getContactSubjectLabel } from "@/features/contact/utils/contact-form.utils";
-
 import { contactMessages } from "@/messages";
 import { type ContactSubject, ContactSubjectEnum } from "@/shared/lib";
 import { track } from "@/shared/lib/analytics";

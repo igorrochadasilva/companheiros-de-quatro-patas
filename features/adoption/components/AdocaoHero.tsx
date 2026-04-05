@@ -4,7 +4,6 @@ import Link from "next/link";
 
 import { PUBLIC_ROUTES } from "@/constants";
 import { useAdoptionCmsContent } from "@/features/adoption/hooks/useAdoptionCmsContent";
-
 import { adoptionMessages } from "@/messages";
 import {
   Breadcrumb,

@@ -5,8 +5,10 @@
 export const API_ROUTES = {
   stats: "/api/stats",
   pets: "/api/pets",
+  petMedia: "/api/pet-media",
   petsImport: "/api/pets/import",
   petsImportTemplate: "/api/pets/import/template",
+  cloudinarySign: "/api/media/cloudinary-sign",
   donationsConfig: "/api/donations/config",
   transparencySummary: "/api/transparency/summary",
   bazaarFeatured: "/api/bazaar/featured",

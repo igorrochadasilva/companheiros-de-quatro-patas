@@ -5,7 +5,6 @@ import Link from "next/link";
 
 import { PUBLIC_ROUTES } from "@/constants";
 import { WHATSAPP_URL } from "@/constants/contact";
-
 import { homeMessages } from "@/messages";
 import { track } from "@/shared/lib/analytics";
 import { Badge } from "@/shared/ui/badge";

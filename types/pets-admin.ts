@@ -2,6 +2,7 @@ export type PetSpeciesValue = "DOG" | "CAT" | "OTHER";
 export type PetSizeValue = "SMALL" | "MEDIUM" | "LARGE";
 export type PetGenderValue = "MALE" | "FEMALE" | "UNKNOWN";
 export type PetStatusValue = "AVAILABLE" | "RESERVED" | "ADOPTED" | "TREATMENT";
+export type PetMediaTypeValue = "IMAGE" | "VIDEO";
 
 export type PetFormValues = {
   externalId?: string;
@@ -40,6 +41,19 @@ export type PetAdminRecord = {
   state: string | null;
   featured: boolean;
   published: boolean;
+  media?: PetMediaAdminRecord[];
+};
+
+export type PetMediaAdminRecord = {
+  id: string;
+  petId: string;
+  type: PetMediaTypeValue;
+  url: string;
+  publicId: string | null;
+  isMain: boolean;
+  sortOrder: number;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type UpsertPetResponse = {
@@ -48,4 +62,13 @@ export type UpsertPetResponse = {
 
 export type DeletePetResponse = {
   ok: boolean;
+};
+
+export type CloudinarySignResponse = {
+  apiKey: string;
+  cloudName: string;
+  folder: string;
+  resourceType: "auto";
+  signature: string;
+  timestamp: number;
 };

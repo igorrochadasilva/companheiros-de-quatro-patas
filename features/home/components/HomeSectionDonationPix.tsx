@@ -7,7 +7,6 @@ import { toast } from "sonner";
 import { PUBLIC_ROUTES } from "@/constants";
 import { useDonationConfig } from "@/features/home/hooks/useDonationConfig";
 import { useHomeCmsContent } from "@/features/home/hooks/useHomeCmsContent";
-
 import { homeMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent } from "@/shared/ui/card";

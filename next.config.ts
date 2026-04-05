@@ -19,6 +19,11 @@ const nextConfig: NextConfig = {
         hostname: "images.eu.ctfassets.net",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "/**",
+      },
     ],
   },
 };

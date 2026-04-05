@@ -7,7 +7,6 @@ import { useDonationConfig } from "@/features/donatation/hooks/useDonationConfig
 import { useStats } from "@/features/donatation/hooks/useStats";
 import { useStories } from "@/features/donatation/hooks/useStories";
 import { useTransparencySummary } from "@/features/donatation/hooks/useTransparencySummary";
-
 import { donateMessages } from "@/messages";
 import { useWhenVisible } from "@/shared/hooks/useWhenVisible";
 import { track } from "@/shared/lib/analytics";

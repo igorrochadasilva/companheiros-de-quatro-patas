@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { PUBLIC_ROUTES } from "@/constants";
 import { useFeaturedPets } from "@/features/home/hooks/useFeaturedPets";
 import { useHomeCmsContent } from "@/features/home/hooks/useHomeCmsContent";
-
 import { homeMessages } from "@/messages";
 import { usePetFilters } from "@/shared/hooks/usePetFilters";
 import { track } from "@/shared/lib/analytics";

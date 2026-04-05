@@ -2,7 +2,6 @@
 
 import { useBazaarFilters } from "@/features/bazaar/hooks/useBazaarFilters";
 import { useBazaarItems } from "@/features/bazaar/hooks/useBazaarItems";
-
 import { bazaarMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 

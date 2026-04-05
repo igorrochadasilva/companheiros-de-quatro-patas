@@ -5,7 +5,6 @@ import Link from "next/link";
 import { PUBLIC_ROUTES } from "@/constants";
 import { useHomeCmsContent } from "@/features/home/hooks/useHomeCmsContent";
 import { useTransparencySummary } from "@/features/home/hooks/useTransparencySummary";
-
 import { homeMessages } from "@/messages";
 import { useWhenVisible } from "@/shared/hooks/useWhenVisible";
 import { Button } from "@/shared/ui/button";
