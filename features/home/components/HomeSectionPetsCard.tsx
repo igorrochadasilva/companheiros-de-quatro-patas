@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -36,11 +36,30 @@ const BADGE_LABELS: Record<string, string> = {
   urgent: petsMessages.badges.urgent,
 };
 
+function formatPetAge(ageYears: number) {
+  if (!Number.isFinite(ageYears) || ageYears <= 0) {
+    return "Idade nao informada";
+  }
+
+  if (ageYears < 1) {
+    const months = Math.max(1, Math.round(ageYears * 12));
+    return `${months} ${months === 1 ? "mes" : "meses"}`;
+  }
+
+  const roundedYears = Number.isInteger(ageYears)
+    ? ageYears
+    : Number(ageYears.toFixed(1));
+
+  return `${roundedYears} ${roundedYears === 1 ? "ano" : "anos"}`;
+}
+
 export function HomeSectionPetsCard({ pet }: { pet: Pet }) {
+  const petPath = `${PUBLIC_ROUTES.adoption}/${pet.id}`;
   const whatsappMessage = encodeURIComponent(
     petsMessages.card.contactWhatsappMessage
       .replace("{name}", pet.name)
-      .replace("{id}", pet.id),
+      .replace("{id}", pet.id)
+      .replace("{url}", petPath),
   );
 
   return (
@@ -57,8 +76,7 @@ export function HomeSectionPetsCard({ pet }: { pet: Pet }) {
       <CardHeader className="pb-2">
         <CardTitle className="text-base">{pet.name}</CardTitle>
         <Muted className="text-xs">
-          {pet.ageYears} {pet.ageYears === 1 ? "ano" : "anos"} · {pet.size} ·{" "}
-          {pet.city}
+          {formatPetAge(pet.ageYears)} · {pet.size} · {pet.city}
         </Muted>
       </CardHeader>
       <CardContent className="flex flex-wrap gap-1 pb-2">
@@ -71,7 +89,7 @@ export function HomeSectionPetsCard({ pet }: { pet: Pet }) {
       <CardFooter className="flex gap-2 pt-0">
         <Button asChild variant="outline" size="sm" className="flex-1">
           <Link
-            href={`${PUBLIC_ROUTES.adoption}/${pet.id}`}
+            href={petPath}
             onClick={() => track("select_pet", { petId: pet.id })}
           >
             {petsMessages.card.seeDetails}
@@ -110,22 +128,6 @@ export function HomeSectionPetsCard({ pet }: { pet: Pet }) {
                   rel="noreferrer"
                 >
                   {petsMessages.card.contactWhatsapp}
-                </Link>
-              </Button>
-              <Button
-                asChild
-                size="sm"
-                onClick={() =>
-                  track("adoption_contact_form", { petId: pet.id })
-                }
-              >
-                <Link href={`${PUBLIC_ROUTES.adoption}/${pet.id}/candidatar`}>
-                  {petsMessages.card.contactForm}
-                </Link>
-              </Button>
-              <Button asChild size="sm" variant="ghost">
-                <Link href={`${PUBLIC_ROUTES.adoption}/${pet.id}`}>
-                  {petsMessages.card.seeFullProfile}
                 </Link>
               </Button>
             </DialogFooter>

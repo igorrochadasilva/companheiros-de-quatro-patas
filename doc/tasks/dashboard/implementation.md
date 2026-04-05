@@ -2,7 +2,7 @@
 
 ## Data de referencia
 
-05/04/2026
+06/04/2026
 
 ## Objetivo do MVP
 
@@ -49,17 +49,25 @@ Entregar dashboard administrativo funcional para pets, sem regressao no site pub
   - `GET /api/pets/import/template`
 - Fluxo de importacao no dashboard validado (download template -> upload -> processamento).
 - Form de cadastro/edicao com React Hook Form + Zod + toast.
+- Integracao Cloudinary concluida para midias de pets:
+  - assinatura segura: `POST /api/media/cloudinary-sign`
+  - upload no dashboard por pet (imagem)
+  - persistencia em `pet_media` (`url`, `publicId`, `isMain`, `sortOrder`)
+  - definicao de imagem principal
+  - remocao de midia com exclusao no Cloudinary + banco
+  - reordenacao da galeria por `sortOrder`
+- Tabela administrativa de pets com thumbnail da midia principal.
 - Loading de transicao aplicado em rotas admin/public.
 - Mensagens desacopladas por dominio (`messages/pt-br/*.ts`) e imports atualizados.
 - Script de dev ajustado para Turbopack por padrao (`pnpm dev`).
+- Regra de destaque da home validada:
+  - secao da home lista pets com `featured = true`
+  - se vier vazio, tratar como dado/cadastro (nao fallback automatico).
 
 ### Parcialmente concluido
 
-- `pet_media` no backend ja possui CRUD de metadados:
-  - `POST /api/pet-media`
-  - `PATCH /api/pet-media/[id]`
-  - `DELETE /api/pet-media/[id]`
-- Ainda falta fluxo completo de upload Cloudinary no dashboard (assinatura/upload/UX).
+- Suporte de midia focado em imagem no MVP atual.
+- Video ainda nao foi habilitado no fluxo de upload.
 
 ## Etapa atual do roadmap
 
@@ -67,53 +75,23 @@ As etapas de base, auth, schema, CRUD de pets e importacao por planilha estao fu
 
 ## Proxima etapa recomendada (prioridade)
 
-## Fase de midias (Cloudinary + Supabase/Auth + pet_media)
+## Fase de fechamento de operacao do dashboard
 
-### Diretriz tecnica (com base na documentacao Cloudinary)
+1. Validar listagem administrativa com filtros finais
+   - revisar UX de filtros e paginaçao.
+   - confirmar desempenho com volume maior.
 
-- Usar SDK Node da Cloudinary no backend para assinar uploads e operar assets.
-- Nao expor `API_SECRET` no cliente.
-- Fazer upload assinado do browser direto para o Upload API da Cloudinary.
-- Persistir no banco somente metadados necessarios (`url`, `publicId`, `type`, `isMain`, `sortOrder`).
+2. Polimento de midia
+   - opcional MVP+: habilitar upload de video (`PetMediaType.VIDEO`).
+   - opcional MVP+: limite maximo de itens por pet com bloqueio de UI.
 
-### Etapas que vamos seguir
+3. Fluxo de solicitacoes de adocao no admin
+   - criar listagem administrativa de `adoption_requests`.
+   - permitir atualizar status (`PENDING`, `IN_REVIEW`, etc.).
 
-1. Padronizar configuracao Cloudinary no backend
-   - manter `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` no servidor.
-   - reforcar que segredo nunca sai do backend.
-
-2. Criar endpoint de assinatura de upload
-   - `POST /api/media/cloudinary-sign`
-   - protegido por `requireAdminApi()`
-   - payload minimo: `petId` (e metadados do arquivo, opcional)
-   - retorno: `signature`, `timestamp`, `apiKey`, `cloudName`, `folder`, `resourceType`.
-
-3. Implementar upload no frontend do dashboard (tela de pet)
-   - usar input de arquivo na tela de edicao de pet.
-   - fluxo:
-     - solicitar assinatura ao backend
-     - enviar arquivo para `https://api.cloudinary.com/v1_1/<cloudName>/<resourceType>/upload`
-     - receber `secure_url` e `public_id`.
-
-4. Persistir vinculo da midia no pet
-   - chamar `POST /api/pet-media` apos upload bem-sucedido.
-   - salvar `petId`, `type`, `url`, `publicId`, `isMain`, `sortOrder`.
-   - atualizar UI com preview imediato.
-
-5. Finalizar operacoes de gestao de midia
-   - marcar/desmarcar principal: `PATCH /api/pet-media/[id]`.
-   - remover: `DELETE /api/pet-media/[id]` e apagar asset no Cloudinary.
-   - garantir regra de uma unica midia principal por pet.
-
-6. Guard rails de MVP (obrigatorio)
-   - validar MIME/type e tamanho maximo por arquivo.
-   - limitar quantidade de itens por pet.
-   - mensagens claras de erro e sucesso (toast).
-
-7. Entrega final desta fase
-   - criar pet -> editar pet -> subir imagem principal e galeria.
-   - recarregar pagina e manter midias persistidas.
-   - excluir/alterar principal funcionando ponta a ponta.
+4. Hardening de seguranca e deploy
+   - revisar RLS/policies no Supabase.
+   - revisar envs de producao (Cloudinary/Supabase) e permissao admin.
 
 ### Notas de arquitetura
 
@@ -136,6 +114,7 @@ As etapas de base, auth, schema, CRUD de pets e importacao por planilha estao fu
 - listagem/edicao sem regressao
 - upload de imagem principal + galeria via Cloudinary funcionando
 - vinculo de midia salvo em `pet_media`
+- secao de pets da home obedecendo regra de `featured`
 
 ## Notas tecnicas
 

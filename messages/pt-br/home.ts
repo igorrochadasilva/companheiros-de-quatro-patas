@@ -9,17 +9,17 @@ export const homeMessages = {
   pets: {
     clearFilters: "Limpar filtros",
     filters: {
-      species: "Espécie",
+      species: "Especie",
       all: "Todos",
       dog: "Cachorros",
       cat: "Gatos",
       size: "Porte",
       age: "Idade",
       city: "Cidade",
-      cityPlaceholder: "Ex.: São Paulo",
+      cityPlaceholder: "Ex.: Sao Paulo",
       urgent: "Urgentes",
       sizeSmall: "Pequeno",
-      sizeMedium: "Médio",
+      sizeMedium: "Medio",
       sizeLarge: "Grande",
       agePuppy: "Filhote",
       ageAdult: "Adulto",
@@ -29,12 +29,10 @@ export const homeMessages = {
       seeDetails: "Ver detalhes",
       wantToAdopt: "Quero adotar",
       dialogDescription:
-        "Como prefere falar com a gente sobre a adoção deste pet?",
-      seeFullProfile: "Ver ficha completa",
+        "Fale com a gente no WhatsApp para iniciar a adocao deste pet.",
       contactWhatsapp: "Falar pelo WhatsApp",
-      contactForm: "Preencher formulário de adoção",
       contactWhatsappMessage:
-        "Olá! Tenho interesse em adotar o pet {name} (ID: {id}).",
+        "Ola! Tenho interesse em adotar o pet {name} (ID: {id}). Link: {url}",
     },
     badges: {
       vaccinated: "Vacinado",
@@ -48,11 +46,11 @@ export const homeMessages = {
   transparency: {
     cards: {
       raisedTitlePrefix: "Arrecadado em",
-      raisedDescription: "Total de doações recebidas no período.",
+      raisedDescription: "Total de doacoes recebidas no periodo.",
       spentTitle: "Investido nos animais",
       spentDescription:
-        "Gastos com alimentação, cuidados veterinários e manutenção.",
-      balanceTitle: "Saldo do mês",
+        "Gastos com alimentacao, cuidados veterinarios e manutencao.",
+      balanceTitle: "Saldo do mes",
       updatedAtPrefix: "Atualizado em",
     },
   },

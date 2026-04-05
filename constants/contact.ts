@@ -3,9 +3,9 @@
  * Em producao, podem vir de variaveis de ambiente.
  */
 export const CONTACT = {
-  email: "contato@companheiros.org.br",
-  whatsAppNumber: "5511999999999",
-  instagramUrl: "https://instagram.com/companheiros4patas",
+  email: "companheirosd4patas@gmail.com",
+  whatsAppNumber: "5511953237838",
+  instagramUrl: "https://www.instagram.com/companheirosde4patasofc",
   city: "Sao Paulo",
 };
 
