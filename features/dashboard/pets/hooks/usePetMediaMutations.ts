@@ -4,6 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 
 import {
   deletePetMediaAdmin,
+  reorderPetMediaAdmin,
   setPetMediaAsMain,
   uploadPetMedia,
 } from "@/features/dashboard/pets/services/petMediaAdmin";
@@ -29,5 +30,15 @@ export function useSetPetMediaMainMutation() {
 export function useDeletePetMediaMutation() {
   return useMutation<{ ok: boolean }, Error, { mediaId: string }>({
     mutationFn: ({ mediaId }) => deletePetMediaAdmin(mediaId),
+  });
+}
+
+export function useReorderPetMediaMutation() {
+  return useMutation<
+    PetMediaAdminRecord[],
+    Error,
+    { items: { mediaId: string; sortOrder: number }[] }
+  >({
+    mutationFn: ({ items }) => reorderPetMediaAdmin(items),
   });
 }

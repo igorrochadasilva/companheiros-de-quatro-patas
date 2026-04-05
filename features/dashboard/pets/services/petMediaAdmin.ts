@@ -79,6 +79,18 @@ export async function setPetMediaAsMain(
   });
 }
 
+export async function reorderPetMediaAdmin(
+  items: { mediaId: string; sortOrder: number }[],
+): Promise<PetMediaAdminRecord[]> {
+  return Promise.all(
+    items.map((item) =>
+      apiPatch<PetMediaAdminRecord>(`${API_ROUTES.petMedia}/${item.mediaId}`, {
+        sortOrder: item.sortOrder,
+      }),
+    ),
+  );
+}
+
 export async function deletePetMediaAdmin(
   mediaId: string,
 ): Promise<{ ok: boolean }> {

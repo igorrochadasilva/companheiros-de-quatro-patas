@@ -1,18 +1,12 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
 import { Controller, type Resolver, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { ADMIN_ROUTES } from "@/constants";
-import {
-  useDeletePetMediaMutation,
-  useSetPetMediaMainMutation,
-  useUploadPetMediaMutation,
-} from "@/features/dashboard/pets/hooks/usePetMediaMutations";
+import { useDashboardPetMediaManager } from "@/features/dashboard/pets/hooks/useDashboardPetMediaManager";
 import {
   useCreatePetMutation,
   useDeletePetMutation,
@@ -31,18 +25,12 @@ import {
   SelectValue,
 } from "@/shared/ui/select";
 import { Textarea } from "@/shared/ui/textarea";
-import type {
-  PetAdminRecord,
-  PetFormValues,
-  PetMediaAdminRecord,
-} from "@/types";
+import type { PetAdminRecord, PetFormValues } from "@/types";
 
 import { petFormSchema } from "../schemas/pet-form.schema";
 import { buildPetFormDefaults } from "../utils/pet-form.utils";
+import { DashboardPetMediaSection } from "./DashboardPetMediaSection";
 const formMessages = dashboardMessages.petEdit.form;
-const mediaMessages = dashboardMessages.petEdit.media;
-const MAX_UPLOAD_SIZE = 10 * 1024 * 1024;
-const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"] as const;
 
 const resolver = zodResolver(petFormSchema as never) as Resolver<PetFormValues>;
 
@@ -59,12 +47,10 @@ export function DashboardPetUpsertForm({
   const createPetMutation = useCreatePetMutation();
   const updatePetMutation = useUpdatePetMutation(pet?.id ?? "");
   const deletePetMutation = useDeletePetMutation(pet?.id ?? "");
-  const uploadPetMediaMutation = useUploadPetMediaMutation(pet?.id ?? "");
-  const setPetMediaMainMutation = useSetPetMediaMainMutation();
-  const deletePetMediaMutation = useDeletePetMediaMutation();
-  const [mediaItems, setMediaItems] = useState<PetMediaAdminRecord[]>(
-    pet?.media ?? [],
-  );
+  const mediaManager = useDashboardPetMediaManager({
+    petId: pet?.id,
+    initialMedia: pet?.media,
+  });
 
   const {
     register,
@@ -94,89 +80,6 @@ export function DashboardPetUpsertForm({
       return;
     }
 
-    router.refresh();
-  }
-
-  const sortedMedia = useMemo(
-    () =>
-      [...mediaItems].sort((a, b) => {
-        if (a.isMain === b.isMain) return a.sortOrder - b.sortOrder;
-        return a.isMain ? -1 : 1;
-      }),
-    [mediaItems],
-  );
-
-  async function onUploadMedia(files: FileList | null) {
-    if (!pet?.id || !files?.length) return;
-
-    const nextFiles = Array.from(files);
-    for (const [index, file] of nextFiles.entries()) {
-      if (
-        !ACCEPTED_IMAGE_TYPES.includes(
-          file.type as (typeof ACCEPTED_IMAGE_TYPES)[number],
-        )
-      ) {
-        toast.error(mediaMessages.invalidType);
-        continue;
-      }
-
-      if (file.size > MAX_UPLOAD_SIZE) {
-        toast.error(mediaMessages.maxSizeError);
-        continue;
-      }
-
-      const created = await uploadPetMediaMutation
-        .mutateAsync({
-          file,
-          sortOrder: mediaItems.length + index + 1,
-          isMain: mediaItems.length === 0 && index === 0,
-        })
-        .catch(() => null);
-
-      if (!created) {
-        toast.error(mediaMessages.uploadError);
-        continue;
-      }
-
-      setMediaItems((current) => [...current, created]);
-      toast.success(mediaMessages.uploadSuccess);
-    }
-
-    router.refresh();
-  }
-
-  async function onSetMainMedia(mediaId: string) {
-    const updated = await setPetMediaMainMutation
-      .mutateAsync({ mediaId })
-      .catch(() => null);
-
-    if (!updated) {
-      toast.error(mediaMessages.setMainError);
-      return;
-    }
-
-    setMediaItems((current) =>
-      current.map((item) => ({
-        ...item,
-        isMain: item.id === updated.id,
-      })),
-    );
-    toast.success(mediaMessages.setMainSuccess);
-    router.refresh();
-  }
-
-  async function onDeleteMedia(mediaId: string) {
-    const result = await deletePetMediaMutation
-      .mutateAsync({ mediaId })
-      .catch(() => null);
-
-    if (!result?.ok) {
-      toast.error(mediaMessages.deleteError);
-      return;
-    }
-
-    setMediaItems((current) => current.filter((item) => item.id !== mediaId));
-    toast.success(mediaMessages.deleteSuccess);
     router.refresh();
   }
 
@@ -426,90 +329,20 @@ export function DashboardPetUpsertForm({
         />
       </div>
 
-      <section className="space-y-3 rounded-lg border p-4">
-        <div>
-          <h3 className="text-base font-semibold">{mediaMessages.title}</h3>
-          <p className="text-sm text-muted-foreground">
-            {mediaMessages.subtitle}
-          </p>
-        </div>
-
-        {mode === "create" || !pet?.id ? (
-          <p className="text-sm text-muted-foreground">
-            {mediaMessages.createHint}
-          </p>
-        ) : (
-          <>
-            <div className="space-y-2">
-              <Label htmlFor="pet-media-upload">
-                {mediaMessages.uploadLabel}
-              </Label>
-              <Input
-                id="pet-media-upload"
-                type="file"
-                accept="image/jpeg,image/png,image/webp"
-                multiple
-                onChange={(event) => onUploadMedia(event.target.files)}
-                disabled={uploadPetMediaMutation.isPending}
-              />
-              <p className="text-xs text-muted-foreground">
-                {mediaMessages.uploadHint}
-              </p>
-            </div>
-
-            {sortedMedia.length === 0 ? (
-              <p className="text-sm text-muted-foreground">
-                {mediaMessages.uploadEmpty}
-              </p>
-            ) : (
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {sortedMedia.map((media) => (
-                  <article
-                    key={media.id}
-                    className="space-y-2 rounded-md border p-2"
-                  >
-                    <div className="relative aspect-square overflow-hidden rounded-md border bg-muted">
-                      <Image
-                        src={media.url}
-                        alt={pet.name}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 1024px) 50vw, 33vw"
-                      />
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {media.isMain ? (
-                        <span className="rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
-                          {mediaMessages.mainBadge}
-                        </span>
-                      ) : (
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          onClick={() => onSetMainMedia(media.id)}
-                          disabled={setPetMediaMainMutation.isPending}
-                        >
-                          {mediaMessages.setMain}
-                        </Button>
-                      )}
-                      <Button
-                        type="button"
-                        variant="destructive"
-                        size="sm"
-                        onClick={() => onDeleteMedia(media.id)}
-                        disabled={deletePetMediaMutation.isPending}
-                      >
-                        {mediaMessages.delete}
-                      </Button>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            )}
-          </>
-        )}
-      </section>
+      <DashboardPetMediaSection
+        mode={mode}
+        petId={pet?.id}
+        petName={pet?.name ?? ""}
+        sortedMedia={mediaManager.sortedMedia}
+        isUploading={mediaManager.isUploading}
+        isDeleting={mediaManager.isDeleting}
+        isSettingMain={mediaManager.isSettingMain}
+        isReordering={mediaManager.isReordering}
+        onUploadMedia={mediaManager.onUploadMedia}
+        onSetMainMedia={mediaManager.onSetMainMedia}
+        onMoveMedia={mediaManager.onMoveMedia}
+        onDeleteMedia={mediaManager.onDeleteMedia}
+      />
 
       <div className="flex flex-wrap items-center gap-2">
         <Button
