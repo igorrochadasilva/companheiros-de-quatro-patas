@@ -2,7 +2,7 @@ import { InboxIcon } from "lucide-react";
 import Link from "next/link";
 
 import { PUBLIC_ROUTES } from "@/constants";
-import messages from "@/messages/pt-br.json";
+import { bazaarMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 import {
   Empty,
@@ -12,8 +12,6 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/shared/ui/empty";
-
-const bazaarMessages = messages.bazaar;
 
 export function BazaarEmptyState() {
   return (

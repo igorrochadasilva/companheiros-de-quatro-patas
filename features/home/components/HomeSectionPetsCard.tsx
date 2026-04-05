@@ -5,7 +5,8 @@ import Link from "next/link";
 
 import { PUBLIC_ROUTES } from "@/constants";
 import { WHATSAPP_URL } from "@/constants/contact";
-import messages from "@/messages/pt-br.json";
+
+import { homeMessages } from "@/messages";
 import { track } from "@/shared/lib/analytics";
 import { Badge } from "@/shared/ui/badge";
 import { Button } from "@/shared/ui/button";
@@ -28,7 +29,7 @@ import {
 import { Muted } from "@/shared/ui/typography";
 import type { Pet } from "@/types";
 
-const petsMessages = messages.home.pets;
+const petsMessages = homeMessages.pets;
 
 const BADGE_LABELS: Record<string, string> = {
   vaccinated: petsMessages.badges.vaccinated,

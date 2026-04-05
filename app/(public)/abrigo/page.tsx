@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 
 import { ShelterContent } from "@/features/shelter/components/ShelterContent";
-import messages from "@/messages/pt-br.json";
-
-const shelterMessages = messages.shelter;
+import { shelterMessages } from "@/messages";
 
 export const metadata: Metadata = {
   title: shelterMessages.metadata.title,

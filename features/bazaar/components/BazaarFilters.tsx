@@ -7,7 +7,8 @@ import {
   type BazaarStatusFilter,
   BazaarStatusFilterEnum,
 } from "@/features/bazaar/hooks/useBazaarFilters";
-import messages from "@/messages/pt-br.json";
+
+import { bazaarMessages } from "@/messages";
 import { Input } from "@/shared/ui/input";
 import {
   Select,
@@ -25,8 +26,6 @@ interface BazaarFiltersProps {
   onQueryChange: (value: string) => void;
   onStatusChange: (value: BazaarStatusFilter) => void;
 }
-
-const bazaarMessages = messages.bazaar;
 
 export function BazaarFilters({
   query,

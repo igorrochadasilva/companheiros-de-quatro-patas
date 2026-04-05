@@ -4,7 +4,8 @@ import Link from "next/link";
 
 import { PUBLIC_ROUTES } from "@/constants";
 import { useAdoptionCmsContent } from "@/features/adoption/hooks/useAdoptionCmsContent";
-import messages from "@/messages/pt-br.json";
+
+import { adoptionMessages } from "@/messages";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -16,7 +17,7 @@ import {
 import { Skeleton } from "@/shared/ui/skeleton";
 import { H1, Muted } from "@/shared/ui/typography";
 
-const heroMessages = messages.adoption.hero;
+const heroMessages = adoptionMessages.hero;
 
 export function AdocaoHero() {
   const { data: cms, isPending: isCmsPending } = useAdoptionCmsContent();

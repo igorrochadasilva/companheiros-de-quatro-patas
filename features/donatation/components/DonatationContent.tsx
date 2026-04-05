@@ -7,7 +7,8 @@ import { useDonationConfig } from "@/features/donatation/hooks/useDonationConfig
 import { useStats } from "@/features/donatation/hooks/useStats";
 import { useStories } from "@/features/donatation/hooks/useStories";
 import { useTransparencySummary } from "@/features/donatation/hooks/useTransparencySummary";
-import messages from "@/messages/pt-br.json";
+
+import { donateMessages } from "@/messages";
 import { useWhenVisible } from "@/shared/hooks/useWhenVisible";
 import { track } from "@/shared/lib/analytics";
 
@@ -19,8 +20,6 @@ import { DonatationItemsSection } from "./DonatationItemsSection";
 import { DonatationPixSection } from "./DonatationPixSection";
 import { DonatationRecurringSection } from "./DonatationRecurringSection";
 import { DonatationTransparencySection } from "./DonatationTransparencySection";
-
-const donateMessages = messages.donate;
 
 export function DonatationContent() {
   const [trackedTransparencyView, setTrackedTransparencyView] = useState(false);

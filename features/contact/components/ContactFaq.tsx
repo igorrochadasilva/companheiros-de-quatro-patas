@@ -1,4 +1,4 @@
-import messages from "@/messages/pt-br.json";
+import { contactMessages } from "@/messages";
 import {
   Accordion,
   AccordionContent,
@@ -6,8 +6,6 @@ import {
   AccordionTrigger,
 } from "@/shared/ui/accordion";
 import { H2 } from "@/shared/ui/typography";
-
-const contactMessages = messages.contact;
 
 export function ContactFaq() {
   return (

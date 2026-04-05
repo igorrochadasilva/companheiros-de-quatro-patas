@@ -1,12 +1,10 @@
 import Link from "next/link";
 
 import { ADMIN_ROUTES } from "@/constants";
-import messages from "@/messages/pt-br.json";
+import { dashboardMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { H3, Muted } from "@/shared/ui/typography";
-
-const dashboardMessages = messages.dashboard;
 
 const quickActions = [
   {

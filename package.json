@@ -7,7 +7,8 @@
     "not IE 11"
   ],
   "scripts": {
-    "dev": "next dev --webpack",
+    "dev": "next dev",
+    "dev:webpack": "next dev --webpack",
     "dev:turbo": "next dev",
     "build": "pnpm prisma:generate && node -e \"require('fs').rmSync('.next', { recursive: true, force: true })\" && next build",
     "start": "next start",

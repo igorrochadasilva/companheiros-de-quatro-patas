@@ -2,14 +2,13 @@
 
 import { useBazaarFilters } from "@/features/bazaar/hooks/useBazaarFilters";
 import { useBazaarItems } from "@/features/bazaar/hooks/useBazaarItems";
-import messages from "@/messages/pt-br.json";
+
+import { bazaarMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 
 import { BazaarFilters } from "./BazaarFilters";
 import { BazaarGrid } from "./BazaarGrid";
 import { BazaarHero } from "./BazaarHero";
-
-const bazaarMessages = messages.bazaar;
 
 export function BazaarContent() {
   const {

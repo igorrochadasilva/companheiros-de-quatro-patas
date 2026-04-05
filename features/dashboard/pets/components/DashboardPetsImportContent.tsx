@@ -7,13 +7,11 @@ import { toast } from "sonner";
 import { ADMIN_ROUTES, API_ROUTES } from "@/constants";
 import { useImportPetsMutation } from "@/features/dashboard/pets/hooks/useImportPetsMutation";
 import { buildPetsImportPreview } from "@/features/dashboard/pets/utils/pets-import-preview";
-import messages from "@/messages/pt-br.json";
+import { dashboardMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 import { H3, Muted, Small } from "@/shared/ui/typography";
 import type { PetImportPreviewRow } from "@/types";
-
-const dashboardMessages = messages.dashboard;
 const importMessages = dashboardMessages.import;
 
 export function DashboardPetsImportContent() {

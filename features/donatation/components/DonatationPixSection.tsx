@@ -1,7 +1,7 @@
 import { CopyIcon, MessageCircleIcon, QrCodeIcon } from "lucide-react";
 import Image from "next/image";
 
-import messages from "@/messages/pt-br.json";
+import { donateMessages } from "@/messages";
 import { track } from "@/shared/lib/analytics";
 import { Alert, AlertDescription, AlertTitle } from "@/shared/ui/alert";
 import { Button } from "@/shared/ui/button";
@@ -17,8 +17,6 @@ import { Skeleton } from "@/shared/ui/skeleton";
 import type { DonationConfig } from "@/types";
 
 import type { PixCopySource } from "./donatation.utils";
-
-const donateMessages = messages.donate;
 
 interface DonatationPixSectionProps {
   donationConfig?: DonationConfig;

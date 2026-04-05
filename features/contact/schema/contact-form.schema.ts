@@ -1,9 +1,7 @@
 import { z } from "zod";
 
-import messages from "@/messages/pt-br.json";
+import { contactMessages } from "@/messages";
 import { ContactSubjectEnum } from "@/shared/lib";
-
-const contactMessages = messages.contact;
 const phoneRegex = /^\+?[0-9()\-\s]{10,}$/;
 
 export const contactFormSchema = z

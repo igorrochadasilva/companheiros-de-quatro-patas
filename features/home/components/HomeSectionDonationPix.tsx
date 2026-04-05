@@ -7,14 +7,15 @@ import { toast } from "sonner";
 import { PUBLIC_ROUTES } from "@/constants";
 import { useDonationConfig } from "@/features/home/hooks/useDonationConfig";
 import { useHomeCmsContent } from "@/features/home/hooks/useHomeCmsContent";
-import messages from "@/messages/pt-br.json";
+
+import { homeMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent } from "@/shared/ui/card";
 import { Input } from "@/shared/ui/input";
 import { Skeleton } from "@/shared/ui/skeleton";
 import { H2, Muted } from "@/shared/ui/typography";
 
-const pixCopiedToast = messages.home.donation.pixCopied;
+const pixCopiedToast = homeMessages.donation.pixCopied;
 
 export function HomeSectionDonationPix() {
   const [copying, setCopying] = useState(false);

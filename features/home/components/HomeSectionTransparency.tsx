@@ -5,14 +5,15 @@ import Link from "next/link";
 import { PUBLIC_ROUTES } from "@/constants";
 import { useHomeCmsContent } from "@/features/home/hooks/useHomeCmsContent";
 import { useTransparencySummary } from "@/features/home/hooks/useTransparencySummary";
-import messages from "@/messages/pt-br.json";
+
+import { homeMessages } from "@/messages";
 import { useWhenVisible } from "@/shared/hooks/useWhenVisible";
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { Skeleton } from "@/shared/ui/skeleton";
 import { H2, Muted } from "@/shared/ui/typography";
 
-const transparencyCardMessages = messages.home.transparency.cards;
+const transparencyCardMessages = homeMessages.transparency.cards;
 
 const TRANSPARENCY_LOAD_ERROR =
   "Não foi possível carregar os dados de transparência no momento.";

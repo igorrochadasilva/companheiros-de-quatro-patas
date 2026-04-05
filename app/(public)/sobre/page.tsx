@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 
 import { AboutContent } from "@/features/about/components/AboutContent";
-import messages from "@/messages/pt-br.json";
-
-const aboutMessages = messages.about;
+import { aboutMessages } from "@/messages";
 
 export const metadata: Metadata = {
   title: aboutMessages.metadata.title,

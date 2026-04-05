@@ -1,8 +1,8 @@
-import messages from "@/messages/pt-br.json";
+import { dashboardMessages } from "@/messages";
 import { Spinner } from "@/shared/ui/spinner";
 import { Small, Typography } from "@/shared/ui/typography";
 
-const loadingMessages = messages.dashboard.loading;
+const loadingMessages = dashboardMessages.loading;
 
 export function DashboardRouteLoading() {
   return (

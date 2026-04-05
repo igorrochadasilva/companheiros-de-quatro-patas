@@ -14,7 +14,7 @@ import Link from "next/link";
 import * as React from "react";
 
 import { PUBLIC_ROUTES } from "@/constants";
-import messages from "@/messages/pt-br.json";
+import { appMessages, navMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 import {
   Sheet,
@@ -28,22 +28,22 @@ import { Muted } from "@/shared/ui/typography";
 const navItems = [
   {
     href: PUBLIC_ROUTES.adoption,
-    label: messages.nav.adoption,
+    label: navMessages.adoption,
     icon: PawPrintIcon,
   },
   {
     href: PUBLIC_ROUTES.shelter,
-    label: messages.nav.shelter,
+    label: navMessages.shelter,
     icon: Building2Icon,
   },
-  { href: PUBLIC_ROUTES.donate, label: messages.nav.donate, icon: GiftIcon },
+  { href: PUBLIC_ROUTES.donate, label: navMessages.donate, icon: GiftIcon },
   {
     href: PUBLIC_ROUTES.bazaar,
-    label: messages.nav.bazaar,
+    label: navMessages.bazaar,
     icon: ShoppingBagIcon,
   },
-  { href: PUBLIC_ROUTES.about, label: messages.nav.about, icon: InfoIcon },
-  { href: PUBLIC_ROUTES.contact, label: messages.nav.contact, icon: MailIcon },
+  { href: PUBLIC_ROUTES.about, label: navMessages.about, icon: InfoIcon },
+  { href: PUBLIC_ROUTES.contact, label: navMessages.contact, icon: MailIcon },
 ];
 
 export function PublicHeader() {
@@ -53,13 +53,13 @@ export function PublicHeader() {
     <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-sm">
       <nav
         className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-3 md:py-4"
-        aria-label={messages.nav.ariaLabel}
+        aria-label={navMessages.ariaLabel}
       >
         <Link href={PUBLIC_ROUTES.home} className="flex items-center gap-3">
           <div className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-border bg-background shadow-sm">
             <Image
               src="/icon.webp"
-              alt={messages.app.name}
+              alt={appMessages.name}
               fill
               sizes="36px"
               className="object-cover"
@@ -68,10 +68,10 @@ export function PublicHeader() {
           </div>
           <div className="flex flex-col">
             <span className="text-sm font-semibold leading-tight tracking-tight text-foreground md:text-base">
-              {messages.app.name}
+              {appMessages.name}
             </span>
             <Muted className="hidden text-[11px] leading-tight md:block">
-              {messages.app.tagline}
+              {appMessages.tagline}
             </Muted>
           </div>
         </Link>
@@ -97,11 +97,11 @@ export function PublicHeader() {
               className="md:inline-flex"
             >
               <Link href={PUBLIC_ROUTES.transparency}>
-                {messages.nav.transparency}
+                {navMessages.transparency}
               </Link>
             </Button>
             <Button asChild size="sm" variant="primary">
-              <Link href={PUBLIC_ROUTES.donate}>{messages.nav.supportCta}</Link>
+              <Link href={PUBLIC_ROUTES.donate}>{navMessages.supportCta}</Link>
             </Button>
           </div>
 
@@ -112,7 +112,7 @@ export function PublicHeader() {
                 variant="ghost"
                 size="icon"
                 className="md:hidden"
-                aria-label={messages.nav.openMenuLabel}
+                aria-label={navMessages.openMenuLabel}
               >
                 <MenuIcon className="size-5" />
               </Button>
@@ -120,10 +120,10 @@ export function PublicHeader() {
             <SheetContent side="right" className="flex flex-col">
               <SheetHeader>
                 <SheetTitle className="text-left">
-                  {messages.app.name}
+                  {appMessages.name}
                 </SheetTitle>
                 <Muted className="text-left text-xs">
-                  {messages.app.tagline}
+                  {appMessages.tagline}
                 </Muted>
               </SheetHeader>
               <div className="flex flex-1 flex-col gap-1 py-4">
@@ -148,7 +148,7 @@ export function PublicHeader() {
                     href={PUBLIC_ROUTES.transparency}
                     onClick={() => setSheetOpen(false)}
                   >
-                    {messages.nav.transparency}
+                    {navMessages.transparency}
                   </Link>
                 </Button>
                 <Button asChild size="sm" className="w-full" variant="primary">
@@ -156,7 +156,7 @@ export function PublicHeader() {
                     href={PUBLIC_ROUTES.donate}
                     onClick={() => setSheetOpen(false)}
                   >
-                    {messages.nav.supportCta}
+                    {navMessages.supportCta}
                   </Link>
                 </Button>
               </div>

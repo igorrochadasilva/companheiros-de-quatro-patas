@@ -5,7 +5,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useMemo } from "react";
 
 import { usePets } from "@/features/adoption/hooks/usePets";
-import messages from "@/messages/pt-br.json";
+
+import { adoptionMessages } from "@/messages";
 import { track } from "@/shared/lib/analytics";
 import {
   parseAdoptionSearchParams,
@@ -111,7 +112,7 @@ export function AdocaoContent() {
 
   const cityInput = filters.city ?? "";
 
-  const toolbarMessages = messages.adoption.toolbar;
+  const toolbarMessages = adoptionMessages.toolbar;
 
   // Páginas vizinhas (max 5) com reticências
   const pages = useMemo(() => {
@@ -160,7 +161,7 @@ export function AdocaoContent() {
 
         {/* Área de resultados: toolbar + grid */}
         <div className="min-w-0 space-y-4">
-          <h2 className="sr-only">{messages.adoption.resultsHeading}</h2>
+          <h2 className="sr-only">{adoptionMessages.resultsHeading}</h2>
           {/* Mobile: botão Filtrar + Sheet */}
           <div className="flex items-center gap-2 lg:hidden">
             <Sheet>

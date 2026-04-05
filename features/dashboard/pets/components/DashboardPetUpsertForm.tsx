@@ -11,7 +11,7 @@ import {
   useDeletePetMutation,
   useUpdatePetMutation,
 } from "@/features/dashboard/pets/hooks/usePetMutations";
-import messages from "@/messages/pt-br.json";
+import { dashboardMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 import { Checkbox } from "@/shared/ui/checkbox";
 import { Input } from "@/shared/ui/input";
@@ -28,8 +28,6 @@ import type { PetAdminRecord, PetFormValues } from "@/types";
 
 import { petFormSchema } from "../schemas/pet-form.schema";
 import { buildPetFormDefaults } from "../utils/pet-form.utils";
-
-const dashboardMessages = messages.dashboard;
 const formMessages = dashboardMessages.petEdit.form;
 
 const resolver = zodResolver(petFormSchema as never) as Resolver<PetFormValues>;

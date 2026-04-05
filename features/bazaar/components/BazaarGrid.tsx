@@ -1,4 +1,4 @@
-import messages from "@/messages/pt-br.json";
+import { bazaarMessages } from "@/messages";
 import { Skeleton } from "@/shared/ui/skeleton";
 import type { BazaarItem } from "@/types";
 
@@ -10,8 +10,6 @@ interface BazaarGridProps {
   isLoading: boolean;
   isError: boolean;
 }
-
-const bazaarMessages = messages.bazaar;
 
 export function BazaarGrid({ items, isLoading, isError }: BazaarGridProps) {
   if (isLoading) {

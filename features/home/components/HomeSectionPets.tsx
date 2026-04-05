@@ -6,7 +6,8 @@ import { useEffect } from "react";
 import { PUBLIC_ROUTES } from "@/constants";
 import { useFeaturedPets } from "@/features/home/hooks/useFeaturedPets";
 import { useHomeCmsContent } from "@/features/home/hooks/useHomeCmsContent";
-import messages from "@/messages/pt-br.json";
+
+import { homeMessages } from "@/messages";
 import { usePetFilters } from "@/shared/hooks/usePetFilters";
 import { track } from "@/shared/lib/analytics";
 import { Button } from "@/shared/ui/button";
@@ -22,7 +23,7 @@ import { HomeSectionPetsCard } from "./HomeSectionPetsCard";
 import { HomeSectionPetsFilters } from "./HomeSectionPetsFilters";
 import { HomeSectionPetsSkeleton } from "./HomeSectionPetsSkeleton";
 
-const petsMessages = messages.home.pets;
+const petsMessages = homeMessages.pets;
 
 /** Cópia local: lista vazia por filtros não está no Contentful. */
 const PETS_EMPTY_LIST = {

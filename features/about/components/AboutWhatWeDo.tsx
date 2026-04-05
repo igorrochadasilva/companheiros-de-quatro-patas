@@ -8,12 +8,10 @@ import {
 import Link from "next/link";
 
 import { PUBLIC_ANCHOR_ROUTES } from "@/constants";
-import messages from "@/messages/pt-br.json";
+import { aboutMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { H2, Muted } from "@/shared/ui/typography";
-
-const aboutMessages = messages.about;
 
 const iconByIndex = [
   LifeBuoyIcon,

@@ -1,6 +1,5 @@
 "use client";
-
-import messages from "@/messages/pt-br.json";
+import { homeMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 import { Checkbox } from "@/shared/ui/checkbox";
 import { Input } from "@/shared/ui/input";
@@ -14,7 +13,7 @@ import {
 import { Tabs, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import type { PetAgeGroup, PetFilters, PetSize, PetSpecies } from "@/types";
 
-const petsMessages = messages.home.pets;
+const petsMessages = homeMessages.pets;
 
 export interface HomeSectionPetsFiltersProps {
   filters: PetFilters;

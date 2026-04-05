@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 
 import { ContactContent } from "@/features/contact/components/ContactContent";
-import messages from "@/messages/pt-br.json";
-
-const contactMessages = messages.contact;
+import { contactMessages } from "@/messages";
 
 export const metadata: Metadata = {
   title: contactMessages.metadata.title,

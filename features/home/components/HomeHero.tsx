@@ -5,13 +5,14 @@ import Link from "next/link";
 
 import { useHomeCmsContent } from "@/features/home/hooks/useHomeCmsContent";
 import { useStats } from "@/features/home/hooks/useStats";
-import messages from "@/messages/pt-br.json";
+
+import { homeMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent } from "@/shared/ui/card";
 import { Skeleton } from "@/shared/ui/skeleton";
 import { H1, Lead } from "@/shared/ui/typography";
 
-const heroStatsLabels = messages.home.hero.stats;
+const heroStatsLabels = homeMessages.hero.stats;
 
 export function HomeHero() {
   const { data: stats, isLoading, isError } = useStats();

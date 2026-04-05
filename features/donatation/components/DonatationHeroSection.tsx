@@ -1,4 +1,4 @@
-import messages from "@/messages/pt-br.json";
+import { donateMessages } from "@/messages";
 import { track } from "@/shared/lib/analytics";
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent } from "@/shared/ui/card";
@@ -6,8 +6,6 @@ import { Skeleton } from "@/shared/ui/skeleton";
 import { H1, Lead, Muted } from "@/shared/ui/typography";
 
 import { formatCurrency } from "./donatation.utils";
-
-const donateMessages = messages.donate;
 
 interface DonatationHeroSectionProps {
   isStatsLoading: boolean;

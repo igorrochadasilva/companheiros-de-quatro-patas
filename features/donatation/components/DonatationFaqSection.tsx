@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { PUBLIC_ROUTES } from "@/constants";
-import messages from "@/messages/pt-br.json";
+import { donateMessages } from "@/messages";
 import {
   Accordion,
   AccordionContent,
@@ -10,8 +10,6 @@ import {
 } from "@/shared/ui/accordion";
 import { Button } from "@/shared/ui/button";
 import { H2 } from "@/shared/ui/typography";
-
-const donateMessages = messages.donate;
 
 export function DonatationFaqSection() {
   return (

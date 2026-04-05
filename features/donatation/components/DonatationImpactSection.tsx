@@ -1,12 +1,10 @@
 import type { RefObject } from "react";
 
-import messages from "@/messages/pt-br.json";
+import { donateMessages } from "@/messages";
 import { Card, CardContent } from "@/shared/ui/card";
 import { Skeleton } from "@/shared/ui/skeleton";
 import { H2, H3, Muted } from "@/shared/ui/typography";
 import type { Story } from "@/types";
-
-const donateMessages = messages.donate;
 
 interface DonatationImpactSectionProps {
   impactRef: RefObject<HTMLElement | null>;

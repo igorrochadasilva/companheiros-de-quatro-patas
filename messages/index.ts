@@ -1,0 +1,12 @@
+export { aboutMessages } from "./pt-br/about";
+export { adoptionMessages } from "./pt-br/adoption";
+export { appMessages } from "./pt-br/app";
+export { authMessages } from "./pt-br/auth";
+export { bazaarMessages } from "./pt-br/bazaar";
+export { contactMessages } from "./pt-br/contact";
+export { dashboardMessages } from "./pt-br/dashboard";
+export { donateMessages } from "./pt-br/donate";
+export { footerMessages } from "./pt-br/footer";
+export { homeMessages } from "./pt-br/home";
+export { navMessages } from "./pt-br/nav";
+export { shelterMessages } from "./pt-br/shelter";

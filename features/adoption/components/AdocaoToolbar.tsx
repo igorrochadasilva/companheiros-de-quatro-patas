@@ -1,6 +1,5 @@
 "use client";
-
-import messages from "@/messages/pt-br.json";
+import { adoptionMessages } from "@/messages";
 import { track } from "@/shared/lib/analytics";
 import { Button } from "@/shared/ui/button";
 import {
@@ -12,7 +11,7 @@ import {
 } from "@/shared/ui/select";
 import type { PetSort } from "@/types";
 
-const toolbarMessages = messages.adoption.toolbar;
+const toolbarMessages = adoptionMessages.toolbar;
 
 const SORT_OPTIONS: { value: PetSort; label: string }[] = [
   { value: "recent", label: toolbarMessages.sortRecent },

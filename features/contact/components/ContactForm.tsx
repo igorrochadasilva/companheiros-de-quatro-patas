@@ -12,7 +12,8 @@ import {
 import { useSubmitContact } from "@/features/contact/hooks/useSubmitContact";
 import { contactFormSchema } from "@/features/contact/schema/contact-form.schema";
 import { getContactSubjectLabel } from "@/features/contact/utils/contact-form.utils";
-import messages from "@/messages/pt-br.json";
+
+import { contactMessages } from "@/messages";
 import { type ContactSubject, ContactSubjectEnum } from "@/shared/lib";
 import { track } from "@/shared/lib/analytics";
 import { Alert, AlertDescription, AlertTitle } from "@/shared/ui/alert";
@@ -29,8 +30,6 @@ import {
 } from "@/shared/ui/select";
 import { Textarea } from "@/shared/ui/textarea";
 import { H2, Muted } from "@/shared/ui/typography";
-
-const contactMessages = messages.contact;
 const contactFormResolver = zodResolver(
   contactFormSchema as never,
 ) as Resolver<ContactFormData>;

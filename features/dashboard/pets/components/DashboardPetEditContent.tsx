@@ -2,13 +2,11 @@ import Link from "next/link";
 
 import { getPetById } from "@/backend/modules/pets/application/get-pet-by-id";
 import { ADMIN_ROUTES } from "@/constants";
-import messages from "@/messages/pt-br.json";
+import { dashboardMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 import { H3, Muted } from "@/shared/ui/typography";
 
 import { DashboardPetUpsertForm } from "./DashboardPetUpsertForm";
-
-const dashboardMessages = messages.dashboard;
 
 type DashboardPetEditContentProps = {
   id: string;

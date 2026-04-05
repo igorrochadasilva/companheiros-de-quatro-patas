@@ -1,10 +1,8 @@
-import messages from "@/messages/pt-br.json";
+import { aboutMessages } from "@/messages";
 import { Card, CardContent } from "@/shared/ui/card";
 import { Skeleton } from "@/shared/ui/skeleton";
 import { H2, Muted } from "@/shared/ui/typography";
 import type { Story } from "@/types";
-
-const aboutMessages = messages.about;
 
 interface AboutStoriesProps {
   stories: Story[];

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { ADMIN_DASHBOARD_NAV_ITEMS } from "@/constants";
-import messages from "@/messages/pt-br.json";
+import { appMessages, dashboardMessages } from "@/messages";
 import {
   Sidebar,
   SidebarContent,
@@ -20,8 +20,6 @@ import { Muted, Small, Typography } from "@/shared/ui/typography";
 
 import { DashboardLogoutButton } from "./DashboardLogoutButton";
 
-const dashboardMessages = messages.dashboard;
-
 type DashboardShellProps = Readonly<{
   children: React.ReactNode;
 }>;
@@ -38,7 +36,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
           >
             {dashboardMessages.sidebar.title}
           </Typography>
-          <Small>{messages.app.name}</Small>
+          <Small>{appMessages.name}</Small>
         </SidebarHeader>
         <SidebarContent>
           <SidebarGroup>

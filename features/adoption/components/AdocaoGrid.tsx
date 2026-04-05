@@ -4,7 +4,8 @@ import { useEffect } from "react";
 
 import { HomeSectionPetsCard } from "@/features/home/components/HomeSectionPetsCard";
 import { HomeSectionPetsSkeleton } from "@/features/home/components/HomeSectionPetsSkeleton";
-import messages from "@/messages/pt-br.json";
+
+import { adoptionMessages } from "@/messages";
 import { track } from "@/shared/lib/analytics";
 import { Button } from "@/shared/ui/button";
 import {
@@ -15,8 +16,8 @@ import {
 } from "@/shared/ui/empty";
 import type { Pet } from "@/types";
 
-const emptyMessages = messages.adoption.empty;
-const errorMessages = messages.adoption.error;
+const emptyMessages = adoptionMessages.empty;
+const errorMessages = adoptionMessages.error;
 
 export interface AdocaoGridProps {
   items: Pet[];

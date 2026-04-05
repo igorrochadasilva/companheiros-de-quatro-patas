@@ -1,13 +1,11 @@
 import { InstagramIcon, MailIcon, MessageCircleIcon } from "lucide-react";
 
 import { CONTACT, EMAIL_URL, WHATSAPP_URL } from "@/constants";
-import messages from "@/messages/pt-br.json";
+import { contactMessages } from "@/messages";
 import { track } from "@/shared/lib/analytics";
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { H2, Muted } from "@/shared/ui/typography";
-
-const contactMessages = messages.contact;
 
 export function ContactQuickChannels() {
   return (

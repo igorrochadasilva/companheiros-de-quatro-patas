@@ -3,7 +3,8 @@
 import { useEffect } from "react";
 
 import { useShelterProgress } from "@/features/shelter/hooks/useShelterProgress";
-import messages from "@/messages/pt-br.json";
+
+import { shelterMessages } from "@/messages";
 import { track } from "@/shared/lib/analytics";
 import { Alert, AlertDescription, AlertTitle } from "@/shared/ui/alert";
 import { Button } from "@/shared/ui/button";
@@ -19,8 +20,6 @@ import { ShelterHeroSection } from "./ShelterHeroSection";
 import { ShelterMilestonesSection } from "./ShelterMilestonesSection";
 import { ShelterMissingSection } from "./ShelterMissingSection";
 import { ShelterUpdatesSection } from "./ShelterUpdatesSection";
-
-const shelterMessages = messages.shelter;
 
 function ShelterLoadingState() {
   return (

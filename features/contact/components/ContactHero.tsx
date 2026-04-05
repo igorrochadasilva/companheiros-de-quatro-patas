@@ -1,14 +1,12 @@
 import Link from "next/link";
 
 import { CONTACT_SUBJECT_ROUTES } from "@/constants";
-import messages from "@/messages/pt-br.json";
+import { contactMessages } from "@/messages";
 import { Badge } from "@/shared/ui/badge";
 import { Button } from "@/shared/ui/button";
 import { H1, Lead, Small } from "@/shared/ui/typography";
 
 import { CONTACT_SUBJECT_ORDER } from "../contact.types";
-
-const contactMessages = messages.contact;
 
 const subjectToRoute: Record<string, string> = {
   adocao: CONTACT_SUBJECT_ROUTES.adoption,

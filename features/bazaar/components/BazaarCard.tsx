@@ -2,7 +2,7 @@ import { MessageCircleIcon } from "lucide-react";
 import Image from "next/image";
 
 import { WHATSAPP_URL } from "@/constants";
-import messages from "@/messages/pt-br.json";
+import { bazaarMessages } from "@/messages";
 import { Badge } from "@/shared/ui/badge";
 import { Button } from "@/shared/ui/button";
 import {
@@ -21,8 +21,6 @@ function formatCurrency(value: number) {
     currency: "BRL",
   });
 }
-
-const bazaarMessages = messages.bazaar;
 
 function getStatusLabel(status: BazaarItem["status"]) {
   if (status === BazaarItemStatusEnum.AVAILABLE) {

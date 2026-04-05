@@ -5,14 +5,15 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { type FormEvent, useState } from "react";
 
 import { ADMIN_ROUTES, API_ROUTES, PUBLIC_ROUTES } from "@/constants";
-import messages from "@/messages/pt-br.json";
+
+import { authMessages } from "@/messages";
 import { getSupabaseBrowserClient } from "@/shared/lib/supabase/client";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
 import { Muted } from "@/shared/ui/typography";
 
-const loginMessages = messages.auth.login;
+const loginMessages = authMessages.login;
 
 type AuthStatusResponse = {
   authenticated: boolean;

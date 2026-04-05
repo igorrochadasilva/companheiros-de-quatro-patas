@@ -1,14 +1,12 @@
 import Link from "next/link";
 
 import { PUBLIC_ROUTES } from "@/constants";
-import messages from "@/messages/pt-br.json";
+import { aboutMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent } from "@/shared/ui/card";
 import { Skeleton } from "@/shared/ui/skeleton";
 import { H2, Muted } from "@/shared/ui/typography";
 import type { Stats } from "@/types";
-
-const aboutMessages = messages.about;
 
 interface AboutImpactProps {
   stats?: Stats;

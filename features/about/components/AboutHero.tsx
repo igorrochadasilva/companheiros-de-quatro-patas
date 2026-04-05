@@ -1,11 +1,9 @@
 import Link from "next/link";
 
 import { PUBLIC_ROUTES } from "@/constants";
-import messages from "@/messages/pt-br.json";
+import { aboutMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 import { H1, Lead, Muted } from "@/shared/ui/typography";
-
-const aboutMessages = messages.about;
 
 export function AboutHero() {
   return (

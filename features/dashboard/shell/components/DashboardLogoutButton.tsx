@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 
 import { PUBLIC_ROUTES } from "@/constants";
-import messages from "@/messages/pt-br.json";
+import { dashboardMessages } from "@/messages";
 import { getSupabaseBrowserClient } from "@/shared/lib/supabase/client";
 import { Button } from "@/shared/ui/button";
 
@@ -19,7 +19,7 @@ export function DashboardLogoutButton() {
 
   return (
     <Button variant="outline" size="sm" onClick={handleLogout}>
-      {messages.dashboard.header.logout}
+      {dashboardMessages.header.logout}
     </Button>
   );
 }

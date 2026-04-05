@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef } from "react";
 import { toast } from "sonner";
 
-import messages from "@/messages/pt-br.json";
+import { contactMessages } from "@/messages";
 import { parseContactPrefill } from "@/shared/lib";
 import { track } from "@/shared/lib/analytics";
 
@@ -12,8 +12,6 @@ import { ContactFaq } from "./ContactFaq";
 import { ContactForm } from "./ContactForm";
 import { ContactHero } from "./ContactHero";
 import { ContactQuickChannels } from "./ContactQuickChannels";
-
-const contactMessages = messages.contact;
 
 export function ContactContent() {
   const searchParams = useSearchParams();

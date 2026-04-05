@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { RefObject } from "react";
 
 import { PUBLIC_ROUTES } from "@/constants";
-import messages from "@/messages/pt-br.json";
+import { donateMessages } from "@/messages";
 import { Alert, AlertDescription, AlertTitle } from "@/shared/ui/alert";
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
@@ -11,8 +11,6 @@ import { H2, Muted } from "@/shared/ui/typography";
 import type { TransparencySummary } from "@/types";
 
 import { formatCurrency, formatDate } from "./donatation.utils";
-
-const donateMessages = messages.donate;
 
 interface DonatationTransparencySectionProps {
   transparencyRef: RefObject<HTMLElement | null>;

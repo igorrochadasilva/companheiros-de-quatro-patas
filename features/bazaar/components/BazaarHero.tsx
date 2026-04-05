@@ -1,9 +1,7 @@
 import { StoreIcon } from "lucide-react";
 
-import messages from "@/messages/pt-br.json";
+import { bazaarMessages } from "@/messages";
 import { H1, Lead } from "@/shared/ui/typography";
-
-const bazaarMessages = messages.bazaar;
 
 export function BazaarHero() {
   return (

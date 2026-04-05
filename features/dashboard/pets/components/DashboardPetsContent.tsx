@@ -2,11 +2,9 @@ import Link from "next/link";
 
 import { listPetsAdmin } from "@/backend/modules/pets/application/list-pets-admin";
 import { ADMIN_ROUTES } from "@/constants";
-import messages from "@/messages/pt-br.json";
+import { dashboardMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 import { H3, Muted, Small } from "@/shared/ui/typography";
-
-const dashboardMessages = messages.dashboard;
 const petsMessages = dashboardMessages.pets;
 
 type SearchParamValue = string | string[] | undefined;

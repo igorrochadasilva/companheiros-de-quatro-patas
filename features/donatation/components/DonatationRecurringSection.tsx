@@ -1,14 +1,12 @@
 import { ExternalLinkIcon } from "lucide-react";
 import Link from "next/link";
 
-import messages from "@/messages/pt-br.json";
+import { donateMessages } from "@/messages";
 import { track } from "@/shared/lib/analytics";
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent } from "@/shared/ui/card";
 import { H2, Muted } from "@/shared/ui/typography";
 import type { DonationConfig } from "@/types";
-
-const donateMessages = messages.donate;
 
 interface DonatationRecurringSectionProps {
   donationConfig?: DonationConfig;

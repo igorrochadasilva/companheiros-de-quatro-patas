@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { PUBLIC_ROUTES } from "@/constants";
-import messages from "@/messages/pt-br.json";
+import { donateMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 import {
   Card,
@@ -11,8 +11,6 @@ import {
   CardTitle,
 } from "@/shared/ui/card";
 import { H2 } from "@/shared/ui/typography";
-
-const donateMessages = messages.donate;
 
 export function DonatationItemsSection() {
   return (

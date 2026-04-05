@@ -1,6 +1,5 @@
 "use client";
-
-import messages from "@/messages/pt-br.json";
+import { adoptionMessages, homeMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 import { Checkbox } from "@/shared/ui/checkbox";
 import { Input } from "@/shared/ui/input";
@@ -14,8 +13,8 @@ import {
 import { Tabs, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import type { PetAgeGroup, PetFilters, PetSize, PetSpecies } from "@/types";
 
-const petsMessages = messages.home.pets;
-const adoptionMessages = messages.adoption.toolbar;
+const petsMessages = homeMessages.pets;
+const adoptionToolbarMessages = adoptionMessages.toolbar;
 
 export interface AdocaoFiltersProps {
   filters: PetFilters;
@@ -123,7 +122,7 @@ export function AdocaoFilters({
             size="sm"
             onClick={onClearFilters}
           >
-            {adoptionMessages.clearFilters}
+            {adoptionToolbarMessages.clearFilters}
           </Button>
         )}
       </div>
