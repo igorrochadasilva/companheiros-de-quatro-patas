@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { listPetsAdmin } from "@/backend/modules/pets/application/list-pets-admin";
@@ -51,6 +52,14 @@ function replacePageTemplate(
   return template
     .replace("{page}", String(page))
     .replace("{totalPages}", String(totalPages));
+}
+
+function petThumbnailUrl(pet: { name: string; media?: { url: string }[] }) {
+  if (pet.media && pet.media.length > 0) {
+    return pet.media[0]?.url;
+  }
+
+  return `https://placehold.co/96x96.png?text=${encodeURIComponent(pet.name)}`;
 }
 
 export async function DashboardPetsContent({
@@ -164,6 +173,9 @@ export async function DashboardPetsContent({
             <thead className="bg-muted/40">
               <tr>
                 <th className="px-3 py-2 text-left">
+                  {petsMessages.table.photo}
+                </th>
+                <th className="px-3 py-2 text-left">
                   {petsMessages.table.name}
                 </th>
                 <th className="px-3 py-2 text-left">
@@ -189,6 +201,17 @@ export async function DashboardPetsContent({
             <tbody>
               {response.items.map((pet) => (
                 <tr key={pet.id} className="border-t">
+                  <td className="px-3 py-2">
+                    <div className="relative h-10 w-10 overflow-hidden rounded-md border bg-muted">
+                      <Image
+                        src={petThumbnailUrl(pet)}
+                        alt={pet.name}
+                        fill
+                        sizes="40px"
+                        className="object-cover"
+                      />
+                    </div>
+                  </td>
                   <td className="px-3 py-2">{pet.name}</td>
                   <td className="px-3 py-2">
                     {

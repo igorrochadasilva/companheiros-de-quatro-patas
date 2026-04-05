@@ -43,6 +43,7 @@ export const dashboardMessages = {
       submit: "Filtrar",
     },
     table: {
+      photo: "Foto",
       name: "Nome",
       species: "Especie",
       status: "Status",
