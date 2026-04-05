@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 
 import { isAdminUser } from "@/backend/modules/auth/application/is-admin-user";
 import { PUBLIC_ROUTES } from "@/constants";
-import { DashboardShell } from "@/features/dashboard/components/DashboardShell";
+import { DashboardShell } from "@/features/dashboard/shell/components/DashboardShell";
 import { getSupabaseServerClient } from "@/shared/lib/supabase/server";
 
 export default async function AdminLayout({

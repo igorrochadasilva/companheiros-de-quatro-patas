@@ -94,7 +94,8 @@
         "RESERVED": "Reservado",
         "ADOPTED": "Adotado",
         "TREATMENT": "Em tratamento"
-      }
+      },
+      "createCta": "Novo pet"
     },
     "import": {
       "title": "Importacao de pets",
@@ -115,14 +116,53 @@
         "save": "Salvar alteracoes",
         "saving": "Salvando...",
         "success": "Dados salvos com sucesso.",
-        "error": "Nao foi possivel salvar. Tente novamente."
+        "error": "Nao foi possivel salvar. Tente novamente.",
+        "externalId": "ID externo",
+        "species": "Especie",
+        "breed": "Raca",
+        "age": "Idade",
+        "size": "Porte",
+        "gender": "Genero",
+        "color": "Cor",
+        "city": "Cidade",
+        "state": "Estado (UF)",
+        "vaccinated": "Vacinado",
+        "castrated": "Castrado",
+        "notInformed": "Nao informado",
+        "create": "Cadastrar pet",
+        "createSuccess": "Pet cadastrado com sucesso.",
+        "delete": "Excluir pet",
+        "deleteConfirm": "Tem certeza que deseja excluir este pet?",
+        "deleteSuccess": "Pet excluido com sucesso.",
+        "deleteError": "Nao foi possivel excluir o pet."
       },
       "statusValues": {
         "AVAILABLE": "Disponivel",
         "RESERVED": "Reservado",
         "ADOPTED": "Adotado",
         "TREATMENT": "Em tratamento"
+      },
+      "createTitle": "Cadastro de pet",
+      "createSubtitle": "Preencha os dados para cadastrar um novo pet.",
+      "speciesValues": {
+        "DOG": "Cachorro",
+        "CAT": "Gato",
+        "OTHER": "Outro"
+      },
+      "sizeValues": {
+        "SMALL": "Pequeno",
+        "MEDIUM": "Medio",
+        "LARGE": "Grande"
+      },
+      "genderValues": {
+        "MALE": "Macho",
+        "FEMALE": "Femea",
+        "UNKNOWN": "Nao informado"
       }
+    },
+    "loading": {
+      "title": "Carregando tela",
+      "subtitle": "Aguarde enquanto preparamos os dados."
     }
   },
   "adoption": {

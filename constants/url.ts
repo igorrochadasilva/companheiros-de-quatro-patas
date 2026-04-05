@@ -13,6 +13,7 @@ export const PUBLIC_ROUTES = {
 export const ADMIN_ROUTES = {
   dashboard: "/dashboard",
   pets: "/dashboard/pets",
+  petCreate: "/dashboard/pets/new",
   petsImport: "/dashboard/pets/import",
   petDetail: (id: string) => `/dashboard/pets/${id}`,
 };

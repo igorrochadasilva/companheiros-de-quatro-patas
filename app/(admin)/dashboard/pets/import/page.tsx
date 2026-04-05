@@ -1,4 +1,4 @@
-import { DashboardPetsImportContent } from "@/features/dashboard/components/DashboardPetsImportContent";
+import { DashboardPetsImportContent } from "@/features/dashboard/pets/components/DashboardPetsImportContent";
 
 export default function DashboardPetsImportPage() {
   return <DashboardPetsImportContent />;

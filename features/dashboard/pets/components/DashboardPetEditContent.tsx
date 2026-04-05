@@ -6,7 +6,7 @@ import messages from "@/messages/pt-br.json";
 import { Button } from "@/shared/ui/button";
 import { H3, Muted } from "@/shared/ui/typography";
 
-import { DashboardPetEditForm } from "./DashboardPetEditForm";
+import { DashboardPetUpsertForm } from "./DashboardPetUpsertForm";
 
 const dashboardMessages = messages.dashboard;
 
@@ -42,12 +42,24 @@ export async function DashboardPetEditContent({
         <Muted>{dashboardMessages.petEdit.subtitle}</Muted>
       </header>
 
-      <DashboardPetEditForm
+      <DashboardPetUpsertForm
+        mode="edit"
         pet={{
           id: pet.id,
+          externalId: pet.externalId,
           name: pet.name,
+          species: pet.species,
+          breed: pet.breed,
+          age: pet.age,
+          size: pet.size,
+          gender: pet.gender,
+          color: pet.color,
+          castrated: pet.castrated,
+          vaccinated: pet.vaccinated,
           status: pet.status,
           description: pet.description,
+          city: pet.city,
+          state: pet.state,
           published: pet.published,
           featured: pet.featured,
         }}

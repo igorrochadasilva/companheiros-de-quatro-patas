@@ -2,6 +2,12 @@ type ApiGetOptions = RequestInit & {
   params?: Record<string, string | number | boolean | undefined>;
 };
 
+type ApiJsonOptions = RequestInit & {
+  params?: Record<string, string | number | boolean | undefined>;
+};
+
+type ApiBody = Record<string, unknown> | unknown[] | null | undefined;
+
 function buildUrl(path: string, params?: ApiGetOptions["params"]): string {
   if (!params || Object.keys(params).length === 0) {
     return path;
@@ -26,13 +32,18 @@ export async function apiGet<T>(
 ): Promise<T> {
   const { params, ...init } = options ?? {};
   const fullUrl = buildUrl(url, params);
+  return apiJsonRequest<T>(fullUrl, { ...init, method: "GET" });
+}
 
-  const res = await fetch(fullUrl, {
-    ...init,
-    method: "GET",
+async function apiJsonRequest<T>(
+  url: string,
+  options?: RequestInit,
+): Promise<T> {
+  const res = await fetch(url, {
+    ...options,
     headers: {
       Accept: "application/json",
-      ...init?.headers,
+      ...options?.headers,
     },
   });
 
@@ -48,4 +59,52 @@ export async function apiGet<T>(
   }
 
   return res.json() as Promise<T>;
+}
+
+export async function apiPost<T>(
+  url: string,
+  body?: ApiBody,
+  options?: ApiJsonOptions,
+): Promise<T> {
+  const { params, ...init } = options ?? {};
+  const fullUrl = buildUrl(url, params);
+  return apiJsonRequest<T>(fullUrl, {
+    ...init,
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      ...init.headers,
+    },
+    body: body === undefined ? undefined : JSON.stringify(body),
+  });
+}
+
+export async function apiPatch<T>(
+  url: string,
+  body?: ApiBody,
+  options?: ApiJsonOptions,
+): Promise<T> {
+  const { params, ...init } = options ?? {};
+  const fullUrl = buildUrl(url, params);
+  return apiJsonRequest<T>(fullUrl, {
+    ...init,
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      ...init.headers,
+    },
+    body: body === undefined ? undefined : JSON.stringify(body),
+  });
+}
+
+export async function apiDelete<T>(
+  url: string,
+  options?: ApiJsonOptions,
+): Promise<T> {
+  const { params, ...init } = options ?? {};
+  const fullUrl = buildUrl(url, params);
+  return apiJsonRequest<T>(fullUrl, {
+    ...init,
+    method: "DELETE",
+  });
 }

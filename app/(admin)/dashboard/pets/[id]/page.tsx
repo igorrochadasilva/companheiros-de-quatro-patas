@@ -1,4 +1,4 @@
-import { DashboardPetEditContent } from "@/features/dashboard/components/DashboardPetEditContent";
+import { DashboardPetEditContent } from "@/features/dashboard/pets/components/DashboardPetEditContent";
 
 type DashboardPetEditPageProps = {
   params: Promise<{ id: string }>;

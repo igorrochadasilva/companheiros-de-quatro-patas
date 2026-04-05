@@ -82,6 +82,9 @@ export async function DashboardPetsContent({
       </header>
 
       <div className="flex flex-wrap gap-2">
+        <Button asChild variant="outline">
+          <Link href={ADMIN_ROUTES.petCreate}>{petsMessages.createCta}</Link>
+        </Button>
         <Button asChild>
           <Link href={ADMIN_ROUTES.petsImport}>{petsMessages.importCta}</Link>
         </Button>

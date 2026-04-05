@@ -1,4 +1,4 @@
-import { DashboardPetsContent } from "@/features/dashboard/components/DashboardPetsContent";
+import { DashboardPetsContent } from "@/features/dashboard/pets/components/DashboardPetsContent";
 
 type DashboardPetsPageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
