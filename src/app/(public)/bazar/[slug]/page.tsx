@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+
+import { featureFlags } from "@/shared/config/feature-flags";
 
 export const metadata: Metadata = {
   title: "Item do bazar",
@@ -13,6 +16,10 @@ interface BazarItemPageProps {
 }
 
 export default async function BazarItemPage({ params }: BazarItemPageProps) {
+  if (!featureFlags.routes.bazaar) {
+    notFound();
+  }
+
   const { slug } = await params;
 
   return (

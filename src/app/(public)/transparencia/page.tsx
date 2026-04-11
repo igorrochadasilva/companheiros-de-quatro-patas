@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 import { PUBLIC_ROUTES } from "@/constants";
+import { featureFlags } from "@/shared/config/feature-flags";
 
 export const metadata: Metadata = {
   title: "Transparência",
@@ -11,6 +13,10 @@ export const metadata: Metadata = {
 };
 
 export default function TransparenciaPage() {
+  if (!featureFlags.routes.transparency) {
+    notFound();
+  }
+
   return (
     <section className="space-y-3">
       <h1 className="text-2xl font-bold">Transparência</h1>

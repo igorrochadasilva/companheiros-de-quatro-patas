@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 import { PUBLIC_ROUTES } from "@/constants";
 import { DonatationContent } from "@/features/donatation/components/DonatationContent";
+import { featureFlags } from "@/shared/config/feature-flags";
 
 export const metadata: Metadata = {
   title: "Doe e ajude a manter o abrigo",
@@ -13,5 +15,9 @@ export const metadata: Metadata = {
 };
 
 export default function DoarPage() {
+  if (!featureFlags.routes.donate) {
+    notFound();
+  }
+
   return <DonatationContent />;
 }

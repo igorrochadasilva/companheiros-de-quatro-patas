@@ -27,27 +27,60 @@ import { Muted } from "@/shared/ui/typography";
 
 const navItems = [
   {
+    key: "adoption",
     href: PUBLIC_ROUTES.adoption,
     label: navMessages.adoption,
     icon: PawPrintIcon,
   },
   {
+    key: "shelter",
     href: PUBLIC_ROUTES.shelter,
     label: navMessages.shelter,
     icon: Building2Icon,
   },
-  { href: PUBLIC_ROUTES.donate, label: navMessages.donate, icon: GiftIcon },
   {
+    key: "donate",
+    href: PUBLIC_ROUTES.donate,
+    label: navMessages.donate,
+    icon: GiftIcon,
+  },
+  {
+    key: "bazaar",
     href: PUBLIC_ROUTES.bazaar,
     label: navMessages.bazaar,
     icon: ShoppingBagIcon,
   },
-  { href: PUBLIC_ROUTES.about, label: navMessages.about, icon: InfoIcon },
-  { href: PUBLIC_ROUTES.contact, label: navMessages.contact, icon: MailIcon },
-];
+  {
+    key: "about",
+    href: PUBLIC_ROUTES.about,
+    label: navMessages.about,
+    icon: InfoIcon,
+  },
+  {
+    key: "contact",
+    href: PUBLIC_ROUTES.contact,
+    label: navMessages.contact,
+    icon: MailIcon,
+  },
+] as const;
 
-export function PublicHeader() {
+type HeaderNavKey = (typeof navItems)[number]["key"];
+
+export type PublicHeaderVisibility = {
+  nav: Record<HeaderNavKey, boolean>;
+  transparency: boolean;
+  supportCta: boolean;
+};
+
+export function PublicHeader({
+  visibility,
+}: {
+  visibility: PublicHeaderVisibility;
+}) {
   const [sheetOpen, setSheetOpen] = React.useState(false);
+  const visibleNavItems = navItems.filter((item) => visibility.nav[item.key]);
+  const showTransparencyLink = visibility.transparency;
+  const showSupportCta = visibility.supportCta;
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-sm">
@@ -78,7 +111,7 @@ export function PublicHeader() {
 
         <div className="flex items-center gap-3">
           <div className="hidden items-center gap-4 text-sm font-medium text-muted-foreground md:flex">
-            {navItems.map((item) => (
+            {visibleNavItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -90,19 +123,25 @@ export function PublicHeader() {
           </div>
 
           <div className="hidden items-center gap-2 md:flex">
-            <Button
-              asChild
-              size="sm"
-              variant="outline"
-              className="md:inline-flex"
-            >
-              <Link href={PUBLIC_ROUTES.transparency}>
-                {navMessages.transparency}
-              </Link>
-            </Button>
-            <Button asChild size="sm" variant="primary">
-              <Link href={PUBLIC_ROUTES.donate}>{navMessages.supportCta}</Link>
-            </Button>
+            {showTransparencyLink ? (
+              <Button
+                asChild
+                size="sm"
+                variant="outline"
+                className="md:inline-flex"
+              >
+                <Link href={PUBLIC_ROUTES.transparency}>
+                  {navMessages.transparency}
+                </Link>
+              </Button>
+            ) : null}
+            {showSupportCta ? (
+              <Button asChild size="sm" variant="primary">
+                <Link href={PUBLIC_ROUTES.donate}>
+                  {navMessages.supportCta}
+                </Link>
+              </Button>
+            ) : null}
           </div>
 
           <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
@@ -127,7 +166,7 @@ export function PublicHeader() {
                 </Muted>
               </SheetHeader>
               <div className="flex flex-1 flex-col gap-1 py-4">
-                {navItems.map((item) => {
+                {visibleNavItems.map((item) => {
                   const Icon = item.icon;
                   return (
                     <Link
@@ -143,22 +182,36 @@ export function PublicHeader() {
                 })}
               </div>
               <div className="flex flex-col gap-2 border-t border-border px-4 pb-4 pt-4">
-                <Button asChild variant="outline" size="sm" className="w-full">
-                  <Link
-                    href={PUBLIC_ROUTES.transparency}
-                    onClick={() => setSheetOpen(false)}
+                {showTransparencyLink ? (
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="sm"
+                    className="w-full"
                   >
-                    {navMessages.transparency}
-                  </Link>
-                </Button>
-                <Button asChild size="sm" className="w-full" variant="primary">
-                  <Link
-                    href={PUBLIC_ROUTES.donate}
-                    onClick={() => setSheetOpen(false)}
+                    <Link
+                      href={PUBLIC_ROUTES.transparency}
+                      onClick={() => setSheetOpen(false)}
+                    >
+                      {navMessages.transparency}
+                    </Link>
+                  </Button>
+                ) : null}
+                {showSupportCta ? (
+                  <Button
+                    asChild
+                    size="sm"
+                    className="w-full"
+                    variant="primary"
                   >
-                    {navMessages.supportCta}
-                  </Link>
-                </Button>
+                    <Link
+                      href={PUBLIC_ROUTES.donate}
+                      onClick={() => setSheetOpen(false)}
+                    >
+                      {navMessages.supportCta}
+                    </Link>
+                  </Button>
+                ) : null}
               </div>
             </SheetContent>
           </Sheet>

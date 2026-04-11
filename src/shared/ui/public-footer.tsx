@@ -13,6 +13,7 @@ import Link from "next/link";
 
 import { CONTACT, PUBLIC_ROUTES, WHATSAPP_URL } from "@/constants";
 import { appMessages, footerMessages, navMessages } from "@/messages";
+import { featureFlags } from "@/shared/config/feature-flags";
 
 const quickLinks = [
   {
@@ -42,6 +43,19 @@ const quickLinks = [
 
 export function PublicFooter() {
   const year = new Date().getFullYear();
+  const visibleQuickLinks = quickLinks.filter((item) => {
+    if (item.href === PUBLIC_ROUTES.adoption)
+      return featureFlags.routes.adoption;
+    if (item.href === PUBLIC_ROUTES.shelter) return featureFlags.routes.shelter;
+    if (item.href === PUBLIC_ROUTES.donate) return featureFlags.routes.donate;
+    if (item.href === PUBLIC_ROUTES.bazaar) return featureFlags.routes.bazaar;
+    if (item.href === PUBLIC_ROUTES.transparency)
+      return featureFlags.routes.transparency;
+    if (item.href === PUBLIC_ROUTES.about) return featureFlags.routes.about;
+    if (item.href === PUBLIC_ROUTES.contact) return featureFlags.routes.contact;
+
+    return true;
+  });
 
   return (
     <footer
@@ -68,7 +82,7 @@ export function PublicFooter() {
               {footerMessages.linksTitle}
             </h3>
             <ul className="flex flex-col gap-2">
-              {quickLinks.map(({ href, label, icon: Icon }) => (
+              {visibleQuickLinks.map(({ href, label, icon: Icon }) => (
                 <li key={href}>
                   <Link
                     href={href}

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { cache } from "react";
 
 import { getPublicPetById } from "@/backend/modules/pets/application/get-public-pet-by-id";
 import { PUBLIC_ROUTES, SEO } from "@/constants";
 import { AdocaoPetDetailContent } from "@/features/adoption/components/AdocaoPetDetailContent";
+import { featureFlags } from "@/shared/config/feature-flags";
 
 type AnimalPageProps = {
   params: Promise<{ slug: string }>;
@@ -14,6 +16,15 @@ const getPetCached = cache(getPublicPetById);
 export async function generateMetadata({
   params,
 }: AnimalPageProps): Promise<Metadata> {
+  if (!featureFlags.routes.adoption) {
+    return {
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
+  }
+
   const { slug } = await params;
   const pet = await getPetCached(slug);
 
@@ -70,6 +81,10 @@ export async function generateMetadata({
 }
 
 export default async function AnimalPage({ params }: AnimalPageProps) {
+  if (!featureFlags.routes.adoption) {
+    notFound();
+  }
+
   const { slug } = await params;
 
   return <AdocaoPetDetailContent slug={slug} />;

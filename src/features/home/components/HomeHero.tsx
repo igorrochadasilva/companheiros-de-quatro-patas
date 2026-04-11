@@ -3,9 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { PUBLIC_ROUTES } from "@/constants";
 import { useHomeCmsContent } from "@/features/home/hooks/useHomeCmsContent";
 import { useStats } from "@/features/home/hooks/useStats";
 import { homeMessages } from "@/messages";
+import { featureFlags } from "@/shared/config/feature-flags";
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent } from "@/shared/ui/card";
 import { Skeleton } from "@/shared/ui/skeleton";
@@ -25,6 +27,16 @@ export function HomeHero() {
     homeCmsContent?.heroImageUrl ||
     "https://placehold.co/600x500.png?text=Companheiros";
   const heroImageAlt = homeCmsContent?.heroImageAlt || heroTitle || "Hero";
+  const primaryCtaHref = featureFlags.home.pets
+    ? "/#animais"
+    : featureFlags.routes.adoption
+      ? PUBLIC_ROUTES.adoption
+      : null;
+  const secondaryCtaHref = featureFlags.home.donationPix
+    ? "/#doar"
+    : featureFlags.routes.donate
+      ? PUBLIC_ROUTES.donate
+      : null;
 
   return (
     <section className="grid gap-8 md:grid-cols-2 md:gap-12 md:items-center">
@@ -43,12 +55,16 @@ export function HomeHero() {
             <H1>{heroTitle}</H1>
             <Lead>{heroSubtitle}</Lead>
             <div className="flex flex-wrap gap-3">
-              <Button asChild variant="primary" size="lg">
-                <Link href="/#animais">{primaryCtaLabel}</Link>
-              </Button>
-              <Button asChild variant="secondary" size="lg">
-                <Link href="/#doar">{secondaryCtaLabel}</Link>
-              </Button>
+              {primaryCtaLabel && primaryCtaHref ? (
+                <Button asChild variant="primary" size="lg">
+                  <Link href={primaryCtaHref}>{primaryCtaLabel}</Link>
+                </Button>
+              ) : null}
+              {secondaryCtaLabel && secondaryCtaHref ? (
+                <Button asChild variant="secondary" size="lg">
+                  <Link href={secondaryCtaHref}>{secondaryCtaLabel}</Link>
+                </Button>
+              ) : null}
             </div>
           </>
         )}

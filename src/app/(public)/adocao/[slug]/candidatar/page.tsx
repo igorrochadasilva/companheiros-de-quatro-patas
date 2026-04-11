@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+
+import { featureFlags } from "@/shared/config/feature-flags";
 
 export const metadata: Metadata = {
   title: "Formulário de adoção",
@@ -13,6 +16,10 @@ interface CandidatarPageProps {
 }
 
 export default async function CandidatarPage({ params }: CandidatarPageProps) {
+  if (!featureFlags.routes.adoption) {
+    notFound();
+  }
+
   const { slug } = await params;
 
   return (
