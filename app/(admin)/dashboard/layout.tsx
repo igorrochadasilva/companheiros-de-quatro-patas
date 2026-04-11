@@ -1,9 +1,18 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 import { isAdminUser } from "@/backend/modules/auth/application/is-admin-user";
 import { PUBLIC_ROUTES } from "@/constants";
 import { DashboardShell } from "@/features/dashboard/shell/components/DashboardShell";
 import { getSupabaseServerClient } from "@/shared/lib/supabase/server";
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function AdminLayout({
   children,

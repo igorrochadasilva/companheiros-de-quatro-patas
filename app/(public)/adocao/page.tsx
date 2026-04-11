@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
+import { PUBLIC_ROUTES } from "@/constants";
 import { AdocaoContent } from "@/features/adoption/components/AdocaoContent";
 
 export const metadata: Metadata = {
-  title: "Adoção de animais | Companheiros de Quatro Patas",
+  title: "Adoção de animais",
   description:
-    "Filtre e encontre o pet ideal para adoção em Companheiros de Quatro Patas. Veja animais disponíveis, use filtros por espécie, porte, idade e cidade, e comece sua candidatura.",
+    "Filtre e encontre o pet ideal para adoção. Veja animais disponíveis por espécie, porte, idade e cidade.",
+  alternates: {
+    canonical: PUBLIC_ROUTES.adoption,
+  },
 };
 
 export default function AdocaoPage() {

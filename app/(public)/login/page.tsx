@@ -1,9 +1,19 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 import { isAdminUser } from "@/backend/modules/auth/application/is-admin-user";
 import { ADMIN_ROUTES } from "@/constants";
 import { LoginContent } from "@/features/auth/components/LoginContent";
 import { getSupabaseServerClient } from "@/shared/lib/supabase/server";
+
+export const metadata: Metadata = {
+  title: "Login administrativo",
+  description: "Acesso administrativo ao dashboard da ONG.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function LoginPage() {
   const supabase = await getSupabaseServerClient();

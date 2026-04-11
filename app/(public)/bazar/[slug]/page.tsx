@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Item do bazar",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
 interface BazarItemPageProps {
   params: Promise<{ slug: string }>;
 }

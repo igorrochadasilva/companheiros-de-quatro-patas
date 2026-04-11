@@ -1,8 +1,8 @@
-# Implementacao tecnica por etapas - Dashboard de pets (status atual)
+﻿# Implementacao tecnica por etapas - Dashboard de pets (status atual)
 
 ## Data de referencia
 
-06/04/2026
+07/04/2026
 
 ## Objetivo do MVP
 
@@ -12,33 +12,23 @@ Entregar dashboard administrativo funcional para pets, sem regressao no site pub
 - CRUD de pets
 - importacao por planilha
 - persistencia em Supabase/Postgres via Prisma
-- base pronta para gestao de midias
+- gestao de midias por pet
+- fluxo publico de adocao via WhatsApp
 
 ## Status consolidado
 
 ### Concluido
 
-- Estrutura de dashboard consolidada em `/dashboard/*` com organizacao por feature:
-  - `features/dashboard/shell/*`
-  - `features/dashboard/overview/*`
-  - `features/dashboard/pets/*`
+- Estrutura de dashboard consolidada em `/dashboard/*` com organizacao por feature.
 - Navegacao e rotas administrativas padronizadas por constantes.
-- Tela de login administrativa implementada em `/(public)/login`.
-- Guard de acesso admin implementado:
-  - server layout em `app/(admin)/dashboard/layout.tsx`
-  - protecao de API com `requireAdminApi()`
-  - regra de admin por email/role em `backend/modules/auth/application/is-admin-user.ts`
-- Backend organizado em camadas (clean architecture leve):
-  - `app/api/*` como adaptadores HTTP finos
-  - regras em `backend/modules/*/application/*`
-  - integracoes em `backend/infrastructure/*`
-  - mocks centralizados em `backend/mock/*`
+- Tela de login administrativa em `/(public)/login`.
+- Guard de acesso admin no layout e nas APIs (`requireAdminApi`).
+- Backend organizado em camadas (adaptadores HTTP + casos de uso + infraestrutura).
 - Prisma v7 configurado e funcional com `prisma.config.ts`.
-- Schema principal modelado no Prisma e aplicado no Supabase:
+- Schema principal aplicado no Supabase:
   - `pets`
   - `pet_media`
   - `adoption_requests`
-  - enums de dominio (status, species, media type, etc.)
 - Endpoints principais de pets entregues:
   - `GET /api/pets`
   - `POST /api/pets`
@@ -47,77 +37,77 @@ Entregar dashboard administrativo funcional para pets, sem regressao no site pub
 - Endpoints de importacao entregues:
   - `POST /api/pets/import`
   - `GET /api/pets/import/template`
-- Fluxo de importacao no dashboard validado (download template -> upload -> processamento).
-- Form de cadastro/edicao com React Hook Form + Zod + toast.
-- Integracao Cloudinary concluida para midias de pets:
+- Fluxo de importacao validado no dashboard.
+- Integracao Cloudinary concluida para imagem de pets:
   - assinatura segura: `POST /api/media/cloudinary-sign`
-  - upload no dashboard por pet (imagem)
+  - upload no dashboard por pet
   - persistencia em `pet_media` (`url`, `publicId`, `isMain`, `sortOrder`)
   - definicao de imagem principal
-  - remocao de midia com exclusao no Cloudinary + banco
-  - reordenacao da galeria por `sortOrder`
-- Tabela administrativa de pets com thumbnail da midia principal.
-- Loading de transicao aplicado em rotas admin/public.
-- Mensagens desacopladas por dominio (`messages/pt-br/*.ts`) e imports atualizados.
+  - remocao com exclusao no Cloudinary + banco
+  - reordenacao de galeria por `sortOrder`
+- Listagem administrativa com thumbnail da midia principal.
+- Mensagens desacopladas por dominio (`messages/pt-br/*.ts`).
 - Script de dev ajustado para Turbopack por padrao (`pnpm dev`).
 - Regra de destaque da home validada:
   - secao da home lista pets com `featured = true`
-  - se vier vazio, tratar como dado/cadastro (nao fallback automatico).
+- Fluxo publico de adocao ajustado:
+  - pagina publica de detalhe em `/adocao/[slug]`
+  - CTA de adocao por WhatsApp (mensagem padrao + link da pagina do pet)
+  - modal do card sem opcoes de formulario/ficha no MVP atual
+- Baseline de SEO tecnico aplicado:
+  - metadata global no `app/layout.tsx` com `metadataBase`, Open Graph e Twitter
+  - `robots.txt` via `app/robots.ts`
+  - `sitemap.xml` via `app/sitemap.ts` (rotas estaticas + pets publicos dinamicos)
+  - metadata dinamica em `/adocao/[slug]` com canonical e imagem social
+  - `noindex` em rotas sensiveis/nao finais (login, dashboard e placeholders)
 
 ### Parcialmente concluido
 
-- Suporte de midia focado em imagem no MVP atual.
-- Video ainda nao foi habilitado no fluxo de upload.
+- Suporte de midia focado em imagem.
+- Upload de video ainda nao habilitado.
 
 ## Etapa atual do roadmap
 
-As etapas de base, auth, schema, CRUD de pets e importacao por planilha estao funcionais para MVP.
+As etapas de base, auth, schema, CRUD de pets, importacao por planilha e midia do pet estao funcionais para MVP.
 
-## Proxima etapa recomendada (prioridade)
+## Proxima etapa recomendada (MVP)
 
-## Fase de fechamento de operacao do dashboard
+1. Hardening de seguranca e deploy
 
-1. Validar listagem administrativa com filtros finais
-   - revisar UX de filtros e paginaçao.
-   - confirmar desempenho com volume maior.
+- revisar RLS/policies no Supabase
+- revisar envs de producao e permissao admin
 
-2. Polimento de midia
-   - opcional MVP+: habilitar upload de video (`PetMediaType.VIDEO`).
-   - opcional MVP+: limite maximo de itens por pet com bloqueio de UI.
+2. QA funcional final
 
-3. Fluxo de solicitacoes de adocao no admin
-   - criar listagem administrativa de `adoption_requests`.
-   - permitir atualizar status (`PENDING`, `IN_REVIEW`, etc.).
+- validar fluxos ponta a ponta: criar, editar, importar, publicar/despublicar
+- validar fluxo publico: home (`featured`), adocao, detalhe do pet, CTA WhatsApp
 
-4. Hardening de seguranca e deploy
-   - revisar RLS/policies no Supabase.
-   - revisar envs de producao (Cloudinary/Supabase) e permissao admin.
+3. Polimentos de UX sem ampliar escopo
 
-### Notas de arquitetura
-
-- Supabase Auth continua sendo o gate de seguranca do dashboard e das APIs de assinatura/upload.
-- Prisma continua como camada de persistencia para `pet_media`.
-- Cloudinary fica como armazenamento e entrega otimizada de imagem/video.
-
-### Referencias usadas
-
-- Cloudinary Programmable Media Overview:
-  - https://cloudinary.com/documentation/programmable_media_overview
-- Cloudinary Node.js Quick Start:
-  - https://cloudinary.com/documentation/node_quickstart
+- ajustes finos de filtros e paginacao da listagem admin
+- melhorias pequenas de mensagens e loading
 
 ## Definicao de pronto para encerrar MVP
 
 - dashboard acessivel apenas por admin
 - CRUD de pets estavel
-- importacao por planilha funcionando (template + upload)
+- importacao por planilha funcionando
 - listagem/edicao sem regressao
 - upload de imagem principal + galeria via Cloudinary funcionando
 - vinculo de midia salvo em `pet_media`
 - secao de pets da home obedecendo regra de `featured`
+- pagina publica de detalhe do pet funcionando
+- CTA de adocao operando via WhatsApp
+
+## Escopo removido do MVP (por decisao atual)
+
+- painel administrativo de solicitacoes de adocao (`adoption_requests`) fica para pos-MVP
+- formulario publico completo de adocao tambem fica para pos-MVP
+
+Referencia: roadmap em `doc/features/post-mvp.md`.
 
 ## Notas tecnicas
 
 - MVP continua sem migrations versionadas; evolucao rapida via `prisma db push`.
 - Em pre-producao/producao, migrar para fluxo com migrations versionadas.
-- Warning de cache do webpack nao impacta MVP; `pnpm dev` agora usa Turbopack por padrao.
+- Warning de cache do webpack nao impacta MVP; `pnpm dev` usa Turbopack por padrao.

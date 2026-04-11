@@ -35,6 +35,10 @@ Consolidar escopo funcional, prioridade e status.
 - [ ] Blog/noticias
 - [ ] Medicao de conversao e engajamento
 
+## Documentos complementares
+
+- Roadmap detalhado de evolucao: [post-mvp.md](/c:/Users/igor0/OneDrive/Desktop/ONG/companheiros-de-quatro-patas/doc/features/post-mvp.md)
+
 ## Legenda de status
 
 - `a definir`

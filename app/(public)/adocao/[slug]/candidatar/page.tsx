@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Formulário de adoção",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
 interface CandidatarPageProps {
   params: Promise<{ slug: string }>;
 }
