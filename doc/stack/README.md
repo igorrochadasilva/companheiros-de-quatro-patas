@@ -1,64 +1,58 @@
-﻿# Stack Tecnologica
+# Stack Tecnologica
 
 ## Objetivo
 
-Registrar a stack oficial do projeto e evitar divergencia de ferramentas.
+Registrar a stack oficial em uso no repositorio e evitar divergencia de ferramentas.
 
-## Base confirmada no repositorio
+## Base confirmada
 
 - Next.js `16.1.6`
 - React `19.2.3`
 - React DOM `19.2.3`
 - TypeScript `^5`
-- ESLint `^9` + `eslint-config-next`
 - Tailwind CSS `^4`
-- PostCSS com `@tailwindcss/postcss`
+- ESLint `^9` + `eslint-config-next`
+- Prettier `^3.8.1`
 
-## Stack definida para o projeto
+## Stack de aplicacao
 
-- Gerenciamento de estado: `zustand`
-- UI e componentes: `shadcn/ui`
-- Data fetching e cache server state: `@tanstack/react-query` (React Query)
-- Formularios: `react-hook-form`
-- Validacao de schema: `zod`
-- Qualidade de codigo em git hooks: `husky` + `lint-staged`
+- UI/Design system: `shadcn` + componentes em `shared/ui`
+- Server state: `@tanstack/react-query`
+- Formularios: `react-hook-form` + `@hookform/resolvers`
+- Validacao: `zod`
+- Banco e ORM: `postgres` + `prisma` + `@prisma/client`
+- Auth/SSR: `@supabase/supabase-js` + `@supabase/ssr`
+- CMS: `contentful`
+- Midia: `cloudinary`
+- Importacao de planilhas: `xlsx`
 
-## Convencoes importantes
+## Qualidade e workflow
 
-- "React Query" sera implementado com `@tanstack/react-query`.
-- "shadcn" refere-se ao ecossistema `shadcn/ui`.
-- Formularios devem combinar `react-hook-form` + `zod`.
+- Git hooks: `husky`
+- Pre-commit checks: `lint-staged`
+- Lint de imports: `eslint-plugin-simple-import-sort`, `eslint-plugin-unused-imports`
+- React Compiler: habilitado em `next.config.ts`
 
-## Documentacao oficial (referencia obrigatoria)
+## Scripts atuais
 
-- Next.js: https://nextjs.org/docs
-- React: https://react.dev/
-- TypeScript: https://www.typescriptlang.org/docs/
-- Tailwind CSS v4: https://tailwindcss.com/docs
-- shadcn/ui: https://ui.shadcn.com/docs
-- Zustand: https://zustand.docs.pmnd.rs/
-- TanStack Query (React Query): https://tanstack.com/query/latest/docs/framework/react/overview
-- React Hook Form: https://react-hook-form.com/docs
-- Zod: https://zod.dev/
-- ESLint: https://eslint.org/docs/latest/
-- Prettier: https://prettier.io/docs/
-- Husky: https://typicode.github.io/husky/
-- lint-staged: https://github.com/lint-staged/lint-staged
-
-## Diretriz de consulta
-
-- Antes de implementar ou alterar comportamento, consultar primeiro a documentacao oficial da stack envolvida.
-- Em caso de conflito entre exemplos de terceiros e docs oficiais, priorizar docs oficiais.
+- `pnpm dev`
+- `pnpm build`
+- `pnpm start`
+- `pnpm lint`
+- `pnpm format`
+- `pnpm prisma:generate`
+- `pnpm prisma:push`
+- `pnpm prisma:studio`
+- `pnpm prisma:reset`
+- `pnpm prisma:seed:pets`
 
 ## A confirmar
 
-- Versao minima do Node.js
-- Ferramenta de testes
-- CI/CD
-- Plataforma de deploy
-- Ferramentas de observabilidade
+- versao minima oficial de Node.js (recomendado: LTS ativa)
+- stack de testes automatizados (unitario/integracao/e2e)
+- pipeline CI/CD oficial
 
 ## Politica de atualizacao
 
-- Atualizar versoes de forma incremental e controlada.
-- Registrar mudancas significativas em `doc/decisoes/README.md`.
+- atualizar versoes de forma incremental
+- registrar decisoes de mudanca em `doc/decisoes/README.md`

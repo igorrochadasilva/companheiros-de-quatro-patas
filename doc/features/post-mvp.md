@@ -2,85 +2,70 @@
 
 ## Objetivo
 
-Organizar as funcionalidades que agregam valor apos o go-live do MVP, sem bloquear a operacao inicial da ONG.
+Priorizar evolucoes de produto e engenharia apos consolidacao do fluxo atual.
 
-## Prioridade alta (curto prazo)
+## Prioridade alta
 
-### 1) Painel de solicitacoes de adocao (dashboard)
+1. Solicitacoes de adocao no dashboard
 
-- Listagem de solicitacoes (`adoption_requests`) por pet.
-- Filtros por status, data e pet.
-- Atualizacao de status: `PENDING`, `IN_REVIEW`, `APPROVED`, `REJECTED`, `CANCELLED`.
-- Visualizacao rapida dos dados do interessado (nome, contato, cidade/estado, mensagem).
-- Linha do tempo minima de mudanca de status (ao menos `updatedAt` confiavel).
+- ampliar triagem em `adoption_requests` (filtros, timeline e historico de status)
+- visao operacional para equipe da ONG
 
-### 2) Fluxo publico de solicitacao estruturada
+2. Fortalecer fluxo publico de candidatura
 
-- Reintroduzir formulario de adocao no site publico (alem do WhatsApp, se desejado).
-- Validacao forte no backend.
-- Anti-spam basico (rate limit/captcha).
-- Confirmacao de recebimento para usuario.
+- revisar UX do `/adocao/[slug]/candidatar`
+- anti-spam (rate limit/captcha)
+- confirmacao e rastreabilidade de envio
 
-### 3) Regras de publicacao e operacao
+3. Hardening de seguranca e operacao
 
-- Ajustar regra final para pets adotados (`ADOPTED`) no site publico.
-- Acoes rapidas no dashboard (publicar/despublicar e destaque).
-- Melhorar busca e filtros no dashboard para volume maior.
+- revisar policies/RLS no Supabase
+- revisar trilha de auditoria basica em acoes administrativas
 
 ## Prioridade media
 
-### 4) Midia de pets (evolucao)
+4. Midia avancada de pets
 
-- Habilitar upload de video no fluxo atual.
-- Regras por tipo de arquivo, tamanho e quantidade.
-- Transformacoes otimizadas do Cloudinary por contexto (card, detalhe, admin).
+- suporte melhor a video
+- regras de tamanho/tipo e transformacoes por contexto
 
-### 5) Importacao de planilha avancada
+5. Importacao avancada
 
-- Modo `insert` e `upsert`.
-- Dry-run detalhado antes de gravar.
-- Exportar erros da importacao em CSV/XLSX.
+- dry-run detalhado
+- modo upsert
+- exportacao de erros de importacao
 
-### 6) Observabilidade e suporte operacional
+6. Observabilidade
 
-- Log estruturado de falhas por endpoint.
-- Correlacao basica por request id.
-- Alertas para erros criticos de importacao e upload.
+- logs estruturados por endpoint
+- correlacao por request id
+- alertas para falhas criticas
 
-## Prioridade baixa (estrategico)
+## Prioridade baixa
 
-### 7) Permissoes e governanca
+7. Governanca de acesso
 
-- Suporte a mais de um admin.
-- Perfis simples (`admin`, `editor`, `viewer`).
-- Auditoria de alteracoes sensiveis.
+- multiplos perfis (`admin`, `editor`, `viewer`)
 
-### 8) Relatorios e metricas
+8. Relatorios e metricas
 
-- Metricas de pets publicados, adotados e tempo medio de adocao.
-- Funil de solicitacoes (entrada -> aprovacao).
-- Exportacao de dados para acompanhamento da ONG.
+- funil de adocao e tempo medio ate adocao
+- indicadores de arrecadacao e engajamento
 
-### 9) Qualidade de dados
+9. Qualidade de dados
 
-- Padronizacao automatica de raca/cidade/estado.
-- Deteccao de duplicidade com score.
-- Arquivamento em vez de exclusao fisica (soft delete).
+- padronizacao de raca/cidade/estado
+- deteccao de duplicidade
 
-## Itens explicitamente fora do MVP atual
+## Fora do escopo imediato
 
-- Painel administrativo completo de solicitacoes de adocao.
-- Workflow de aprovacao complexo.
-- Auditoria completa por usuario.
-- RBAC completo.
-- BI/dashboard analitico avancado.
+- BI analitico avancado
+- workflow complexo de aprovacao com varias etapas
 
-## Ordem recomendada de execucao apos MVP
+## Ordem recomendada
 
-1. Painel de solicitacoes de adocao.
-2. Formulario publico + anti-spam.
-3. Regras de operacao e filtros admin.
-4. Midia com video.
-5. Importacao avancada.
-6. Permissoes e auditoria.
-7. Metricas e relatorios.
+1. Solicitacoes de adocao no dashboard
+2. Hardening de seguranca
+3. Evolucao do formulario/candidatura publica
+4. Midia e importacao avancadas
+5. Observabilidade e metricas

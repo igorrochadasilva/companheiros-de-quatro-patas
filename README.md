@@ -24,7 +24,7 @@ O objetivo é centralizar, em uma experiência simples e acessível, as principa
 - **TypeScript 5**
 - **ESLint 9** + `eslint-config-next`
 - **Tailwind CSS 4** (via `@tailwindcss/postcss`)
-- **App Router** (diretório `/app`)
+- **App Router** (diretório `/src/app`)
 
 ### A confirmar
 
@@ -63,10 +63,16 @@ Estrutura atual (resumo):
 
 ```text
 .
-├─ app/                 # App Router (rotas, layout e páginas)
-│  ├─ layout.tsx        # layout raiz da aplicação
-│  ├─ page.tsx          # página inicial
-│  └─ globals.css       # estilos globais
+├─ src/
+│  ├─ app/              # App Router (rotas, layout e páginas)
+│  │  ├─ layout.tsx     # layout raiz da aplicação
+│  │  ├─ page.tsx       # página inicial
+│  │  └─ globals.css    # estilos globais
+│  ├─ features/         # domínios por feature
+│  ├─ shared/           # UI, libs e providers compartilhados
+│  ├─ constants/        # rotas e constantes globais
+│  ├─ messages/         # textos de interface por domínio
+│  └─ types/            # tipos compartilhados
 ├─ public/              # arquivos estáticos
 ├─ next.config.ts       # configuração do Next.js
 ├─ eslint.config.mjs    # configuração de lint

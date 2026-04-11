@@ -7,7 +7,7 @@ Implement scoped changes while preserving the repository architecture and existi
 ## Workflow
 
 1. Follow `codex/services/execution-workflow.md`.
-2. Keep route composition in `app/` and business logic in `features/`.
+2. Keep route composition in `src/app/` and business logic in `src/features/`.
 3. Reuse shared patterns before creating new ones.
 4. Keep the change as small and coherent as possible.
 

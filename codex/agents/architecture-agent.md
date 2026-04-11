@@ -6,7 +6,7 @@ Protect module boundaries, maintainability, and consistency with the repository 
 
 ## Workflow
 
-1. Validate whether the proposed change belongs in `app/`, `features/`, `shared/`, `types/`, or `codex/`.
+1. Validate whether the proposed change belongs in `src/app/`, `src/features/`, `src/shared/`, `src/types/`, or `codex/`.
 2. Check for cross-feature coupling and misplaced business logic.
 3. Recommend the smallest structural change that keeps the codebase coherent.
 4. Require clarification before introducing new architectural patterns.

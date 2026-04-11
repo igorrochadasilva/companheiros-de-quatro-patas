@@ -11,5 +11,5 @@
 - Keep business rules out of UI components.
 - Validate external input near the boundary.
 - Avoid hardcoded strings, numbers, and route fragments when a shared source already exists.
-- Keep route composition in `app/`, domain logic in `features/`, shared infrastructure in `shared/`, and Codex operational files in `codex/`.
+- Keep route composition in `src/app/`, domain logic in `src/features/`, shared infrastructure in `src/shared/`, and Codex operational files in `codex/`.
 - Do not let one feature import another feature directly.

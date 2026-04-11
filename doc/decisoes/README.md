@@ -1,33 +1,37 @@
-﻿# Decisoes de Projeto (ADR Simplificado)
+# Decisoes de Projeto (ADR)
 
 ## Objetivo
 
-Registrar decisoes tecnicas e funcionais relevantes de forma rastreavel.
+Registrar decisoes tecnicas e funcionais relevantes com contexto e consequencias.
 
-## Como registrar
+## Formato padrao
 
-Use o template abaixo para cada nova decisao.
+Use o template abaixo para novas decisoes.
 
 ---
 
-### ADR-0001 - Titulo da decisao
+### ADR-XXXX - Titulo da decisao
 
 - Data: YYYY-MM-DD
 - Status: proposto | aprovado | substituido
 - Contexto:
-  Descreva o problema e as restricoes.
-
+  Problema, restricoes e motivacao.
 - Decisao:
-  Descreva a decisao tomada.
-
+  O que foi escolhido.
 - Consequencias:
-  Liste impactos positivos e riscos.
-
+  Impactos positivos, trade-offs e riscos.
 - Alternativas consideradas:
-  Liste opcoes avaliadas.
+  Opcoes avaliadas e motivo de descarte.
 
 ---
 
-## Registro atual
+## ADRs registradas
 
-Nenhuma ADR registrada ate o momento.
+1. `ADR-0001` - adocao de `shadcn/ui` como base de componentes
+   - arquivo: `doc/decisoes/shadcn-componentes.md`
+   - status: aprovado
+
+## Regra de manutencao
+
+- toda mudanca relevante de arquitetura, contratos ou stack deve gerar ADR
+- ao substituir decisao anterior, atualizar status para `substituido` e apontar sucessora

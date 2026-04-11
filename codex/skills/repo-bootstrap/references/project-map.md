@@ -1,11 +1,11 @@
 # Project Map
 
-- `app/`: route composition, layouts, pages, and route handlers.
-- `features/`: domain-oriented code split by feature.
-- `shared/`: shared UI, generic hooks, infrastructure helpers, and providers.
-- `types/`: global shared types when multiple features depend on them.
-- `constants/`: shared constants and route fragments.
-- `messages/`: interface text and localization content.
+- `src/app/`: route composition, layouts, pages, and route handlers.
+- `src/features/`: domain-oriented code split by feature.
+- `src/shared/`: shared UI, generic hooks, infrastructure helpers, and providers.
+- `src/types/`: global shared types when multiple features depend on them.
+- `src/constants/`: shared constants and route fragments.
+- `src/messages/`: interface text and localization content.
 - `doc/`: architecture, stack, decisions, and feature documentation.
 - `codex/standards/`: repository-wide engineering standards for Codex execution.
 - `codex/agents/`: role definitions for repository automation.

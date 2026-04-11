@@ -1,73 +1,33 @@
-﻿# Bibliotecas
+# Bibliotecas
 
 ## Objetivo
 
-Listar bibliotecas aprovadas, em avaliacao e descartadas.
+Listar bibliotecas adotadas no projeto e as diretrizes para novas adocoes.
 
-## Aprovadas (base atual)
+## Bibliotecas em uso no repositorio
 
-- `next`
-- `react`
-- `react-dom`
-- `typescript`
-- `eslint`
-- `eslint-config-next`
-- `tailwindcss`
-- `@tailwindcss/postcss`
+- Base web: `next`, `react`, `react-dom`, `typescript`
+- Estilo/UI: `tailwindcss`, `@tailwindcss/postcss`, `shadcn`, `lucide-react`, `class-variance-authority`, `tailwind-merge`, `sonner`
+- Dados e validacao: `@tanstack/react-query`, `react-hook-form`, `@hookform/resolvers`, `zod`
+- Persistencia: `prisma`, `@prisma/client`, `@prisma/adapter-pg`, `pg`
+- Integracoes: `@supabase/supabase-js`, `@supabase/ssr`, `contentful`, `cloudinary`, `xlsx`
+- Qualidade: `eslint`, `eslint-config-next`, `prettier`, `husky`, `lint-staged`
 
-## Aprovadas para adocao no projeto
+## Diretrizes de implementacao
 
-- Estado global: `zustand`
-- UI: `shadcn/ui`
-- Server state: `@tanstack/react-query`
-- Formularios: `react-hook-form`
-- Validacao: `zod`
-- Git hooks e qualidade pre-commit: `husky`, `lint-staged`
-- CMS headless: `contentful`
-
-## Observacoes de nomenclatura
-
-- "react-query" = pacote atual `@tanstack/react-query`.
-- "reacct hook form" = `react-hook-form`.
-
-## Documentacao oficial por biblioteca
-
-- `next`: https://nextjs.org/docs
-- `react`: https://react.dev/
-- `typescript`: https://www.typescriptlang.org/docs/
-- `tailwindcss`: https://tailwindcss.com/docs
-- `@tailwindcss/postcss`: https://tailwindcss.com/docs/installation/using-postcss
-- `eslint`: https://eslint.org/docs/latest/
-- `eslint-config-next`: https://nextjs.org/docs/app/api-reference/config/eslint
-- `eslint-plugin-unused-imports`: https://www.npmjs.com/package/eslint-plugin-unused-imports
-- `eslint-plugin-simple-import-sort`: https://github.com/lydell/eslint-plugin-simple-import-sort
-- `prettier`: https://prettier.io/docs/
-- `husky`: https://typicode.github.io/husky/
-- `lint-staged`: https://github.com/lint-staged/lint-staged
-- `zustand`: https://zustand.docs.pmnd.rs/
-- `@tanstack/react-query`: https://tanstack.com/query/latest/docs/framework/react/overview
-- `react-hook-form`: https://react-hook-form.com/docs
-- `zod`: https://zod.dev/
-- `contentful` (SDK): https://www.contentful.com/developers/docs/javascript/tutorials/using-js-cda-sdk/
-
-## Diretriz de implementacao
-
-- Toda adocao de biblioteca deve incluir link de documentacao oficial nesta pagina.
-- Sempre consultar docs oficiais antes de implementar, atualizar versao ou aplicar workaround.
-
-## Em avaliacao
-
-- Biblioteca de testes: a confirmar
-- Estrategia de testes (unitario/integracao/e2e): a confirmar
+- consultar docs oficiais antes de implementar comportamento novo
+- priorizar padroes ja existentes no repositorio
+- evitar novas dependencias quando `shared/` ou stack atual resolve o problema
+- registrar impacto de novas libs em `doc/decisoes/README.md`
 
 ## Criterios para adicao de biblioteca
 
-- Necessidade real de produto/engenharia
-- Maturidade e manutencao ativa
-- Compatibilidade com Next.js 16
-- Impacto em bundle/performance
-- Curva de aprendizado e manutencao
+- necessidade real de produto/engenharia
+- manutencao ativa da biblioteca
+- compatibilidade com Next.js 16 e React 19
+- impacto em bundle/performance
+- custo de manutencao e onboarding
 
-## Registro de decisao
+## Em aberto
 
-Toda nova biblioteca deve ser registrada com motivacao em `doc/decisoes/README.md`.
+- biblioteca/ferramenta oficial de testes automatizados

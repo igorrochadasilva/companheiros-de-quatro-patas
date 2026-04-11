@@ -1,29 +1,39 @@
-﻿# Documentacao do Projeto
+# Documentacao do Projeto
 
-Esta pasta centraliza definicoes funcionais e tecnicas do projeto **companheiros-de-quatro-patas**.
+Esta pasta e a referencia oficial de contexto funcional e tecnico do projeto
+`companheiros-de-quatro-patas`.
 
 ## Objetivo
 
 Manter um ponto unico de verdade para orientar pessoas e agentes sobre:
 
-- Arquitetura
-- Stack
-- Bibliotecas aprovadas
-- Features (MVP e evolucao)
-- Decisoes de projeto
+- arquitetura e limites de camadas
+- stack e bibliotecas
+- escopo funcional e status das features
+- decisoes tecnicas registradas em ADR
 
-## Estrutura
+## Estrutura principal
 
-- `doc/arquitetura/README.md`: organizacao tecnica do sistema.
-- `doc/stack/README.md`: tecnologias e versoes adotadas.
-- `doc/libraries/README.md`: bibliotecas permitidas/avaliadas.
-- `doc/features/README.md`: escopo, priorizacao e status das features.
-- `doc/decisoes/README.md`: registro de decisoes (ADR simplificado).
+- `doc/arquitetura/README.md`: arquitetura atual, camadas e fronteiras.
+- `doc/stack/README.md`: stack oficial e versoes em uso.
+- `doc/stack/contentful.md`: detalhes de integracao com Contentful.
+- `doc/libraries/README.md`: bibliotecas adotadas e diretrizes de adocao.
+- `doc/features/README.md`: escopo e status consolidado por feature.
+- `doc/features/post-mvp.md`: backlog priorizado apos o MVP.
+- `doc/decisoes/README.md`: indice de ADRs.
+- `doc/decisoes/*.md`: decisoes tecnicas detalhadas.
+- `doc/tasks/`: historico de planos e execucoes por tema.
 
 ## Regra de atualizacao
 
-Atualize estes arquivos sempre que houver mudanca relevante de arquitetura, stack, escopo funcional ou bibliotecas.
+Atualize a documentacao no mesmo workstream de mudancas relevantes em:
 
-## Status atual
+- arquitetura
+- contratos de API e modelo de dados
+- stack e bibliotecas
+- escopo funcional e roadmap
 
-Conteudo inicial criado como base. Pontos sem definicao devem permanecer marcados como **a confirmar**.
+## Ultima revisao
+
+- Data: 2026-04-11
+- Escopo: sincronizacao geral da pasta `doc/` com o estado atual do codigo.

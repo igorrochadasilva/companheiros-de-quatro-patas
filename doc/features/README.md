@@ -1,48 +1,55 @@
-﻿# Features
+# Features
 
 ## Objetivo
 
-Consolidar escopo funcional, prioridade e status.
+Consolidar escopo funcional e status atual por feature com base no codigo em producao.
 
-## MVP
+## Status consolidado (2026-04-11)
 
-### 1) Adocao
+### Publico
 
-- [ ] Listar animais disponiveis
-- [ ] Exibir detalhes do animal
-- [ ] Orientar processo de adocao
+- [x] `home` (`/`)
+  - hero, pets em destaque, transparencia, historias, bazar e FAQ
+- [x] `adocao` (`/adocao`, `/adocao/[slug]`, `/adocao/[slug]/candidatar`)
+  - listagem, filtros, detalhe do pet e CTA de candidatura
+- [x] `doar` (`/doar`)
+  - conteudo de doacao com PIX, impacto e transparencia
+- [x] `bazar` (`/bazar`, `/bazar/[slug]`)
+  - listagem, filtros e detalhe de item
+- [x] `sobre` (`/sobre`)
+  - contexto institucional e secoes de impacto
+- [x] `contato` (`/contato`)
+  - canais rapidos e formulario
+- [x] `abrigo` (`/abrigo`)
+  - progresso e necessidades do abrigo
+- [x] `transparencia` (`/transparencia`)
+- [x] `login` (`/login`)
 
-### 2) Doacoes
+### Admin
 
-- [ ] Explicar formas de doacao financeira
-- [ ] Explicar doacao de itens
+- [x] `dashboard` (`/dashboard`)
+- [x] gestao de pets (`/dashboard/pets`)
+- [x] criar/editar pet (`/dashboard/pets/new`, `/dashboard/pets/[id]`)
+- [x] importacao de pets (`/dashboard/pets/import`)
 
-### 3) Informacoes da ONG
+## APIs disponiveis
 
-- [ ] Missao e apresentacao institucional
-- [ ] Transparencia
-- [ ] Contato e redes sociais
+Principais endpoints ativos:
 
-### 4) Bazar
+- pets: `GET/POST /api/pets`, `PATCH/DELETE /api/pets/[id]`
+- pet media: `POST /api/pet-media`, `PATCH/DELETE /api/pet-media/[id]`
+- importacao: `POST /api/pets/import`, `GET /api/pets/import/template`
+- adoption requests: `GET/POST /api/adoption-requests`, `PATCH /api/adoption-requests/[id]`
+- conteudo e institucional: `/api/stats`, `/api/stories`, `/api/transparency/summary`, `/api/shelter/progress`, `/api/donations/config`
+- bazar: `/api/bazaar/featured`, `/api/bazaar/items`
+- cms/contentful: `/api/cms/contentful/health`, `/api/cms/contentful/home`, `/api/cms/contentful/adoption`
+- suporte: `/api/contact`, `/api/auth`, `/api/webhooks`, `/api/media/cloudinary-sign`
 
-- [ ] Divulgar itens/produtos
-- [ ] Orientar compra
+## Pontos de atencao
 
-## Futuro (pos-MVP)
+- padronizar nome da feature de doacao (`donatation`) para evitar inconsistencias futuras.
+- consolidar definicao de pronto para testes automatizados por feature.
 
-- [ ] Filtros avancados na adocao
-- [ ] Area administrativa
-- [ ] Blog/noticias
-- [ ] Medicao de conversao e engajamento
+## Proximo documento
 
-## Documentos complementares
-
-- Roadmap detalhado de evolucao: [post-mvp.md](/c:/Users/igor0/OneDrive/Desktop/ONG/companheiros-de-quatro-patas/doc/features/post-mvp.md)
-
-## Legenda de status
-
-- `a definir`
-- `planejado`
-- `em andamento`
-- `concluido`
-- `despriorizado`
+Backlog de evolucao apos o estado atual: `doc/features/post-mvp.md`.
