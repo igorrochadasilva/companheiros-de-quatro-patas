@@ -2,6 +2,9 @@
 
 Use this workflow before editing code.
 
+Stage gates and role checklist:
+- `codex/standards/stage-gate-checklist.md`
+
 1. Read `README.md` for repository and product context.
 2. Read the relevant files in `codex/standards/`.
 3. Read `doc/arquitetura/README.md` when the task affects structure, flow, or module boundaries.
@@ -15,3 +18,21 @@ Use this workflow before editing code.
 7. Reuse existing patterns before introducing new ones.
 8. Decide whether the task needs a plan, clarification, or direct execution.
 9. List likely validation steps before making changes.
+
+## PM -> Dev Handoff (required for substantial tasks)
+
+- Goal and scope boundaries
+- In-scope vs out-of-scope
+- Target files or modules
+- Stage acceptance criteria
+- Known constraints and risks
+
+## Dev Stage Rules
+
+- Implement only the current approved stage.
+- Keep changes scoped and coherent to existing architecture.
+- Produce a concise implementation note after each stage:
+  - changed files
+  - key behavior changes
+  - validation executed
+  - residual risks

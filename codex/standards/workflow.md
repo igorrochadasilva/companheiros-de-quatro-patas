@@ -1,5 +1,7 @@
 # Workflow Standard
 
+- Work in stage gates: PM scope -> Dev implementation -> QA approval.
+- For stage-gate details, follow `codex/standards/stage-gate-checklist.md`.
 - Load repository context before editing.
 - Read the relevant files in `doc/` and `codex/standards/`.
 - Choose the smallest skill that fits the request.
@@ -19,3 +21,4 @@
   - concrete findings when they exist
   - residual risks or gaps
 - Summarize technical decisions in terms of correctness, maintainability, and scope control.
+- For UI stages, include desktop/mobile visual QA evidence in `doc/qa/...`.
