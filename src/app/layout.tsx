@@ -1,7 +1,7 @@
 import "@/app/globals.css";
 
 import type { Metadata } from "next";
-import { Abril_Fatface, Alata } from "next/font/google";
+import { Abril_Fatface, Alata, Manrope, Noto_Serif } from "next/font/google";
 
 import { SEO } from "@/constants";
 import { AppQueryClientProvider } from "@/shared/providers/query-client-provider";
@@ -22,6 +22,20 @@ const abrilFatface = Abril_Fatface({
   weight: ["400"],
   display: "swap",
   fallback: ["system-ui", "sans-serif"],
+});
+
+const manrope = Manrope({
+  variable: "--font-v2-body",
+  subsets: ["latin"],
+  display: "swap",
+  fallback: ["system-ui", "sans-serif"],
+});
+
+const notoSerif = Noto_Serif({
+  variable: "--font-v2-headline",
+  subsets: ["latin"],
+  display: "swap",
+  fallback: ["serif"],
 });
 
 export const metadata: Metadata = {
@@ -71,7 +85,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${alata.variable} ${abrilFatface.variable} antialiased`}
+        className={`${alata.variable} ${abrilFatface.variable} ${manrope.variable} ${notoSerif.variable} antialiased`}
         suppressHydrationWarning
       >
         <AppQueryClientProvider>
