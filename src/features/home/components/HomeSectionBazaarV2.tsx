@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRightIcon, ShoppingBagIcon } from "lucide-react";
+import { ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -105,15 +105,12 @@ export function HomeSectionBazaarV2() {
         </div>
 
         <div className="md:hidden">
-          <div className="rounded-3xl bg-[var(--v2-surface-container-lowest)] p-8 text-center">
-            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--v2-secondary-container)] text-[var(--v2-secondary)]">
-              <ShoppingBagIcon className="size-8" aria-hidden />
-            </div>
-            <Typography as="h2" variant="v2Body" className="text-2xl !font-bold">
-              {homeMessages.bazaar.v2.mobileTitle}
+          <div className="text-center">
+            <Typography as="h2" variant="v2H2" className="mb-3 text-3xl">
+              {homeMessages.bazaar.v2.title}
             </Typography>
-            <Typography as="p" variant="v2Muted" className="mb-6 mt-2">
-              {homeMessages.bazaar.v2.mobileSubtitle}
+            <Typography as="p" variant="v2Muted" className="mb-8 text-sm">
+              {homeMessages.bazaar.v2.subtitle}
             </Typography>
 
             {isLoading ? (
@@ -132,8 +129,11 @@ export function HomeSectionBazaarV2() {
             ) : (
               <div className="grid grid-cols-2 gap-4">
                 {items.slice(0, 2).map((item) => (
-                  <div key={item.id} className="space-y-2">
-                    <div className="relative aspect-square overflow-hidden rounded-xl bg-[var(--v2-surface-container-high)]">
+                  <article
+                    key={item.id}
+                    className="overflow-hidden rounded-xl bg-[var(--v2-surface-container-lowest)] shadow-sm"
+                  >
+                    <div className="relative aspect-square overflow-hidden">
                       <Image
                         src={item.imageUrl ?? "/icon.webp"}
                         alt={item.name}
@@ -142,10 +142,27 @@ export function HomeSectionBazaarV2() {
                         className="object-cover"
                       />
                     </div>
-                    <Typography as="p" variant="v2Body" className="text-xs !font-bold">
-                      {item.name}
-                    </Typography>
-                  </div>
+                    <div className="p-3 text-left">
+                      <Typography as="p" variant="v2Body" className="mb-1 truncate text-xs !font-bold">
+                        {item.name}
+                      </Typography>
+                      <Typography
+                        as="p"
+                        variant="v2Body"
+                        className="text-sm !font-bold text-[var(--v2-primary)]"
+                      >
+                        {formatCurrency(item.price)}
+                      </Typography>
+                      <Button
+                        asChild
+                        className="mt-3 h-8 w-full rounded-full bg-[var(--v2-secondary)]/10 text-[10px] font-bold text-[var(--v2-secondary)] hover:bg-[var(--v2-secondary)]/20"
+                      >
+                        <Link href={PUBLIC_ROUTES.bazaar}>
+                          {homeMessages.bazaar.v2.buy}
+                        </Link>
+                      </Button>
+                    </div>
+                  </article>
                 ))}
               </div>
             )}
@@ -153,10 +170,10 @@ export function HomeSectionBazaarV2() {
             <Button
               asChild
               variant="outline"
-              className="mt-8 h-12 w-full rounded-full border-2 border-[var(--v2-secondary)] bg-transparent px-8 text-sm font-bold text-[var(--v2-secondary)] hover:bg-[var(--v2-secondary)]/5 hover:text-[var(--v2-secondary)]"
+              className="mt-8 h-12 w-full rounded-full border-2 border-[var(--v2-primary)] bg-transparent px-8 text-sm font-bold text-[var(--v2-primary)] hover:bg-[var(--v2-primary)]/5 hover:text-[var(--v2-primary)]"
             >
               <Link href={PUBLIC_ROUTES.bazaar}>
-                {homeMessages.bazaar.v2.mobileCta}
+                {homeMessages.bazaar.v2.viewAll}
               </Link>
             </Button>
           </div>

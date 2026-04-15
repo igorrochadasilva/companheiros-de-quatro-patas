@@ -3,13 +3,21 @@
 import { HeartIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { PUBLIC_ROUTES } from "@/constants";
 import { useFeaturedPets } from "@/features/home/hooks/useFeaturedPets";
 import { homeMessages } from "@/messages";
 import { track } from "@/shared/lib/analytics";
 import { Button } from "@/shared/ui/button";
+import {
+  type CarouselApi,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/shared/ui/carousel";
 import { Typography } from "@/shared/ui/typography";
 import type { Pet, PetFilters } from "@/types";
 
@@ -125,11 +133,34 @@ function PetCardV2({ pet }: { pet: Pet }) {
 
 export function HomeSectionPetsV2() {
   const [quickFilter, setQuickFilter] = useState<QuickFilter>("all");
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+  const [currentSlide, setCurrentSlide] = useState(1);
 
   const filters = useMemo(() => mapQuickFilterToQuery(quickFilter), [quickFilter]);
   const { data, isLoading } = useFeaturedPets(filters);
 
   const items = data?.items ?? [];
+
+  useEffect(() => {
+    if (!carouselApi) return;
+
+    const updateCurrentSlide = () => {
+      setCurrentSlide(carouselApi.selectedScrollSnap() + 1);
+    };
+
+    updateCurrentSlide();
+    carouselApi.on("select", updateCurrentSlide);
+    carouselApi.on("reInit", updateCurrentSlide);
+
+    return () => {
+      carouselApi.off("select", updateCurrentSlide);
+      carouselApi.off("reInit", updateCurrentSlide);
+    };
+  }, [carouselApi]);
+
+  useEffect(() => {
+    setCurrentSlide(1);
+  }, [quickFilter, items.length]);
 
   return (
     <section id="animais" className="v2-section v2-section-muted scroll-mt-24">
@@ -182,11 +213,31 @@ export function HomeSectionPetsV2() {
             </Typography>
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {items.map((pet) => (
-              <PetCardV2 key={pet.id} pet={pet} />
-            ))}
-          </div>
+          <>
+            <Carousel
+              opts={{ align: "start", loop: false }}
+              className="w-full"
+              setApi={setCarouselApi}
+            >
+              <CarouselContent className="-ml-0 sm:-ml-4">
+                {items.map((pet) => (
+                  <CarouselItem
+                    key={pet.id}
+                    className="basis-[88%] pl-0 sm:pl-4 sm:basis-full md:basis-1/2 lg:basis-1/3"
+                  >
+                    <PetCardV2 pet={pet} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="-left-3 hidden border-[var(--v2-outline-variant)] bg-[var(--v2-surface)] text-[var(--v2-on-surface)] md:inline-flex" />
+              <CarouselNext className="-right-3 hidden border-[var(--v2-outline-variant)] bg-[var(--v2-surface)] text-[var(--v2-on-surface)] md:inline-flex" />
+            </Carousel>
+            <div className="mt-4 text-center md:hidden">
+              <Typography as="p" variant="v2Muted" className="text-xs !font-semibold">
+                {currentSlide} / {items.length}
+              </Typography>
+            </div>
+          </>
         )}
       </div>
     </section>

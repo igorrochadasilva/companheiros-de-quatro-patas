@@ -86,12 +86,21 @@ export function HomeSectionStoriesV2() {
         </div>
 
         <div className="md:hidden">
-          <Typography as="h2" variant="v2H2" className="mb-8">
-            {homeMessages.stories.v2.mobileTitle}
-          </Typography>
+          <div className="mb-10 text-center">
+            <Typography as="h2" variant="v2H2" className="mb-3 text-4xl">
+              {homeMessages.stories.v2.title}
+            </Typography>
+            <Typography as="p" variant="v2Muted" className="text-sm">
+              {homeMessages.stories.v2.subtitle}
+            </Typography>
+          </div>
 
           {isLoading ? (
-            <div className="h-80 animate-pulse rounded-3xl bg-[var(--v2-surface-container-high)]" />
+            <div className="space-y-5">
+              <div className="aspect-[3/4] animate-pulse rounded-3xl bg-[var(--v2-surface-container-high)]" />
+              <div className="h-7 w-2/3 animate-pulse rounded bg-[var(--v2-surface-container-high)]" />
+              <div className="h-4 w-full animate-pulse rounded bg-[var(--v2-surface-container-high)]" />
+            </div>
           ) : isError || !featuredStory ? (
             <div className="rounded-2xl bg-[var(--v2-surface-container-lowest)] p-6">
               <Typography as="p" variant="v2Muted">
@@ -99,26 +108,34 @@ export function HomeSectionStoriesV2() {
               </Typography>
             </div>
           ) : (
-            <article className="group relative">
-              <Image
-                src={featuredStory.imageUrl}
-                alt={featuredStory.title}
-                width={900}
-                height={640}
-                className="h-80 w-full rounded-3xl object-cover"
-              />
-              <div className="absolute inset-x-0 bottom-0 rounded-b-3xl bg-gradient-to-t from-[var(--v2-on-surface)]/80 to-transparent p-6">
-                <Typography
-                  as="h3"
-                  variant="v2Body"
-                  className="v2-font-headline text-xl !font-bold italic text-white"
-                >
-                  {featuredStory.title || homeMessages.stories.v2.mobileQuoteFallback}
-                </Typography>
-                <Typography as="p" variant="v2Muted" className="mt-2 text-sm text-white/80">
-                  {featuredStory.summary}
-                </Typography>
+            <article>
+              <div className="mb-6 aspect-[3/4] overflow-hidden rounded-3xl">
+                <Image
+                  src={featuredStory.imageUrl}
+                  alt={featuredStory.title}
+                  width={600}
+                  height={800}
+                  className="h-full w-full object-cover"
+                />
               </div>
+              <Typography
+                as="h3"
+                variant="v2Body"
+                className="v2-font-headline mb-2 text-3xl !font-bold"
+              >
+                {featuredStory.title}
+              </Typography>
+              <Typography as="p" variant="v2Muted" className="italic">
+                "{featuredStory.summary}"
+              </Typography>
+              <Typography
+                as="p"
+                variant="v2Body"
+                className="mt-4 text-xs !font-bold uppercase tracking-[0.08em] text-[var(--v2-secondary)]"
+              >
+                {homeMessages.stories.v2.bylinePrefix}{" "}
+                {homeMessages.stories.v2.bylines[0] ?? "Companheiros"}
+              </Typography>
             </article>
           )}
         </div>
