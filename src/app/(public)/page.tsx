@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { PUBLIC_ROUTES } from "@/constants";
 import { appMessages } from "@/messages";
 
-import { Home } from "./home/Home";
+import { HomePageSwitch } from "./home/HomePageSwitch";
 
 export const metadata: Metadata = {
   title: appMessages.name,
@@ -15,5 +15,5 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  return <Home />;
+  return <HomePageSwitch />;
 }

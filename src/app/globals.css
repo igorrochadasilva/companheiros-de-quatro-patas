@@ -226,15 +226,42 @@ body {
 
   background: var(--v2-background);
   color: var(--v2-on-surface);
-  font-family: var(--font-v2-body), var(--font-sans), system-ui, sans-serif;
+  font-family:
+    var(--font-v2-body),
+    "Manrope",
+    var(--font-sans),
+    system-ui,
+    sans-serif;
 }
 
 .layout-v2 .v2-font-headline {
-  font-family: var(--font-v2-headline), var(--font-display), serif;
+  font-family:
+    var(--font-v2-headline),
+    "Noto Serif",
+    var(--font-display),
+    serif;
 }
 
 .layout-v2 .v2-font-body {
-  font-family: var(--font-v2-body), var(--font-sans), system-ui, sans-serif;
+  font-family:
+    var(--font-v2-body),
+    "Manrope",
+    var(--font-sans),
+    system-ui,
+    sans-serif;
+}
+
+.layout-v2 h1,
+.layout-v2 h2,
+.layout-v2 h3,
+.layout-v2 h4,
+.layout-v2 h5,
+.layout-v2 h6 {
+  font-family:
+    var(--font-v2-headline),
+    "Noto Serif",
+    var(--font-display),
+    serif;
 }
 
 .layout-v2 .v2-main-offset {

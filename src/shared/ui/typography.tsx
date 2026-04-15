@@ -16,6 +16,15 @@ const typographyVariants = cva("text-foreground", {
       small: "text-xs font-medium text-muted-foreground",
       overline:
         "text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground",
+      v2H1:
+        "v2-font-headline text-[var(--v2-on-surface)] text-5xl font-bold leading-tight md:text-7xl",
+      v2H2:
+        "v2-font-headline text-[var(--v2-on-surface)] text-3xl font-bold leading-tight md:text-4xl",
+      v2Body: "v2-font-body text-base text-[var(--v2-on-surface)]",
+      v2Muted:
+        "v2-font-body text-sm text-[var(--v2-on-surface-variant)] font-medium",
+      v2Label:
+        "v2-font-body text-xs font-semibold uppercase tracking-[0.08em] text-[var(--v2-on-surface-variant)]",
     },
     align: {
       left: "text-left",

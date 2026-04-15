@@ -8,6 +8,7 @@ import { featureFlags } from "@/shared/config/feature-flags";
 import { PublicFooter } from "@/shared/ui/public-footer";
 import { PublicHeader } from "@/shared/ui/public-header";
 import { LayoutV2Shell } from "@/shared/ui/v2/layout-v2-shell";
+import { PublicFooterV2 } from "@/shared/ui/v2/public-footer-v2";
 import { PublicHeaderV2 } from "@/shared/ui/v2/public-header-v2";
 
 function getHeaderVisibility() {
@@ -44,7 +45,7 @@ export function PublicLayoutClient({ children }: { children: ReactNode }) {
     return (
       <LayoutV2Shell
         header={<PublicHeaderV2 visibility={headerVisibility} />}
-        footer={<PublicFooter />}
+        footer={<PublicFooterV2 />}
       >
         {children}
       </LayoutV2Shell>

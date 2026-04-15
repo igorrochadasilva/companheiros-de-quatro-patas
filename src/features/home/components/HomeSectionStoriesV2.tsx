@@ -1,0 +1,128 @@
+"use client";
+
+import Image from "next/image";
+
+import { useStories } from "@/features/home/hooks/useStories";
+import { homeMessages } from "@/messages";
+import { useWhenVisible } from "@/shared/hooks/useWhenVisible";
+import { Typography } from "@/shared/ui/typography";
+
+export function HomeSectionStoriesV2() {
+  const [sectionRef, isVisible] = useWhenVisible({ rootMargin: "150px" });
+  const { data, isLoading, isError } = useStories({ enabled: isVisible });
+  const items = data?.items ?? [];
+  const featuredStory = items[0];
+
+  return (
+    <section ref={sectionRef} className="v2-section">
+      <div className="v2-container">
+        <div className="hidden md:block">
+          <div className="mb-16 text-center">
+            <Typography as="h2" variant="v2H2" align="center" className="mb-4">
+              {homeMessages.stories.v2.title}
+            </Typography>
+            <Typography as="p" variant="v2Muted" align="center">
+              {homeMessages.stories.v2.subtitle}
+            </Typography>
+          </div>
+
+          {isLoading ? (
+            <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
+              {[1, 2, 3].map((skeleton) => (
+                <div key={skeleton} className="space-y-6">
+                  <div className="aspect-[3/4] animate-pulse rounded-3xl bg-[var(--v2-surface-container-high)]" />
+                  <div className="h-6 w-3/4 animate-pulse rounded bg-[var(--v2-surface-container-high)]" />
+                  <div className="h-4 w-full animate-pulse rounded bg-[var(--v2-surface-container-high)]" />
+                </div>
+              ))}
+            </div>
+          ) : isError || items.length === 0 ? (
+            <div className="rounded-2xl bg-[var(--v2-surface-container-lowest)] p-6">
+              <Typography as="p" variant="v2Muted">
+                {homeMessages.stories.v2.empty}
+              </Typography>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
+              {items.slice(0, 3).map((story, index) => (
+                <article
+                  key={story.id}
+                  className={[
+                    "group relative",
+                    index === 1 ? "md:mt-16" : "",
+                  ].join(" ")}
+                >
+                  <div className="mb-6 aspect-[3/4] overflow-hidden rounded-3xl">
+                    <Image
+                      src={story.imageUrl}
+                      alt={story.title}
+                      width={600}
+                      height={800}
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                  </div>
+                  <Typography
+                    as="h3"
+                    variant="v2Body"
+                    className="v2-font-headline mb-2 text-xl !font-bold"
+                  >
+                    {story.title}
+                  </Typography>
+                  <Typography as="p" variant="v2Muted" className="italic">
+                    "{story.summary}"
+                  </Typography>
+                  <Typography
+                    as="p"
+                    variant="v2Body"
+                    className="mt-4 text-xs !font-bold text-[var(--v2-secondary)]"
+                  >
+                    {homeMessages.stories.v2.bylinePrefix}{" "}
+                    {homeMessages.stories.v2.bylines[index] ?? "Companheiros"}
+                  </Typography>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="md:hidden">
+          <Typography as="h2" variant="v2H2" className="mb-8">
+            {homeMessages.stories.v2.mobileTitle}
+          </Typography>
+
+          {isLoading ? (
+            <div className="h-80 animate-pulse rounded-3xl bg-[var(--v2-surface-container-high)]" />
+          ) : isError || !featuredStory ? (
+            <div className="rounded-2xl bg-[var(--v2-surface-container-lowest)] p-6">
+              <Typography as="p" variant="v2Muted">
+                {homeMessages.stories.v2.empty}
+              </Typography>
+            </div>
+          ) : (
+            <article className="group relative">
+              <Image
+                src={featuredStory.imageUrl}
+                alt={featuredStory.title}
+                width={900}
+                height={640}
+                className="h-80 w-full rounded-3xl object-cover"
+              />
+              <div className="absolute inset-x-0 bottom-0 rounded-b-3xl bg-gradient-to-t from-[var(--v2-on-surface)]/80 to-transparent p-6">
+                <Typography
+                  as="h3"
+                  variant="v2Body"
+                  className="v2-font-headline text-xl !font-bold italic text-white"
+                >
+                  {featuredStory.title || homeMessages.stories.v2.mobileQuoteFallback}
+                </Typography>
+                <Typography as="p" variant="v2Muted" className="mt-2 text-sm text-white/80">
+                  {featuredStory.summary}
+                </Typography>
+              </div>
+            </article>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}

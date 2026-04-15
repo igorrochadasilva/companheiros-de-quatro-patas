@@ -27,6 +27,7 @@ const abrilFatface = Abril_Fatface({
 const manrope = Manrope({
   variable: "--font-v2-body",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
   fallback: ["system-ui", "sans-serif"],
 });
@@ -34,6 +35,8 @@ const manrope = Manrope({
 const notoSerif = Noto_Serif({
   variable: "--font-v2-headline",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
   display: "swap",
   fallback: ["serif"],
 });
