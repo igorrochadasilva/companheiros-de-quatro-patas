@@ -18,6 +18,9 @@
     "prisma:studio": "prisma studio --config prisma.config.ts",
     "prisma:reset": "prisma db push --force-reset --config prisma.config.ts",
     "prisma:seed:pets": "node --env-file=.env backend/prisma/seeds/pets.mjs",
+    "qa:visual": "playwright test tests/features",
+    "qa:visual:update": "playwright test tests/features --update-snapshots",
+    "qa:visual:ui": "playwright test tests/features --ui",
     "format": "prettier --write .",
     "prepare": "husky"
   },
@@ -63,6 +66,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

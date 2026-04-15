@@ -12,6 +12,12 @@
 
 # testing
 /coverage
+/playwright-report/
+/test-results/
+/tests/**/**/*.spec.ts-snapshots/
+/tests/qa/visual/**
+/tmp/stitch/**
+/stitch_mcp_setup.html
 
 # next.js
 /.next/
