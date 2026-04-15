@@ -10,7 +10,11 @@ type LayoutV2ShellProps = {
  * Internal v2 shell. It is intentionally isolated from current public layout
  * so we can roll out header/footer/home in phases without regressions.
  */
-export function LayoutV2Shell({ header, children, footer }: LayoutV2ShellProps) {
+export function LayoutV2Shell({
+  header,
+  children,
+  footer,
+}: LayoutV2ShellProps) {
   return (
     <div className="layout-v2 min-h-screen">
       <header>{header}</header>
@@ -19,4 +23,3 @@ export function LayoutV2Shell({ header, children, footer }: LayoutV2ShellProps) 
     </div>
   );
 }
-

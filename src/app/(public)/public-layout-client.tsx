@@ -1,7 +1,7 @@
 "use client";
 
-import type { ReactNode } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
+import type { ReactNode } from "react";
 
 import { PUBLIC_ROUTES } from "@/constants";
 import { featureFlags } from "@/shared/config/feature-flags";
@@ -59,4 +59,3 @@ export function PublicLayoutClient({ children }: { children: ReactNode }) {
     </div>
   );
 }
-

@@ -212,4 +212,3 @@ export function PublicHeaderV2({
     </header>
   );
 }
-
