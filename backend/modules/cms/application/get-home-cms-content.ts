@@ -7,6 +7,7 @@ import {
   type HomeCmsAdoptionStep,
   type HomeCmsContent,
   type HomeCmsFaqItem,
+  type HomeCmsImpactStory,
 } from "@/types";
 
 type HomeEntryLike = {
@@ -21,6 +22,13 @@ type ApplicationResult<T> = {
   status: number;
 };
 
+type ContentfulAssetLike = {
+  fields?: {
+    title?: unknown;
+    file?: { url?: unknown };
+  };
+};
+
 function resolveAssetUrl(url: unknown) {
   if (typeof url !== "string" || !url) return null;
   if (url.startsWith("//")) return `https:${url}`;
@@ -31,15 +39,25 @@ function resolveTextField(field: unknown) {
   return typeof field === "string" && field.trim() ? field : null;
 }
 
+function resolvePixKeyField(field: unknown): string | null {
+  const value = resolveTextField(field);
+  if (!value) return null;
+
+  const normalized = value.toLowerCase();
+  // Avoid treating label-like placeholders as actual PIX keys.
+  if (
+    normalized === "chave pix" ||
+    normalized === "pix key" ||
+    normalized.includes("chave pix")
+  ) {
+    return null;
+  }
+
+  return value;
+}
+
 function resolveHeroImage(entry: HomeEntryLike | undefined) {
-  const heroImage = entry?.fields?.heroImage as
-    | {
-        fields?: {
-          title?: unknown;
-          file?: { url?: unknown };
-        };
-      }
-    | undefined;
+  const heroImage = entry?.fields?.heroImage as ContentfulAssetLike | undefined;
   return {
     heroImageUrl: resolveAssetUrl(heroImage?.fields?.file?.url),
     heroImageAlt: resolveTextField(heroImage?.fields?.title),
@@ -85,8 +103,103 @@ function parseFaqItemsFromObject(field: unknown): HomeCmsFaqItem[] | null {
   for (const row of arr) {
     if (!row || typeof row !== "object") continue;
     const question = resolveTextField((row as { question?: unknown }).question);
-    const answer = resolveTextField((row as { answer?: unknown }).answer);
-    if (question && answer) out.push({ question, answer });
+    const answer =
+      resolveTextField((row as { answer?: unknown }).answer) ?? "";
+    if (question) out.push({ question, answer });
+  }
+  return out.length ? out : null;
+}
+
+function resolveStoryImageUrl(row: Record<string, unknown>): string | null {
+  const direct = resolveAssetUrl(row.imageUrl);
+  if (direct) return direct;
+
+  const image = row.image as ContentfulAssetLike | undefined;
+  return resolveAssetUrl(image?.fields?.file?.url);
+}
+
+function parseHistoryImages(field: unknown): string[] {
+  if (!Array.isArray(field)) return [];
+
+  const out: string[] = [];
+  for (const item of field) {
+    const asset = item as ContentfulAssetLike | undefined;
+    const url = resolveAssetUrl(asset?.fields?.file?.url);
+    if (url) out.push(url);
+  }
+  return out;
+}
+
+function parseHistoryInfoRows(field: unknown): Array<Record<string, unknown>> {
+  const raw = normalizeJsonField(field);
+  const arr = unwrapArray(raw, [
+    "items",
+    "stories",
+    "history",
+    "historyInfo",
+    "cards",
+  ]);
+  if (!arr) return [];
+
+  return arr
+    .filter((row): row is Record<string, unknown> => Boolean(row) && typeof row === "object");
+}
+
+function parseImpactStoriesFromHistoryFields(
+  historyImagesField: unknown,
+  historyInfoField: unknown,
+): HomeCmsImpactStory[] | null {
+  const images = parseHistoryImages(historyImagesField);
+  const rows = parseHistoryInfoRows(historyInfoField);
+  if (!images.length && !rows.length) return null;
+
+  const maxLength = Math.max(images.length, rows.length);
+  const out: HomeCmsImpactStory[] = [];
+
+  for (let index = 0; index < maxLength; index += 1) {
+    const row = rows[index] ?? {};
+    const title = resolveTextField(row.title ?? row.titulo);
+    const text = resolveTextField(
+      row.text ?? row.texto ?? row.summary ?? row.quote,
+    );
+    const family = resolveTextField(
+      row.family ?? row.dono ?? row.byline ?? row.author,
+    );
+    const imageUrl = images[index] ?? resolveStoryImageUrl(row);
+
+    if (title && text && family && imageUrl) {
+      out.push({ imageUrl, title, text, family });
+    }
+  }
+
+  return out.length ? out : null;
+}
+
+function parseImpactStoriesFromObject(field: unknown): HomeCmsImpactStory[] | null {
+  const raw = normalizeJsonField(field);
+  const arr = unwrapArray(raw, [
+    "items",
+    "stories",
+    "impactStories",
+    "storiesItems",
+  ]);
+  if (!arr) return null;
+
+  const out: HomeCmsImpactStory[] = [];
+  for (const row of arr) {
+    if (!row || typeof row !== "object") continue;
+    const record = row as Record<string, unknown>;
+    const title = resolveTextField(record.title ?? record.titulo);
+    const text = resolveTextField(
+      record.text ?? record.texto ?? record.summary ?? record.quote,
+    );
+    const family = resolveTextField(
+      record.family ?? record.dono ?? record.byline ?? record.author,
+    );
+    const imageUrl = resolveStoryImageUrl(record);
+    if (title && text && family && imageUrl) {
+      out.push({ title, text, family, imageUrl });
+    }
   }
   return out.length ? out : null;
 }
@@ -105,6 +218,10 @@ function unwrapArray(raw: unknown, objectKeys: string[]): unknown[] | null {
 function mapHomeEntry(entry: HomeEntryLike | undefined): HomeCmsContent {
   const fields = entry?.fields;
   const hero = resolveHeroImage(entry);
+  const impactStoriesFromHistory = parseImpactStoriesFromHistoryFields(
+    fields?.historyImages,
+    fields?.historyInfo,
+  );
 
   const base = emptyHomeCmsContent();
   return {
@@ -130,6 +247,9 @@ function mapHomeEntry(entry: HomeEntryLike | undefined): HomeCmsContent {
     donationImpactTitle: resolveTextField(fields?.donationSubtitle),
     donationPixLabel: resolveTextField(fields?.donationPixLabel),
     donationPixCopy: resolveTextField(fields?.donationPixCopyLabel),
+    donationPixKey: resolvePixKeyField(
+      fields?.donationPixLabel ?? fields?.donationPixKey ?? fields?.pixKey,
+    ),
     donationSeeMoreWays: resolveTextField(fields?.donationMoreWaysLabel),
     donationSeeMoreWaysHref: resolveTextField(fields?.donationMoreWaysHref),
     transparencyTitle: resolveTextField(fields?.transparencyTitle),
@@ -144,6 +264,15 @@ function mapHomeEntry(entry: HomeEntryLike | undefined): HomeCmsContent {
     storiesSubtitle: resolveTextField(fields?.storiesSubtitle),
     storiesCta: resolveTextField(fields?.storiesCtaLabel),
     storiesCtaHref: resolveTextField(fields?.storiesCtaHref),
+    impactStories:
+      impactStoriesFromHistory ??
+      parseImpactStoriesFromObject(
+        fields?.impactStoriesJson ??
+          fields?.storiesImpactJson ??
+          fields?.storiesItemsJson ??
+          fields?.impactStories ??
+          fields?.storiesItems,
+      ),
     faqTitle: resolveTextField(fields?.faqTitle),
     faqContactLink: resolveTextField(fields?.faqContactLabel),
     faqContactHref: resolveTextField(fields?.faqContactHref),
@@ -166,6 +295,23 @@ export async function getHomeCmsContent(): Promise<
     });
 
     const entry = response.items[0] as HomeEntryLike | undefined;
+    if (process.env.NODE_ENV !== "production") {
+      console.log("[contentful][home] entryId:", entry?.sys?.id ?? null);
+      console.log(
+        "[contentful][home] fieldKeys:",
+        Object.keys(entry?.fields ?? {}),
+      );
+      console.log("[contentful][home] rawFields:");
+      console.dir(entry?.fields ?? null, { depth: null });
+      console.log("[contentful][home] fieldsPreview:", {
+        donationPixLabel: entry?.fields?.donationPixLabel ?? null,
+        hasHeroImage: Boolean(entry?.fields?.heroImage),
+        hasFaqItems: Boolean(entry?.fields?.faqItems),
+        hasAdoptionHowStepsJson: Boolean(entry?.fields?.adoptionHowStepsJson),
+        hasHistoryImages: Array.isArray(entry?.fields?.historyImages),
+        hasHistoryInfo: Boolean(entry?.fields?.historyInfo),
+      });
+    }
     return { data: mapHomeEntry(entry), status: 200 };
   } catch {
     return { data: emptyHomeCmsContent(), status: 500 };

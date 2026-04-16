@@ -2,15 +2,38 @@
 
 import Image from "next/image";
 
+import { useHomeCmsContent } from "@/features/home/hooks/useHomeCmsContent";
 import { useStories } from "@/features/home/hooks/useStories";
 import { homeMessages } from "@/messages";
 import { useWhenVisible } from "@/shared/hooks/useWhenVisible";
 import { Typography } from "@/shared/ui/typography";
 
+type StoryDisplayItem = {
+  imageUrl: string;
+  title: string;
+  text: string;
+  family: string;
+};
+
 export function HomeSectionStoriesV2() {
   const [sectionRef, isVisible] = useWhenVisible({ rootMargin: "150px" });
-  const { data, isLoading, isError } = useStories({ enabled: isVisible });
-  const items = data?.items ?? [];
+  const { data: cms, isLoading: isCmsLoading, isError: isCmsError } = useHomeCmsContent();
+  const cmsItems = cms?.impactStories ?? [];
+  const shouldLoadApiStories = isVisible && cmsItems.length === 0;
+  const { data: storiesData, isLoading: isStoriesLoading, isError: isStoriesError } = useStories({
+    enabled: shouldLoadApiStories,
+  });
+
+  const apiItems: StoryDisplayItem[] = (storiesData?.items ?? []).map((story, index) => ({
+    imageUrl: story.imageUrl,
+    title: story.title,
+    text: story.summary,
+    family: homeMessages.stories.v2.bylines[index] ?? "Companheiros",
+  }));
+
+  const items: StoryDisplayItem[] = isVisible ? (cmsItems.length > 0 ? cmsItems : apiItems) : [];
+  const isLoading = isCmsLoading || isStoriesLoading;
+  const isError = isCmsError && isStoriesError;
   const featuredStory = items[0];
 
   return (
@@ -46,7 +69,7 @@ export function HomeSectionStoriesV2() {
             <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
               {items.slice(0, 3).map((story, index) => (
                 <article
-                  key={story.id}
+                  key={`${story.title}-${story.family}-${index}`}
                   className={[
                     "group relative",
                     index === 1 ? "md:mt-16" : "",
@@ -69,15 +92,14 @@ export function HomeSectionStoriesV2() {
                     {story.title}
                   </Typography>
                   <Typography as="p" variant="v2Muted" className="italic">
-                    "{story.summary}"
+                    "{story.text}"
                   </Typography>
                   <Typography
                     as="p"
                     variant="v2Body"
                     className="mt-4 text-xs !font-bold text-[var(--v2-secondary)]"
                   >
-                    {homeMessages.stories.v2.bylinePrefix}{" "}
-                    {homeMessages.stories.v2.bylines[index] ?? "Companheiros"}
+                    {homeMessages.stories.v2.bylinePrefix} {story.family}
                   </Typography>
                 </article>
               ))}
@@ -126,15 +148,14 @@ export function HomeSectionStoriesV2() {
                 {featuredStory.title}
               </Typography>
               <Typography as="p" variant="v2Muted" className="italic">
-                "{featuredStory.summary}"
+                "{featuredStory.text}"
               </Typography>
               <Typography
                 as="p"
                 variant="v2Body"
                 className="mt-4 text-xs !font-bold uppercase tracking-[0.08em] text-[var(--v2-secondary)]"
               >
-                {homeMessages.stories.v2.bylinePrefix}{" "}
-                {homeMessages.stories.v2.bylines[0] ?? "Companheiros"}
+                {homeMessages.stories.v2.bylinePrefix} {featuredStory.family}
               </Typography>
             </article>
           )}

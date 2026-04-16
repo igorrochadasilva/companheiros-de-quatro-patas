@@ -24,7 +24,7 @@ export function HomeSectionFaqV2() {
           align="center"
           className="mb-8 hidden md:block"
         >
-          {cms?.faqTitle?.trim() || homeMessages.faq.v2.titleDesktop}
+          {homeMessages.faq.v2.titleDesktop}
         </Typography>
 
         <Typography as="h2" variant="v2H2" className="mb-8 text-3xl md:hidden">

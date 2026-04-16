@@ -5,6 +5,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 import { useDonationConfig } from "@/features/home/hooks/useDonationConfig";
+import { useHomeCmsContent } from "@/features/home/hooks/useHomeCmsContent";
 import { homeMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 import { Typography } from "@/shared/ui/typography";
@@ -14,7 +15,11 @@ const pixCopiedToast = homeMessages.donation.pixCopied;
 export function HomeSectionDonationPixV2() {
   const [copying, setCopying] = useState(false);
   const { data: donationConfig } = useDonationConfig();
-  const pixKey = donationConfig?.pixKey || "pix@companheiros.org.br";
+  const { data: homeCmsContent } = useHomeCmsContent();
+  const pixKey =
+    homeCmsContent?.donationPixKey?.trim() ||
+    donationConfig?.pixKey ||
+    "pix@companheiros.org.br";
 
   async function handleCopy() {
     try {

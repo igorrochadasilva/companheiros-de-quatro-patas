@@ -113,6 +113,13 @@ export type HomeCmsFaqItem = {
   answer: string;
 };
 
+export type HomeCmsImpactStory = {
+  imageUrl: string;
+  title: string;
+  text: string;
+  family: string;
+};
+
 export type HomeCmsContent = {
   title: string | null;
   subtitle: string | null;
@@ -133,6 +140,7 @@ export type HomeCmsContent = {
   donationImpactTitle: string | null;
   donationPixLabel: string | null;
   donationPixCopy: string | null;
+  donationPixKey: string | null;
   donationSeeMoreWays: string | null;
   donationSeeMoreWaysHref: string | null;
   transparencyTitle: string | null;
@@ -147,6 +155,7 @@ export type HomeCmsContent = {
   storiesSubtitle: string | null;
   storiesCta: string | null;
   storiesCtaHref: string | null;
+  impactStories: HomeCmsImpactStory[] | null;
   faqTitle: string | null;
   faqContactLink: string | null;
   faqContactHref: string | null;
@@ -174,6 +183,7 @@ export function emptyHomeCmsContent(): HomeCmsContent {
     donationImpactTitle: null,
     donationPixLabel: null,
     donationPixCopy: null,
+    donationPixKey: null,
     donationSeeMoreWays: null,
     donationSeeMoreWaysHref: null,
     transparencyTitle: null,
@@ -188,6 +198,7 @@ export function emptyHomeCmsContent(): HomeCmsContent {
     storiesSubtitle: null,
     storiesCta: null,
     storiesCtaHref: null,
+    impactStories: null,
     faqTitle: null,
     faqContactLink: null,
     faqContactHref: null,

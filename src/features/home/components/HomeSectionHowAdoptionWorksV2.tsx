@@ -2,6 +2,7 @@
 
 import { ClipboardListIcon, HandHeartIcon, HouseIcon, SearchCheckIcon } from 'lucide-react'
 
+import { useHomeCmsContent } from '@/features/home/hooks/useHomeCmsContent'
 import { homeMessages } from '@/messages'
 import { Typography } from '@/shared/ui/typography'
 
@@ -10,7 +11,9 @@ const stepIcons = [SearchCheckIcon, ClipboardListIcon, HandHeartIcon, HouseIcon]
 const stepNumbers = ['01', '02', '03', '04'] as const
 
 export function HomeSectionHowAdoptionWorksV2() {
-  const steps = homeMessages.adoptionHowV2.steps
+  const { data: cms } = useHomeCmsContent()
+  const cmsSteps = cms?.adoptionHowSteps?.filter((step) => step.title && step.description) ?? []
+  const steps = cmsSteps.length > 0 ? cmsSteps : homeMessages.adoptionHowV2.steps
 
   return (
     <section className="v2-section">

@@ -1,9 +1,9 @@
 "use client";
 
-import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react";
+import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import * as React from "react";
 
 import { cn } from "@/shared/lib/utils";
@@ -229,8 +229,8 @@ function CarouselNext({
 }
 
 export {
-  type CarouselApi,
   Carousel,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,

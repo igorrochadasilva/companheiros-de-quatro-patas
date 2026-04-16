@@ -11,8 +11,8 @@ import { homeMessages } from "@/messages";
 import { track } from "@/shared/lib/analytics";
 import { Button } from "@/shared/ui/button";
 import {
-  type CarouselApi,
   Carousel,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
