@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
 import { PUBLIC_ROUTES } from "@/constants";
@@ -27,19 +27,11 @@ function getHeaderVisibility() {
   } as const;
 }
 
-function isTruthyParam(value: string | null) {
-  if (!value) return false;
-  return ["1", "true", "v2", "yes"].includes(value.trim().toLowerCase());
-}
-
 export function PublicLayoutClient({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const headerVisibility = getHeaderVisibility();
 
-  const useV2Layout =
-    pathname === PUBLIC_ROUTES.home &&
-    isTruthyParam(searchParams.get("layout"));
+  const useV2Layout = pathname === PUBLIC_ROUTES.home;
 
   if (useV2Layout) {
     return (
