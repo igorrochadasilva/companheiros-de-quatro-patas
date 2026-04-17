@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 
+import { PUBLIC_ROUTES } from "@/constants";
 import { HomeHeroV2 } from "@/features/home/components/HomeHeroV2";
 import { HomeSectionBazaarV2 } from "@/features/home/components/HomeSectionBazaarV2";
 import { HomeSectionDonationPixV2 } from "@/features/home/components/HomeSectionDonationPixV2";
@@ -12,32 +13,35 @@ import { HomeSectionTransparencyV2 } from "@/features/home/components/HomeSectio
 import { featureFlags } from "@/shared/config/feature-flags";
 
 export function HomeV2() {
+  const primaryCtaHref = featureFlags.home.pets
+    ? "/#animais"
+    : featureFlags.routes.adoption
+      ? PUBLIC_ROUTES.adoption
+      : null;
+
+  const secondaryCtaHref = featureFlags.home.donationPix
+    ? "/#doar"
+    : featureFlags.routes.donate
+      ? PUBLIC_ROUTES.donate
+      : null;
+
   return (
     <>
-      {featureFlags.home.hero ? <HomeHeroV2 /> : null}
+      <HomeHeroV2
+        primaryCtaHref={primaryCtaHref}
+        secondaryCtaHref={secondaryCtaHref}
+      />
       {featureFlags.home.pets ? (
         <Suspense fallback={<HomeSectionPetsSkeleton />}>
           <HomeSectionPetsV2 />
         </Suspense>
       ) : null}
-      {featureFlags.home.adoptionHow ? (
-        <HomeSectionHowAdoptionWorksV2 />
-      ) : null}
-      {featureFlags.home.donationPix ? (
-        <HomeSectionDonationPixV2 />
-      ) : null}
-      {featureFlags.home.transparency ? (
-        <HomeSectionTransparencyV2 />
-      ) : null}
-      {featureFlags.home.bazaar ? (
-        <HomeSectionBazaarV2 />
-      ) : null}
-      {featureFlags.home.stories ? (
-        <HomeSectionStoriesV2 />
-      ) : null}
-      {featureFlags.home.faq ? (
-        <HomeSectionFaqV2 />
-      ) : null}
+      {featureFlags.home.adoptionHow ? <HomeSectionHowAdoptionWorksV2 /> : null}
+      {featureFlags.home.donationPix ? <HomeSectionDonationPixV2 /> : null}
+      {featureFlags.home.transparency ? <HomeSectionTransparencyV2 /> : null}
+      {featureFlags.home.bazaar ? <HomeSectionBazaarV2 /> : null}
+      {featureFlags.home.stories ? <HomeSectionStoriesV2 /> : null}
+      {featureFlags.home.faq ? <HomeSectionFaqV2 /> : null}
     </>
   );
 }

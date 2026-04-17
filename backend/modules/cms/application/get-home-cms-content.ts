@@ -103,8 +103,7 @@ function parseFaqItemsFromObject(field: unknown): HomeCmsFaqItem[] | null {
   for (const row of arr) {
     if (!row || typeof row !== "object") continue;
     const question = resolveTextField((row as { question?: unknown }).question);
-    const answer =
-      resolveTextField((row as { answer?: unknown }).answer) ?? "";
+    const answer = resolveTextField((row as { answer?: unknown }).answer) ?? "";
     if (question) out.push({ question, answer });
   }
   return out.length ? out : null;
@@ -141,8 +140,10 @@ function parseHistoryInfoRows(field: unknown): Array<Record<string, unknown>> {
   ]);
   if (!arr) return [];
 
-  return arr
-    .filter((row): row is Record<string, unknown> => Boolean(row) && typeof row === "object");
+  return arr.filter(
+    (row): row is Record<string, unknown> =>
+      Boolean(row) && typeof row === "object",
+  );
 }
 
 function parseImpactStoriesFromHistoryFields(
@@ -175,35 +176,6 @@ function parseImpactStoriesFromHistoryFields(
   return out.length ? out : null;
 }
 
-function parseImpactStoriesFromObject(field: unknown): HomeCmsImpactStory[] | null {
-  const raw = normalizeJsonField(field);
-  const arr = unwrapArray(raw, [
-    "items",
-    "stories",
-    "impactStories",
-    "storiesItems",
-  ]);
-  if (!arr) return null;
-
-  const out: HomeCmsImpactStory[] = [];
-  for (const row of arr) {
-    if (!row || typeof row !== "object") continue;
-    const record = row as Record<string, unknown>;
-    const title = resolveTextField(record.title ?? record.titulo);
-    const text = resolveTextField(
-      record.text ?? record.texto ?? record.summary ?? record.quote,
-    );
-    const family = resolveTextField(
-      record.family ?? record.dono ?? record.byline ?? record.author,
-    );
-    const imageUrl = resolveStoryImageUrl(record);
-    if (title && text && family && imageUrl) {
-      out.push({ title, text, family, imageUrl });
-    }
-  }
-  return out.length ? out : null;
-}
-
 function unwrapArray(raw: unknown, objectKeys: string[]): unknown[] | null {
   if (Array.isArray(raw)) return raw;
   if (!raw || typeof raw !== "object") return null;
@@ -226,56 +198,16 @@ function mapHomeEntry(entry: HomeEntryLike | undefined): HomeCmsContent {
   const base = emptyHomeCmsContent();
   return {
     ...base,
-    title: resolveTextField(fields?.title),
-    subtitle: resolveTextField(fields?.subtitle),
-    primaryCtaLabel: resolveTextField(fields?.primaryCtaLabel),
-    secondaryCtaLabel: resolveTextField(fields?.secondaryCtaLabel),
+    entryId: entry?.sys?.id ?? null,
     heroImageUrl: hero.heroImageUrl,
     heroImageAlt: hero.heroImageAlt,
-    entryId: entry?.sys?.id ?? null,
-    petsTitle: resolveTextField(fields?.petsSectionTitle),
-    petsSeeAll: resolveTextField(fields?.petsSectionCtaLabel),
-    petsSeeAllHref: resolveTextField(fields?.petsSectionCtaHref),
-    adoptionHowTitle: resolveTextField(fields?.adoptionHowTitle),
-    adoptionHowSubtitle: resolveTextField(fields?.adoptionHowSubtitle),
-    adoptionHowCta: resolveTextField(fields?.adoptionHowCtaLabel),
-    adoptionHowCtaHref: resolveTextField(fields?.adoptionHowCtaHref),
     adoptionHowSteps: parseAdoptionStepsFromObject(
       fields?.adoptionHowStepsJson,
     ),
-    donationTitle: resolveTextField(fields?.donationTitle),
-    donationImpactTitle: resolveTextField(fields?.donationSubtitle),
-    donationPixLabel: resolveTextField(fields?.donationPixLabel),
-    donationPixCopy: resolveTextField(fields?.donationPixCopyLabel),
     donationPixKey: resolvePixKeyField(
       fields?.donationPixLabel ?? fields?.donationPixKey ?? fields?.pixKey,
     ),
-    donationSeeMoreWays: resolveTextField(fields?.donationMoreWaysLabel),
-    donationSeeMoreWaysHref: resolveTextField(fields?.donationMoreWaysHref),
-    transparencyTitle: resolveTextField(fields?.transparencyTitle),
-    transparencySubtitle: resolveTextField(fields?.transparencySubtitle),
-    transparencyCta: resolveTextField(fields?.transparencyCtaLabel),
-    transparencyCtaHref: resolveTextField(fields?.transparencyCtaHref),
-    bazaarTitle: resolveTextField(fields?.bazaarTitle),
-    bazaarSubtitle: resolveTextField(fields?.bazaarSubtitle),
-    bazaarCta: resolveTextField(fields?.bazaarCtaLabel),
-    bazaarCtaHref: resolveTextField(fields?.bazaarCtaHref),
-    storiesTitle: resolveTextField(fields?.storiesTitle),
-    storiesSubtitle: resolveTextField(fields?.storiesSubtitle),
-    storiesCta: resolveTextField(fields?.storiesCtaLabel),
-    storiesCtaHref: resolveTextField(fields?.storiesCtaHref),
-    impactStories:
-      impactStoriesFromHistory ??
-      parseImpactStoriesFromObject(
-        fields?.impactStoriesJson ??
-          fields?.storiesImpactJson ??
-          fields?.storiesItemsJson ??
-          fields?.impactStories ??
-          fields?.storiesItems,
-      ),
-    faqTitle: resolveTextField(fields?.faqTitle),
-    faqContactLink: resolveTextField(fields?.faqContactLabel),
-    faqContactHref: resolveTextField(fields?.faqContactHref),
+    impactStories: impactStoriesFromHistory,
     faqItems: parseFaqItemsFromObject(fields?.faqItems),
   };
 }

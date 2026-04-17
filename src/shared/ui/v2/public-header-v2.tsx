@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   Building2Icon,
@@ -9,84 +9,99 @@ import {
   MenuIcon,
   PawPrintIcon,
   ShoppingBagIcon,
-} from 'lucide-react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import * as React from 'react'
+} from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import * as React from "react";
 
-import { PUBLIC_ROUTES } from '@/constants'
-import { appMessages, navMessages } from '@/messages'
-import { Button } from '@/shared/ui/button'
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/shared/ui/sheet'
+import { PUBLIC_ROUTES } from "@/constants";
+import { appMessages, navMessages } from "@/messages";
+import { Button } from "@/shared/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/shared/ui/sheet";
 
 const navItems = [
   {
-    key: 'adoption',
+    key: "adoption",
     href: PUBLIC_ROUTES.adoption,
     label: navMessages.adoption,
     icon: PawPrintIcon,
   },
   {
-    key: 'shelter',
+    key: "shelter",
     href: PUBLIC_ROUTES.shelter,
     label: navMessages.shelter,
     icon: Building2Icon,
   },
   {
-    key: 'donate',
+    key: "donate",
     href: PUBLIC_ROUTES.donate,
     label: navMessages.donate,
     icon: GiftIcon,
   },
   {
-    key: 'bazaar',
+    key: "bazaar",
     href: PUBLIC_ROUTES.bazaar,
     label: navMessages.bazaar,
     icon: ShoppingBagIcon,
   },
   {
-    key: 'about',
+    key: "about",
     href: PUBLIC_ROUTES.about,
     label: navMessages.about,
     icon: InfoIcon,
   },
   {
-    key: 'contact',
+    key: "contact",
     href: PUBLIC_ROUTES.contact,
     label: navMessages.contact,
     icon: MailIcon,
   },
-] as const
+] as const;
 
-type HeaderNavKey = (typeof navItems)[number]['key']
+type HeaderNavKey = (typeof navItems)[number]["key"];
 
 export type PublicHeaderV2Visibility = {
-  nav: Record<HeaderNavKey, boolean>
-  transparency: boolean
-  supportCta: boolean
-}
+  nav: Record<HeaderNavKey, boolean>;
+  supportCta: boolean;
+};
 
-export function PublicHeaderV2({ visibility }: { visibility: PublicHeaderV2Visibility }) {
-  const pathname = usePathname()
-  const [sheetOpen, setSheetOpen] = React.useState(false)
-  const visibleNavItems = navItems.filter((item) => visibility.nav[item.key])
+export function PublicHeaderV2({
+  visibility,
+}: {
+  visibility: PublicHeaderV2Visibility;
+}) {
+  const pathname = usePathname();
+  const [sheetOpen, setSheetOpen] = React.useState(false);
+  const visibleNavItems = navItems.filter((item) => visibility.nav[item.key]);
 
-  const normalizedPathname = pathname.replace(/\/+$/, '') || '/'
-  const isHomeActive = normalizedPathname === PUBLIC_ROUTES.home || normalizedPathname === '/home'
+  const normalizedPathname = pathname.replace(/\/+$/, "") || "/";
+  const isHomeActive =
+    normalizedPathname === PUBLIC_ROUTES.home || normalizedPathname === "/home";
 
   function isItemActive(href: string) {
-    if (href === PUBLIC_ROUTES.home) return isHomeActive
-    return normalizedPathname.startsWith(href)
+    if (href === PUBLIC_ROUTES.home) return isHomeActive;
+    return normalizedPathname.startsWith(href);
   }
 
   return (
     <header
       className={[
-        'fixed top-0 w-full border-b border-[color:var(--v2-outline-variant)]/20 shadow-sm shadow-[color:var(--v2-on-surface)]/5',
-        sheetOpen ? 'z-50 bg-[#faf7f2] backdrop-blur-none' : 'v2-glass-nav z-50',
-      ].join(' ')}
+        "fixed top-0 w-full border-b border-[color:var(--v2-outline-variant)]/20 shadow-sm shadow-[color:var(--v2-on-surface)]/5",
+        sheetOpen
+          ? "z-50 bg-[#faf7f2] backdrop-blur-none"
+          : "v2-glass-nav z-50",
+      ].join(" ")}
     >
-      <nav className="v2-container flex h-20 items-center justify-between px-6" aria-label={navMessages.ariaLabel}>
+      <nav
+        className="v2-container flex h-20 items-center justify-between px-6"
+        aria-label={navMessages.ariaLabel}
+      >
         <Link
           href={PUBLIC_ROUTES.home}
           className="v2-font-headline text-2xl font-bold tracking-tight text-[var(--v2-on-surface)]"
@@ -99,11 +114,11 @@ export function PublicHeaderV2({ visibility }: { visibility: PublicHeaderV2Visib
             <Link
               href={PUBLIC_ROUTES.home}
               className={[
-                'pb-1 transition-transform hover:scale-105',
+                "pb-1 transition-transform hover:scale-105",
                 isItemActive(PUBLIC_ROUTES.home)
-                  ? 'border-b-2 border-[var(--v2-primary)] text-[var(--v2-primary)]'
-                  : 'text-[var(--v2-on-surface)]/80 hover:text-[var(--v2-primary)]',
-              ].join(' ')}
+                  ? "border-b-2 border-[var(--v2-primary)] text-[var(--v2-primary)]"
+                  : "text-[var(--v2-on-surface)]/80 hover:text-[var(--v2-primary)]",
+              ].join(" ")}
             >
               Home
             </Link>
@@ -113,11 +128,11 @@ export function PublicHeaderV2({ visibility }: { visibility: PublicHeaderV2Visib
                 key={item.href}
                 href={item.href}
                 className={[
-                  'pb-1 transition-transform hover:scale-105',
+                  "pb-1 transition-transform hover:scale-105",
                   isItemActive(item.href)
-                    ? 'border-b-2 border-[var(--v2-primary)] text-[var(--v2-primary)]'
-                    : 'text-[var(--v2-on-surface)]/80 hover:text-[var(--v2-primary)]',
-                ].join(' ')}
+                    ? "border-b-2 border-[var(--v2-primary)] text-[var(--v2-primary)]"
+                    : "text-[var(--v2-on-surface)]/80 hover:text-[var(--v2-primary)]",
+                ].join(" ")}
               >
                 {item.label}
               </Link>
@@ -151,54 +166,58 @@ export function PublicHeaderV2({ visibility }: { visibility: PublicHeaderV2Visib
               className="flex flex-col border-l-[color:var(--v2-outline-variant)]/25 bg-white opacity-100 backdrop-blur-none"
             >
               <SheetHeader>
-                <SheetTitle className="v2-font-headline text-left text-xl">{appMessages.name}</SheetTitle>
+                <SheetTitle className="v2-font-headline text-left text-xl">
+                  {appMessages.name}
+                </SheetTitle>
               </SheetHeader>
 
               <div className="flex flex-1 flex-col gap-1 py-4">
                 <Link
                   href={PUBLIC_ROUTES.home}
                   className={[
-                    'flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors',
+                    "flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors",
                     isItemActive(PUBLIC_ROUTES.home)
-                      ? 'bg-[var(--v2-primary)]/10 text-[var(--v2-primary)]'
-                      : 'text-[var(--v2-on-surface)] hover:bg-[var(--v2-surface-container-low)]',
-                  ].join(' ')}
+                      ? "bg-[var(--v2-primary)]/10 text-[var(--v2-primary)]"
+                      : "text-[var(--v2-on-surface)] hover:bg-[var(--v2-surface-container-low)]",
+                  ].join(" ")}
                   onClick={() => setSheetOpen(false)}
                 >
                   <HouseIcon
                     className={[
-                      'size-5 shrink-0',
+                      "size-5 shrink-0",
                       isItemActive(PUBLIC_ROUTES.home)
-                        ? 'text-[var(--v2-primary)]'
-                        : 'text-[var(--v2-on-surface-variant)]',
-                    ].join(' ')}
+                        ? "text-[var(--v2-primary)]"
+                        : "text-[var(--v2-on-surface-variant)]",
+                    ].join(" ")}
                   />
                   Home
                 </Link>
 
                 {visibleNavItems.map((item) => {
-                  const Icon = item.icon
+                  const Icon = item.icon;
                   return (
                     <Link
                       key={item.href}
                       href={item.href}
                       className={[
-                        'flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors',
+                        "flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors",
                         isItemActive(item.href)
-                          ? 'bg-[var(--v2-primary)]/10 text-[var(--v2-primary)]'
-                          : 'text-[var(--v2-on-surface)] hover:bg-[var(--v2-surface-container-low)]',
-                      ].join(' ')}
+                          ? "bg-[var(--v2-primary)]/10 text-[var(--v2-primary)]"
+                          : "text-[var(--v2-on-surface)] hover:bg-[var(--v2-surface-container-low)]",
+                      ].join(" ")}
                       onClick={() => setSheetOpen(false)}
                     >
                       <Icon
                         className={[
-                          'size-5 shrink-0',
-                          isItemActive(item.href) ? 'text-[var(--v2-primary)]' : 'text-[var(--v2-on-surface-variant)]',
-                        ].join(' ')}
+                          "size-5 shrink-0",
+                          isItemActive(item.href)
+                            ? "text-[var(--v2-primary)]"
+                            : "text-[var(--v2-on-surface-variant)]",
+                        ].join(" ")}
                       />
                       {item.label}
                     </Link>
-                  )
+                  );
                 })}
               </div>
 
@@ -209,7 +228,10 @@ export function PublicHeaderV2({ visibility }: { visibility: PublicHeaderV2Visib
                     size="sm"
                     className="w-full rounded-full bg-[#f3af3d] text-white hover:bg-[#f3af3d]/90"
                   >
-                    <Link href={PUBLIC_ROUTES.donate} onClick={() => setSheetOpen(false)}>
+                    <Link
+                      href={PUBLIC_ROUTES.donate}
+                      onClick={() => setSheetOpen(false)}
+                    >
                       {navMessages.supportCta}
                     </Link>
                   </Button>
@@ -220,5 +242,5 @@ export function PublicHeaderV2({ visibility }: { visibility: PublicHeaderV2Visib
         </div>
       </nav>
     </header>
-  )
+  );
 }

@@ -13,7 +13,6 @@ import Link from "next/link";
 
 import { CONTACT, PUBLIC_ROUTES, WHATSAPP_URL } from "@/constants";
 import { appMessages, footerMessages, navMessages } from "@/messages";
-import { featureFlags } from "@/shared/config/feature-flags";
 
 const quickLinks = [
   {
@@ -41,18 +40,31 @@ const quickLinks = [
   { href: PUBLIC_ROUTES.contact, label: navMessages.contact, icon: MailIcon },
 ] as const;
 
-export function PublicFooter() {
+type RouteVisibility = {
+  adoption: boolean;
+  shelter: boolean;
+  donate: boolean;
+  bazaar: boolean;
+  about: boolean;
+  contact: boolean;
+  transparency: boolean;
+};
+
+export function PublicFooter({
+  routesVisibility,
+}: {
+  routesVisibility: RouteVisibility;
+}) {
   const year = new Date().getFullYear();
   const visibleQuickLinks = quickLinks.filter((item) => {
-    if (item.href === PUBLIC_ROUTES.adoption)
-      return featureFlags.routes.adoption;
-    if (item.href === PUBLIC_ROUTES.shelter) return featureFlags.routes.shelter;
-    if (item.href === PUBLIC_ROUTES.donate) return featureFlags.routes.donate;
-    if (item.href === PUBLIC_ROUTES.bazaar) return featureFlags.routes.bazaar;
+    if (item.href === PUBLIC_ROUTES.adoption) return routesVisibility.adoption;
+    if (item.href === PUBLIC_ROUTES.shelter) return routesVisibility.shelter;
+    if (item.href === PUBLIC_ROUTES.donate) return routesVisibility.donate;
+    if (item.href === PUBLIC_ROUTES.bazaar) return routesVisibility.bazaar;
     if (item.href === PUBLIC_ROUTES.transparency)
-      return featureFlags.routes.transparency;
-    if (item.href === PUBLIC_ROUTES.about) return featureFlags.routes.about;
-    if (item.href === PUBLIC_ROUTES.contact) return featureFlags.routes.contact;
+      return routesVisibility.transparency;
+    if (item.href === PUBLIC_ROUTES.about) return routesVisibility.about;
+    if (item.href === PUBLIC_ROUTES.contact) return routesVisibility.contact;
 
     return true;
   });

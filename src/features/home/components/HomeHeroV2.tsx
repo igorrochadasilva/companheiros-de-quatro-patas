@@ -1,39 +1,46 @@
-'use client'
+"use client";
 
-import { HeartIcon } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
+import { HeartIcon } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
-import { PUBLIC_ROUTES } from '@/constants'
-import { useHomeCmsContent } from '@/features/home/hooks/useHomeCmsContent'
-import { useStats } from '@/features/home/hooks/useStats'
-import { homeMessages } from '@/messages'
-import { featureFlags } from '@/shared/config/feature-flags'
-import { Button } from '@/shared/ui/button'
-import { Typography } from '@/shared/ui/typography'
+import { useHomeCmsContent } from "@/features/home/hooks/useHomeCmsContent";
+import { useStats } from "@/features/home/hooks/useStats";
+import { homeMessages } from "@/messages";
+import { Button } from "@/shared/ui/button";
+import { Typography } from "@/shared/ui/typography";
 
-export function HomeHeroV2() {
-  const { data: stats, isLoading, isError } = useStats()
-  const { data: homeCmsContent } = useHomeCmsContent()
+type HomeHeroV2Props = {
+  primaryCtaHref: string | null;
+  secondaryCtaHref: string | null;
+};
 
-  const heroImageUrl = homeCmsContent?.heroImageUrl || 'https://placehold.co/900x1200.png?text=Companheiros'
-  const heroImageAlt = homeCmsContent?.heroImageAlt || `${homeMessages.hero.titleTop} ${homeMessages.hero.titleAccent}`
+export function HomeHeroV2({
+  primaryCtaHref,
+  secondaryCtaHref,
+}: HomeHeroV2Props) {
+  const { data: stats, isLoading, isError } = useStats();
+  const { data: homeCmsContent } = useHomeCmsContent();
 
-  const primaryCtaHref = featureFlags.home.pets
-    ? '/#animais'
-    : featureFlags.routes.adoption
-      ? PUBLIC_ROUTES.adoption
-      : null
+  const heroImageUrl =
+    homeCmsContent?.heroImageUrl ||
+    "https://placehold.co/900x1200.png?text=Companheiros";
+  const heroImageAlt =
+    homeCmsContent?.heroImageAlt ||
+    `${homeMessages.hero.titleTop} ${homeMessages.hero.titleAccent}`;
 
-  const secondaryCtaHref = featureFlags.home.donationPix
-    ? '/#doar'
-    : featureFlags.routes.donate
-      ? PUBLIC_ROUTES.donate
-      : null
-
-  const adoptedValue = isLoading || isError || !stats ? '-' : stats.adoptedCount.toLocaleString('pt-BR')
-  const inTreatmentValue = isLoading || isError || !stats ? '-' : stats.inTreatmentCount.toLocaleString('pt-BR')
-  const rescuedValue = isLoading || isError || !stats ? '-' : stats.rescuedCount.toLocaleString('pt-BR')
+  const adoptedValue =
+    isLoading || isError || !stats
+      ? "-"
+      : stats.adoptedCount.toLocaleString("pt-BR");
+  const inTreatmentValue =
+    isLoading || isError || !stats
+      ? "-"
+      : stats.inTreatmentCount.toLocaleString("pt-BR");
+  const rescuedValue =
+    isLoading || isError || !stats
+      ? "-"
+      : stats.rescuedCount.toLocaleString("pt-BR");
 
   return (
     <section className="v2-section relative overflow-hidden !pt-12 md:!pt-24">
@@ -56,7 +63,9 @@ export function HomeHeroV2() {
           >
             {homeMessages.hero.titleTop}
             <br />
-            <span className="text-[var(--v2-primary)] italic">{homeMessages.hero.titleAccent}</span>
+            <span className="text-[var(--v2-primary)] italic">
+              {homeMessages.hero.titleAccent}
+            </span>
           </Typography>
 
           <div className="mb-10 flex w-fit flex-wrap justify-center gap-12 text-center md:w-auto md:justify-start md:text-left">
@@ -68,7 +77,11 @@ export function HomeHeroV2() {
               >
                 {adoptedValue}
               </Typography>
-              <Typography as="p" variant="v2Muted" className="text-xs  md:text-sm">
+              <Typography
+                as="p"
+                variant="v2Muted"
+                className="text-xs  md:text-sm"
+              >
                 {homeMessages.hero.stats.adopted}
               </Typography>
             </div>
@@ -80,7 +93,11 @@ export function HomeHeroV2() {
               >
                 {inTreatmentValue}
               </Typography>
-              <Typography as="p" variant="v2Muted" className="text-xs md:text-sm">
+              <Typography
+                as="p"
+                variant="v2Muted"
+                className="text-xs md:text-sm"
+              >
                 {homeMessages.hero.stats.inTreatment}
               </Typography>
             </div>
@@ -92,7 +109,11 @@ export function HomeHeroV2() {
               >
                 {rescuedValue}
               </Typography>
-              <Typography as="p" variant="v2Muted" className="text-xs md:text-sm">
+              <Typography
+                as="p"
+                variant="v2Muted"
+                className="text-xs md:text-sm"
+              >
                 {homeMessages.hero.stats.rescued}
               </Typography>
             </div>
@@ -105,7 +126,9 @@ export function HomeHeroV2() {
                 size="lg"
                 className="v2-editorial-shadow min-h-14 w-full rounded-full bg-[var(--v2-primary)] px-8 text-lg font-bold text-[var(--v2-on-primary)] transition-transform hover:scale-105 active:scale-95 sm:w-auto"
               >
-                <Link href={primaryCtaHref}>{homeMessages.hero.primaryCta}</Link>
+                <Link href={primaryCtaHref}>
+                  {homeMessages.hero.primaryCta}
+                </Link>
               </Button>
             ) : null}
 
@@ -115,7 +138,9 @@ export function HomeHeroV2() {
                 size="lg"
                 className="min-h-14 w-full rounded-full bg-[#46c2c11a] px-8 py-4 text-lg font-bold text-[var(--v2-secondary)] transition-transform hover:scale-105 active:scale-95 sm:w-auto"
               >
-                <Link href={secondaryCtaHref}>{homeMessages.hero.secondaryCta}</Link>
+                <Link href={secondaryCtaHref}>
+                  {homeMessages.hero.secondaryCta}
+                </Link>
               </Button>
             ) : null}
           </div>
@@ -144,7 +169,11 @@ export function HomeHeroV2() {
               <HeartIcon className="size-5 fill-current" />
             </div>
             <div>
-              <Typography as="p" variant="v2Muted" className="text-xs !font-bold text-[var(--v2-on-surface)]">
+              <Typography
+                as="p"
+                variant="v2Muted"
+                className="text-xs !font-bold text-[var(--v2-on-surface)]"
+              >
                 {homeMessages.hero.weeklyHomesTitle}
               </Typography>
               <Typography as="p" variant="v2Muted" className="text-[10px]">
@@ -155,5 +184,5 @@ export function HomeHeroV2() {
         </div>
       </div>
     </section>
-  )
+  );
 }

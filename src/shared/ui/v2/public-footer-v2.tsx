@@ -1,26 +1,49 @@
-﻿import { CameraIcon, MailIcon, MapPinIcon, MessageCircleIcon, Share2Icon } from "lucide-react";
+﻿import {
+  CameraIcon,
+  MailIcon,
+  MapPinIcon,
+  MessageCircleIcon,
+  Share2Icon,
+} from "lucide-react";
 import Link from "next/link";
 
 import { CONTACT, PUBLIC_ROUTES, WHATSAPP_URL } from "@/constants";
 import { appMessages, navMessages } from "@/messages";
-import { featureFlags } from "@/shared/config/feature-flags";
 import { Typography } from "@/shared/ui/typography";
 
 const quickLinks = [
   { href: PUBLIC_ROUTES.adoption, label: navMessages.adoption },
   { href: PUBLIC_ROUTES.donate, label: navMessages.donate },
   { href: PUBLIC_ROUTES.shelter, label: navMessages.shelter },
+  { href: PUBLIC_ROUTES.bazaar, label: navMessages.bazaar },
   { href: PUBLIC_ROUTES.about, label: navMessages.about },
+  { href: PUBLIC_ROUTES.contact, label: navMessages.contact },
 ] as const;
 
-export function PublicFooterV2() {
+type RouteVisibility = {
+  adoption: boolean;
+  shelter: boolean;
+  donate: boolean;
+  bazaar: boolean;
+  about: boolean;
+  contact: boolean;
+  transparency: boolean;
+};
+
+export function PublicFooterV2({
+  routesVisibility,
+}: {
+  routesVisibility: RouteVisibility;
+}) {
   const year = new Date().getFullYear();
 
   const visibleQuickLinks = quickLinks.filter((item) => {
-    if (item.href === PUBLIC_ROUTES.adoption) return featureFlags.routes.adoption;
-    if (item.href === PUBLIC_ROUTES.donate) return featureFlags.routes.donate;
-    if (item.href === PUBLIC_ROUTES.shelter) return featureFlags.routes.shelter;
-    if (item.href === PUBLIC_ROUTES.about) return featureFlags.routes.about;
+    if (item.href === PUBLIC_ROUTES.adoption) return routesVisibility.adoption;
+    if (item.href === PUBLIC_ROUTES.donate) return routesVisibility.donate;
+    if (item.href === PUBLIC_ROUTES.shelter) return routesVisibility.shelter;
+    if (item.href === PUBLIC_ROUTES.bazaar) return routesVisibility.bazaar;
+    if (item.href === PUBLIC_ROUTES.about) return routesVisibility.about;
+    if (item.href === PUBLIC_ROUTES.contact) return routesVisibility.contact;
     return true;
   });
 
@@ -44,7 +67,8 @@ export function PublicFooterV2() {
             variant="v2Muted"
             className="text-[var(--v2-on-surface)]/70"
           >
-            Transformando vidas atraves do resgate, cuidado e amor animal desde 2015.
+            Transformando vidas atraves do resgate, cuidado e amor animal desde
+            2015.
           </Typography>
         </div>
 
@@ -70,41 +94,43 @@ export function PublicFooterV2() {
           </ul>
         </div>
 
-        <div>
-          <Typography
-            as="h5"
-            variant="v2Body"
-            className="mb-4 text-sm !font-semibold text-[var(--v2-primary)]"
-          >
-            Contatos
-          </Typography>
-          <ul className="space-y-2 text-sm text-[var(--v2-on-surface)]/70">
-            <li>
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2 transition-colors hover:text-[var(--v2-primary)]"
-              >
-                <MessageCircleIcon className="size-4" aria-hidden />
-                WhatsApp
-              </a>
-            </li>
-            <li>
-              <a
-                href={`mailto:${CONTACT.email}`}
-                className="flex items-center gap-2 transition-colors hover:text-[var(--v2-primary)]"
-              >
-                <MailIcon className="size-4" aria-hidden />
-                {CONTACT.email}
-              </a>
-            </li>
-            <li className="flex items-center gap-2">
-              <MapPinIcon className="size-4" aria-hidden />
-              {CONTACT.city}
-            </li>
-          </ul>
-        </div>
+        {routesVisibility.contact ? (
+          <div>
+            <Typography
+              as="h5"
+              variant="v2Body"
+              className="mb-4 text-sm !font-semibold text-[var(--v2-primary)]"
+            >
+              Contatos
+            </Typography>
+            <ul className="space-y-2 text-sm text-[var(--v2-on-surface)]/70">
+              <li>
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 transition-colors hover:text-[var(--v2-primary)]"
+                >
+                  <MessageCircleIcon className="size-4" aria-hidden />
+                  WhatsApp
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${CONTACT.email}`}
+                  className="flex items-center gap-2 transition-colors hover:text-[var(--v2-primary)]"
+                >
+                  <MailIcon className="size-4" aria-hidden />
+                  {CONTACT.email}
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <MapPinIcon className="size-4" aria-hidden />
+                {CONTACT.city}
+              </li>
+            </ul>
+          </div>
+        ) : null}
 
         <div>
           <Typography
