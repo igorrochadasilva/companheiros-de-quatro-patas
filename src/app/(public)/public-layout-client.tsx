@@ -62,7 +62,9 @@ export function PublicLayoutClient({
   const pathname = usePathname();
   const headerVisibility = getHeaderVisibility(flagSnapshot);
 
-  const useV2Layout = pathname === PUBLIC_ROUTES.home;
+  const useV2Layout =
+    pathname === PUBLIC_ROUTES.home ||
+    pathname.startsWith(PUBLIC_ROUTES.adoption);
 
   if (useV2Layout) {
     return (

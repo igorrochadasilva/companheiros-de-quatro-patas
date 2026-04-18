@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 import { PUBLIC_ROUTES } from "@/constants";
-import { AdocaoContent } from "@/features/adoption/components/AdocaoContent";
+import { AdocaoContentV2 } from "@/features/adoption/components/AdocaoContentV2";
 import { featureFlags } from "@/shared/config/feature-flags";
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default function AdocaoPage() {
 
   return (
     <Suspense fallback={<div className="animate-pulse space-y-4 p-4" />}>
-      <AdocaoContent />
+      <AdocaoContentV2 />
     </Suspense>
   );
 }

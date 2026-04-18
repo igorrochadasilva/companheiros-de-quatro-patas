@@ -1,9 +1,52 @@
 export const adoptionMessages = {
   hero: {
     title: "Adocao",
-    subtitle: "Filtre e encontre o pet ideal para sua familia.",
+    subtitle:
+      "Filtre e encontre o pet ideal para sua familia. Cada olhar aqui guarda uma historia esperando por um novo capitulo.",
     breadcrumbHome: "Home",
     breadcrumbCurrent: "Adocao",
+  },
+  v2: {
+    filters: {
+      title: "Filtros",
+      subtitle: "Encontre seu melhor amigo",
+      speciesLabel: "Especie",
+      sizeLabel: "Porte",
+      ageLabel: "Idade",
+      cityLabel: "Cidade",
+      allSpecies: "Todos",
+      otherSpecies: "Outros",
+      anySize: "Qualquer porte",
+      anyAge: "Qualquer idade",
+      allCities: "Todas as cidades",
+      urgentOnly: "Urgentes (adocao prioritaria)",
+      clearFilters: "Limpar filtros",
+    },
+    toolbar: {
+      mobileFilterButton: "Filtrar",
+      mobileSortLabel: "Ordenar:",
+      desktopResultsContext: 'Exibindo resultados para "Todos os Pets"',
+      desktopSortLabel: "Ordenar por:",
+    },
+    grid: {
+      species: {
+        dog: "Cachorro",
+        cat: "Gato",
+        other: "Outros",
+      },
+      ageUnknown: "Idade nao informada",
+      urgentBadge: "Urgente",
+      detailsCta: "Detalhes",
+      adoptCta: "Adotar",
+      favoriteAriaLabel: "Favoritar pet",
+    },
+    pagination: {
+      previous: "Pagina anterior",
+      next: "Proxima pagina",
+    },
+    sheet: {
+      title: "Filtros",
+    },
   },
   resultsHeading: "Resultados da lista de animais disponiveis para adocao",
   toolbar: {
