@@ -10,6 +10,7 @@ import {
   PawPrintIcon,
   ShoppingBagIcon,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
@@ -104,9 +105,21 @@ export function PublicHeaderV2({
       >
         <Link
           href={PUBLIC_ROUTES.home}
-          className="v2-font-headline text-2xl font-bold tracking-tight text-[var(--v2-on-surface)]"
+          className="flex items-center gap-3"
         >
-          {appMessages.name}
+          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[color:var(--v2-outline-variant)]/30 bg-white shadow-sm">
+            <Image
+              src="/iconV2.webp"
+              alt={appMessages.name}
+              fill
+              sizes="40px"
+              className="object-cover"
+              priority
+            />
+          </div>
+          <span className="v2-font-headline text-xl font-bold tracking-tight text-[var(--v2-on-surface)] md:text-2xl">
+            {appMessages.name}
+          </span>
         </Link>
 
         <div className="flex items-center gap-3">
@@ -166,8 +179,21 @@ export function PublicHeaderV2({
               className="flex flex-col border-l-[color:var(--v2-outline-variant)]/25 bg-white opacity-100 backdrop-blur-none"
             >
               <SheetHeader>
-                <SheetTitle className="v2-font-headline text-left text-xl">
-                  {appMessages.name}
+                <SheetTitle asChild>
+                  <Link href={PUBLIC_ROUTES.home} className="flex items-center gap-3">
+                    <div className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[color:var(--v2-outline-variant)]/30 bg-white shadow-sm">
+                      <Image
+                        src="/iconV2.webp"
+                        alt={appMessages.name}
+                        fill
+                        sizes="36px"
+                        className="object-cover"
+                      />
+                    </div>
+                    <span className="v2-font-headline text-left text-xl">
+                      {appMessages.name}
+                    </span>
+                  </Link>
                 </SheetTitle>
               </SheetHeader>
 
