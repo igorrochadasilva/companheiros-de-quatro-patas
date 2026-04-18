@@ -4,10 +4,10 @@ Listagem de pets para adocao em `/adocao`: filtros, ordenacao, paginacao, grid e
 
 ## Conteudo
 
-| Pasta           | Responsabilidade                                                                |
-| --------------- | ------------------------------------------------------------------------------- |
-| **hooks/**      | usePets (listagem paginada)                                                     |
-| **services/**   | fetchPets (listagem com page, limit, sort)                                      |
+| Pasta           | Responsabilidade                                                              |
+| --------------- | ----------------------------------------------------------------------------- |
+| **hooks/**      | usePets (listagem paginada)                                                   |
+| **services/**   | fetchPets (listagem com page, limit, sort)                                    |
 | **components/** | AdocaoContentV2, AdocaoFiltersV2, AdocaoGridV2, AdocaoHeroV2, AdocaoToolbarV2 |
 
 ## Dependencias
