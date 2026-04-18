@@ -1,28 +1,28 @@
-# Feature: Adoption (Adoção)
+# Feature: Adoption (Adocao)
 
-Listagem de pets para adoção em `/adocao`: filtros, ordenação, paginação, grid e dialog “Quero adotar”.
+Listagem de pets para adocao em `/adocao`: filtros, ordenacao, paginacao, grid e dialog "Quero adotar".
 
-## Conteúdo
+## Conteudo
 
-| Pasta           | Responsabilidade                                                            |
-| --------------- | --------------------------------------------------------------------------- |
-| **hooks/**      | usePets (listagem paginada), usePetFilters (URL ↔ estado) — quando migrados |
-| **services/**   | fetchPets (listagem com page, limit, sort) — quando migrado                 |
-| **components/** | AdocaoContent, AdocaoFilters, AdocaoGrid, AdocaoHero, AdocaoToolbar         |
+| Pasta           | Responsabilidade                                                                |
+| --------------- | ------------------------------------------------------------------------------- |
+| **hooks/**      | usePets (listagem paginada)                                                     |
+| **services/**   | fetchPets (listagem com page, limit, sort)                                      |
+| **components/** | AdocaoContentV2, AdocaoFiltersV2, AdocaoGridV2, AdocaoHeroV2, AdocaoToolbarV2 |
 
-## Dependências
+## Dependencias
 
 - Tipos em `types/home.ts` (Pet, PetFilters).
-- `shared/lib/search-params.ts` para parse/serialize de filtros (ou versão específica aqui).
+- `shared/lib/search-params.ts` para parse/serialize de filtros.
 - API: `GET /api/pets` com page, limit, sort.
 - UI e analytics em `shared/`.
 
 ## Uso
 
-A página `app/(public)/adocao/page.tsx` importa o conteúdo da adoção daqui:
+A pagina `app/(public)/adocao/page.tsx` importa o conteudo da adocao daqui:
 
 ```ts
-import { AdocaoContent } from "@/features/adoption/components/AdocaoContent";
+import { AdocaoContentV2 } from "@/features/adoption/components/AdocaoContentV2";
 import { usePets } from "@/features/adoption/hooks/usePets";
 import { fetchPets } from "@/features/adoption/services/pets";
 ```

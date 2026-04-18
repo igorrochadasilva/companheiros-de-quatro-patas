@@ -38,7 +38,6 @@ export const adoptionMessages = {
       urgentBadge: "Urgente",
       detailsCta: "Detalhes",
       adoptCta: "Adotar",
-      favoriteAriaLabel: "Favoritar pet",
     },
     pagination: {
       previous: "Pagina anterior",
@@ -48,19 +47,15 @@ export const adoptionMessages = {
       title: "Filtros",
     },
   },
-  resultsHeading: "Resultados da lista de animais disponiveis para adocao",
   toolbar: {
     clearFilters: "Limpar filtros",
     resultsCount: "{count} pets encontrados",
     resultsCountNone: "Nenhum pet encontrado",
-    sortLabel: "Ordenar por",
     sortRecent: "Mais recentes",
     sortUrgent: "Urgentes primeiro",
     sortAgeAsc: "Idade (menor primeiro)",
     sortAgeDesc: "Idade (maior primeiro)",
     sortName: "Nome (A-Z)",
-    filterButton: "Filtrar",
-    applyFilters: "Aplicar filtros",
   },
   empty: {
     title: "Nenhum pet encontrado",
