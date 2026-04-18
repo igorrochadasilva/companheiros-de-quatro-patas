@@ -15,9 +15,7 @@ export function AdocaoHeroV2() {
   const title = cms?.adoptionTitle?.trim() || heroMessages.title;
   const cmsSubtitle = cms?.adoptionSubtitle?.trim() || "";
   const subtitle =
-    cmsSubtitle.length >= 60
-      ? cmsSubtitle
-      : heroMessages.subtitle;
+    cmsSubtitle.length >= 60 ? cmsSubtitle : heroMessages.subtitle;
 
   return (
     <section className="v2-section v2-section-muted relative overflow-hidden !pb-12 !pt-12 md:!pb-16 md:!pt-16">

@@ -1,13 +1,16 @@
 "use client";
 
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { usePets } from "@/features/adoption/hooks/usePets";
 import { adoptionMessages } from "@/messages";
-import { parseAdoptionSearchParams, toAdoptionSearchParams } from "@/shared/lib/search-params";
 import { track } from "@/shared/lib/analytics";
+import {
+  parseAdoptionSearchParams,
+  toAdoptionSearchParams,
+} from "@/shared/lib/search-params";
 import {
   Sheet,
   SheetContent,
@@ -145,12 +148,16 @@ export function AdocaoContentV2() {
     : items;
 
   const availableFilterOptions = useMemo(() => {
-    const species = Array.from(new Set(filterSourceItems.map((pet) => pet.species)));
+    const species = Array.from(
+      new Set(filterSourceItems.map((pet) => pet.species)),
+    );
     const sizes = Array.from(new Set(filterSourceItems.map((pet) => pet.size)));
     const ageGroups = Array.from(
       new Set(filterSourceItems.map((pet) => pet.ageGroup)),
     );
-    const cities = Array.from(new Set(filterSourceItems.map((pet) => pet.city)));
+    const cities = Array.from(
+      new Set(filterSourceItems.map((pet) => pet.city)),
+    );
 
     return { species, sizes, ageGroups, cities };
   }, [filterSourceItems]);

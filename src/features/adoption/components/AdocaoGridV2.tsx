@@ -42,7 +42,8 @@ const SPECIES_LABELS: Record<Pet["species"], string> = {
 const SPECIES_BADGE_CLASS: Record<Pet["species"], string> = {
   dog: "bg-[color-mix(in_oklab,var(--v2-secondary)_10%,transparent)] text-[var(--v2-secondary)]",
   cat: "bg-[color-mix(in_oklab,var(--v2-primary)_12%,transparent)] text-[var(--v2-primary)]",
-  other: "bg-[color-mix(in_oklab,var(--v2-tertiary)_10%,transparent)] text-[var(--v2-tertiary)]",
+  other:
+    "bg-[color-mix(in_oklab,var(--v2-tertiary)_10%,transparent)] text-[var(--v2-tertiary)]",
 };
 
 const SPECIES_ICON: Record<Pet["species"], typeof Dog> = {
@@ -65,7 +66,9 @@ function formatPetAge(ageYears: number) {
     const months = Math.max(1, Math.round(ageYears * 12));
     return `${months} ${months === 1 ? "mes" : "meses"}`;
   }
-  const wholeAge = Number.isInteger(ageYears) ? ageYears : Number(ageYears.toFixed(1));
+  const wholeAge = Number.isInteger(ageYears)
+    ? ageYears
+    : Number(ageYears.toFixed(1));
   return `${wholeAge} ${wholeAge === 1 ? "ano" : "anos"}`;
 }
 

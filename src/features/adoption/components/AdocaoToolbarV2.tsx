@@ -70,7 +70,10 @@ export function AdocaoToolbarV2({
           <Typography as="span" variant="v2Muted" className="text-xs">
             {v2ToolbarMessages.mobileSortLabel}
           </Typography>
-          <Select value={sort} onValueChange={(value) => onSortChange(value as PetSort)}>
+          <Select
+            value={sort}
+            onValueChange={(value) => onSortChange(value as PetSort)}
+          >
             <SelectTrigger className="h-10 w-[140px] rounded-full border-none bg-[var(--v2-surface-container-low)] px-4 text-xs font-semibold text-[var(--v2-on-surface)]">
               <SelectValue />
             </SelectTrigger>
@@ -102,7 +105,10 @@ export function AdocaoToolbarV2({
           >
             {v2ToolbarMessages.desktopSortLabel}
           </Typography>
-          <Select value={sort} onValueChange={(value) => onSortChange(value as PetSort)}>
+          <Select
+            value={sort}
+            onValueChange={(value) => onSortChange(value as PetSort)}
+          >
             <SelectTrigger className="h-10 w-[190px] rounded-full border-none bg-[var(--v2-surface-container-low)] px-5 text-sm font-medium text-[var(--v2-on-surface-variant)]">
               <SelectValue />
             </SelectTrigger>

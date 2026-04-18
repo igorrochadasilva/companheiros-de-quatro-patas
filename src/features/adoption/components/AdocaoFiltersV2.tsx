@@ -3,6 +3,7 @@
 import { Dog, PawPrint, Rabbit, RotateCcw } from "lucide-react";
 
 import { adoptionMessages, homeMessages } from "@/messages";
+import { cn } from "@/shared/lib/utils";
 import { Button } from "@/shared/ui/button";
 import { Checkbox } from "@/shared/ui/checkbox";
 import {
@@ -13,7 +14,6 @@ import {
   SelectValue,
 } from "@/shared/ui/select";
 import { Typography } from "@/shared/ui/typography";
-import { cn } from "@/shared/lib/utils";
 import type { PetAgeGroup, PetFilters, PetSize, PetSpecies } from "@/types";
 
 const petsMessages = homeMessages.pets;
@@ -160,7 +160,9 @@ export function AdocaoFiltersV2({
                 <SelectValue placeholder={filtersMessages.anySize} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="__all__">{filtersMessages.anySize}</SelectItem>
+                <SelectItem value="__all__">
+                  {filtersMessages.anySize}
+                </SelectItem>
                 {availableOptions.sizes.map((size) => (
                   <SelectItem key={size} value={size}>
                     {SIZE_LABELS[size]}
@@ -188,7 +190,9 @@ export function AdocaoFiltersV2({
                 <SelectValue placeholder={filtersMessages.anyAge} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="__all__">{filtersMessages.anyAge}</SelectItem>
+                <SelectItem value="__all__">
+                  {filtersMessages.anyAge}
+                </SelectItem>
                 {availableOptions.ageGroups.map((ageGroup) => (
                   <SelectItem key={ageGroup} value={ageGroup}>
                     {AGE_LABELS[ageGroup]}
@@ -212,7 +216,9 @@ export function AdocaoFiltersV2({
                 <SelectValue placeholder={filtersMessages.allCities} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="__all__">{filtersMessages.allCities}</SelectItem>
+                <SelectItem value="__all__">
+                  {filtersMessages.allCities}
+                </SelectItem>
                 {cityOptions.map((city) => (
                   <SelectItem key={city} value={city}>
                     {city}
