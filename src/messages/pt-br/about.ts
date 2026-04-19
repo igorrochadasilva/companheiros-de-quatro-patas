@@ -66,7 +66,6 @@ export const aboutMessages = {
     },
     stories: {
       title: "Histórias de recomeço",
-      readMore: "Ler história completa",
       items: [
         {
           title: "A superação da Mel",
