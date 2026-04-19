@@ -8,7 +8,7 @@ import { Button } from "@/shared/ui/button";
 
 export function AboutHeroV2() {
   return (
-    <section className="mx-auto w-full max-w-[1280px] px-6 pb-16 pt-8 md:px-10 md:pt-10">
+    <section className="mx-auto w-full max-w-[1280px] overflow-x-clip px-6 pb-16 pt-8 md:px-10 md:pt-10">
       <nav className="mb-6 flex items-center gap-2 text-xs">
         <span className="text-[#f3af3d]">
           {aboutMessages.v2.breadcrumb.home}
@@ -53,7 +53,7 @@ export function AboutHeroV2() {
         </div>
 
         <div className="md:justify-self-end">
-          <div className="overflow-hidden rounded-2xl bg-[#f0e6e0] shadow-[0_20px_45px_-18px_rgba(31,27,23,0.35)] md:rotate-2">
+          <div className="overflow-hidden rounded-2xl bg-[#f0e6e0] shadow-[0_20px_45px_-18px_rgba(31,27,23,0.35)] lg:rotate-2">
             <img
               src={aboutMessages.v2.hero.imageUrl}
               alt={aboutMessages.v2.hero.imageAlt}

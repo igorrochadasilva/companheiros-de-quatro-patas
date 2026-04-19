@@ -15,7 +15,7 @@ export function AboutContentV2() {
   const { data: stats } = useStats();
 
   return (
-    <div className="relative left-1/2 w-dvw -translate-x-1/2 overflow-x-clip bg-[#faf7f2] text-[#2f2a26] [font-family:var(--font-v2-body)]">
+    <div className="w-full overflow-x-hidden bg-[#faf7f2] text-[#2f2a26] [font-family:var(--font-v2-body)]">
       <AboutHeroV2 />
       <AboutMissionV2 />
       <AboutHowWeHelpV2 />
