@@ -4,141 +4,140 @@ export const aboutMessages = {
     description:
       "Conheca a missao, o impacto e como atuamos para resgatar, tratar e encaminhar animais para adocao responsavel.",
   },
-  hero: {
-    title: "Sobre a ONG",
-    subtitle:
-      "Atuamos no resgate e cuidado de animais em situacao de risco, conectando cada historia a uma adocao responsavel.",
-    regionLabel: "Atuacao principal",
-    regionValue: "Sao Paulo e regiao metropolitana",
-    primaryCta: "Ver animais",
-    secondaryCta: "Doar",
-  },
-  mission: {
-    title: "Missao, visao e valores",
-    cards: [
-      {
-        title: "Missao",
-        description:
-          "Resgatar, tratar e encaminhar animais para familias preparadas, com foco em bem-estar e dignidade.",
-      },
-      {
-        title: "Visao",
-        description:
-          "Ser referencia local em adocao responsavel e rede de apoio para reduzir abandono e maus-tratos.",
-      },
-      {
-        title: "Valores",
-        description:
-          "Transparencia, responsabilidade, respeito a vida animal e trabalho colaborativo com a comunidade.",
-      },
-    ],
-  },
-  howWeHelp: {
-    title: "Como ajudamos",
-    cards: [
-      {
-        title: "Resgate",
-        description:
-          "Atendimento inicial para animais em situacao de rua, abandono ou risco.",
-      },
-      {
-        title: "Tratamento veterinario",
-        description:
-          "Consultas, exames e medicacao para estabilizacao e recuperacao.",
-      },
-      {
-        title: "Castracao",
-        description:
-          "Controle populacional para prevenir ninhadas e melhorar qualidade de vida.",
-      },
-      {
-        title: "Adocao responsavel",
-        description:
-          "Triagem de candidatos para garantir compatibilidade e compromisso de longo prazo.",
-      },
-      {
-        title: "Pos-adocao",
-        description:
-          "Acompanhamento para apoiar adaptacao e consolidar vinculo com a nova familia.",
-      },
-    ],
-    cta: "Entenda o processo de adocao",
-  },
-  impact: {
-    title: "Impacto em numeros",
-    adopted: "Adotados",
-    inTreatment: "Em tratamento",
-    rescued: "Resgatados",
-    transparencyCta: "Ver transparencia",
-    loadingAria: "Carregando indicadores de impacto",
-  },
-  stories: {
-    title: "Historias que movem nosso trabalho",
-    empty: "Estamos preparando novas historias para publicar aqui.",
-  },
-  team: {
-    title: "Somos voluntarios",
-    subtitle:
-      "Nossa operacao e feita por pessoas que doam tempo e conhecimento para manter o abrigo ativo.",
-    roles: [
-      {
-        title: "Resgate e transporte",
-        description:
-          "Apoio em chamadas emergenciais e deslocamento seguro dos animais.",
-      },
-      {
-        title: "Feiras de adocao",
-        description: "Organizacao de eventos e acompanhamento de candidatos.",
-      },
-      {
-        title: "Triagem e cuidado diario",
-        description:
-          "Rotina de alimentacao, limpeza, socializacao e observacao.",
-      },
-      {
-        title: "Rede veterinaria",
-        description:
-          "Profissionais parceiros que fortalecem diagnostico e tratamento.",
-      },
-    ],
-    cta: "Quero ajudar",
-    fosterCta: "Quero oferecer lar temporario",
-  },
-  partners: {
-    title: "Parceiros e apoio",
-    subtitle:
-      "Contamos com pessoas, empresas e profissionais que fortalecem cada etapa do cuidado animal.",
-    items: [
-      "Clinicas veterinarias parceiras",
-      "Pet shops e casas de racao",
-      "Empresas apoiadoras de eventos",
-      "Rede local de lares temporarios",
-    ],
-    cta: "Quero ser parceiro",
-  },
-  faq: {
-    title: "Perguntas frequentes",
-    items: [
-      {
-        question: "Como voces se mantem?",
-        answer:
-          "Nos mantemos por meio de doacoes, bazar solidario, trabalho voluntario e parcerias locais.",
-      },
-      {
-        question: "Como posso ajudar?",
-        answer:
-          "Voce pode doar, adotar, comprar no bazar, divulgar campanhas ou atuar como voluntario.",
-      },
-      {
-        question: "Como funciona lar temporario?",
-        answer:
-          "O lar temporario acolhe o animal ate a adocao, com suporte da equipe para orientacoes e acompanhamento.",
-      },
-      {
-        question: "Como garantem adocao responsavel?",
-        answer:
-          "Aplicamos triagem, entrevista e orientacao para buscar compatibilidade entre pet e familia.",
-      },
-    ],
+  v2: {
+    breadcrumb: {
+      home: "Home",
+      current: "Sobre",
+    },
+    hero: {
+      titleStart: "Nossa historia e sobre",
+      titleHighlight: "novos comecos.",
+      subtitle:
+        "Dedicados ao resgate e atuacao no estado de Sao Paulo, transformando a vida de animais abandonados atraves de um ecossistema de amor, reabilitacao fisica e responsabilidade social.",
+      primaryCta: "Ver animais",
+      secondaryCta: "Doar agora",
+      imageUrl:
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuCk2txgzGvoLegZo4y0DRtJ9xBxfkiqppm--J2DQl5aEDu8w6iphQr0nRCzd0-Eh2vJC1HEdpLnV7isKe4cLwfaRMUTrh_asLjjBsuGwbu-JNDtub5KQddnaDfdmmZjtVLNXlfBhdhUiTmZMd1cawgc6xpx2z9STJ311QGSJiDz41gScdj3pnP0cT7ys-LRTjXa2NGsKWZLSbUq00GsfeLbWjM7zZD4GV77Pq6Tpz743q4wXE7gsnaafNLxrWxXFjnhbeVgKfmH6LU",
+      imageAlt: "Gatinho em retrato de estudio.",
+    },
+    mission: {
+      cards: [
+        {
+          title: "Missao",
+          description:
+            "Resgatar e reabilitar animais em situacao de risco, garantindo que cada vida receba tratamento e carinho para uma nova chance.",
+        },
+        {
+          title: "Visao",
+          description:
+            "Ser referencia em bem-estar animal no estado de SP, promovendo adocao consciente e respeito a vida.",
+        },
+        {
+          title: "Valores",
+          description:
+            "Transparencia, etica, responsabilidade tecnica e amor incondicional em cada decisao.",
+        },
+      ],
+    },
+    howWeHelp: {
+      title: "Como ajudamos",
+      subtitle:
+        "Um ciclo completo de cuidado, desde as ruas ate o conforto de um lar definitivo.",
+      cards: [
+        { title: "Resgate", description: "Acoes taticas em SP" },
+        { title: "Tratamento", description: "Cuidados intensivos" },
+        { title: "Castracao", description: "Controle populacional" },
+        { title: "Adocao", description: "Match perfeito" },
+        { title: "Pos-adocao", description: "Acompanhamento" },
+      ],
+      cta: "Entenda o processo detalhado",
+    },
+    impact: {
+      title: "Nosso impacto real",
+      subtitle:
+        "Numeros atualizados em tempo real diretamente do nosso abrigo.",
+      transparencyCta: "Ver transparencia",
+      adoptedLabel: "Adotados",
+      inTreatmentLabel: "Em tratamento",
+      rescuedLabel: "Resgatados",
+      adoptedHint: "+12% esse mes",
+      inTreatmentHint: "Aguardando recuperacao",
+      rescuedHint: "Meta: 5.000 vidas",
+    },
+    stories: {
+      title: "Historias de recomeco",
+      readMore: "Ler historia completa",
+      items: [
+        {
+          title: "A superacao da Mel",
+          summary:
+            "Encontrada debilitada em uma rodovia, Mel passou por 3 meses de fisioterapia intensa. Hoje, ela corre livremente no jardim de sua familia em Campinas.",
+          imageUrl:
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuAaWpUMS6eFfwhR7bSbvfFLOnXbQiPS-AEZugv8dNbKPszCy6MBP6IDqKcbsDlL3P9LgiTt_dCWPcEcbZlLKcjb4JPsiQDfZu5xTZlmaonddPQRSlXp9NX5QTgdz-e8GN3oKfO7ywOS6b5tfpYdn8tb1G428SgRLMZCXuhVBhk_Diie27XQ13205hCSuSSsG9G9coBLwOkdXZotOr0g8xZSOsR_Hh8J4Ejx3k4LqXIQYP6Hxsrqmu3te5bzQhndrdqnWByMdlXwfjI",
+        },
+        {
+          title: "O novo reino de Simba",
+          summary:
+            "Resgatado de um local insalubre, Simba era arisco e assustado. Com paciencia e amor, ele se tornou o companheiro inseparavel de uma senhora que mora sozinha.",
+          imageUrl:
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuAKbV4rQDLUojx4ODep90Hn7Jr79DLXJDt6FGZ0rSEf_dN8DfBFl1Py6CkxxUkUNyg9hFot1LwPH78vICfh1kF9Lsu4ie1qByWwEnLhtdwpbEHK0hMONReyCXofUMlTJI8JMTzne7FX5AbILNsArTv90QsGobQg4kg2OFIUIPzkb6JYIntPscbvMjbnzSbkd8zs-QGDOGaRAdTbKcPjFFXxINL98Tes2a-ErKbH3jz0xxWa0uGmeesgzONRVgLe9GQT0Lvb3G86CBs",
+        },
+        {
+          title: "Thor: De volta a ativa",
+          summary:
+            "Apos ser abandonado por sua idade, Thor provou que nunca e tarde para recomecar. Ele foi adotado por um casal de maratonistas e hoje os acompanha em todos os treinos.",
+          imageUrl:
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuCmuGkzNmx_CJZzAvJNje_iydlVy2Retb-jvD6BHkeCJ2Ne3CDQ-z9nfnv43zaR3Qbl1puJ8j_X8AgP2-E4wYRpqISJU_TlRGUxAJoMLYRTt9iXMFhhhC8Yzhl_QdpbFgNYGEulDEY2lVFr8PbLNTn0iz4rg5XJtZUSo-AP6kqj0qOPXgoHuYHfNcRdEdRfMSzBBSSok_cmhNZwbGPCFzRjzNdASbjcOHsZ40B_PgvhwKEbWzcUwrImIDRPIJQ4l57JYfljYXZJtE4",
+        },
+      ],
+    },
+    team: {
+      title: "O coracao da ONG: Nosso Time",
+      subtitle:
+        "Ninguem faz nada sozinho. Somos uma rede de apaixonados pela causa animal.",
+      roles: [
+        "Resgate tatico",
+        "Eventos e feiras",
+        "Cuidado diario",
+        "Veterinaria",
+      ],
+      primaryCta: "Quero ajudar agora",
+      secondaryCta: "Oferecer lar temporario",
+    },
+    partners: {
+      title: "Nossos Parceiros Estrategicos",
+      items: [
+        "Clinicas parceiras",
+        "Pet shops",
+        "Empresas amigas",
+        "Lares temporarios",
+      ],
+      cta: "Sua empresa quer ser parceira?",
+    },
+    faq: {
+      title: "Perguntas frequentes",
+      items: [
+        {
+          question: "Como posso adotar um animal?",
+          answer:
+            "O processo de adocao envolve uma entrevista, visita ao lar e preenchimento de um termo de responsabilidade. Queremos garantir que o animal e a familia sejam o match perfeito.",
+        },
+        {
+          question: "Para onde vai a minha doacao?",
+          answer:
+            "100% das doacoes sao destinadas a custos veterinarios, alimentacao de qualidade, medicamentos e manutencao do nosso espaco fisico.",
+        },
+        {
+          question: "A ONG recebe visitas?",
+          answer:
+            "Sim. Realizamos dias de portas abertas mensalmente. Para visitas individuais, solicitamos agendamento previo para nao estressar os animais.",
+        },
+        {
+          question: "Como posso ajudar sem ser com dinheiro?",
+          answer:
+            "Voce pode doar seu tempo como voluntario, compartilhar nossas postagens ou doar itens fisicos como racao, cobertores e produtos de limpeza.",
+        },
+      ],
+    },
   },
 };

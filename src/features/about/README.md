@@ -1,10 +1,9 @@
 # Feature: About
 
-Feature responsavel pela pagina publica `/sobre`, com secoes de contexto
-institucional, impacto, historias, time e parceiros.
+Feature responsavel pela pagina publica `/sobre`, na versao visual v2.
 
 ## Conteudo
 
-- `services/`: consumo de dados de apoio (`stats` e `stories`).
+- `services/`: consumo de dados de apoio (`stats`).
 - `hooks/`: hooks de consulta da feature.
-- `components/`: composicao da pagina e secoes menores.
+- `components/`: composicao da pagina e secoes da About v2.

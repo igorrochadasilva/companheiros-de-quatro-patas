@@ -103,10 +103,7 @@ export function PublicHeaderV2({
         className="v2-container flex h-20 items-center justify-between px-6"
         aria-label={navMessages.ariaLabel}
       >
-        <Link
-          href={PUBLIC_ROUTES.home}
-          className="flex items-center gap-3"
-        >
+        <Link href={PUBLIC_ROUTES.home} className="flex items-center gap-3">
           <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[color:var(--v2-outline-variant)]/30 bg-white shadow-sm">
             <Image
               src="/iconV2.webp"
@@ -180,7 +177,10 @@ export function PublicHeaderV2({
             >
               <SheetHeader>
                 <SheetTitle asChild>
-                  <Link href={PUBLIC_ROUTES.home} className="flex items-center gap-3">
+                  <Link
+                    href={PUBLIC_ROUTES.home}
+                    className="flex items-center gap-3"
+                  >
                     <div className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[color:var(--v2-outline-variant)]/30 bg-white shadow-sm">
                       <Image
                         src="/iconV2.webp"

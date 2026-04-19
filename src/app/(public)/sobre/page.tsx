@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { AboutContent } from "@/features/about/components/AboutContent";
+import { AboutContentV2 } from "@/features/about/components/AboutContentV2";
 import { aboutMessages } from "@/messages";
 import { featureFlags } from "@/shared/config/feature-flags";
 
@@ -15,5 +15,5 @@ export default function SobrePage() {
     notFound();
   }
 
-  return <AboutContent />;
+  return <AboutContentV2 />;
 }
