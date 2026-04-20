@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-import { ContactContent } from "@/features/contact/components/ContactContent";
+import { ContactContentV2 } from "@/features/contact/components/ContactContentV2";
 import { contactMessages } from "@/messages";
 import { featureFlags } from "@/shared/config/feature-flags";
 
@@ -18,7 +18,7 @@ export default function ContatoPage() {
 
   return (
     <Suspense fallback={null}>
-      <ContactContent />
+      <ContactContentV2 />
     </Suspense>
   );
 }

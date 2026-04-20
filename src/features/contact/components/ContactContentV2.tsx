@@ -8,12 +8,13 @@ import { contactMessages } from "@/messages";
 import { parseContactPrefill } from "@/shared/lib";
 import { track } from "@/shared/lib/analytics";
 
-import { ContactFaq } from "./ContactFaq";
-import { ContactForm } from "./ContactForm";
-import { ContactHero } from "./ContactHero";
-import { ContactQuickChannels } from "./ContactQuickChannels";
+import { ContactFaqV2 } from "./ContactFaqV2";
+import { ContactFormV2 } from "./ContactFormV2";
+import { ContactHeroV2 } from "./ContactHeroV2";
+import { ContactImageBreakV2 } from "./ContactImageBreakV2";
+import { ContactQuickChannelsV2 } from "./ContactQuickChannelsV2";
 
-export function ContactContent() {
+export function ContactContentV2() {
   const searchParams = useSearchParams();
   const trackedPrefill = useRef(false);
 
@@ -39,11 +40,12 @@ export function ContactContent() {
   }, [prefill.pet, prefill.subject, searchParams]);
 
   return (
-    <div className="space-y-12">
-      <ContactHero />
-      <ContactQuickChannels />
-      <ContactForm prefillSubject={prefill.subject} prefillPet={prefill.pet} />
-      <ContactFaq />
+    <div className="w-full overflow-x-clip bg-[#faf7f2] text-[#2f2a26]">
+      <ContactHeroV2 />
+      <ContactQuickChannelsV2 />
+      <ContactFormV2 prefillSubject={prefill.subject} prefillPet={prefill.pet} />
+      <ContactFaqV2 />
+      <ContactImageBreakV2 />
     </div>
   );
 }

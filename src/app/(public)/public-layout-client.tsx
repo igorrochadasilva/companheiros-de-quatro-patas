@@ -65,7 +65,8 @@ export function PublicLayoutClient({
   const useV2Layout =
     pathname === PUBLIC_ROUTES.home ||
     pathname.startsWith(PUBLIC_ROUTES.adoption) ||
-    pathname.startsWith(PUBLIC_ROUTES.about);
+    pathname.startsWith(PUBLIC_ROUTES.about) ||
+    pathname.startsWith(PUBLIC_ROUTES.contact);
 
   if (useV2Layout) {
     return (
