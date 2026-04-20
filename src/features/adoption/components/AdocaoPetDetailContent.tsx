@@ -7,7 +7,7 @@ import { PUBLIC_ROUTES, WHATSAPP_URL } from "@/constants";
 import { adoptionMessages } from "@/messages";
 import { Badge } from "@/shared/ui/badge";
 import { Button } from "@/shared/ui/button";
-import { H1, Muted } from "@/shared/ui/typography";
+import { H1, Muted, Typography } from "@/shared/ui/typography";
 
 type AdocaoPetDetailContentProps = {
   slug: string;
@@ -118,9 +118,13 @@ export async function AdocaoPetDetailContent({
       </div>
 
       <div className="rounded-lg border p-4">
-        <p className="whitespace-pre-wrap text-sm leading-relaxed text-foreground">
+        <Typography
+          as="p"
+          variant="body"
+          className="whitespace-pre-wrap text-sm leading-relaxed"
+        >
           {pet.description?.trim() || adoptionMessages.petDetail.noDescription}
-        </p>
+        </Typography>
       </div>
 
       <div className="flex flex-wrap gap-2">

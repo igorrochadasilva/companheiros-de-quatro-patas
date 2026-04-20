@@ -1,6 +1,7 @@
 "use client";
 
 import { aboutMessages } from "@/messages";
+import { Typography } from "@/shared/ui/typography";
 import type { AboutCmsContent } from "@/types";
 
 export function AboutStoriesV2({ cms }: { cms?: AboutCmsContent }) {
@@ -11,9 +12,13 @@ export function AboutStoriesV2({ cms }: { cms?: AboutCmsContent }) {
 
   return (
     <section className="mx-auto w-full max-w-[1280px] px-6 pb-14 md:px-10">
-      <h2 className="text-[2.2rem] font-bold leading-none md:text-5xl [font-family:var(--font-v2-headline)]">
+      <Typography
+        as="h2"
+        variant="v2H2"
+        className="!text-[2.2rem] leading-none md:!text-5xl"
+      >
         {aboutMessages.v2.stories.title}
-      </h2>
+      </Typography>
       <div className="mt-7 grid gap-8 md:mt-8 md:grid-cols-3 md:gap-6">
         {stories.map((story) => (
           <article
@@ -28,12 +33,20 @@ export function AboutStoriesV2({ cms }: { cms?: AboutCmsContent }) {
               />
             </div>
             <div className="p-6 md:p-0">
-              <h3 className="text-[1.4rem] font-bold leading-tight md:mt-4 md:text-3xl [font-family:var(--font-v2-headline)]">
+              <Typography
+                as="h3"
+                variant="v2H2"
+                className="!text-[1.4rem] leading-tight md:mt-4 md:!text-3xl"
+              >
                 {story.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-[#514535] md:leading-6">
+              </Typography>
+              <Typography
+                as="p"
+                variant="v2Muted"
+                className="mt-2 leading-relaxed !text-[#514535] md:leading-6"
+              >
                 {story.summary}
-              </p>
+              </Typography>
             </div>
           </article>
         ))}

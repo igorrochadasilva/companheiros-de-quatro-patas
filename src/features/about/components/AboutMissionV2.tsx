@@ -3,6 +3,7 @@
 import { CircleCheckIcon, HeartIcon, TargetIcon } from "lucide-react";
 
 import { aboutMessages } from "@/messages";
+import { Typography } from "@/shared/ui/typography";
 
 const missionIcons = [HeartIcon, TargetIcon, CircleCheckIcon] as const;
 
@@ -28,12 +29,20 @@ export function AboutMissionV2() {
               >
                 <Icon className="size-5" />
               </div>
-              <h3 className="text-3xl font-bold leading-none md:text-4xl [font-family:var(--font-v2-headline)]">
+              <Typography
+                as="h3"
+                variant="v2H2"
+                className="!text-3xl leading-none md:!text-4xl"
+              >
                 {card.title}
-              </h3>
-              <p className="mt-3 text-sm leading-6 text-[#514535]">
+              </Typography>
+              <Typography
+                as="p"
+                variant="v2Muted"
+                className="mt-3 leading-6 !text-[#514535]"
+              >
                 {card.description}
-              </p>
+              </Typography>
             </article>
           );
         })}

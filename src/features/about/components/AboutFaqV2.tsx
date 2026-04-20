@@ -7,13 +7,19 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/shared/ui/accordion";
+import { Typography } from "@/shared/ui/typography";
 
 export function AboutFaqV2() {
   return (
     <section className="mx-auto w-full max-w-3xl px-6 pb-16 md:px-10">
-      <h2 className="mb-8 text-center text-[2rem] font-bold leading-none md:text-5xl [font-family:var(--font-v2-headline)]">
+      <Typography
+        as="h2"
+        variant="v2H2"
+        align="center"
+        className="mb-8 !text-[2rem] leading-none md:!text-5xl"
+      >
         {aboutMessages.v2.faq.title}
-      </h2>
+      </Typography>
       <Accordion
         type="single"
         collapsible

@@ -5,18 +5,27 @@ import Link from "next/link";
 import { PUBLIC_ROUTES } from "@/constants";
 import { aboutMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
+import { Typography } from "@/shared/ui/typography";
 
 export function AboutTeamV2() {
   return (
     <section className="mx-auto w-full max-w-[1280px] px-6 pb-14 md:px-10">
       <div className="rounded-2xl bg-[#f3af3d] px-5 py-7 md:px-6 md:flex md:items-center md:justify-between md:gap-8">
         <div>
-          <h2 className="text-[2rem] font-bold leading-none text-[#2f2a26] md:text-5xl [font-family:var(--font-v2-headline)]">
+          <Typography
+            as="h2"
+            variant="v2H2"
+            className="!text-[2rem] leading-none !text-[#2f2a26] md:!text-5xl"
+          >
             {aboutMessages.v2.team.title}
-          </h2>
-          <p className="mt-2 text-xs text-[#2f2a26]/85 md:text-sm">
+          </Typography>
+          <Typography
+            as="p"
+            variant="v2Muted"
+            className="mt-2 !text-xs !text-[#2f2a26]/85 md:!text-sm"
+          >
             {aboutMessages.v2.team.subtitle}
-          </p>
+          </Typography>
           <div className="mt-4 grid gap-2 sm:grid-cols-2">
             {aboutMessages.v2.team.roles.map((role) => (
               <div

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { PUBLIC_ROUTES } from "@/constants";
 import { aboutMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
+import { Typography } from "@/shared/ui/typography";
 import type { AboutCmsContent } from "@/types";
 
 export function AboutHeroV2({ cms }: { cms?: AboutCmsContent }) {
@@ -25,16 +26,24 @@ export function AboutHeroV2({ cms }: { cms?: AboutCmsContent }) {
 
       <div className="grid items-center gap-8 md:gap-10 md:grid-cols-2">
         <div className="max-w-xl">
-          <h1 className="text-4xl font-bold leading-tight tracking-tight md:text-[76px] md:leading-[1.05] [font-family:var(--font-v2-headline)]">
+          <Typography
+            as="h1"
+            variant="v2H1"
+            className="!text-4xl leading-tight tracking-tight md:!text-[76px] md:leading-[1.05]"
+          >
             {aboutMessages.v2.hero.titleStart}{" "}
             <span className="text-[#f3af3d] italic">
               {aboutMessages.v2.hero.titleHighlight}
             </span>
-          </h1>
+          </Typography>
 
-          <p className="mt-4 text-base leading-relaxed text-[#514535] md:mt-6 md:text-lg">
+          <Typography
+            as="p"
+            variant="v2Body"
+            className="mt-4 leading-relaxed !text-[#514535] md:mt-6 md:text-lg"
+          >
             {aboutMessages.v2.hero.subtitle}
-          </p>
+          </Typography>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Button

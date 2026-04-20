@@ -13,6 +13,7 @@ import Link from "next/link";
 import { PUBLIC_ROUTES } from "@/constants";
 import { aboutMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
+import { Typography } from "@/shared/ui/typography";
 
 const helpIcons = [
   HeartIcon,
@@ -27,12 +28,20 @@ export function AboutHowWeHelpV2() {
     <section className="mx-auto w-full max-w-[1280px] px-6 pb-14 md:px-10">
       <div className="rounded-2xl bg-[#f6ece5] px-4 py-9 md:px-10">
         <div className="text-center">
-          <h2 className="text-[2.2rem] font-bold leading-none md:text-5xl [font-family:var(--font-v2-headline)]">
+          <Typography
+            as="h2"
+            variant="v2H2"
+            className="!text-[2.2rem] leading-none md:!text-5xl"
+          >
             {aboutMessages.v2.howWeHelp.title}
-          </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-xs text-[#514535] md:mt-4 md:text-sm">
+          </Typography>
+          <Typography
+            as="p"
+            variant="v2Muted"
+            className="mx-auto mt-3 max-w-2xl !text-xs !text-[#514535] md:mt-4 md:!text-sm"
+          >
             {aboutMessages.v2.howWeHelp.subtitle}
-          </p>
+          </Typography>
         </div>
 
         <div className="mt-7 grid grid-cols-2 gap-3 md:mt-8 md:gap-3 lg:grid-cols-5">
@@ -53,12 +62,20 @@ export function AboutHowWeHelpV2() {
                 >
                   <Icon className="size-4" />
                 </div>
-                <h3 className="text-sm font-bold leading-tight">
+                <Typography
+                  as="h3"
+                  variant="v2Body"
+                  className="!text-sm !font-bold leading-tight"
+                >
                   {card.title}
-                </h3>
-                <p className="mt-1 text-[11px] text-[#514535] md:text-xs">
+                </Typography>
+                <Typography
+                  as="p"
+                  variant="v2Muted"
+                  className="mt-1 !text-[11px] !text-[#514535] md:!text-xs"
+                >
                   {card.description}
-                </p>
+                </Typography>
               </article>
             );
           })}
