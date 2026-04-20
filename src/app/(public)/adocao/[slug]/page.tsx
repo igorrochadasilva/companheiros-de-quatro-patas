@@ -13,6 +13,14 @@ type AnimalPageProps = {
 
 const getPetCached = cache(getPublicPetById);
 
+function toAbsoluteImageUrl(url: string) {
+  if (!url) return url;
+  if (url.startsWith("http://") || url.startsWith("https://")) return url;
+  if (url.startsWith("//")) return `https:${url}`;
+
+  return new URL(url, SEO.siteUrl).toString();
+}
+
 export async function generateMetadata({
   params,
 }: AnimalPageProps): Promise<Metadata> {
@@ -30,8 +38,8 @@ export async function generateMetadata({
 
   if (!pet) {
     return {
-      title: "Pet não encontrado",
-      description: "Este pet não está disponível para adoção no momento.",
+      title: "Pet n�o encontrado",
+      description: "Este pet n�o est� dispon�vel para ado��o no momento.",
       robots: {
         index: false,
         follow: false,
@@ -41,11 +49,12 @@ export async function generateMetadata({
 
   const petSlug = pet.externalId ?? pet.id;
   const url = `${PUBLIC_ROUTES.adoption}/${petSlug}`;
-  const mainImage =
-    pet.media.find((item) => item.type === "IMAGE")?.url ??
-    `https://placehold.co/1200x630.png?text=${encodeURIComponent(pet.name)}`;
+  const mainImage = toAbsoluteImageUrl(
+    pet.media.find((item) => item.type === "IMAGE")?.url ?? "",
+  );
+
   const description = [
-    `${pet.name} está disponível para adoção responsável.`,
+    `${pet.name} est� dispon�vel para ado��o respons�vel.`,
     pet.city ? `Cidade: ${pet.city}.` : null,
     pet.description ? pet.description.slice(0, 120) : null,
   ]
@@ -53,7 +62,7 @@ export async function generateMetadata({
     .join(" ");
 
   return {
-    title: `${pet.name} para adoção`,
+    title: `${pet.name} para ado��o`,
     description,
     alternates: {
       canonical: url,
@@ -62,20 +71,24 @@ export async function generateMetadata({
       type: "article",
       locale: SEO.siteLocale,
       url,
-      title: `${pet.name} para adoção`,
+      title: `${pet.name} para ado��o`,
       description,
-      images: [
-        {
-          url: mainImage,
-          alt: pet.name,
-        },
-      ],
+      ...(mainImage
+        ? {
+            images: [
+              {
+                url: mainImage,
+                alt: pet.name,
+              },
+            ],
+          }
+        : {}),
     },
     twitter: {
       card: "summary_large_image",
-      title: `${pet.name} para adoção`,
+      title: `${pet.name} para ado��o`,
       description,
-      images: [mainImage],
+      ...(mainImage ? { images: [mainImage] } : {}),
     },
   };
 }

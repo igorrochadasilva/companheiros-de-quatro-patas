@@ -14,7 +14,7 @@ function normalizeSiteUrl(value: string | undefined): string {
 export const SEO = {
   siteName: "Companheiros de Quatro Patas",
   siteDescription:
-    "ONG de proteção animal com adoção responsável, apoio ao abrigo e transparência nas ações.",
+    "ONG de prote��o animal com ado��o respons�vel, apoio ao abrigo e transpar�ncia nas a��es.",
   siteUrl: normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL),
   siteLocale: "pt_BR",
   siteType: "website" as const,
