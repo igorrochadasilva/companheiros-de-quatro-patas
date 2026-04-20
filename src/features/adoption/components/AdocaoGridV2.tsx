@@ -64,12 +64,18 @@ function formatPetAge(ageYears: number) {
   }
   if (ageYears < 1) {
     const months = Math.max(1, Math.round(ageYears * 12));
-    return `${months} ${months === 1 ? "mes" : "meses"}`;
+    return `${months} ${
+      months === 1
+        ? v2GridMessages.ageUnits.month
+        : v2GridMessages.ageUnits.months
+    }`;
   }
   const wholeAge = Number.isInteger(ageYears)
     ? ageYears
     : Number(ageYears.toFixed(1));
-  return `${wholeAge} ${wholeAge === 1 ? "ano" : "anos"}`;
+  return `${wholeAge} ${
+    wholeAge === 1 ? v2GridMessages.ageUnits.year : v2GridMessages.ageUnits.years
+  }`;
 }
 
 function normalizeImageUrl(url: string) {

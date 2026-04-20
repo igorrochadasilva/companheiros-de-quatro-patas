@@ -35,6 +35,12 @@ export const adoptionMessages = {
         other: "Outros",
       },
       ageUnknown: "Idade nao informada",
+      ageUnits: {
+        month: "mes",
+        months: "meses",
+        year: "ano",
+        years: "anos",
+      },
       urgentBadge: "Urgente",
       detailsCta: "Detalhes",
       adoptCta: "Adotar",
@@ -70,10 +76,58 @@ export const adoptionMessages = {
   petDetail: {
     notFoundTitle: "Pet nao encontrado",
     notFoundDescription: "Este pet nao esta disponivel para adocao no momento.",
+    breadcrumbHome: "Home",
+    breadcrumbAdoption: "Adocao",
     backToList: "Voltar para adocao",
     whatsappCta: "Quero adotar pelo WhatsApp",
     whatsappMessage:
       "Ola! Tenho interesse em adotar o pet {name} (ID: {id}). Link: {url}",
     noDescription: "Sem descricao para este pet.",
+    cityFallback: "Cidade nao informada",
+    mobileDescriptionTitle: "Um sopro de alegria",
+    sizePrefix: "Porte",
+    species: {
+      dog: "Cachorro",
+      cat: "Gato",
+      other: "Outro",
+    },
+    size: {
+      small: "Pequeno",
+      medium: "Medio",
+      large: "Grande",
+    },
+    status: {
+      vaccinated: "Vacinado",
+      castrated: "Castrado",
+      available: "Disponivel",
+    },
+    aria: {
+      favoritePet: "Favoritar pet",
+      selectImage: "Selecionar imagem {index} de {name}",
+    },
+    quickInfo: {
+      energyLabel: "Energia",
+      energyValue: "Moderada",
+    },
+    process: {
+      title: "Como funciona a adocao",
+      steps: [
+        {
+          title: "1. Candidatura",
+          description:
+            "Preencha nosso formulario para que possamos conhecer seu perfil e rotina.",
+        },
+        {
+          title: "2. Entrevista",
+          description:
+            "Conversamos sobre os cuidados especificos que o pet precisa.",
+        },
+        {
+          title: "3. Novo Lar",
+          description:
+            "Finalizamos o processo e voce ganha um novo melhor amigo para a vida.",
+        },
+      ],
+    },
   },
 };
