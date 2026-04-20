@@ -18,6 +18,7 @@
       title: "Eles esperam por voce",
       subtitle:
         "Conheca nossos amigos que estao prontos para receber e dar muito amor em uma nova familia.",
+      viewAll: "Ver todos",
       filters: {
         all: "Todos",
         dogs: "Caes",

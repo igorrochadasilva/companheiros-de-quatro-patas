@@ -237,6 +237,17 @@ export function HomeSectionPetsV2() {
                 {currentSlide} / {items.length}
               </Typography>
             </div>
+            <div className="mt-6 flex justify-center md:mt-8">
+              <Button
+                asChild
+                variant="outline"
+                className="h-11 rounded-full border-[var(--v2-primary)] px-7 font-semibold text-[var(--v2-primary)] hover:bg-[var(--v2-primary)]/10 hover:text-[var(--v2-primary)]"
+              >
+                <Link href={PUBLIC_ROUTES.adoption}>
+                  {homeMessages.pets.v2.viewAll}
+                </Link>
+              </Button>
+            </div>
           </>
         )}
       </div>
