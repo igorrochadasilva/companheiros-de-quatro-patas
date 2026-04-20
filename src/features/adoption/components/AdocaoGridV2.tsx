@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 import { PUBLIC_ROUTES } from "@/constants";
 import { WHATSAPP_URL } from "@/constants/contact";
-import { adoptionMessages, homeMessages } from "@/messages";
+import { adoptionMessages } from "@/messages";
 import { track } from "@/shared/lib/analytics";
 import { Button } from "@/shared/ui/button";
 import {
@@ -30,7 +30,6 @@ import type { Pet } from "@/types";
 
 const emptyMessages = adoptionMessages.empty;
 const errorMessages = adoptionMessages.error;
-const petsMessages = homeMessages.pets;
 const v2GridMessages = adoptionMessages.v2.grid;
 
 const SPECIES_LABELS: Record<Pet["species"], string> = {
@@ -53,9 +52,9 @@ const SPECIES_ICON: Record<Pet["species"], typeof Dog> = {
 };
 
 const BADGE_LABELS: Record<string, string> = {
-  vaccinated: petsMessages.badges.vaccinated,
-  neutered: petsMessages.badges.neutered,
-  urgent: petsMessages.badges.urgent,
+  vaccinated: v2GridMessages.badges.vaccinated,
+  neutered: v2GridMessages.badges.neutered,
+  urgent: v2GridMessages.badges.urgent,
 };
 
 function formatPetAge(ageYears: number) {
@@ -74,7 +73,9 @@ function formatPetAge(ageYears: number) {
     ? ageYears
     : Number(ageYears.toFixed(1));
   return `${wholeAge} ${
-    wholeAge === 1 ? v2GridMessages.ageUnits.year : v2GridMessages.ageUnits.years
+    wholeAge === 1
+      ? v2GridMessages.ageUnits.year
+      : v2GridMessages.ageUnits.years
   }`;
 }
 
@@ -167,7 +168,7 @@ export function AdocaoGridV2({
       {items.map((pet) => {
         const detailPath = `${PUBLIC_ROUTES.adoption}/${pet.id}`;
         const whatsappMessage = encodeURIComponent(
-          petsMessages.card.contactWhatsappMessage
+          v2GridMessages.contactWhatsappMessage
             .replace("{name}", pet.name)
             .replace("{id}", pet.id)
             .replace("{url}", detailPath),
@@ -261,7 +262,7 @@ export function AdocaoGridV2({
                     <DialogHeader>
                       <DialogTitle>{pet.name}</DialogTitle>
                       <DialogDescription>
-                        {petsMessages.card.dialogDescription}
+                        {v2GridMessages.dialogDescription}
                       </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>
@@ -271,7 +272,7 @@ export function AdocaoGridV2({
                           target="_blank"
                           rel="noreferrer"
                         >
-                          {petsMessages.card.contactWhatsapp}
+                          {v2GridMessages.contactWhatsapp}
                         </Link>
                       </Button>
                     </DialogFooter>

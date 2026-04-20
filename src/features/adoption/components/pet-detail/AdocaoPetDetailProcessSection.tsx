@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
 import { HomeIcon, MessageSquareIcon, SearchCheckIcon } from "lucide-react";
+import type { ReactNode } from "react";
 
 import { adoptionMessages } from "@/messages";
 import { Typography } from "@/shared/ui/typography";
@@ -60,4 +60,3 @@ export function AdocaoPetDetailProcessSection() {
     </section>
   );
 }
-

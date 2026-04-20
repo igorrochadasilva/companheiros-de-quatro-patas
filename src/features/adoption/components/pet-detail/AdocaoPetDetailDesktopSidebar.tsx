@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { BoltIcon, HeartIcon, MessageCircleIcon } from "lucide-react";
+import Link from "next/link";
 
 import { PUBLIC_ROUTES } from "@/constants";
 import { adoptionMessages } from "@/messages";
@@ -119,4 +119,3 @@ export function AdocaoPetDetailDesktopSidebar({
     </aside>
   );
 }
-

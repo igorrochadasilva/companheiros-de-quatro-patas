@@ -71,7 +71,9 @@ export async function AdocaoPetDetailContent({
             {adoptionMessages.petDetail.breadcrumbAdoption}
           </Link>
           <span>/</span>
-          <span className="font-bold text-[var(--v2-on-surface)]">{pet.name}</span>
+          <span className="font-bold text-[var(--v2-on-surface)]">
+            {pet.name}
+          </span>
         </nav>
 
         <AdocaoPetDetailMobileHeader
@@ -87,7 +89,9 @@ export async function AdocaoPetDetailContent({
               petName={pet.name}
               imageUrls={galleryImages}
               favoriteAriaLabel={adoptionMessages.petDetail.aria.favoritePet}
-              selectImageAriaTemplate={adoptionMessages.petDetail.aria.selectImage}
+              selectImageAriaTemplate={
+                adoptionMessages.petDetail.aria.selectImage
+              }
             />
 
             <AdocaoPetDetailMobileContent

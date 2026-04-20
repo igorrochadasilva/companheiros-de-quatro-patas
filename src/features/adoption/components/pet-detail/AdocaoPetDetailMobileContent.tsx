@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { PawPrintIcon, ScissorsIcon, ShieldCheckIcon } from "lucide-react";
+import Link from "next/link";
 
 import { PUBLIC_ROUTES } from "@/constants";
 import { adoptionMessages } from "@/messages";
@@ -81,4 +81,3 @@ export function AdocaoPetDetailMobileContent({
     </div>
   );
 }
-

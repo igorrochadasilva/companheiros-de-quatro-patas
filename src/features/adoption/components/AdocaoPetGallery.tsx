@@ -1,8 +1,8 @@
 "use client";
 
+import { HeartIcon } from "lucide-react";
 import Image from "next/image";
 import { useMemo, useState } from "react";
-import { HeartIcon } from "lucide-react";
 
 type AdocaoPetGalleryProps = {
   petName: string;

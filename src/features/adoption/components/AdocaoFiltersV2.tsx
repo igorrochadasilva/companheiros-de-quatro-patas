@@ -2,7 +2,7 @@
 
 import { Dog, PawPrint, Rabbit, RotateCcw } from "lucide-react";
 
-import { adoptionMessages, homeMessages } from "@/messages";
+import { adoptionMessages } from "@/messages";
 import { cn } from "@/shared/lib/utils";
 import { Button } from "@/shared/ui/button";
 import { Checkbox } from "@/shared/ui/checkbox";
@@ -16,7 +16,6 @@ import {
 import { Typography } from "@/shared/ui/typography";
 import type { PetAgeGroup, PetFilters, PetSize, PetSpecies } from "@/types";
 
-const petsMessages = homeMessages.pets;
 const filtersMessages = adoptionMessages.v2.filters;
 
 export interface AdocaoFiltersV2Props {
@@ -34,21 +33,21 @@ export interface AdocaoFiltersV2Props {
 }
 
 const SPECIES_LABELS: Record<PetSpecies, string> = {
-  dog: petsMessages.filters.dog,
-  cat: petsMessages.filters.cat,
+  dog: filtersMessages.dogsSpecies,
+  cat: filtersMessages.catsSpecies,
   other: filtersMessages.otherSpecies,
 };
 
 const SIZE_LABELS: Record<PetSize, string> = {
-  small: petsMessages.filters.sizeSmall,
-  medium: petsMessages.filters.sizeMedium,
-  large: petsMessages.filters.sizeLarge,
+  small: filtersMessages.sizeSmall,
+  medium: filtersMessages.sizeMedium,
+  large: filtersMessages.sizeLarge,
 };
 
 const AGE_LABELS: Record<PetAgeGroup, string> = {
-  puppy: petsMessages.filters.agePuppy,
-  adult: petsMessages.filters.ageAdult,
-  senior: petsMessages.filters.ageSenior,
+  puppy: filtersMessages.agePuppy,
+  adult: filtersMessages.ageAdult,
+  senior: filtersMessages.ageSenior,
 };
 
 export function AdocaoFiltersV2({
