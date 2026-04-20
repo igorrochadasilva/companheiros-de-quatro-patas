@@ -20,6 +20,7 @@ export const API_ROUTES = {
   homeCms: "/api/cms/contentful/home",
   adoptionCms: "/api/cms/contentful/adoption",
   aboutCms: "/api/cms/contentful/about",
+  contactCms: "/api/cms/contentful/contact",
 };
 
 export type ApiRouteKey = keyof typeof API_ROUTES;

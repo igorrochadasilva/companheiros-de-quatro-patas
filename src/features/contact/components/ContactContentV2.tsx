@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { contactMessages } from "@/messages";
 import { parseContactPrefill } from "@/shared/lib";
 import { track } from "@/shared/lib/analytics";
+import { useContactCmsContent } from "@/features/contact/hooks/useContactCmsContent";
 
 import { ContactFaqV2 } from "./ContactFaqV2";
 import { ContactFormV2 } from "./ContactFormV2";
@@ -17,6 +18,7 @@ import { ContactQuickChannelsV2 } from "./ContactQuickChannelsV2";
 export function ContactContentV2() {
   const searchParams = useSearchParams();
   const trackedPrefill = useRef(false);
+  const { data: contactCmsContent } = useContactCmsContent();
 
   const prefill = useMemo(
     () => parseContactPrefill(searchParams),
@@ -41,11 +43,11 @@ export function ContactContentV2() {
 
   return (
     <div className="w-full overflow-x-clip bg-[#faf7f2] text-[#2f2a26]">
-      <ContactHeroV2 />
+      <ContactHeroV2 cms={contactCmsContent} />
       <ContactQuickChannelsV2 />
       <ContactFormV2 prefillSubject={prefill.subject} prefillPet={prefill.pet} />
       <ContactFaqV2 />
-      <ContactImageBreakV2 />
+      <ContactImageBreakV2 cms={contactCmsContent} />
     </div>
   );
 }
