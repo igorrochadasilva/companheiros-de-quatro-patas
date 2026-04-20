@@ -6,14 +6,8 @@ import { PUBLIC_ROUTES } from "@/constants";
 import { aboutMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
 import { Typography } from "@/shared/ui/typography";
-import type { Stats } from "@/types";
 
-function formatNumber(value: number | undefined) {
-  if (typeof value !== "number") return "--";
-  return `${value}`;
-}
-
-export function AboutImpactV2({ stats }: { stats: Stats | undefined }) {
+export function AboutImpactV2() {
   return (
     <section className="mx-auto w-full max-w-[1280px] px-6 pb-14 md:px-10">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
@@ -58,7 +52,7 @@ export function AboutImpactV2({ stats }: { stats: Stats | undefined }) {
             variant="v2H2"
             className="mt-1 !text-4xl !text-[#46c2c1] md:mt-2 md:!text-5xl"
           >
-            {formatNumber(stats?.adoptedCount)}
+            +100
           </Typography>
           <Typography
             as="p"
@@ -81,7 +75,7 @@ export function AboutImpactV2({ stats }: { stats: Stats | undefined }) {
             variant="v2H2"
             className="mt-1 !text-4xl !text-[#2f2a26] md:mt-2 md:!text-5xl"
           >
-            {formatNumber(stats?.inTreatmentCount)}
+            2
           </Typography>
           <Typography
             as="p"
@@ -104,7 +98,7 @@ export function AboutImpactV2({ stats }: { stats: Stats | undefined }) {
             variant="v2H2"
             className="mt-1 !text-4xl !text-[#875300] md:mt-2 md:!text-5xl"
           >
-            {formatNumber(stats?.rescuedCount)}
+            +100
           </Typography>
           <Typography
             as="p"

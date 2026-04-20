@@ -1,7 +1,6 @@
 "use client";
 
 import { useAboutCmsContent } from "@/features/about/hooks/useAboutCmsContent";
-import { useStats } from "@/features/about/hooks/useStats";
 
 import { AboutFaqV2 } from "./AboutFaqV2";
 import { AboutHeroV2 } from "./AboutHeroV2";
@@ -13,7 +12,6 @@ import { AboutStoriesV2 } from "./AboutStoriesV2";
 import { AboutTeamV2 } from "./AboutTeamV2";
 
 export function AboutContentV2() {
-  const { data: stats } = useStats();
   const { data: aboutCmsContent } = useAboutCmsContent();
 
   return (
@@ -21,7 +19,7 @@ export function AboutContentV2() {
       <AboutHeroV2 cms={aboutCmsContent} />
       <AboutMissionV2 />
       <AboutHowWeHelpV2 />
-      <AboutImpactV2 stats={stats} />
+      <AboutImpactV2 />
       <AboutStoriesV2 cms={aboutCmsContent} />
       <AboutTeamV2 />
       <AboutPartnersV2 />

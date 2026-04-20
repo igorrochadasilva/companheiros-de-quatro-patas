@@ -1,18 +1,14 @@
 "use client";
 
 import {
-  ArrowRightIcon,
   HeartIcon,
   HomeIcon,
   ScissorsIcon,
   StethoscopeIcon,
   UsersIcon,
 } from "lucide-react";
-import Link from "next/link";
 
-import { PUBLIC_ROUTES } from "@/constants";
 import { aboutMessages } from "@/messages";
-import { Button } from "@/shared/ui/button";
 import { Typography } from "@/shared/ui/typography";
 
 const helpIcons = [
@@ -81,18 +77,6 @@ export function AboutHowWeHelpV2() {
           })}
         </div>
 
-        <div className="mt-6 text-center">
-          <Button
-            variant="link"
-            asChild
-            className="text-sm text-[#46c2c1] hover:text-[#39adac]"
-          >
-            <Link href={PUBLIC_ROUTES.adoption}>
-              {aboutMessages.v2.howWeHelp.cta}
-              <ArrowRightIcon className="size-4" />
-            </Link>
-          </Button>
-        </div>
       </div>
     </section>
   );

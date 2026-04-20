@@ -60,7 +60,7 @@ export const aboutMessages = {
       adoptedLabel: "Adotados",
       inTreatmentLabel: "Em tratamento",
       rescuedLabel: "Resgatados",
-      adoptedHint: "+12% este mês",
+      adoptedHint: "Adote um também",
       inTreatmentHint: "Aguardando recuperação",
       rescuedHint: "Meta: 5.000 vidas",
     },
