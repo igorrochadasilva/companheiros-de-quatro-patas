@@ -8,12 +8,6 @@ type DataLayerEvent = AnalyticsPayload & {
   event: AnalyticsEventName;
 };
 
-declare global {
-  interface Window {
-    dataLayer?: DataLayerEvent[];
-  }
-}
-
 export function track(event: AnalyticsEventName, payload?: AnalyticsPayload) {
   const eventPayload: DataLayerEvent = {
     event,
@@ -26,7 +20,12 @@ export function track(event: AnalyticsEventName, payload?: AnalyticsPayload) {
     sendGTMEvent(eventPayload);
   } catch {
     // Fallback defensivo: garante o push mesmo sem GTM ativo.
-    window.dataLayer = window.dataLayer ?? [];
-    window.dataLayer.push(eventPayload);
+    const dataLayer = (window as Window & { dataLayer?: object[] }).dataLayer;
+    if (Array.isArray(dataLayer)) {
+      dataLayer.push(eventPayload);
+      return;
+    }
+
+    (window as Window & { dataLayer?: object[] }).dataLayer = [eventPayload];
   }
 }
