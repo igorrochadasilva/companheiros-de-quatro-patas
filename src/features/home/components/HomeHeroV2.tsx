@@ -8,6 +8,7 @@ import { useHomeCmsContent } from "@/features/home/hooks/useHomeCmsContent";
 import { useStats } from "@/features/home/hooks/useStats";
 import { homeMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
+import { Skeleton } from "@/shared/ui/skeleton";
 import { Typography } from "@/shared/ui/typography";
 
 type HomeHeroV2Props = {
@@ -20,11 +21,9 @@ export function HomeHeroV2({
   secondaryCtaHref,
 }: HomeHeroV2Props) {
   const { data: stats, isLoading, isError } = useStats();
-  const { data: homeCmsContent } = useHomeCmsContent();
+  const { data: homeCmsContent, isLoading: isCmsLoading } = useHomeCmsContent();
 
-  const heroImageUrl =
-    homeCmsContent?.heroImageUrl ||
-    "https://placehold.co/900x1200.png?text=Companheiros";
+  const heroImageUrl = homeCmsContent?.heroImageUrl;
   const heroImageAlt =
     homeCmsContent?.heroImageAlt ||
     `${homeMessages.hero.titleTop} ${homeMessages.hero.titleAccent}`;
@@ -59,11 +58,10 @@ export function HomeHeroV2({
           <Typography
             as="h1"
             variant="v2H1"
-            className="mx-auto mb-8 max-w-[12ch] text-center text-4xl leading-tight md:mx-0 md:max-w-none md:text-left md:text-7xl"
+            className="mx-auto mb-4 max-w-[12ch] text-center text-4xl leading-tight md:mx-0 md:max-w-none md:text-left md:text-7xl"
           >
             {homeMessages.hero.titleTop}
-            <br />
-            <span className="text-[var(--v2-primary)] italic">
+            <span className="block -mt-1 text-[var(--v2-primary)] italic md:-mt-2">
               {homeMessages.hero.titleAccent}
             </span>
           </Typography>
@@ -152,15 +150,19 @@ export function HomeHeroV2({
 
           <div className="v2-editorial-shadow relative z-10 overflow-hidden rounded-[3rem] bg-[var(--v2-surface-container-lowest)] shadow-[0_12px_28px_-18px_rgba(31,27,23,0.28)] transition-transform duration-700 md:rotate-2 md:hover:rotate-0">
             <div className="relative aspect-[4/3] w-full md:aspect-[4/5]">
-              <Image
-                src={heroImageUrl}
-                alt={heroImageAlt}
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-                priority
-                fetchPriority="high"
-              />
+              {isCmsLoading || !heroImageUrl ? (
+                <Skeleton className="h-full w-full" />
+              ) : (
+                <Image
+                  src={heroImageUrl}
+                  alt={heroImageAlt}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                  priority
+                  fetchPriority="high"
+                />
+              )}
             </div>
           </div>
 

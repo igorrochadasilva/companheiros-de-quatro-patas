@@ -1,13 +1,22 @@
 "use client";
 
 import { aboutMessages } from "@/messages";
+import { Skeleton } from "@/shared/ui/skeleton";
 import { Typography } from "@/shared/ui/typography";
 import type { AboutCmsContent } from "@/types";
 
-export function AboutStoriesV2({ cms }: { cms?: AboutCmsContent }) {
+type AboutStoriesV2Props = {
+  cms?: AboutCmsContent;
+  isCmsLoading?: boolean;
+};
+
+export function AboutStoriesV2({
+  cms,
+  isCmsLoading = false,
+}: AboutStoriesV2Props) {
   const stories = aboutMessages.v2.stories.items.map((story, index) => ({
     ...story,
-    imageUrl: cms?.storiesImages?.[index] ?? story.imageUrl,
+    imageUrl: cms?.storiesImages?.[index] ?? null,
   }));
 
   return (
@@ -26,11 +35,15 @@ export function AboutStoriesV2({ cms }: { cms?: AboutCmsContent }) {
             className="rounded-3xl border border-[#d5c4af]/10 bg-white p-0 shadow-sm md:rounded-none md:border-0 md:bg-transparent md:p-0 md:shadow-none"
           >
             <div className="overflow-hidden rounded-3xl bg-[#ebe1da] shadow-sm md:rounded-xl md:shadow-sm">
-              <img
-                src={story.imageUrl}
-                alt={story.title}
-                className="h-56 w-full object-cover md:aspect-square md:h-auto"
-              />
+              {isCmsLoading || !story.imageUrl ? (
+                <Skeleton className="h-56 w-full md:aspect-square md:h-auto" />
+              ) : (
+                <img
+                  src={story.imageUrl}
+                  alt={story.title}
+                  className="h-56 w-full object-cover md:aspect-square md:h-auto"
+                />
+              )}
             </div>
             <div className="p-6 md:p-0">
               <Typography

@@ -1,184 +1,156 @@
-# Implementacao SEO por etapas - Home e Adocao
+# SEO Home e Adocao - estrategia de melhoria (Next.js 16)
 
-## Data de referencia
+## Data de revisao
 
-2026-04-11
+2026-05-07
 
 ## Objetivo
 
-Elevar o ranqueamento organico do projeto com foco principal em intencao de busca de adocao de animais, mantendo a home como pagina de autoridade e distribuicao de links internos.
+Melhorar indexacao, relevancia e CTR organica das rotas `"/"` e `"/adocao"` (incluindo `"/adocao/[slug]"`), seguindo boas praticas atuais do App Router no Next.js 16.
 
-## Escopo
+## Fontes oficiais (base tecnica)
 
-### Prioridade principal
+- Metadata API (`metadata` e `generateMetadata`):
+  - https://nextjs.org/docs/app/api-reference/functions/generate-metadata
+- robots metadata file:
+  - https://nextjs.org/docs/app/api-reference/file-conventions/metadata/robots
+- sitemap metadata file:
+  - https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap
+- JSON-LD no App Router:
+  - https://nextjs.org/docs/app/guides/json-ld
+- Open Graph / Twitter image file conventions:
+  - https://nextjs.org/docs/app/api-reference/file-conventions/metadata/opengraph-image
 
-- `src/app/(public)/adocao/page.tsx`
-- `src/app/(public)/adocao/[slug]/page.tsx`
-- `src/features/adoption/*`
+## Diagnostico atual (Home e Adocao)
 
-### Prioridade secundaria
+## O que ja esta bom
+
+- Home (`src/app/(public)/page.tsx`) e listagem de adocao (`src/app/(public)/adocao/page.tsx`) ja possuem:
+  - `title`
+  - `description`
+  - `alternates.canonical`
+  - `openGraph`
+  - `twitter`
+- Detalhe de pet (`src/app/(public)/adocao/[slug]/page.tsx`) ja possui `generateMetadata` dinamico com canonical e imagem OG quando disponivel.
+- Projeto ja possui `robots.ts` e `sitemap.ts`.
+
+## Gaps de impacto direto em SEO
+
+1. Links internos de pet ainda usam `pet.id` em partes da Home e da grade de Adocao, mas o canonical do detalhe favorece `externalId` quando existe.
+2. Listagem `"/adocao"` e filtros/paginacao sao client-first (`useQuery` + `router.push`), com pouco HTML util no primeiro response para crawler.
+3. Paginacao da listagem usa botoes, nao links reais `<a href>`, reduzindo rastreabilidade.
+4. Nao ha JSON-LD de `Organization`, `ItemList` e `Pet` nas rotas prioritarias.
+5. Nao existe estrategia de `opengraph-image`/`twitter-image` por arquivo para padrao visual de compartilhamento.
+
+## Escopo desta frente
 
 - `src/app/(public)/page.tsx`
-- `src/features/home/*`
-- `src/app/sitemap.ts`
-- `src/app/robots.ts`
-- `src/app/layout.tsx`
+- `src/app/(public)/adocao/page.tsx`
+- `src/app/(public)/adocao/[slug]/page.tsx`
+- `src/features/home/*` (links para detalhe de pet)
+- `src/features/adoption/*` (links, paginacao, bootstrap SSR)
+- `src/app/layout.tsx` (JSON-LD organizacional)
+- `src/app/sitemap.ts` (consistencia canonical)
 
-## Estado atual (baseline)
+## Estrategia de implementacao (por fases)
 
-Ja existe:
-
-- metadata global no layout
-- sitemap e robots
-- metadata dinamica em detalhe de pet
-- canonical em algumas paginas principais
-
-Gaps de impacto:
-
-- listagem de adocao renderizada majoritariamente no client
-- paginacao com `href="#"` (fraca rastreabilidade)
-- falta de dados estruturados (JSON-LD) para pet/lista/organizacao
-- links internos de pet nem sempre apontam para slug canonico
-- metadata incompleta em parte das paginas publicas
-
-## Meta de resultado
-
-1. Melhor indexacao da listagem e detalhes de adocao.
-2. Maior cobertura de queries long-tail de adocao por pet/cidade/porte.
-3. Melhor CTR organica por snippets enriquecidos e metadata consistente.
-
-## Principios de implementacao
-
-- Seguir docs oficiais do Next.js Metadata API e JSON-LD.
-- Priorizar mudancas incrementais com validacao por etapa.
-- Evitar regressao de UX enquanto otimiza crawl/indexacao.
-- Sempre manter canonical consistente entre links internos, sitemap e metadata.
-
-## Etapas de implementacao
-
-## Etapa 1 - Canonical e arquitetura de URL (fundacao)
+## Fase 1 - Consistencia canonica e links internos (prioridade alta)
 
 ### Objetivo
 
-Consolidar uma unica URL canonica para cada pet e evitar duplicidade de sinais SEO.
+Garantir um unico endereco canonico por pet em todo o fluxo Home -> Adocao -> Detalhe.
 
 ### Implementar
 
-- Padronizar links internos para usar slug canonico do pet (`externalId` quando existir).
-- Em `src/app/(public)/adocao/[slug]/page.tsx`, redirecionar para URL canonica quando acessar variante nao canonica.
-- Garantir alinhamento entre:
-  - `alternates.canonical`
+- Padronizar URL de detalhe para `externalId ?? id` em:
+  - `src/features/home/components/HomeSectionPetsCard.tsx`
+  - `src/features/adoption/components/AdocaoGridV2.tsx`
+- Em `src/app/(public)/adocao/[slug]/page.tsx`, redirecionar para slug canonico quando rota acessada nao for canonica.
+- Confirmar alinhamento entre:
+  - canonical da pagina
   - links internos
-  - entradas do sitemap
+  - entradas de `sitemap.ts`
 
-### Criterios de pronto
+### Criterio de pronto
 
-- qualquer acesso alternativo ao mesmo pet resolve em URL canonica
-- links de home e adocao apontam para formato unico
-- nenhuma pagina de pet indexavel sem canonical explicita
+- Nenhum link interno para detalhe com slug nao canonico.
+- Acesso por slug alternativo retorna redirect para slug canonico.
 
-### Validacao
-
-- testar manualmente 3 pets com e sem `externalId`
-- conferir header/location de redirect
-- rodar `pnpm lint` e `pnpm build`
-
-## Etapa 2 - Listagem de adocao indexavel e paginacao rastreavel
+## Fase 2 - Listagem de adocao server-first para indexacao (prioridade alta)
 
 ### Objetivo
 
-Tornar `/adocao` mais amigavel para rastreamento e indexacao sem perder filtros.
+Entregar HTML inicial rastreavel da listagem sem depender de hidratacao completa.
 
 ### Implementar
 
-- mover bootstrap da listagem para render no servidor em `src/app/(public)/adocao/page.tsx`
-- manter estado de filtros em URL (`searchParams`)
-- substituir paginacao de `href="#"` por links reais (`/adocao?page=2&...`)
-- manter fallback client para interatividade, mas com HTML inicial util para crawler
+- Mover bootstrap de dados da listagem para Server Component em `src/app/(public)/adocao/page.tsx`.
+- Passar estado inicial para componente client (hidratar com initial data).
+- Manter filtros em query string (`searchParams`) como fonte de verdade.
+- Revisar canonical da listagem:
+  - canonical limpa para URL principal de categoria.
+  - parametros de filtro/paginacao com estrategia explicita (indexavel ou nao, conforme regra do negocio).
 
-### Criterios de pronto
+### Criterio de pronto
 
-- pagina inicial de adocao entrega conteudo util sem depender de hidratacao completa
-- links de pagina e filtros sao rastreaveis
-- canonical da listagem respeita combinacao principal definida
+- `view-source` da listagem ja contem itens de pets renderizados.
+- Filtros e pagina atual continuam funcionando sem regressao de UX.
 
-### Validacao
-
-- inspecionar HTML renderizado da listagem
-- navegar em 3 combinacoes de filtros via URL
-- verificar ausencia de loops de navegacao
-- rodar `pnpm lint` e `pnpm build`
-
-## Etapa 3 - Dados estruturados (JSON-LD)
+## Fase 3 - Paginacao e navegação rastreavel (prioridade alta)
 
 ### Objetivo
 
-Melhorar entendimento semantico para buscadores.
+Substituir controle de pagina somente por botoes para um modelo com links rastreaveis.
 
 ### Implementar
 
-- `Organization` no layout publico (dados institucionais da ONG)
-- `ItemList` em `/adocao` (pets renderizados na pagina atual)
-- `Pet` + `BreadcrumbList` em `/adocao/[slug]`
-- `FAQPage` quando FAQ da home/adocao estiver estavel no conteudo
+- Trocar paginacao de `button + onClick` por `Link` com `href` real:
+  - `/adocao?page=2&sort=...&...`
+- Manter tracking e estado visual ativo.
+- Opcional: manter botao apenas como fallback de interacao, mas com link crawlable no markup.
 
-### Criterios de pronto
+### Criterio de pronto
 
-- JSON-LD valido e consistente com conteudo visivel
-- sem campos inventados ou divergentes da pagina
+- Bots conseguem seguir paginacao apenas lendo HTML.
+- Navegacao continua fluida para usuario.
 
-### Validacao
-
-- validar em Rich Results Test
-- validar ausencia de warnings criticos no Schema.org
-- confirmar render server-side do script JSON-LD
-
-## Etapa 4 - Metadata completa em rotas publicas
+## Fase 4 - Dados estruturados (prioridade media/alta)
 
 ### Objetivo
 
-Uniformizar sinais de SEO on-page nas rotas mais importantes.
+Aumentar compreensao semantica por buscadores e elegibilidade a rich results.
 
 ### Implementar
 
-- completar `alternates.canonical`, `openGraph` e `twitter` nas paginas publicas que ainda estao incompletas
-- revisar titulos e descricoes com foco em intencao de adocao local
-- padronizar tom de copy para facilitar CTR sem keyword stuffing
+- `Organization` no layout publico (`src/app/layout.tsx`).
+- `ItemList` na listagem `/adocao` com os pets da pagina.
+- `Pet` + `BreadcrumbList` em `/adocao/[slug]`.
+- Sanitizar payload JSON-LD (`replace(/</g, "\\u003c")`) conforme guia oficial.
 
-### Criterios de pronto
+### Criterio de pronto
 
-- todas as rotas publicas indexaveis com metadata coerente
-- sem conflito entre metadata de layout e metadata de pagina
+- JSON-LD valido no Rich Results Test / Schema Markup Validator.
+- Dados estruturados coerentes com conteudo visivel.
 
-### Validacao
-
-- checklist por rota publica
-- revisar codigo-fonte renderizado
-- rodar `pnpm lint` e `pnpm build`
-
-## Etapa 5 - Home como hub de autoridade para adocao
+## Fase 5 - Social metadata e assets OG (prioridade media)
 
 ### Objetivo
 
-Fortalecer distribuicao de autoridade da home para adocao e paginas de pet.
+Padronizar compartilhamento com imagem social confiavel por rota.
 
 ### Implementar
 
-- reforcar linking interno contextual para `/adocao` e detalhes de pet
-- revisar headings e copy da home para intencao "adocao responsavel"
-- revisar FAQ da home com perguntas transacionais e informacionais sobre adocao
+- Adicionar arquivos por convencao:
+  - `app/opengraph-image.(png|tsx)`
+  - `app/twitter-image.(png|tsx)`
+- Definir imagem base de Home e variante para adocao/listagem quando fizer sentido.
+- Garantir `title` e `description` alinhados entre metadata e conteudo da pagina.
 
-### Criterios de pronto
+### Criterio de pronto
 
-- trilha de navegacao clara home -> listagem -> detalhe
-- links com ancoras descritivas e sem duplicidade excessiva
+- Preview consistente em WhatsApp, X e Facebook para Home e Adocao.
 
-### Validacao
-
-- auditoria manual de links internos
-- checagem de heading hierarchy (`h1`, `h2`, etc.)
-
-## Etapa 6 - Medicao e iteracao
+## Fase 6 - Medicao e governanca (prioridade media)
 
 ### Objetivo
 
@@ -186,103 +158,49 @@ Fechar ciclo de melhoria continua orientado a dados.
 
 ### Implementar
 
-- definir baseline e acompanhamento em Search Console:
-  - impressao
-  - clique
+- Medir baseline no Search Console:
+  - impressoes
+  - cliques
   - CTR
   - posicao media
-- acompanhar cobertura de indexacao para `/adocao` e `/adocao/[slug]`
-- registrar resultados quinzenais em doc de acompanhamento
+- Criar rotina quinzenal de revisao.
+- Registrar evolucao no `doc/tasks/seo/`.
 
-### Criterios de pronto
+### Criterio de pronto
 
-- baseline registrado
-- primeira rodada de comparacao publicada
+- Baseline documentado e primeira comparacao publicada.
 
-## Sequenciamento recomendado
+## Plano de execucao recomendado
 
-1. Etapa 1
-2. Etapa 2
-3. Etapa 3
-4. Etapa 4
-5. Etapa 5
-6. Etapa 6
+1. Fase 1
+2. Fase 2
+3. Fase 3
+4. Fase 4
+5. Fase 5
+6. Fase 6
 
-## Divisao sugerida para agents
-
-### Agent A - Arquitetura SEO
-
-Responsavel por canonical, redirects e consistencia de URL.
-
-Arquivos principais:
-
-- `src/app/(public)/adocao/[slug]/page.tsx`
-- `src/features/home/components/HomeSectionPetsCard.tsx`
-- `src/app/sitemap.ts`
-
-### Agent B - Render e navegabilidade da listagem
-
-Responsavel por indexabilidade da listagem e paginacao.
-
-Arquivos principais:
-
-- `src/app/(public)/adocao/page.tsx`
-- `src/features/adoption/components/AdocaoContent.tsx`
-- `src/features/adoption/hooks/usePets.ts`
-
-### Agent C - Dados estruturados
-
-Responsavel por JSON-LD e validacao semantica.
-
-Arquivos principais:
-
-- `src/app/layout.tsx`
-- `src/app/(public)/adocao/page.tsx`
-- `src/app/(public)/adocao/[slug]/page.tsx`
-
-### Agent D - Metadata e conteudo SEO
-
-Responsavel por metadata das rotas publicas e melhoria de copy.
-
-Arquivos principais:
-
-- `src/app/(public)/*/page.tsx`
-- `src/messages/pt-br/*.ts`
-
-## Checklist de validacao por PR
+## Checklist tecnico por PR
 
 - [ ] `pnpm lint` sem erros
 - [ ] `pnpm build` sem erros
-- [ ] canonical consistente por pagina
-- [ ] paginacao rastreavel sem `href="#"`
-- [ ] JSON-LD valido
-- [ ] sem regressao de UX
+- [ ] canonical consistente com URL final renderizada
+- [ ] links internos de detalhe usando slug canonico
+- [ ] paginacao rastreavel via `<a href>`
+- [ ] JSON-LD valido e sanitizado
+- [ ] sem regressao funcional em filtros/paginacao
 
 ## Riscos e mitigacao
 
-- Risco: regressao de UX ao migrar fluxo para server-first.
-  - Mitigacao: manter interatividade client incremental e testes manuais por fluxo.
-- Risco: canonical incorreto em cenarios com slug alternativo.
-  - Mitigacao: testes com amostra de pets com e sem `externalId`.
-- Risco: schema markup divergente do conteudo.
-  - Mitigacao: gerar JSON-LD a partir dos mesmos dados usados no render.
+- Risco: regressao de UX ao migrar listagem para server-first.
+  - Mitigacao: hidratar com estado inicial e manter camada client para interacoes.
+- Risco: redirect canonico mal configurado gerar loop.
+  - Mitigacao: comparar slug atual vs slug canonico antes de redirecionar.
+- Risco: JSON-LD divergente do conteudo.
+  - Mitigacao: montar schema a partir dos mesmos dados usados no render da pagina.
 
-## Fora de escopo desta frente
+## Fora de escopo desta etapa
 
-- link building externo
-- campanhas pagas
-- internacionalizacao
-- redesign completo de layout
-
-## Referencias oficiais
-
-- Next.js Metadata API
-  - https://nextjs.org/docs/app/building-your-application/optimizing/metadata
-- Next.js `generateMetadata`
-  - https://nextjs.org/docs/app/api-reference/functions/generate-metadata
-- Next.js `robots.txt`
-  - https://nextjs.org/docs/app/api-reference/file-conventions/metadata/robots
-- Next.js `sitemap.xml`
-  - https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap
-- Next.js JSON-LD guide
-  - https://nextjs.org/docs/app/guides/json-ld
+- Link building externo
+- Campanhas pagas
+- Internacionalizacao
+- Redesign visual completo

@@ -1,12 +1,18 @@
 import { contactMessages } from "@/messages";
+import { Skeleton } from "@/shared/ui/skeleton";
 import { Typography } from "@/shared/ui/typography";
 import type { ContactCmsContent } from "@/types";
 
-const HERO_IMAGE_URL =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuD80cWCCvaQyy7PxkTOQaW9wIWXcLy3_kUxLF0RYx11grssuStm4kra97nzbsi63j_MJOUfr5-T488K7z3wSltPCeHJm7hcS28a1P4Pw98zSQvrxz075i2LhUe5HFmDjAQYgT_EgsxGPySz60hI444T-qJjsbURttYZjnNE0moAtH4rhwGhqZTN2Cmim2bjdBOCDSTG5qKDYigN6PdEkTcqXtysKGv46BdyFaxw-DH0SEd-K7rBVeAHT0C696YJeBliG6ejidld5Z4";
+type ContactHeroV2Props = {
+  cms?: ContactCmsContent;
+  isCmsLoading?: boolean;
+};
 
-export function ContactHeroV2({ cms }: { cms?: ContactCmsContent }) {
-  const imageUrl = cms?.heroImageUrl ?? HERO_IMAGE_URL;
+export function ContactHeroV2({
+  cms,
+  isCmsLoading = false,
+}: ContactHeroV2Props) {
+  const imageUrl = cms?.heroImageUrl;
   const imageAlt = cms?.heroImageAlt ?? "Ilustracao de um gato simpatico";
 
   return (
@@ -44,14 +50,23 @@ export function ContactHeroV2({ cms }: { cms?: ContactCmsContent }) {
         </div>
 
         <div className="relative hidden lg:block">
-          <img
-            src={imageUrl}
-            alt={imageAlt}
-            className="h-[460px] w-full rounded-2xl object-cover shadow-xl"
-          />
+          {isCmsLoading || !imageUrl ? (
+            <Skeleton className="h-[460px] w-full rounded-2xl" />
+          ) : (
+            <img
+              src={imageUrl}
+              alt={imageAlt}
+              className="h-[460px] w-full rounded-2xl object-cover shadow-xl"
+            />
+          )}
           <div className="absolute -bottom-5 left-5 max-w-[290px] rounded-2xl border border-white/30 bg-[#faf7f2]/85 p-5 shadow-lg backdrop-blur-sm">
-            <Typography as="p" variant="v2Body" className="italic !text-[#f3af3d]">
-              "O amor nao precisa de palavras, mas nos adoramos conversar sobre ele."
+            <Typography
+              as="p"
+              variant="v2Body"
+              className="italic !text-[#f3af3d]"
+            >
+              &quot;O amor nao precisa de palavras, mas nos adoramos conversar
+              sobre ele.&quot;
             </Typography>
           </div>
         </div>

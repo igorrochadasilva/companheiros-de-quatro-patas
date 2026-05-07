@@ -5,11 +5,17 @@ import Link from "next/link";
 import { PUBLIC_ROUTES } from "@/constants";
 import { aboutMessages } from "@/messages";
 import { Button } from "@/shared/ui/button";
+import { Skeleton } from "@/shared/ui/skeleton";
 import { Typography } from "@/shared/ui/typography";
 import type { AboutCmsContent } from "@/types";
 
-export function AboutHeroV2({ cms }: { cms?: AboutCmsContent }) {
-  const imageUrl = cms?.heroImageUrl ?? aboutMessages.v2.hero.imageUrl;
+type AboutHeroV2Props = {
+  cms?: AboutCmsContent;
+  isCmsLoading?: boolean;
+};
+
+export function AboutHeroV2({ cms, isCmsLoading = false }: AboutHeroV2Props) {
+  const imageUrl = cms?.heroImageUrl;
   const imageAlt = cms?.heroImageAlt ?? aboutMessages.v2.hero.imageAlt;
 
   return (
@@ -67,11 +73,15 @@ export function AboutHeroV2({ cms }: { cms?: AboutCmsContent }) {
 
         <div className="hidden md:block md:justify-self-end">
           <div className="overflow-hidden rounded-2xl bg-[#f0e6e0] shadow-[0_20px_45px_-18px_rgba(31,27,23,0.35)] lg:rotate-2">
-            <img
-              src={imageUrl}
-              alt={imageAlt}
-              className="aspect-[4/3] w-full max-w-[560px] object-cover"
-            />
+            {isCmsLoading || !imageUrl ? (
+              <Skeleton className="aspect-[4/3] w-full max-w-[560px]" />
+            ) : (
+              <img
+                src={imageUrl}
+                alt={imageAlt}
+                className="aspect-[4/3] w-full max-w-[560px] object-cover"
+              />
+            )}
           </div>
         </div>
       </div>

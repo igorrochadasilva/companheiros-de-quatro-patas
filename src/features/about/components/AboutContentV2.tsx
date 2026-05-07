@@ -12,15 +12,16 @@ import { AboutStoriesV2 } from "./AboutStoriesV2";
 import { AboutTeamV2 } from "./AboutTeamV2";
 
 export function AboutContentV2() {
-  const { data: aboutCmsContent } = useAboutCmsContent();
+  const { data: aboutCmsContent, isLoading: isCmsLoading } =
+    useAboutCmsContent();
 
   return (
     <div className="w-full overflow-x-hidden bg-[#faf7f2] text-[#2f2a26] [font-family:var(--font-v2-body)]">
-      <AboutHeroV2 cms={aboutCmsContent} />
+      <AboutHeroV2 cms={aboutCmsContent} isCmsLoading={isCmsLoading} />
       <AboutMissionV2 />
       <AboutHowWeHelpV2 />
       <AboutImpactV2 />
-      <AboutStoriesV2 cms={aboutCmsContent} />
+      <AboutStoriesV2 cms={aboutCmsContent} isCmsLoading={isCmsLoading} />
       <AboutTeamV2 />
       <AboutPartnersV2 />
       <AboutFaqV2 />
