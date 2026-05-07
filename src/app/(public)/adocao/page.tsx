@@ -6,7 +6,7 @@ import { listPets } from "@/backend/modules/pets/application/list-pets";
 import { PUBLIC_ROUTES, SEO } from "@/constants";
 import { AdocaoContentV2 } from "@/features/adoption/components/AdocaoContentV2";
 import { featureFlags } from "@/shared/config/feature-flags";
-import { getPetCanonicalSlug } from "@/shared/lib";
+import { buildAdoptionItemListJsonLd } from "@/shared/lib";
 import { parseAdoptionSearchParamsRecord } from "@/shared/lib/search-params";
 import { JsonLdScript } from "@/shared/ui/json-ld-script";
 
@@ -52,23 +52,12 @@ export default async function AdocaoPage({ searchParams }: AdocaoPageProps) {
     page: initialSearchState.page,
     sort: initialSearchState.sort,
   });
-  const itemListJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: pageTitle,
-    itemListOrder: "https://schema.org/ItemListOrderAscending",
-    numberOfItems: initialData.items.length,
-    itemListElement: initialData.items.map((pet, index) => {
-      const slug = getPetCanonicalSlug(pet);
-      const itemUrl = `${SEO.siteUrl}${PUBLIC_ROUTES.adoption}/${slug}`;
-      return {
-        "@type": "ListItem",
-        position: (initialData.page - 1) * 12 + index + 1,
-        url: itemUrl,
-        name: pet.name,
-      };
-    }),
-  };
+  const itemListJsonLd = buildAdoptionItemListJsonLd({
+    title: pageTitle,
+    items: initialData.items,
+    page: initialData.page,
+    pageSize: 12,
+  });
 
   return (
     <>

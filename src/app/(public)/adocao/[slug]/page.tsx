@@ -6,6 +6,7 @@ import { getPublicPetById } from "@/backend/modules/pets/application/get-public-
 import { PUBLIC_ROUTES, SEO } from "@/constants";
 import { AdocaoPetDetailContent } from "@/features/adoption/components/AdocaoPetDetailContent";
 import { featureFlags } from "@/shared/config/feature-flags";
+import { buildPetBreadcrumbJsonLd, buildPetJsonLd } from "@/shared/lib";
 import { JsonLdScript } from "@/shared/ui/json-ld-script";
 
 type AnimalPageProps = {
@@ -26,12 +27,6 @@ function getPetCanonicalSlug(
   pet: NonNullable<Awaited<ReturnType<typeof getPublicPetById>>>,
 ) {
   return pet.externalId ?? pet.id;
-}
-
-function getPetCanonicalUrl(
-  pet: NonNullable<Awaited<ReturnType<typeof getPublicPetById>>>,
-) {
-  return `${SEO.siteUrl}${PUBLIC_ROUTES.adoption}/${getPetCanonicalSlug(pet)}`;
 }
 
 function getMainPetImageUrl(
@@ -126,51 +121,22 @@ export default async function AnimalPage({ params }: AnimalPageProps) {
       redirect(`${PUBLIC_ROUTES.adoption}/${canonicalSlug}`);
     }
 
-    const petUrl = getPetCanonicalUrl(pet);
     const mainImage = getMainPetImageUrl(pet);
-    const petJsonLd = {
-      "@context": "https://schema.org",
-      "@type": "Pet",
+    const petJsonLd = buildPetJsonLd({
       name: pet.name,
-      description: pet.description ?? undefined,
-      url: petUrl,
-      image: mainImage || undefined,
-      animalType: pet.species,
-      gender: pet.gender ?? undefined,
-      size: pet.size ?? undefined,
-      address: pet.city
-        ? {
-            "@type": "PostalAddress",
-            addressLocality: pet.city,
-            addressRegion: pet.state ?? undefined,
-            addressCountry: "BR",
-          }
-        : undefined,
-    };
-    const breadcrumbJsonLd = {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: SEO.siteUrl,
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Adocao",
-          item: `${SEO.siteUrl}${PUBLIC_ROUTES.adoption}`,
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: pet.name,
-          item: petUrl,
-        },
-      ],
-    };
+      description: pet.description,
+      species: pet.species,
+      gender: pet.gender,
+      size: pet.size,
+      city: pet.city,
+      state: pet.state,
+      canonicalSlug,
+      imageUrl: mainImage,
+    });
+    const breadcrumbJsonLd = buildPetBreadcrumbJsonLd({
+      petName: pet.name,
+      canonicalSlug,
+    });
 
     return (
       <>
