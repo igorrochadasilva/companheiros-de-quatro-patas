@@ -5,9 +5,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
 
 import { usePets } from "@/features/adoption/hooks/usePets";
+import type { PetsListResponse } from "@/features/adoption/services/pets";
 import { adoptionMessages } from "@/messages";
 import { track } from "@/shared/lib/analytics";
 import {
+  type AdoptionSearchState,
   parseAdoptionSearchParams,
   toAdoptionSearchParams,
 } from "@/shared/lib/search-params";
@@ -28,6 +30,11 @@ const PATHNAME = "/adocao";
 const paginationMessages = adoptionMessages.v2.pagination;
 const sheetMessages = adoptionMessages.v2.sheet;
 
+type AdocaoContentV2Props = {
+  initialSearchState?: AdoptionSearchState;
+  initialData?: PetsListResponse;
+};
+
 function buildPages(currentPage: number, totalPages: number) {
   const maxPagesToShow = 5;
   if (totalPages <= maxPagesToShow) {
@@ -47,7 +54,27 @@ function buildPages(currentPage: number, totalPages: number) {
   return pages.sort((left, right) => left - right);
 }
 
-export function AdocaoContentV2() {
+function isSameSearchState(
+  left: AdoptionSearchState,
+  right?: AdoptionSearchState,
+) {
+  if (!right) return false;
+
+  return (
+    left.page === right.page &&
+    left.sort === right.sort &&
+    left.filters.species === right.filters.species &&
+    left.filters.size === right.filters.size &&
+    left.filters.ageGroup === right.filters.ageGroup &&
+    left.filters.city === right.filters.city &&
+    left.filters.urgentOnly === right.filters.urgentOnly
+  );
+}
+
+export function AdocaoContentV2({
+  initialSearchState,
+  initialData,
+}: AdocaoContentV2Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -58,10 +85,22 @@ export function AdocaoContentV2() {
     [searchParams],
   );
 
+  const currentSearchState = useMemo(
+    () => ({ filters, page, sort }),
+    [filters, page, sort],
+  );
+  const useInitialData = isSameSearchState(
+    currentSearchState,
+    initialSearchState,
+  );
+
   const { data, isLoading, isError, isSuccess, refetch } = usePets(
     filters,
     page,
     sort,
+    {
+      initialData: useInitialData ? initialData : undefined,
+    },
   );
   const { data: baseFiltersData } = usePets(emptyFilters, 1, "recent");
 

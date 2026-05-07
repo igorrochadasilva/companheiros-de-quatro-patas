@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
+import { listPets } from "@/backend/modules/pets/application/list-pets";
 import { PUBLIC_ROUTES, SEO } from "@/constants";
 import { AdocaoContentV2 } from "@/features/adoption/components/AdocaoContentV2";
 import { featureFlags } from "@/shared/config/feature-flags";
+import { parseAdoptionSearchParamsRecord } from "@/shared/lib/search-params";
 
 const pageTitle = "Adoção de animais";
 const pageDescription =
@@ -31,14 +33,30 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AdocaoPage() {
+type AdocaoPageProps = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
+
+export default async function AdocaoPage({ searchParams }: AdocaoPageProps) {
   if (!featureFlags.routes.adoption) {
     notFound();
   }
 
+  const resolvedSearchParams = await searchParams;
+  const initialSearchState =
+    parseAdoptionSearchParamsRecord(resolvedSearchParams);
+  const initialData = await listPets({
+    ...initialSearchState.filters,
+    page: initialSearchState.page,
+    sort: initialSearchState.sort,
+  });
+
   return (
     <Suspense fallback={<div className="animate-pulse space-y-4 p-4" />}>
-      <AdocaoContentV2 />
+      <AdocaoContentV2
+        initialSearchState={initialSearchState}
+        initialData={initialData}
+      />
     </Suspense>
   );
 }

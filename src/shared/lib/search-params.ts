@@ -1,5 +1,24 @@
 import type { PetFilters, PetSort } from "@/types";
 
+type SearchParamsRecord = Record<string, string | string[] | undefined>;
+
+function getParamValue(value: string | string[] | undefined) {
+  if (Array.isArray(value)) return value[0];
+  return value;
+}
+
+export function toURLSearchParams(record: SearchParamsRecord): URLSearchParams {
+  const params = new URLSearchParams();
+
+  for (const [key, rawValue] of Object.entries(record)) {
+    const value = getParamValue(rawValue);
+    if (!value) continue;
+    params.set(key, value);
+  }
+
+  return params;
+}
+
 export function parsePetFiltersFromSearchParams(
   searchParams: URLSearchParams,
 ): PetFilters {
@@ -56,6 +75,12 @@ export function parseAdoptionSearchParams(
       : "recent";
 
   return { filters, page, sort };
+}
+
+export function parseAdoptionSearchParamsRecord(
+  searchParams: SearchParamsRecord,
+): AdoptionSearchState {
+  return parseAdoptionSearchParams(toURLSearchParams(searchParams));
 }
 
 export function toAdoptionSearchParams(
