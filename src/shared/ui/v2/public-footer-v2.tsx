@@ -9,6 +9,7 @@ import Link from "next/link";
 
 import { CONTACT, PUBLIC_ROUTES, WHATSAPP_URL } from "@/constants";
 import { appMessages, navMessages } from "@/messages";
+import { track } from "@/shared/lib/analytics";
 import { Typography } from "@/shared/ui/typography";
 
 const quickLinks = [
@@ -85,6 +86,12 @@ export function PublicFooterV2({
               <li key={item.href}>
                 <Link
                   href={item.href}
+                  onClick={() =>
+                    track("navigation_click", {
+                      location: "footer_v2_links",
+                      target: item.href,
+                    })
+                  }
                   className="transition-colors hover:text-[var(--v2-primary)]"
                 >
                   {item.label}
@@ -109,6 +116,7 @@ export function PublicFooterV2({
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => track("open_whatsapp", { from: "footer_v2" })}
                   className="flex items-center gap-2 transition-colors hover:text-[var(--v2-primary)]"
                 >
                   <MessageCircleIcon className="size-4" aria-hidden />
@@ -118,6 +126,7 @@ export function PublicFooterV2({
               <li>
                 <a
                   href={`mailto:${CONTACT.email}`}
+                  onClick={() => track("open_email", { from: "footer_v2" })}
                   className="flex items-center gap-2 transition-colors hover:text-[var(--v2-primary)]"
                 >
                   <MailIcon className="size-4" aria-hidden />
@@ -145,6 +154,12 @@ export function PublicFooterV2({
               href={CONTACT.instagramUrl}
               target="_blank"
               rel="noreferrer"
+              onClick={() =>
+                track("social_click", {
+                  network: "instagram",
+                  from: "footer_v2",
+                })
+              }
               className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--v2-surface-container-high)] text-[var(--v2-on-surface)] transition-colors hover:bg-[var(--v2-primary-container)]"
               aria-label="Instagram"
             >
@@ -154,6 +169,12 @@ export function PublicFooterV2({
               href={CONTACT.instagramUrl}
               target="_blank"
               rel="noreferrer"
+              onClick={() =>
+                track("social_click", {
+                  network: "instagram_share",
+                  from: "footer_v2",
+                })
+              }
               className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--v2-surface-container-high)] text-[var(--v2-on-surface)] transition-colors hover:bg-[var(--v2-primary-container)]"
               aria-label="Compartilhar"
             >

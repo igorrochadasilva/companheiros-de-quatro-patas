@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useHomeCmsContent } from "@/features/home/hooks/useHomeCmsContent";
 import { useStats } from "@/features/home/hooks/useStats";
 import { homeMessages } from "@/messages";
+import { track } from "@/shared/lib/analytics";
 import { Button } from "@/shared/ui/button";
 import { Skeleton } from "@/shared/ui/skeleton";
 import { Typography } from "@/shared/ui/typography";
@@ -124,7 +125,15 @@ export function HomeHeroV2({
                 size="lg"
                 className="v2-editorial-shadow min-h-14 w-full rounded-full bg-[var(--v2-primary)] px-8 text-lg font-bold text-[var(--v2-on-primary)] transition-transform hover:scale-105 active:scale-95 sm:w-auto"
               >
-                <Link href={primaryCtaHref}>
+                <Link
+                  href={primaryCtaHref}
+                  onClick={() =>
+                    track("navigation_click", {
+                      location: "home_hero_primary_cta",
+                      target: primaryCtaHref,
+                    })
+                  }
+                >
                   {homeMessages.hero.primaryCta}
                 </Link>
               </Button>
@@ -136,7 +145,18 @@ export function HomeHeroV2({
                 size="lg"
                 className="min-h-14 w-full rounded-full bg-[#46c2c11a] px-8 py-4 text-lg font-bold text-[var(--v2-secondary)] transition-transform hover:scale-105 active:scale-95 sm:w-auto"
               >
-                <Link href={secondaryCtaHref}>
+                <Link
+                  href={secondaryCtaHref}
+                  onClick={() => {
+                    track("navigation_click", {
+                      location: "home_hero_secondary_cta",
+                      target: secondaryCtaHref,
+                    });
+                    track("donate_click", {
+                      location: "home_hero_secondary_cta",
+                    });
+                  }}
+                >
                   {homeMessages.hero.secondaryCta}
                 </Link>
               </Button>

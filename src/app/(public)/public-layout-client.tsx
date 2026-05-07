@@ -1,9 +1,10 @@
 ﻿"use client";
 
 import { usePathname } from "next/navigation";
-import type { ReactNode } from "react";
+import { type ReactNode, useEffect } from "react";
 
 import { PUBLIC_ROUTES } from "@/constants";
+import { track } from "@/shared/lib/analytics";
 import { PublicFooter } from "@/shared/ui/public-footer";
 import { PublicHeader } from "@/shared/ui/public-header";
 import { LayoutV2Shell } from "@/shared/ui/v2/layout-v2-shell";
@@ -61,6 +62,10 @@ export function PublicLayoutClient({
 }) {
   const pathname = usePathname();
   const headerVisibility = getHeaderVisibility(flagSnapshot);
+
+  useEffect(() => {
+    track("page_view", { path: pathname });
+  }, [pathname]);
 
   const useV2Layout =
     pathname === PUBLIC_ROUTES.home ||

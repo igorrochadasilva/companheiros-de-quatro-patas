@@ -15,6 +15,7 @@ import * as React from "react";
 
 import { PUBLIC_ROUTES } from "@/constants";
 import { appMessages, navMessages } from "@/messages";
+import { track } from "@/shared/lib/analytics";
 import { Button } from "@/shared/ui/button";
 import {
   Sheet,
@@ -115,6 +116,12 @@ export function PublicHeader({
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={() =>
+                  track("navigation_click", {
+                    location: "header_legacy_desktop",
+                    target: item.href,
+                  })
+                }
                 className="transition-colors hover:text-foreground"
               >
                 {item.label}
@@ -130,14 +137,27 @@ export function PublicHeader({
                 variant="outline"
                 className="md:inline-flex"
               >
-                <Link href={PUBLIC_ROUTES.transparency}>
+                <Link
+                  href={PUBLIC_ROUTES.transparency}
+                  onClick={() =>
+                    track("navigation_click", {
+                      location: "header_legacy_desktop",
+                      target: PUBLIC_ROUTES.transparency,
+                    })
+                  }
+                >
                   {navMessages.transparency}
                 </Link>
               </Button>
             ) : null}
             {showSupportCta ? (
               <Button asChild size="sm" variant="primary">
-                <Link href={PUBLIC_ROUTES.donate}>
+                <Link
+                  href={PUBLIC_ROUTES.donate}
+                  onClick={() =>
+                    track("donate_click", { location: "header_legacy_desktop" })
+                  }
+                >
                   {navMessages.supportCta}
                 </Link>
               </Button>
@@ -173,7 +193,13 @@ export function PublicHeader({
                       key={item.href}
                       href={item.href}
                       className="flex items-center gap-3 rounded-md px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-                      onClick={() => setSheetOpen(false)}
+                      onClick={() => {
+                        track("navigation_click", {
+                          location: "header_legacy_mobile",
+                          target: item.href,
+                        });
+                        setSheetOpen(false);
+                      }}
                     >
                       <Icon className="size-5 shrink-0 text-muted-foreground" />
                       {item.label}
@@ -191,7 +217,13 @@ export function PublicHeader({
                   >
                     <Link
                       href={PUBLIC_ROUTES.transparency}
-                      onClick={() => setSheetOpen(false)}
+                      onClick={() => {
+                        track("navigation_click", {
+                          location: "header_legacy_mobile",
+                          target: PUBLIC_ROUTES.transparency,
+                        });
+                        setSheetOpen(false);
+                      }}
                     >
                       {navMessages.transparency}
                     </Link>
@@ -206,7 +238,12 @@ export function PublicHeader({
                   >
                     <Link
                       href={PUBLIC_ROUTES.donate}
-                      onClick={() => setSheetOpen(false)}
+                      onClick={() => {
+                        track("donate_click", {
+                          location: "header_legacy_mobile",
+                        });
+                        setSheetOpen(false);
+                      }}
                     >
                       {navMessages.supportCta}
                     </Link>

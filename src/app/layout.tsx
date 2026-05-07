@@ -1,5 +1,6 @@
 import "@/app/globals.css";
 
+import { GoogleTagManager } from "@next/third-parties/google";
 import type { Metadata } from "next";
 import { Abril_Fatface, Alata, Manrope, Noto_Serif } from "next/font/google";
 
@@ -72,6 +73,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID?.trim();
+
   return (
     <html lang="pt-BR">
       <head>
@@ -87,6 +90,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
+      {gtmId ? <GoogleTagManager gtmId={gtmId} /> : null}
       <body
         className={`${alata.variable} ${abrilFatface.variable} ${manrope.variable} ${notoSerif.variable} antialiased`}
         suppressHydrationWarning

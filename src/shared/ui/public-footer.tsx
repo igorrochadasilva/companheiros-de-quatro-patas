@@ -13,6 +13,7 @@ import Link from "next/link";
 
 import { CONTACT, PUBLIC_ROUTES, WHATSAPP_URL } from "@/constants";
 import { appMessages, footerMessages, navMessages } from "@/messages";
+import { track } from "@/shared/lib/analytics";
 
 const quickLinks = [
   {
@@ -98,6 +99,12 @@ export function PublicFooter({
                 <li key={href}>
                   <Link
                     href={href}
+                    onClick={() =>
+                      track("navigation_click", {
+                        location: "footer_legacy_links",
+                        target: href,
+                      })
+                    }
                     className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground hover:underline"
                   >
                     <Icon className="size-4 shrink-0" aria-hidden />
@@ -118,6 +125,9 @@ export function PublicFooter({
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    track("open_whatsapp", { from: "footer_legacy" })
+                  }
                   className="flex items-center gap-2 hover:text-foreground hover:underline"
                 >
                   <MessageCircleIcon className="size-4 shrink-0" aria-hidden />
@@ -127,6 +137,7 @@ export function PublicFooter({
               <li>
                 <a
                   href={`mailto:${CONTACT.email}`}
+                  onClick={() => track("open_email", { from: "footer_legacy" })}
                   className="flex items-center gap-2 hover:text-foreground hover:underline"
                 >
                   <MailIcon className="size-4 shrink-0" aria-hidden />

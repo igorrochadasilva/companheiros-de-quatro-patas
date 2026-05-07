@@ -17,6 +17,7 @@ import * as React from "react";
 
 import { PUBLIC_ROUTES } from "@/constants";
 import { appMessages, navMessages } from "@/messages";
+import { track } from "@/shared/lib/analytics";
 import { Button } from "@/shared/ui/button";
 import {
   Sheet,
@@ -123,6 +124,12 @@ export function PublicHeaderV2({
           <div className="v2-font-headline hidden items-center gap-8 text-base font-medium md:flex">
             <Link
               href={PUBLIC_ROUTES.home}
+              onClick={() =>
+                track("navigation_click", {
+                  location: "header_v2_desktop",
+                  target: PUBLIC_ROUTES.home,
+                })
+              }
               className={[
                 "pb-1 transition-transform hover:scale-105",
                 isItemActive(PUBLIC_ROUTES.home)
@@ -137,6 +144,12 @@ export function PublicHeaderV2({
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={() =>
+                  track("navigation_click", {
+                    location: "header_v2_desktop",
+                    target: item.href,
+                  })
+                }
                 className={[
                   "pb-1 transition-transform hover:scale-105",
                   isItemActive(item.href)
@@ -155,7 +168,14 @@ export function PublicHeaderV2({
               size="sm"
               className="hidden rounded-full bg-[var(--v2-primary)] px-6 py-2.5 font-semibold text-[var(--v2-on-primary)] shadow-md transition-transform hover:scale-105 active:scale-95 md:inline-flex"
             >
-              <Link href={PUBLIC_ROUTES.donate}>{navMessages.supportCta}</Link>
+              <Link
+                href={PUBLIC_ROUTES.donate}
+                onClick={() =>
+                  track("donate_click", { location: "header_v2_desktop" })
+                }
+              >
+                {navMessages.supportCta}
+              </Link>
             </Button>
           ) : null}
 
@@ -200,13 +220,19 @@ export function PublicHeaderV2({
               <div className="flex flex-1 flex-col gap-1 py-4">
                 <Link
                   href={PUBLIC_ROUTES.home}
+                  onClick={() => {
+                    track("navigation_click", {
+                      location: "header_v2_mobile",
+                      target: PUBLIC_ROUTES.home,
+                    });
+                    setSheetOpen(false);
+                  }}
                   className={[
                     "flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors",
                     isItemActive(PUBLIC_ROUTES.home)
                       ? "bg-[var(--v2-primary)]/10 text-[var(--v2-primary)]"
                       : "text-[var(--v2-on-surface)] hover:bg-[var(--v2-surface-container-low)]",
                   ].join(" ")}
-                  onClick={() => setSheetOpen(false)}
                 >
                   <HouseIcon
                     className={[
@@ -231,7 +257,13 @@ export function PublicHeaderV2({
                           ? "bg-[var(--v2-primary)]/10 text-[var(--v2-primary)]"
                           : "text-[var(--v2-on-surface)] hover:bg-[var(--v2-surface-container-low)]",
                       ].join(" ")}
-                      onClick={() => setSheetOpen(false)}
+                      onClick={() => {
+                        track("navigation_click", {
+                          location: "header_v2_mobile",
+                          target: item.href,
+                        });
+                        setSheetOpen(false);
+                      }}
                     >
                       <Icon
                         className={[
@@ -256,7 +288,10 @@ export function PublicHeaderV2({
                   >
                     <Link
                       href={PUBLIC_ROUTES.donate}
-                      onClick={() => setSheetOpen(false)}
+                      onClick={() => {
+                        track("donate_click", { location: "header_v2_mobile" });
+                        setSheetOpen(false);
+                      }}
                     >
                       {navMessages.supportCta}
                     </Link>
