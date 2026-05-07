@@ -7,6 +7,7 @@ import { PUBLIC_ROUTES } from "@/constants";
 import { WHATSAPP_URL } from "@/constants/contact";
 import { homeMessages } from "@/messages";
 import { track } from "@/shared/lib/analytics";
+import { getPetCanonicalSlug } from "@/shared/lib/pet-slug";
 import { Badge } from "@/shared/ui/badge";
 import { Button } from "@/shared/ui/button";
 import {
@@ -54,11 +55,12 @@ function formatPetAge(ageYears: number) {
 }
 
 export function HomeSectionPetsCard({ pet }: { pet: Pet }) {
-  const petPath = `${PUBLIC_ROUTES.adoption}/${pet.id}`;
+  const petSlug = getPetCanonicalSlug(pet);
+  const petPath = `${PUBLIC_ROUTES.adoption}/${petSlug}`;
   const whatsappMessage = encodeURIComponent(
     petsMessages.card.contactWhatsappMessage
       .replace("{name}", pet.name)
-      .replace("{id}", pet.id)
+      .replace("{id}", petSlug)
       .replace("{url}", petPath),
   );
 

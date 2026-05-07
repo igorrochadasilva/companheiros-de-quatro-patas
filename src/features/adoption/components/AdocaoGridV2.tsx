@@ -9,6 +9,7 @@ import { PUBLIC_ROUTES } from "@/constants";
 import { WHATSAPP_URL } from "@/constants/contact";
 import { adoptionMessages } from "@/messages";
 import { track } from "@/shared/lib/analytics";
+import { getPetCanonicalSlug } from "@/shared/lib/pet-slug";
 import { Button } from "@/shared/ui/button";
 import {
   Dialog,
@@ -166,11 +167,12 @@ export function AdocaoGridV2({
   return (
     <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
       {items.map((pet) => {
-        const detailPath = `${PUBLIC_ROUTES.adoption}/${pet.id}`;
+        const petSlug = getPetCanonicalSlug(pet);
+        const detailPath = `${PUBLIC_ROUTES.adoption}/${petSlug}`;
         const whatsappMessage = encodeURIComponent(
           v2GridMessages.contactWhatsappMessage
             .replace("{name}", pet.name)
-            .replace("{id}", pet.id)
+            .replace("{id}", petSlug)
             .replace("{url}", detailPath),
         );
 

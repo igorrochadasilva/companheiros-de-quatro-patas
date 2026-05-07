@@ -46,6 +46,7 @@ type PetsListResponse = {
 
 type PetRow = {
   id: string;
+  external_id: string | null;
   name: string;
   species: PrismaPetSpecies;
   size: PrismaPetSize | null;
@@ -232,6 +233,7 @@ export async function listPets(
   const rows = await prisma.$queryRaw<PetRow[]>`
     SELECT
       p.id,
+      p.external_id,
       p.name,
       p.species,
       p.size,
@@ -262,6 +264,7 @@ export async function listPets(
 
     return {
       id: pet.id,
+      externalId: pet.external_id,
       name: pet.name,
       species: fromPrismaSpecies(pet.species),
       size: fromPrismaSize(pet.size),

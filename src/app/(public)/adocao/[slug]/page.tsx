@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { cache } from "react";
 
 import { getPublicPetById } from "@/backend/modules/pets/application/get-public-pet-by-id";
@@ -99,6 +99,14 @@ export default async function AnimalPage({ params }: AnimalPageProps) {
   }
 
   const { slug } = await params;
+  const pet = await getPetCached(slug);
+
+  if (pet) {
+    const canonicalSlug = pet.externalId ?? pet.id;
+    if (slug !== canonicalSlug) {
+      redirect(`${PUBLIC_ROUTES.adoption}/${canonicalSlug}`);
+    }
+  }
 
   return <AdocaoPetDetailContent slug={slug} />;
 }

@@ -8,6 +8,7 @@ export type PetTag = "vaccinated" | "neutered" | "urgent";
 
 export type Pet = {
   id: string;
+  externalId?: string | null;
   name: string;
   species: PetSpecies;
   size: PetSize;
