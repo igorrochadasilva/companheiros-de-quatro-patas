@@ -38,13 +38,5 @@ export async function POST(request: Request) {
     );
   }
 
-  // Mock inicial: log para observabilidade local.
-  // Em producao, trocar por persistencia (DB, fila, e-mail, etc.).
-  // eslint-disable-next-line no-console
-  console.info("[api/contact]", {
-    receivedAt: new Date().toISOString(),
-    payload: body,
-  });
-
   return NextResponse.json({ ok: true });
 }

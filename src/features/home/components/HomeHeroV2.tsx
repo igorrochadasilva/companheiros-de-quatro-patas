@@ -59,7 +59,7 @@ export function HomeHeroV2({
           <Typography
             as="h1"
             variant="v2H1"
-            className="mx-auto mb-4 max-w-[12ch] text-center text-4xl leading-tight md:mx-0 md:max-w-none md:text-left md:text-7xl"
+            className="mx-auto mb-2 max-w-[12ch] text-center text-4xl leading-[1.05] md:mx-0 md:max-w-none md:text-left md:text-7xl"
           >
             {homeMessages.hero.titleTop}
             <span className="block -mt-1 text-[var(--v2-primary)] italic md:-mt-2">
@@ -67,7 +67,7 @@ export function HomeHeroV2({
             </span>
           </Typography>
 
-          <div className="mb-10 flex w-fit flex-wrap justify-center gap-12 text-center md:w-auto md:justify-start md:text-left">
+          <div className="mb-8 flex w-fit flex-wrap justify-center gap-12 text-center md:w-auto md:justify-start md:text-left">
             <div className="text-center md:text-left">
               <Typography
                 as="p"

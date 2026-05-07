@@ -227,23 +227,6 @@ export async function getHomeCmsContent(): Promise<
     });
 
     const entry = response.items[0] as HomeEntryLike | undefined;
-    if (process.env.NODE_ENV !== "production") {
-      console.log("[contentful][home] entryId:", entry?.sys?.id ?? null);
-      console.log(
-        "[contentful][home] fieldKeys:",
-        Object.keys(entry?.fields ?? {}),
-      );
-      console.log("[contentful][home] rawFields:");
-      console.dir(entry?.fields ?? null, { depth: null });
-      console.log("[contentful][home] fieldsPreview:", {
-        donationPixLabel: entry?.fields?.donationPixLabel ?? null,
-        hasHeroImage: Boolean(entry?.fields?.heroImage),
-        hasFaqItems: Boolean(entry?.fields?.faqItems),
-        hasAdoptionHowStepsJson: Boolean(entry?.fields?.adoptionHowStepsJson),
-        hasHistoryImages: Array.isArray(entry?.fields?.historyImages),
-        hasHistoryInfo: Boolean(entry?.fields?.historyInfo),
-      });
-    }
     return { data: mapHomeEntry(entry), status: 200 };
   } catch {
     return { data: emptyHomeCmsContent(), status: 500 };

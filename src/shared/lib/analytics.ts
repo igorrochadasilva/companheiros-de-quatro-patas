@@ -20,11 +20,6 @@ export function track(event: AnalyticsEventName, payload?: AnalyticsPayload) {
     ...(payload ?? {}),
   };
 
-  if (process.env.NODE_ENV !== "production") {
-    // eslint-disable-next-line no-console
-    console.debug("[analytics]", eventPayload);
-  }
-
   if (typeof window === "undefined") return;
 
   try {

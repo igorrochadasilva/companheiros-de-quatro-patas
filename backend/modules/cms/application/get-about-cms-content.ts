@@ -73,22 +73,6 @@ export async function getAboutCmsContent(): Promise<
 
     const entry = response.items[0] as AboutPageEntryLike | undefined;
 
-    if (process.env.NODE_ENV !== "production") {
-      console.log("[contentful][about] entryId:", entry?.sys?.id ?? null);
-      console.log(
-        "[contentful][about] fieldKeys:",
-        Object.keys(entry?.fields ?? {}),
-      );
-      console.log("[contentful][about] rawFields:");
-      console.dir(entry?.fields ?? null, { depth: null });
-      console.log("[contentful][about] fieldsPreview:", {
-        hasAboutHeroImage: Boolean(entry?.fields?.aboutHeroImage),
-        hasStoriesOfNewBeginningsImages: Array.isArray(
-          entry?.fields?.storiesOfNewBeginningsImages,
-        ),
-      });
-    }
-
     return { data: mapAboutEntry(entry), status: 200 };
   } catch {
     return { data: emptyAboutCmsContent(), status: 500 };

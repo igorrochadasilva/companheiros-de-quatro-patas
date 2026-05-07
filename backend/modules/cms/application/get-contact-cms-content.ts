@@ -61,22 +61,8 @@ export async function getContactCmsContent(): Promise<
 
     const entry = response.items[0] as ContactPageEntryLike | undefined;
 
-    if (process.env.NODE_ENV !== "production") {
-      console.log("[contentful][contact] entryId:", entry?.sys?.id ?? null);
-      console.log(
-        "[contentful][contact] fieldKeys:",
-        Object.keys(entry?.fields ?? {}),
-      );
-      console.log("[contentful][contact] rawFields:");
-      console.dir(entry?.fields ?? null, { depth: null });
-      console.log("[contentful][contact] fieldsPreview:", {
-        hasHeroImage: Boolean(entry?.fields?.heroImage),
-      });
-    }
-
     return { data: mapContactEntry(entry), status: 200 };
   } catch {
     return { data: emptyContactCmsContent(), status: 500 };
   }
 }
-
