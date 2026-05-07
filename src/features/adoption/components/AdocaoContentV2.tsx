@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
 
@@ -163,19 +164,6 @@ export function AdocaoContentV2({
     [filters, setState],
   );
 
-  const handlePageChange = useCallback(
-    (nextPage: number) => {
-      if (nextPage < 1 || nextPage > totalPages || nextPage === page) return;
-      setState({
-        filters,
-        page: nextPage,
-        sort,
-      });
-      track("paginate", { page: nextPage });
-    },
-    [filters, page, sort, totalPages, setState],
-  );
-
   const pages = useMemo(() => buildPages(page, totalPages), [page, totalPages]);
   const showLeftEllipsis = pages.length > 0 && pages[0] > 2;
   const showRightEllipsis =
@@ -200,6 +188,15 @@ export function AdocaoContentV2({
 
     return { species, sizes, ageGroups, cities };
   }, [filterSourceItems]);
+
+  const buildPageHref = useCallback(
+    (nextPage: number) => {
+      const params = toAdoptionSearchParams({ filters, page: nextPage, sort });
+      const query = params.toString();
+      return query ? `${PATHNAME}?${query}` : PATHNAME;
+    },
+    [filters, sort],
+  );
 
   return (
     <div className="bg-[var(--v2-surface)]">
@@ -246,15 +243,23 @@ export function AdocaoContentV2({
 
             {totalPages > 1 ? (
               <div className="flex items-center justify-center gap-2 pt-2">
-                <button
-                  type="button"
-                  onClick={() => handlePageChange(page - 1)}
-                  disabled={page <= 1}
-                  className="inline-flex size-10 items-center justify-center rounded-full border border-[var(--v2-outline-variant)] text-[var(--v2-on-surface-variant)] transition-colors hover:bg-[var(--v2-surface-container)] disabled:cursor-not-allowed disabled:opacity-30"
-                  aria-label={paginationMessages.previous}
-                >
-                  <ChevronLeft className="size-4" />
-                </button>
+                {page <= 1 ? (
+                  <span
+                    className="inline-flex size-10 cursor-not-allowed items-center justify-center rounded-full border border-[var(--v2-outline-variant)] text-[var(--v2-on-surface-variant)] opacity-30"
+                    aria-label={paginationMessages.previous}
+                  >
+                    <ChevronLeft className="size-4" />
+                  </span>
+                ) : (
+                  <Link
+                    href={buildPageHref(page - 1)}
+                    onClick={() => track("paginate", { page: page - 1 })}
+                    className="inline-flex size-10 items-center justify-center rounded-full border border-[var(--v2-outline-variant)] text-[var(--v2-on-surface-variant)] transition-colors hover:bg-[var(--v2-surface-container)]"
+                    aria-label={paginationMessages.previous}
+                  >
+                    <ChevronLeft className="size-4" />
+                  </Link>
+                )}
 
                 {showLeftEllipsis ? (
                   <span className="px-1 text-[var(--v2-on-surface-variant)]">
@@ -263,10 +268,14 @@ export function AdocaoContentV2({
                 ) : null}
 
                 {pages.map((pageNumber) => (
-                  <button
+                  <Link
                     key={pageNumber}
-                    type="button"
-                    onClick={() => handlePageChange(pageNumber)}
+                    href={buildPageHref(pageNumber)}
+                    onClick={() => {
+                      if (pageNumber !== page) {
+                        track("paginate", { page: pageNumber });
+                      }
+                    }}
                     className={[
                       "inline-flex size-10 items-center justify-center rounded-full text-sm font-semibold transition-colors",
                       pageNumber === page
@@ -276,7 +285,7 @@ export function AdocaoContentV2({
                     aria-current={pageNumber === page ? "page" : undefined}
                   >
                     {pageNumber}
-                  </button>
+                  </Link>
                 ))}
 
                 {showRightEllipsis ? (
@@ -285,15 +294,23 @@ export function AdocaoContentV2({
                   </span>
                 ) : null}
 
-                <button
-                  type="button"
-                  onClick={() => handlePageChange(page + 1)}
-                  disabled={page >= totalPages}
-                  className="inline-flex size-10 items-center justify-center rounded-full border border-[var(--v2-outline-variant)] text-[var(--v2-on-surface-variant)] transition-colors hover:bg-[var(--v2-surface-container)] disabled:cursor-not-allowed disabled:opacity-30"
-                  aria-label={paginationMessages.next}
-                >
-                  <ChevronRight className="size-4" />
-                </button>
+                {page >= totalPages ? (
+                  <span
+                    className="inline-flex size-10 cursor-not-allowed items-center justify-center rounded-full border border-[var(--v2-outline-variant)] text-[var(--v2-on-surface-variant)] opacity-30"
+                    aria-label={paginationMessages.next}
+                  >
+                    <ChevronRight className="size-4" />
+                  </span>
+                ) : (
+                  <Link
+                    href={buildPageHref(page + 1)}
+                    onClick={() => track("paginate", { page: page + 1 })}
+                    className="inline-flex size-10 items-center justify-center rounded-full border border-[var(--v2-outline-variant)] text-[var(--v2-on-surface-variant)] transition-colors hover:bg-[var(--v2-surface-container)]"
+                    aria-label={paginationMessages.next}
+                  >
+                    <ChevronRight className="size-4" />
+                  </Link>
+                )}
               </div>
             ) : null}
           </div>
