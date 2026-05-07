@@ -1,4 +1,10 @@
-import { ArrowRight, Camera, MapPin, MessageCircleMore, Send } from "lucide-react";
+﻿import {
+  ArrowRight,
+  Camera,
+  MapPin,
+  MessageCircleMore,
+  Send,
+} from "lucide-react";
 
 import { CONTACT, EMAIL_URL, WHATSAPP_URL } from "@/constants";
 import { contactMessages } from "@/messages";
@@ -8,7 +14,7 @@ import { Typography } from "@/shared/ui/typography";
 export function ContactQuickChannelsV2() {
   return (
     <section className="bg-[#f5f1ea] py-10 md:py-16">
-      <div className="mx-auto grid w-full max-w-[1280px] gap-4 px-6 md:gap-6 md:px-10 lg:grid-cols-3">
+      <div className="mx-auto grid w-full max-w-[1200px] gap-4 px-6 md:gap-6 md:px-10 lg:grid-cols-3">
         <article className="rounded-2xl border border-black/5 bg-[#ccf2f1] p-6 shadow-sm md:rounded-3xl md:bg-white md:p-8">
           <div className="mb-6 flex size-14 items-center justify-center rounded-2xl bg-[#46c2c1]/10">
             <MessageCircleMore className="size-7 text-[#46c2c1]" />
@@ -16,8 +22,14 @@ export function ContactQuickChannelsV2() {
           <Typography as="h3" variant="v2H2" className="!text-4xl md:!text-4xl">
             {contactMessages.quickChannels.whatsapp.title}
           </Typography>
-          <Typography as="p" variant="v2Muted" className="mt-1 !text-[#514535] md:mt-3">
-            <span className="md:hidden">{contactMessages.quickChannels.whatsapp.description}</span>
+          <Typography
+            as="p"
+            variant="v2Muted"
+            className="mt-1 !text-[#514535] md:mt-3"
+          >
+            <span className="md:hidden">
+              {contactMessages.quickChannels.whatsapp.description}
+            </span>
             <span className="hidden md:inline">
               Resposta imediata para urgencias e duvidas rapidas sobre adocao.
             </span>
@@ -41,8 +53,14 @@ export function ContactQuickChannelsV2() {
           <Typography as="h3" variant="v2H2" className="!text-4xl">
             {contactMessages.quickChannels.email.title}
           </Typography>
-          <Typography as="p" variant="v2Muted" className="mt-1 !text-[#514535] md:mt-3">
-            <span className="md:hidden">{contactMessages.quickChannels.email.description}</span>
+          <Typography
+            as="p"
+            variant="v2Muted"
+            className="mt-1 !text-[#514535] md:mt-3"
+          >
+            <span className="md:hidden">
+              {contactMessages.quickChannels.email.description}
+            </span>
             <span className="hidden md:inline">
               Para parcerias formais, documentacao e relatos detalhados.
             </span>
@@ -64,11 +82,19 @@ export function ContactQuickChannelsV2() {
           </div>
           <Typography as="h3" variant="v2H2" className="!text-4xl">
             <span className="md:hidden">Sede Fisica</span>
-            <span className="hidden md:inline">{contactMessages.quickChannels.instagram.title}</span>
+            <span className="hidden md:inline">
+              {contactMessages.quickChannels.instagram.title}
+            </span>
           </Typography>
-          <Typography as="p" variant="v2Muted" className="mt-1 !text-[#514535] md:mt-3">
+          <Typography
+            as="p"
+            variant="v2Muted"
+            className="mt-1 !text-[#514535] md:mt-3"
+          >
             <span className="md:hidden">Visitas sob agendamento</span>
-            <span className="hidden md:inline">{contactMessages.quickChannels.instagram.description}</span>
+            <span className="hidden md:inline">
+              {contactMessages.quickChannels.instagram.description}
+            </span>
           </Typography>
           <a
             href={CONTACT.instagramUrl}

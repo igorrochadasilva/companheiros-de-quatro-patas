@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    /* Nova paleta: ciano #3bbbc4, pêssego #ffbd59, amarelo #fbc728, laranja claro #f8f0e5 */
+    /* Nova paleta: ciano #3bbbc4, pÃªssego #ffbd59, amarelo #fbc728, laranja claro #f8f0e5 */
     --background: 30 67% 95%;
     --foreground: 220 26% 14%;
 
@@ -32,7 +32,7 @@
     --destructive-foreground: 0 0% 100%;
 
     --border: 30 25% 88%;
-    /* Input/campos: superfície clara para contraste com o fundo da página (--background) */
+    /* Input/campos: superfÃ­cie clara para contraste com o fundo da pÃ¡gina (--background) */
     --input: 0 0% 98%;
     --ring: 187 61% 55%;
 
@@ -141,7 +141,7 @@
   --color-info: hsl(var(--info));
   --color-warning: hsl(var(--warning));
   --radius-lg: var(--radius);
-  /* Fontes: Alata = corpo/UI, Abril Fatface = display (títulos). */
+  /* Fontes: Alata = corpo/UI, Abril Fatface = display (tÃ­tulos). */
   --font-sans: var(--font-alata), system-ui, sans-serif;
   --font-display: var(--font-abril), var(--font-alata), system-ui, sans-serif;
   --font-mono: ui-monospace, "Cascadia Code", monospace;
@@ -227,28 +227,17 @@ body {
   background: var(--v2-background);
   color: var(--v2-on-surface);
   font-family:
-    var(--font-v2-body),
-    "Manrope",
-    var(--font-sans),
-    system-ui,
-    sans-serif;
+    var(--font-v2-body), "Manrope", var(--font-sans), system-ui, sans-serif;
 }
 
 .layout-v2 .v2-font-headline {
   font-family:
-    var(--font-v2-headline),
-    "Noto Serif",
-    var(--font-display),
-    serif;
+    var(--font-v2-headline), "Noto Serif", var(--font-display), serif;
 }
 
 .layout-v2 .v2-font-body {
   font-family:
-    var(--font-v2-body),
-    "Manrope",
-    var(--font-sans),
-    system-ui,
-    sans-serif;
+    var(--font-v2-body), "Manrope", var(--font-sans), system-ui, sans-serif;
 }
 
 .layout-v2 h1,
@@ -258,10 +247,7 @@ body {
 .layout-v2 h5,
 .layout-v2 h6 {
   font-family:
-    var(--font-v2-headline),
-    "Noto Serif",
-    var(--font-display),
-    serif;
+    var(--font-v2-headline), "Noto Serif", var(--font-display), serif;
 }
 
 .layout-v2 .v2-main-offset {
@@ -271,7 +257,7 @@ body {
 .layout-v2 .v2-container {
   margin-inline: auto;
   width: 100%;
-  max-width: 80rem;
+  max-width: 75rem;
 }
 
 .layout-v2 .v2-section {

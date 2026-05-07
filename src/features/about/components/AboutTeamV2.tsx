@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 
@@ -9,7 +9,7 @@ import { Typography } from "@/shared/ui/typography";
 
 export function AboutTeamV2() {
   return (
-    <section className="mx-auto w-full max-w-[1280px] px-6 pb-14 md:px-10">
+    <section className="mx-auto w-full max-w-[1200px] px-6 pb-14 md:px-10">
       <div className="rounded-2xl bg-[#f3af3d] px-5 py-7 md:px-6 md:flex md:items-center md:justify-between md:gap-8">
         <div>
           <Typography

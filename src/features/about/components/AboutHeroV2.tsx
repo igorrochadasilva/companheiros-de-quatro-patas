@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 
@@ -19,7 +19,7 @@ export function AboutHeroV2({ cms, isCmsLoading = false }: AboutHeroV2Props) {
   const imageAlt = cms?.heroImageAlt ?? aboutMessages.v2.hero.imageAlt;
 
   return (
-    <section className="mx-auto w-full max-w-[1280px] overflow-x-clip bg-gradient-to-b from-[#f6ece5]/40 to-transparent px-6 pb-12 pt-8 md:bg-none md:px-10 md:pb-16 md:pt-10">
+    <section className="mx-auto w-full max-w-[1200px] overflow-x-clip bg-gradient-to-b from-[#f6ece5]/40 to-transparent px-6 pb-12 pt-8 md:bg-none md:px-10 md:pb-16 md:pt-10">
       <nav className="mb-4 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.15em] text-[#514535]/70 md:mb-6 md:text-xs md:normal-case md:tracking-normal md:text-[#2f2a26]">
         <span className="text-[#f3af3d]">
           {aboutMessages.v2.breadcrumb.home}

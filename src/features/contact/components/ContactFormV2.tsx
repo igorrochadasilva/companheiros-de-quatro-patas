@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Clock3, MapPin, PawPrint } from "lucide-react";
@@ -97,7 +97,7 @@ export function ContactFormV2({
   }
 
   return (
-    <section className="mx-auto w-full max-w-[1280px] px-6 py-10 md:px-10 md:py-20">
+    <section className="mx-auto w-full max-w-[1200px] px-6 py-10 md:px-10 md:py-20">
       <div className="grid items-start gap-12 lg:grid-cols-12">
         <aside className="hidden lg:col-span-4 lg:block">
           <Typography as="h2" variant="v2H2" className="!text-6xl md:!text-7xl">
@@ -121,7 +121,7 @@ export function ContactFormV2({
                   ATENDIMENTO
                 </Typography>
                 <Typography as="p" variant="v2Body" className="!text-sm">
-                  Seg à Sex, 09h às 18h
+                  Seg Ã  Sex, 09h Ã s 18h
                 </Typography>
               </div>
             </div>
@@ -135,7 +135,7 @@ export function ContactFormV2({
                   SEDE
                 </Typography>
                 <Typography as="p" variant="v2Body" className="!text-sm">
-                  São Paulo, SP
+                  SÃ£o Paulo, SP
                 </Typography>
               </div>
             </div>
@@ -152,10 +152,15 @@ export function ContactFormV2({
               variant="v2Muted"
               className="mt-2 !text-sm !text-[#514535]"
             >
-              Preencha o formulário e nossa equipe entrará em contato em breve.
+              Preencha o formulÃ¡rio e nossa equipe entrarÃ¡ em contato em
+              breve.
             </Typography>
           </div>
-          <form className="space-y-6" onSubmit={handleSubmit(onSubmit)} noValidate>
+          <form
+            className="space-y-6"
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate
+          >
             <div className="grid gap-5 md:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="name">{contactMessages.form.nameLabel}</Label>
@@ -167,7 +172,11 @@ export function ContactFormV2({
                   aria-invalid={!!errors.name}
                 />
                 {errors.name ? (
-                  <Typography as="p" variant="muted" className="!text-destructive">
+                  <Typography
+                    as="p"
+                    variant="muted"
+                    className="!text-destructive"
+                  >
                     {errors.name.message}
                   </Typography>
                 ) : null}
@@ -183,7 +192,11 @@ export function ContactFormV2({
                   aria-invalid={!!errors.phone}
                 />
                 {errors.phone ? (
-                  <Typography as="p" variant="muted" className="!text-destructive">
+                  <Typography
+                    as="p"
+                    variant="muted"
+                    className="!text-destructive"
+                  >
                     {errors.phone.message}
                   </Typography>
                 ) : null}
@@ -200,28 +213,38 @@ export function ContactFormV2({
                   aria-invalid={!!errors.email}
                 />
                 {errors.email ? (
-                  <Typography as="p" variant="muted" className="!text-destructive">
+                  <Typography
+                    as="p"
+                    variant="muted"
+                    className="!text-destructive"
+                  >
                     {errors.email.message}
                   </Typography>
                 ) : null}
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="subject">{contactMessages.form.subjectLabel}</Label>
+                <Label htmlFor="subject">
+                  {contactMessages.form.subjectLabel}
+                </Label>
                 <Controller
                   control={control}
                   name="subject"
                   render={({ field }) => (
                     <Select
                       value={field.value}
-                      onValueChange={(value) => field.onChange(value as ContactSubject)}
+                      onValueChange={(value) =>
+                        field.onChange(value as ContactSubject)
+                      }
                     >
                       <SelectTrigger
                         id="subject"
                         className="rounded-2xl border-0 bg-[#faf7f2] px-4 py-3"
                         aria-invalid={!!errors.subject}
                       >
-                        <SelectValue placeholder={contactMessages.form.subjectPlaceholder} />
+                        <SelectValue
+                          placeholder={contactMessages.form.subjectPlaceholder}
+                        />
                       </SelectTrigger>
                       <SelectContent>
                         {CONTACT_SUBJECT_ORDER.map((option) => (
@@ -234,7 +257,11 @@ export function ContactFormV2({
                   )}
                 />
                 {errors.subject ? (
-                  <Typography as="p" variant="muted" className="!text-destructive">
+                  <Typography
+                    as="p"
+                    variant="muted"
+                    className="!text-destructive"
+                  >
                     {errors.subject.message}
                   </Typography>
                 ) : null}
@@ -246,7 +273,7 @@ export function ContactFormV2({
                 <div className="flex items-center gap-2 text-[#46c2c1]">
                   <PawPrint className="size-4" />
                   <Typography as="p" variant="v2Body" className="!font-bold">
-                    Informações para Adoção
+                    InformaÃ§Ãµes para AdoÃ§Ã£o
                   </Typography>
                 </div>
 
@@ -262,7 +289,9 @@ export function ContactFormV2({
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="city">{contactMessages.form.cityLabel}</Label>
+                    <Label htmlFor="city">
+                      {contactMessages.form.cityLabel}
+                    </Label>
                     <Input
                       id="city"
                       placeholder={contactMessages.form.cityPlaceholder}
@@ -271,7 +300,11 @@ export function ContactFormV2({
                       aria-invalid={!!errors.city}
                     />
                     {errors.city ? (
-                      <Typography as="p" variant="muted" className="!text-destructive">
+                      <Typography
+                        as="p"
+                        variant="muted"
+                        className="!text-destructive"
+                      >
                         {errors.city.message}
                       </Typography>
                     ) : null}
@@ -286,9 +319,15 @@ export function ContactFormV2({
                       <Checkbox
                         className="mt-0.5"
                         checked={field.value}
-                        onCheckedChange={(checked) => field.onChange(Boolean(checked))}
+                        onCheckedChange={(checked) =>
+                          field.onChange(Boolean(checked))
+                        }
                       />
-                      <Typography as="span" variant="v2Muted" className="!text-xs">
+                      <Typography
+                        as="span"
+                        variant="v2Muted"
+                        className="!text-xs"
+                      >
                         {contactMessages.form.adoptionAwareLabel}
                       </Typography>
                     </label>
@@ -298,7 +337,9 @@ export function ContactFormV2({
             ) : null}
 
             <div className="space-y-2">
-              <Label htmlFor="message">{contactMessages.form.messageLabel}</Label>
+              <Label htmlFor="message">
+                {contactMessages.form.messageLabel}
+              </Label>
               <Textarea
                 id="message"
                 placeholder={contactMessages.form.messagePlaceholder}
@@ -308,7 +349,11 @@ export function ContactFormV2({
                 aria-invalid={!!errors.message}
               />
               {errors.message ? (
-                <Typography as="p" variant="muted" className="!text-destructive">
+                <Typography
+                  as="p"
+                  variant="muted"
+                  className="!text-destructive"
+                >
                   {errors.message.message}
                 </Typography>
               ) : null}

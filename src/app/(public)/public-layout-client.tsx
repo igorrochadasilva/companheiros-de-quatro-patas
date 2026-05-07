@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
@@ -82,7 +82,9 @@ export function PublicLayoutClient({
   return (
     <div className="min-h-screen bg-background text-foreground">
       <PublicHeader visibility={headerVisibility} />
-      <main className="mx-auto w-full max-w-6xl px-4 py-10">{children}</main>
+      <main className="mx-auto w-full max-w-[1200px] px-4 py-10">
+        {children}
+      </main>
       <PublicFooter routesVisibility={flagSnapshot.routes} />
     </div>
   );

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 
@@ -9,7 +9,7 @@ import { Typography } from "@/shared/ui/typography";
 
 export function AboutImpactV2() {
   return (
-    <section className="mx-auto w-full max-w-[1280px] px-6 pb-14 md:px-10">
+    <section className="mx-auto w-full max-w-[1200px] px-6 pb-14 md:px-10">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
           <Typography

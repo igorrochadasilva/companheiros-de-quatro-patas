@@ -1,4 +1,4 @@
-import { Skeleton } from "@/shared/ui/skeleton";
+﻿import { Skeleton } from "@/shared/ui/skeleton";
 import { Typography } from "@/shared/ui/typography";
 import type { ContactCmsContent } from "@/types";
 
@@ -15,7 +15,7 @@ export function ContactImageBreakV2({
   const imageAlt = cms?.heroImageAlt ?? "Caes felizes em um jardim";
 
   return (
-    <section className="mx-auto w-full max-w-[1280px] px-6 pb-12 md:hidden">
+    <section className="mx-auto w-full max-w-[1200px] px-6 pb-12 md:hidden">
       <div className="relative h-48 overflow-hidden rounded-3xl">
         {isCmsLoading || !imageUrl ? (
           <Skeleton className="h-full w-full" />

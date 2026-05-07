@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import {
   HeartIcon,
@@ -21,7 +21,7 @@ const helpIcons = [
 
 export function AboutHowWeHelpV2() {
   return (
-    <section className="mx-auto w-full max-w-[1280px] px-6 pb-14 md:px-10">
+    <section className="mx-auto w-full max-w-[1200px] px-6 pb-14 md:px-10">
       <div className="rounded-2xl bg-[#f6ece5] px-4 py-9 md:px-10">
         <div className="text-center">
           <Typography
@@ -76,7 +76,6 @@ export function AboutHowWeHelpV2() {
             );
           })}
         </div>
-
       </div>
     </section>
   );

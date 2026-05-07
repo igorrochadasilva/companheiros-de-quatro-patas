@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { aboutMessages } from "@/messages";
 import { Skeleton } from "@/shared/ui/skeleton";
@@ -20,7 +20,7 @@ export function AboutStoriesV2({
   }));
 
   return (
-    <section className="mx-auto w-full max-w-[1280px] px-6 pb-14 md:px-10">
+    <section className="mx-auto w-full max-w-[1200px] px-6 pb-14 md:px-10">
       <Typography
         as="h2"
         variant="v2H2"

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import {
   Building2Icon,
@@ -85,7 +85,7 @@ export function PublicHeader({
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-sm">
       <nav
-        className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-3 md:py-4"
+        className="mx-auto flex w-full max-w-[1200px] items-center justify-between gap-4 px-4 py-3 md:py-4"
         aria-label={navMessages.ariaLabel}
       >
         <Link href={PUBLIC_ROUTES.home} className="flex items-center gap-3">

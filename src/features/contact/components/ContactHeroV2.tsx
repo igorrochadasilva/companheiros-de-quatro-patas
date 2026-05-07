@@ -1,4 +1,4 @@
-import { contactMessages } from "@/messages";
+﻿import { contactMessages } from "@/messages";
 import { Skeleton } from "@/shared/ui/skeleton";
 import { Typography } from "@/shared/ui/typography";
 import type { ContactCmsContent } from "@/types";
@@ -16,7 +16,7 @@ export function ContactHeroV2({
   const imageAlt = cms?.heroImageAlt ?? "Ilustracao de um gato simpatico";
 
   return (
-    <section className="mx-auto w-full max-w-[1280px] px-6 pb-8 pt-4 md:px-10 md:pb-20 md:pt-12">
+    <section className="mx-auto w-full max-w-[1200px] px-6 pb-8 pt-4 md:px-10 md:pb-20 md:pt-12">
       <div className="grid items-center gap-10 lg:grid-cols-2">
         <div>
           <Typography as="h1" variant="v2H1" className="!text-6xl md:!text-7xl">

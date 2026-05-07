@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { HeartIcon, HomeIcon, StethoscopeIcon, UsersIcon } from "lucide-react";
 import Link from "next/link";
@@ -12,7 +12,7 @@ const partnerIcons = [StethoscopeIcon, HeartIcon, UsersIcon, HomeIcon] as const;
 
 export function AboutPartnersV2() {
   return (
-    <section className="mx-auto w-full max-w-[1280px] px-6 pb-14 md:px-10">
+    <section className="mx-auto w-full max-w-[1200px] px-6 pb-14 md:px-10">
       <Typography
         as="h2"
         variant="v2H2"

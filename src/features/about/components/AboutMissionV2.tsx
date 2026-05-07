@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { CircleCheckIcon, HeartIcon, TargetIcon } from "lucide-react";
 
@@ -9,7 +9,7 @@ const missionIcons = [HeartIcon, TargetIcon, CircleCheckIcon] as const;
 
 export function AboutMissionV2() {
   return (
-    <section className="mx-auto w-full max-w-[1280px] px-6 pb-14 md:px-10">
+    <section className="mx-auto w-full max-w-[1200px] px-6 pb-14 md:px-10">
       <div className="grid gap-6 md:grid-cols-3">
         {aboutMessages.v2.mission.cards.map((card, index) => {
           const Icon = missionIcons[index] ?? HeartIcon;
