@@ -6,6 +6,7 @@ import { getPublicPetById } from "@/backend/modules/pets/application/get-public-
 import { PUBLIC_ROUTES, SEO } from "@/constants";
 import { AdocaoPetDetailContent } from "@/features/adoption/components/AdocaoPetDetailContent";
 import { featureFlags } from "@/shared/config/feature-flags";
+import { JsonLdScript } from "@/shared/ui/json-ld-script";
 
 type AnimalPageProps = {
   params: Promise<{ slug: string }>;
@@ -19,6 +20,26 @@ function toAbsoluteImageUrl(url: string) {
   if (url.startsWith("//")) return `https:${url}`;
 
   return new URL(url, SEO.siteUrl).toString();
+}
+
+function getPetCanonicalSlug(
+  pet: NonNullable<Awaited<ReturnType<typeof getPublicPetById>>>,
+) {
+  return pet.externalId ?? pet.id;
+}
+
+function getPetCanonicalUrl(
+  pet: NonNullable<Awaited<ReturnType<typeof getPublicPetById>>>,
+) {
+  return `${SEO.siteUrl}${PUBLIC_ROUTES.adoption}/${getPetCanonicalSlug(pet)}`;
+}
+
+function getMainPetImageUrl(
+  pet: NonNullable<Awaited<ReturnType<typeof getPublicPetById>>>,
+) {
+  return toAbsoluteImageUrl(
+    pet.media.find((item) => item.type === "IMAGE")?.url ?? "",
+  );
 }
 
 export async function generateMetadata({
@@ -47,11 +68,9 @@ export async function generateMetadata({
     };
   }
 
-  const petSlug = pet.externalId ?? pet.id;
+  const petSlug = getPetCanonicalSlug(pet);
   const url = `${PUBLIC_ROUTES.adoption}/${petSlug}`;
-  const mainImage = toAbsoluteImageUrl(
-    pet.media.find((item) => item.type === "IMAGE")?.url ?? "",
-  );
+  const mainImage = getMainPetImageUrl(pet);
 
   const description = [
     `${pet.name} est� dispon�vel para ado��o respons�vel.`,
@@ -102,10 +121,64 @@ export default async function AnimalPage({ params }: AnimalPageProps) {
   const pet = await getPetCached(slug);
 
   if (pet) {
-    const canonicalSlug = pet.externalId ?? pet.id;
+    const canonicalSlug = getPetCanonicalSlug(pet);
     if (slug !== canonicalSlug) {
       redirect(`${PUBLIC_ROUTES.adoption}/${canonicalSlug}`);
     }
+
+    const petUrl = getPetCanonicalUrl(pet);
+    const mainImage = getMainPetImageUrl(pet);
+    const petJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Pet",
+      name: pet.name,
+      description: pet.description ?? undefined,
+      url: petUrl,
+      image: mainImage || undefined,
+      animalType: pet.species,
+      gender: pet.gender ?? undefined,
+      size: pet.size ?? undefined,
+      address: pet.city
+        ? {
+            "@type": "PostalAddress",
+            addressLocality: pet.city,
+            addressRegion: pet.state ?? undefined,
+            addressCountry: "BR",
+          }
+        : undefined,
+    };
+    const breadcrumbJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: SEO.siteUrl,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Adocao",
+          item: `${SEO.siteUrl}${PUBLIC_ROUTES.adoption}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: pet.name,
+          item: petUrl,
+        },
+      ],
+    };
+
+    return (
+      <>
+        <JsonLdScript data={petJsonLd} />
+        <JsonLdScript data={breadcrumbJsonLd} />
+        <AdocaoPetDetailContent slug={slug} />
+      </>
+    );
   }
 
   return <AdocaoPetDetailContent slug={slug} />;
