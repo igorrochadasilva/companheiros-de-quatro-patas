@@ -35,6 +35,8 @@ export default function TwitterImage() {
       </div>
       <div
         style={{
+          display: "flex",
+          flexDirection: "column",
           fontSize: 64,
           lineHeight: 1.08,
           fontWeight: 800,
@@ -43,7 +45,7 @@ export default function TwitterImage() {
         }}
       >
         Encontre seu novo amigo
-        <br />e mude duas vidas hoje.
+        <span>e mude duas vidas hoje.</span>
       </div>
       <div style={{ fontSize: 30, color: "#514535", maxWidth: 920 }}>
         Adocao, transparencia e apoio continuo ao abrigo.

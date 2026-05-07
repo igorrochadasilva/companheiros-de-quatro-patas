@@ -39,7 +39,7 @@ export default function OpenGraphImage() {
             height: 22,
             borderRadius: "999px",
             backgroundColor: "#f3af3d",
-            display: "inline-flex",
+            display: "flex",
           }}
         />
         Companheiros de Quatro Patas
@@ -48,6 +48,8 @@ export default function OpenGraphImage() {
       <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
         <div
           style={{
+            display: "flex",
+            flexDirection: "column",
             fontSize: 72,
             lineHeight: 1.04,
             fontWeight: 800,
@@ -55,9 +57,8 @@ export default function OpenGraphImage() {
             maxWidth: 960,
           }}
         >
-          Adocao responsavel,
-          <br />
-          cuidado que transforma vidas.
+          <span>Adocao responsavel,</span>
+          <span>cuidado que transforma vidas.</span>
         </div>
         <div style={{ fontSize: 32, color: "#514535", maxWidth: 900 }}>
           Conheca pets para adocao, acompanhe o abrigo e apoie a ONG.
