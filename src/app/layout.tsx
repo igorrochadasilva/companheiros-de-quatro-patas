@@ -2,6 +2,7 @@ import "@/app/globals.css";
 
 import { GoogleTagManager } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Abril_Fatface, Alata, Manrope, Noto_Serif } from "next/font/google";
 
@@ -101,6 +102,7 @@ export default function RootLayout({
             {children}
             <Toaster />
             <Analytics />
+            <SpeedInsights />
           </TooltipProvider>
         </AppQueryClientProvider>
       </body>
