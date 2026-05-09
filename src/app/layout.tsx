@@ -79,19 +79,6 @@ export default function RootLayout({
 
   return (
     <html lang="pt-BR">
-      <head>
-        {/* Image origins used across the public pages */}
-        <link
-          rel="preconnect"
-          href="https://placehold.co"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preconnect"
-          href="https://res.cloudinary.com"
-          crossOrigin="anonymous"
-        />
-      </head>
       {gtmId ? <GoogleTagManager gtmId={gtmId} /> : null}
       <body
         className={`${alata.variable} ${abrilFatface.variable} ${manrope.variable} ${notoSerif.variable} antialiased`}

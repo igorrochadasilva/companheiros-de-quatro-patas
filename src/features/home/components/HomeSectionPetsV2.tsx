@@ -195,63 +195,65 @@ export function HomeSectionPetsV2() {
           </div>
         </div>
 
-        {isLoading ? (
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {[1, 2, 3].map((skeleton) => (
-              <div
-                key={skeleton}
-                className="h-[29rem] animate-pulse rounded-xl bg-[var(--v2-surface-container-high)]"
-              />
-            ))}
-          </div>
-        ) : items.length === 0 ? (
-          <div className="rounded-2xl border border-[var(--v2-outline-variant)]/30 bg-[var(--v2-surface-container-lowest)] p-8 text-center">
-            <Typography as="p" variant="v2Body" className="!font-semibold">
-              Nenhum pet encontrado para este filtro.
-            </Typography>
-          </div>
-        ) : (
-          <>
-            <Carousel
-              opts={{ align: "start", loop: false }}
-              className="w-full"
-              setApi={setCarouselApi}
-            >
-              <CarouselContent className="-ml-0 sm:-ml-4">
-                {items.map((pet) => (
-                  <CarouselItem
-                    key={pet.id}
-                    className="basis-[88%] pl-0 sm:pl-4 sm:basis-full md:basis-1/2 lg:basis-1/3"
-                  >
-                    <PetCardV2 pet={pet} />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="-left-3 hidden border-[var(--v2-outline-variant)] bg-[var(--v2-surface)] text-[var(--v2-on-surface)] md:inline-flex" />
-              <CarouselNext className="-right-3 hidden border-[var(--v2-outline-variant)] bg-[var(--v2-surface)] text-[var(--v2-on-surface)] md:inline-flex" />
-            </Carousel>
-            <div className="mt-4 text-center md:hidden">
-              <Typography
-                as="p"
-                variant="v2Muted"
-                className="text-xs !font-semibold"
-              >
-                {currentSlide} / {items.length}
+        <div className="min-h-[34rem]">
+          {isLoading ? (
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {[1, 2, 3].map((skeleton) => (
+                <div
+                  key={skeleton}
+                  className="h-[29rem] animate-pulse rounded-xl bg-[var(--v2-surface-container-high)]"
+                />
+              ))}
+            </div>
+          ) : items.length === 0 ? (
+            <div className="rounded-2xl border border-[var(--v2-outline-variant)]/30 bg-[var(--v2-surface-container-lowest)] p-8 text-center">
+              <Typography as="p" variant="v2Body" className="!font-semibold">
+                Nenhum pet encontrado para este filtro.
               </Typography>
             </div>
-            <div className="mt-6 flex justify-center md:mt-8">
-              <Button
-                asChild
-                variant="outline"
-                className="h-11 rounded-full border-[var(--v2-primary)] px-7 font-semibold text-[var(--v2-primary)] hover:bg-[var(--v2-primary)]/10 hover:text-[var(--v2-primary)]"
+          ) : (
+            <>
+              <Carousel
+                opts={{ align: "start", loop: false }}
+                className="w-full"
+                setApi={setCarouselApi}
               >
-                <Link href={PUBLIC_ROUTES.adoption}>
-                  {homeMessages.pets.v2.viewAll}
-                </Link>
-              </Button>
-            </div>
-          </>
-        )}
+                <CarouselContent className="-ml-0 sm:-ml-4">
+                  {items.map((pet) => (
+                    <CarouselItem
+                      key={pet.id}
+                      className="basis-[88%] pl-0 sm:pl-4 sm:basis-full md:basis-1/2 lg:basis-1/3"
+                    >
+                      <PetCardV2 pet={pet} />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="-left-3 hidden border-[var(--v2-outline-variant)] bg-[var(--v2-surface)] text-[var(--v2-on-surface)] md:inline-flex" />
+                <CarouselNext className="-right-3 hidden border-[var(--v2-outline-variant)] bg-[var(--v2-surface)] text-[var(--v2-on-surface)] md:inline-flex" />
+              </Carousel>
+              <div className="mt-4 text-center md:hidden">
+                <Typography
+                  as="p"
+                  variant="v2Muted"
+                  className="text-xs !font-semibold"
+                >
+                  {currentSlide} / {items.length}
+                </Typography>
+              </div>
+              <div className="mt-6 flex justify-center md:mt-8">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="h-11 rounded-full border-[var(--v2-primary)] px-7 font-semibold text-[var(--v2-primary)] hover:bg-[var(--v2-primary)]/10 hover:text-[var(--v2-primary)]"
+                >
+                  <Link href={PUBLIC_ROUTES.adoption}>
+                    {homeMessages.pets.v2.viewAll}
+                  </Link>
+                </Button>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </section>
   );
