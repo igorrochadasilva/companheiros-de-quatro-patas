@@ -71,7 +71,8 @@ export function HomeSectionPetsCard({ pet }: { pet: Pet }) {
           src={pet.imageUrl}
           alt={pet.name}
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          quality={70}
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 46vw, 31vw"
           className="object-cover"
         />
       </div>

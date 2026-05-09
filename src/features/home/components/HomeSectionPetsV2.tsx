@@ -70,7 +70,8 @@ function PetCardV2({ pet }: { pet: Pet }) {
           src={pet.imageUrl}
           alt={pet.name}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+          quality={70}
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 46vw, (max-width: 1536px) 31vw, 420px"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute left-4 top-4 flex flex-col gap-2">
