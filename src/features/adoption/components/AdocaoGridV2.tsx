@@ -58,6 +58,12 @@ const BADGE_LABELS: Record<string, string> = {
   urgent: v2GridMessages.badges.urgent,
 };
 
+const SIZE_LABELS: Record<Pet["size"], string> = {
+  small: adoptionMessages.v2.filters.sizeSmall,
+  medium: adoptionMessages.v2.filters.sizeMedium,
+  large: adoptionMessages.v2.filters.sizeLarge,
+};
+
 function formatPetAge(ageYears: number) {
   if (!Number.isFinite(ageYears) || ageYears <= 0) {
     return v2GridMessages.ageUnknown;
@@ -227,7 +233,7 @@ export function AdocaoGridV2({
                 </span>
                 <span className="inline-flex items-center gap-1">
                   <Ruler className="size-3.5" />
-                  {pet.size}
+                  {SIZE_LABELS[pet.size]}
                 </span>
                 <span className="inline-flex items-center gap-1">
                   <MapPin className="size-3.5" />

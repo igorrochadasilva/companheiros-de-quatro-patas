@@ -1,6 +1,5 @@
 ﻿"use client";
 
-import { HeartIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
@@ -84,9 +83,6 @@ function PetCardV2({ pet }: { pet: Pet }) {
             </span>
           ))}
         </div>
-        <div className="absolute right-4 top-4 rounded-full bg-[var(--v2-surface)]/85 p-2 text-[var(--v2-tertiary)] backdrop-blur-md">
-          <HeartIcon className="size-5" aria-hidden />
-        </div>
       </div>
 
       <div className="p-6">
@@ -136,7 +132,10 @@ export function HomeSectionPetsV2() {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [currentSlide, setCurrentSlide] = useState(1);
 
-  const filters = useMemo(() => mapQuickFilterToQuery(quickFilter), [quickFilter]);
+  const filters = useMemo(
+    () => mapQuickFilterToQuery(quickFilter),
+    [quickFilter],
+  );
   const { data, isLoading } = useFeaturedPets(filters);
 
   const items = data?.items ?? [];
@@ -157,10 +156,6 @@ export function HomeSectionPetsV2() {
       carouselApi.off("reInit", updateCurrentSlide);
     };
   }, [carouselApi]);
-
-  useEffect(() => {
-    setCurrentSlide(1);
-  }, [quickFilter, items.length]);
 
   return (
     <section id="animais" className="v2-section v2-section-muted scroll-mt-24">
@@ -188,7 +183,10 @@ export function HomeSectionPetsV2() {
                       ? "bg-[var(--v2-primary)] text-[var(--v2-on-primary)] hover:bg-[var(--v2-primary)]"
                       : "bg-[var(--v2-surface-container-highest)] text-[var(--v2-on-surface-variant)] hover:bg-[var(--v2-primary-container)]/20",
                   ].join(" ")}
-                  onClick={() => setQuickFilter(filter)}
+                  onClick={() => {
+                    setQuickFilter(filter);
+                    setCurrentSlide(1);
+                  }}
                 >
                   {homeMessages.pets.v2.filters[filter]}
                 </Button>
@@ -233,7 +231,11 @@ export function HomeSectionPetsV2() {
               <CarouselNext className="-right-3 hidden border-[var(--v2-outline-variant)] bg-[var(--v2-surface)] text-[var(--v2-on-surface)] md:inline-flex" />
             </Carousel>
             <div className="mt-4 text-center md:hidden">
-              <Typography as="p" variant="v2Muted" className="text-xs !font-semibold">
+              <Typography
+                as="p"
+                variant="v2Muted"
+                className="text-xs !font-semibold"
+              >
                 {currentSlide} / {items.length}
               </Typography>
             </div>
