@@ -102,6 +102,6 @@ export const shelterProgressMock: ShelterProgress = {
   donation: {
     pixKey: "pix@companheiros4patas.org",
     pixQrUrl: "https://placehold.co/320x320.png?text=PIX+ABRIGO",
-    whatsapp: "5511999999999",
+    whatsapp: "5515991558976",
   },
 };

@@ -4,7 +4,7 @@
  */
 export const CONTACT = {
   email: "companheirosd4patas@gmail.com",
-  whatsAppNumber: "5511953237838",
+  whatsAppNumber: "5515991558976",
   instagramUrl: "https://www.instagram.com/companheirosde4patasofc",
   city: "Sao Paulo",
 };

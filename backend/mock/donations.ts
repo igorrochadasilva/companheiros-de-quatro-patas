@@ -3,7 +3,7 @@ import type { DonationConfig } from "@/types";
 export const donationConfigMock: DonationConfig = {
   pixKey: "pix@companheiros4patas.org",
   pixQrUrl: "https://placehold.co/320x320?text=PIX+QR",
-  whatsapp: "5511999999999",
+  whatsapp: "5515991558976",
   recurringUrl: "https://apoia.se/companheiros4patas",
   bankAccount: "Banco Exemplo - Ag 0001 - Cc 12345-6",
   tiers: [
